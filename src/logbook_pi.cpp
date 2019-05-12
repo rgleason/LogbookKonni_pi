@@ -941,8 +941,10 @@ void logbookkonni_pi::SaveConfig()
         pConf->Write ( _T ( "NavDegrees" ), opt->Deg );
         pConf->Write ( _T ( "NavMin" ), opt->Min );
         pConf->Write ( _T ( "NavSec" ), opt->Sec );
-        pConf->Write ( _T ( "NavDistance" ), opt->distance );
-        pConf->Write ( _T ( "NavSpeed" ), opt->speed );
+        pConf->Write ( _T ( "ShowDistance" ), opt->showDistance);
+		pConf->Write ( _T ("ShowDistanceInd"), opt->showDistanceChoice);
+		pConf->Write ( _T ("ShowBoatSpeedInd"), opt->showBoatSpeedchoice);
+        pConf->Write ( _T ( "showBoatSpeed" ), opt->showBoatSpeed );
         pConf->Write ( _T ( "NavMeter" ), opt->meter );
         pConf->Write ( _T ( "NavFeet" ), opt->feet );
         pConf->Write ( _T ( "NavFathom" ), opt->fathom );
@@ -1162,8 +1164,12 @@ void logbookkonni_pi::LoadConfig()
         pConf->Read ( _T ( "NavDegrees" ), &opt->Deg );
         pConf->Read ( _T ( "NavMin" ), &opt->Min );
         pConf->Read ( _T ( "NavSec" ), &opt->Sec );
-        pConf->Read ( _T ( "NavDistance" ), &opt->distance );
-        pConf->Read ( _T ( "NavSpeed" ), &opt->speed );
+
+        pConf->Read ( _T ( "ShowDistance" ), &opt->showDistance);
+        pConf->Read ( _T ( "showBoatSpeed" ), &opt->showBoatSpeed );
+		pConf->Read ( _T ("ShowDistanceInd"), &opt->showDistanceChoice);
+		pConf->Read ( _T ("ShowBoatSpeedInd"), &opt->showBoatSpeedchoice);
+
         pConf->Read ( _T ( "Baro" ), &opt->baro );
         pConf->Read ( _T ( "Temperature" ), &opt->temperature );
         pConf->Read ( _T ( "NavMeter" ), &opt->meter );

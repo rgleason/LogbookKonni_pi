@@ -634,15 +634,22 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_staticText38->Wrap( -1 );
     fgSizer91->Add( m_staticText38, 0, wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_sDist = new wxTextCtrl( m_panel16, wxID_ANY, _( "NM" ), wxDefaultPosition, wxSize( 40,-1 ), 0 );
-    fgSizer91->Add( m_sDist, 0, 0, 5 );
+	wxString m_choiceDistanceChoices[] = { _("NM"), _("m"), _("km") };
+	int m_choiceDistanceNChoices = sizeof(m_choiceDistanceChoices) / sizeof(wxString);
+	m_choiceDistance = new wxChoice(m_panel16, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choiceDistanceNChoices, m_choiceDistanceChoices, 0);
+	m_choiceDistance->SetSelection(0);
+	fgSizer91->Add(m_choiceDistance, 0, 0, 5 );
 
     m_staticText39 = new wxStaticText( m_panel16, wxID_ANY, _( "Speed" ), wxDefaultPosition, wxDefaultSize, 0 );
     m_staticText39->Wrap( -1 );
     fgSizer91->Add( m_staticText39, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	wxString m_choiceBoatSpeedChoices[] = { _("kts"), _("m/s"), _("kmh") };
+	int m_choiceBoatSpeedNChoices = sizeof(m_choiceBoatSpeedChoices) / sizeof(wxString);
+	m_choiceBoatSpeed = new wxChoice(m_panel16, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choiceBoatSpeedNChoices, m_choiceBoatSpeedChoices, 0);
+	m_choiceBoatSpeed->SetSelection(0);
 
-    m_sSpeed = new wxTextCtrl( m_panel16, wxID_ANY, _( "kts" ), wxDefaultPosition, wxSize( 40,-1 ), 0 );
-    fgSizer91->Add( m_sSpeed, 0, 0, 5 );
+    fgSizer91->Add( m_choiceBoatSpeed, 0, 0, 5 );
     fgSizer91->Add( 0, 0, 1, wxEXPAND, 5 );
     fgSizer91->Add( 0, 0, 1, wxEXPAND, 5 );
     fgSizer91->Add( 0, 0, 1, wxEXPAND, 5 );
@@ -2074,9 +2081,9 @@ void LogbookOptions::setValues()
     m_sDeg->SetValue( opt->Deg );
     m_sMin->SetValue( opt->Min );
     m_sSec->SetValue( opt->Sec );
-
-    m_sDist->SetValue( opt->distance );
-    m_sSpeed->SetValue( opt->speed );
+   
+	m_choiceDistance->SetSelection(opt->showDistanceChoice);
+	m_choiceBoatSpeed->SetSelection(opt->showBoatSpeedchoice);
 
     m_sBaro->SetValue( opt->baro );
     m_textCtrlTemperature->SetValue( opt->temperature );
@@ -2228,8 +2235,33 @@ void LogbookOptions::getValues()
     opt->Min = m_sMin->GetValue();
     opt->Sec =m_sSec->GetValue();
 
-    opt->distance = m_sDist->GetValue();
-    opt->speed    = m_sSpeed->GetValue();
+	opt->showDistanceChoice = m_choiceDistance->GetSelection();
+	switch (m_choiceDistance->GetSelection())
+	{
+	case 0:
+		opt->showDistance = _T("NM");
+		break;
+	case 1:
+		opt->showDistance = _T("m");
+		break;
+	case 2:
+		opt->showDistance = _T("km");
+		break;
+	}
+
+	opt->showBoatSpeedchoice = m_choiceBoatSpeed->GetSelection();
+	switch (m_choiceBoatSpeed->GetSelection())
+	{
+	case 0:
+		opt->showBoatSpeed = _T("kts");
+		break;
+	case 1:
+		opt->showBoatSpeed = _T("m/s");
+		break;
+	case 2:
+		opt->showBoatSpeed = _T("kmh");
+		break;
+	}
 
     opt->baro        = m_sBaro->GetValue();
     opt->temperature = m_textCtrlTemperature->GetValue();

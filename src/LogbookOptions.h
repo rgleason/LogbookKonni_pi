@@ -134,7 +134,6 @@ public:
     wxStaticText* m_staticText36;
     wxTextCtrl* m_sSec;
     wxStaticText* m_staticText38;
-    wxTextCtrl* m_sDist;
     wxStaticText* m_staticText39;
     wxTextCtrl* m_sSpeed;
     wxStaticText* m_staticText40;
@@ -295,6 +294,8 @@ public:
     wxTextCtrl* m_textCtrlTankFuel;
     wxTextCtrl* m_textCtrlBank1;
     wxTextCtrl* m_textCtrlBank2;
+	wxChoice* m_choiceDistance;
+	wxChoice* m_choiceBoatSpeed;
     wxChoice* m_choiceDepth;
     wxChoice* m_choiceWaveSwell;
     wxChoice* m_choiceHeading;

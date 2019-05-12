@@ -175,7 +175,26 @@ void Logbook::SetPosition( PlugIn_Position_Fix &pfix )
 
     if ( pfix.nSats != 0 )
     {
-        sSOG = wxString::Format( _T( "%5.2f %s" ), pfix.Sog, opt->speed.c_str() );
+        
+		double factor = 1;
+		double tspeed = 1;
+
+		switch (opt->showBoatSpeedchoice)
+		{
+		case 0:
+			factor = 1;
+			break;
+		case 1:
+			factor = 0.51444;
+			break;
+		case 2:
+			factor = 1.852;
+			break;
+		}
+
+		tspeed = pfix.Sog * factor;			
+		
+		sSOG = wxString::Format( _T( "%5.2f %s" ), tspeed , opt->showBoatSpeed.c_str() );
         sCOG = wxString::Format( _T( "%5.2f %s" ), pfix.Cog, opt->Deg.c_str() );
         SetGPSStatus( true );
     }
@@ -316,6 +335,8 @@ void Logbook::SetSentence( wxString &sentence )
         {
             if ( m_NMEA0183.Parse() )
             {
+				double factor = 1;
+				double tboatspeed = 1;
 				if ( m_NMEA0183.Rmc.IsDataValid == NTrue )
                 {
                 	SetGPSStatus( true );
@@ -323,8 +344,25 @@ void Logbook::SetSentence( wxString &sentence )
                                    	m_NMEA0183.Rmc.Position.Latitude.Northing,
                                    	m_NMEA0183.Rmc.Position.Longitude.Longitude,
                                    	m_NMEA0183.Rmc.Position.Longitude.Easting );
+
                 	if ( m_NMEA0183.Rmc.SpeedOverGroundKnots != 999.0 )
-                    	sSOG = wxString::Format( _T( "%5.2f %s" ), m_NMEA0183.Rmc.SpeedOverGroundKnots,opt->speed.c_str() );
+						switch (opt->showBoatSpeedchoice)
+						{
+						case 0:
+							factor = 1;
+							break;
+						case 1:							
+							factor = 0.51444;							
+							break;
+						case 2:
+							factor = 1.852;							
+							break;
+						}
+
+					tboatspeed = m_NMEA0183.Rmc.SpeedOverGroundKnots * factor;
+
+					sSOG = wxString::Format(_T("%5.2f %s"), tboatspeed, opt->showBoatSpeed.c_str());
+                    	
                 	if ( m_NMEA0183.Rmc.TrackMadeGoodDegreesTrue != 999.0 )
                     	sCOG = wxString::Format( _T( "%5.2f%s" ), m_NMEA0183.Rmc.TrackMadeGoodDegreesTrue, opt->Deg.c_str() );
                 	if ( m_NMEA0183.Rmc.TrackMadeGoodDegreesTrue != 999.0 )
@@ -349,7 +387,7 @@ void Logbook::SetSentence( wxString &sentence )
         {
             if ( m_NMEA0183.Parse() )
             {
-                sSOW = wxString::Format( _T( "%5.2f %s" ), m_NMEA0183.Vhw.Knots,opt->speed.c_str() );
+                sSOW = wxString::Format( _T( "%5.2f %s" ), m_NMEA0183.Vhw.Knots,opt->showBoatSpeed.c_str() );
                 dtSOW = wxDateTime::Now();
                 bSOW = true;
             }
@@ -942,7 +980,7 @@ void Logbook::newLogbook()
     {
         dialog->logGrids[0]->SetCellValue( 0,13,_( "Last line from Logbook\n" )+ss );
         dialog->logGrids[0]->SetCellValue( 0,6,dialog->logGrids[0]->GetCellValue( 0,6 ) );
-        wxString t = _T( "0.00 " )+opt->distance;
+        wxString t = _T( "0.00 " )+opt->showDistance;
         dialog->logGrids[0]->SetCellValue( 0,5,t );
     }
     else
@@ -2266,7 +2304,25 @@ void Logbook::checkDistance()
         acos( cos( fromlat )*cos( fromlon )*cos( tolat )*cos( tolon ) +
               cos( fromlat )*sin( fromlon )*cos( tolat )*sin( tolon ) + sin( fromlat )*sin( tolat ) ) * 3443.9;
 
-    if ( sm >= opt->dEverySM && !dialog->logbookPlugIn->eventsEnabled )
+	double factor = 1;
+	double tdistance = 1;
+
+	switch (opt->showDistanceChoice)
+	{
+	case 0:
+		factor = 1;
+		break;
+	case 1:
+		factor = 1852;
+		break;
+	case 2:
+		factor = 1.852;
+		break;
+	}
+
+	tdistance = sm * factor;
+	
+	if ( tdistance >= opt->dEverySM && !dialog->logbookPlugIn->eventsEnabled )
     {
         dialog->logbookTimerWindow->popUp();
         everySM = true;
@@ -2279,7 +2335,7 @@ void Logbook::checkDistance()
 wxString Logbook::calculateDistance( wxString fromstr, wxString tostr )
 {
     if ( ( fromstr.IsEmpty() || tostr.IsEmpty() ) || fromstr == tostr )
-        return wxString( _T( "0.00 " )+opt->distance );
+        return wxString( _T( "0.00 " )+opt->showDistance);
 
     wxString sLat, sLon, sLatto, sLonto;
     wxDouble fromlat,fromlon,tolat,tolon, sm;
@@ -2315,7 +2371,25 @@ wxString Logbook::calculateDistance( wxString fromstr, wxString tostr )
                cos( fromlat )*sin( fromlon )*cos( tolat )*sin( tolon ) + sin( fromlat )*sin( tolat ) ) * 3443.9;
     ////// code snippet from http://www2.nau.edu/~cvm/latlongdist.html#formats
 
-    wxString ret = wxString::Format( _T( "%.2f %s" ),sm,opt->distance.c_str() );
+	double factor = 1;
+	double tdistance = 1;
+
+	switch (opt->showDistanceChoice)
+	{
+	case 0:
+		factor = 1;
+		break;
+	case 1:
+		factor = 1852;
+		break;
+	case 2:
+		factor = 1.852;
+		break;
+	}		
+
+	tdistance = sm * factor;
+
+    wxString ret = wxString::Format( _T( "%.2f %s" ),tdistance,opt->showDistance.c_str() );
     ret.Replace( _T( "." ),dialog->decimalPoint );
     return ret;
 }
@@ -2596,9 +2670,9 @@ void  Logbook::getModifiedCellValue( int grid, int row, int selCol, int col )
     {
         s.Replace( _T( "," ),_T( "." ) );
 
-        s = wxString::Format( _T( "%.2f %s" ),wxAtof( s ),opt->distance.c_str() );
-
-        s.Replace( _T( "." ),dialog->decimalPoint );
+        s = wxString::Format( _T( "%.2f %s" ),wxAtof( s ),opt->showDistance.c_str() );	
+		
+		s.Replace( _T( "." ),dialog->decimalPoint );
         dialog->logGrids[grid]->SetCellValue( row,col,s );
 
         computeCell( grid, row, col, s, true );
@@ -2675,7 +2749,7 @@ void  Logbook::getModifiedCellValue( int grid, int row, int selCol, int col )
                 temp = dialog->logGrids[grid]->GetCellValue( i,5 );
                 temp.Replace( _T( "," ),_T( "." ) );
                 temp.ToDouble( &dist );
-                s= wxString::Format( _T( "%9.2f %s" ),distTotal+dist,opt->distance.c_str() );
+                s= wxString::Format( _T( "%9.2f %s" ),distTotal+dist,opt->showDistance.c_str() );
                 s.Replace( _T( "." ),dialog->decimalPoint );
                 dialog->logGrids[grid]->SetCellValue( i,6,s );
 
@@ -2719,9 +2793,9 @@ void  Logbook::getModifiedCellValue( int grid, int row, int selCol, int col )
         {
             s.Replace( _T( "," ),_T( "." ) );
 #ifdef __WXOSX__
-            s = wxString::Format( _T( "%2.2f %s" ),wxAtof( s ),( const wchar_t* )opt->speed.c_str() );
+            s = wxString::Format( _T( "%2.2f %s" ),wxAtof( s ),( const wchar_t* )opt->showBoatSpeed.c_str() );
 #else
-            s = wxString::Format( _T( "%2.2f %s" ),wxAtof( s ),opt->speed.c_str() );
+            s = wxString::Format( _T( "%2.2f %s" ),wxAtof( s ),opt->showBoatSpeed.c_str() );
 #endif
             s.Replace( _T( "." ),dialog->decimalPoint );
             dialog->logGrids[grid]->SetCellValue( row,col,s );
@@ -2838,7 +2912,7 @@ void  Logbook::getModifiedCellValue( int grid, int row, int selCol, int col )
         if ( s != _T( "" ) )
         {
             s.Replace( _T( "," ),_T( "." ) );
-            s = wxString::Format( _T( "%3.2f %s" ),wxAtof( s ),opt->speed.c_str() );
+            s = wxString::Format( _T( "%3.2f %s" ),wxAtof( s ),opt->showBoatSpeed.c_str() );
             s.Replace( _T( "." ),dialog->decimalPoint );
             dialog->logGrids[grid]->SetCellValue( row,col,s );
         }
@@ -3178,7 +3252,7 @@ wxString Logbook::computeCell( int grid, int row, int col, wxString s, bool mode
     s.Replace( _T( "," ),_T( "." ) );
 
     if ( col == DISTANCE )
-        abrev = opt->distance;
+        abrev = opt->showDistance;
     else if ( col == LogbookHTML::MOTOR || col == LogbookHTML::MOTOR1 ||
               col == LogbookHTML::GENE || col == LogbookHTML::WATERM )
         abrev = opt->motorh;
@@ -3541,7 +3615,7 @@ bool Logbook::checkGPS( bool autoLine )
 
         }
         else if ( everySM && autoLine )
-            sLogText += opt->everySMText+opt->everySMAmount+opt->distance;
+            sLogText += opt->everySMText+opt->everySMAmount+opt->showDistance;
         else if ( ( dialog->timer->IsRunning() || opt->timerType != 0 ) && autoLine )
             sLogText += opt->ttext;
 

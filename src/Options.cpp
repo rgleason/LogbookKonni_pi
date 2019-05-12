@@ -154,10 +154,7 @@ or change this text in Toolbox/Plugins/Logbook\n\nShift+Enter appends a new line
     Deg = _T( "\xB0" ); // Apple \xA1 ??
     Min = _( "'" );
     Sec = _( "\"" );
-
-    distance = _( "NM" );
-    speed = _( "kts" );
-
+    
     meter = _( "m" );
     feet = _( "ft" );
     fathom = _( "fth" );
@@ -187,6 +184,10 @@ or change this text in Toolbox/Plugins/Logbook\n\nShift+Enter appends a new line
     ampere     = _T( "A" );
 
     //wxChoice
+	showDistanceChoice = 0;
+	showDistance = _("NM");
+	showBoatSpeedchoice = 0;
+	showBoatSpeed = _("kts");
     showDepth = 0;
     showWaveSwell = 0;
     showWindSpeedchoice = 0;

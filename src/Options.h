@@ -84,8 +84,8 @@ public:
     wxString	Min;
     wxString	Sec;
 
-    wxString	distance;
-    wxString	speed;
+    
+    
 
     wxString	meter;
     wxString	feet;
@@ -163,6 +163,10 @@ public:
     int             numberSails;
 
     //wxChoice
+	int	    
+		Choice;
+	int	    showDistanceChoice;
+	int	    showBoatSpeedchoice;
     int		showDepth;
     int		showWaveSwell;
     int     showWindSpeedchoice;
@@ -204,6 +208,8 @@ public:
     int 	  timeformat;
     bool	  noseconds;
     int       dateformat;
+	wxString  showDistance;
+	wxString  showBoatSpeed;
     wxString  showWindSpeed;
     wxString  dateseparatorlocale;
     wxString  dateseparatorindiv;

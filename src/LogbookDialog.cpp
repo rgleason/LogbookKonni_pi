@@ -282,7 +282,7 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
     bSizer39->Add( m_bpButtonDistance, 0, wxALIGN_CENTER_VERTICAL|wxRIGHT, 5 );
 
     m_textCtrlStatusDistance = new wxTextCtrl( Statusbar, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxTE_PROCESS_ENTER  );
-    m_textCtrlStatusDistance->SetToolTip( _( "Set the desired distance in NM\n = (Track made good)" ) );
+    m_textCtrlStatusDistance->SetToolTip( _( "Set the desired distance in NM...m...km\n = (Track made good)" ) );
 
     bSizer39->Add( m_textCtrlStatusDistance, 0, wxALIGN_CENTER_VERTICAL, 5 );
 
@@ -2833,7 +2833,7 @@ void LogbookDialog::OnTextEnterStatusDistance( wxCommandEvent& event )
     wxString tmp = wxString::Format( _T( "%0.2f" ),i );
     tmp.Replace( _T( "." ),decimalPoint );
     logbookPlugIn->opt->everySMAmount = tmp;
-    m_textCtrlStatusDistance->SetValue( wxString::Format( _T( "%0.2f %s" ),i,logbookPlugIn->opt->distance.c_str() ) );
+    m_textCtrlStatusDistance->SetValue( wxString::Format( _T( "%0.2f %s" ),i,logbookPlugIn->opt->showDistance.c_str() ) );
 }
 
 void LogbookDialog::OnTextEnterStatusCourseDeg( wxCommandEvent& event )
@@ -3790,7 +3790,7 @@ Backup Logbook(*.txt)|*.txt" );
 
     m_textCtrlStatusCourseDeg->SetValue( logbookPlugIn->opt->courseChangeDegrees+_T( " " )+logbookPlugIn->opt->Deg );
     m_textCtrlStatusCourseMin->SetValue( logbookPlugIn->opt->courseTextAfterMinutes+_T( " m" ) );
-    m_textCtrlStatusDistance->SetValue( logbookPlugIn->opt->everySMAmount+_T( " " )+logbookPlugIn->opt->distance );
+    m_textCtrlStatusDistance->SetValue( logbookPlugIn->opt->everySMAmount+_T( " " )+logbookPlugIn->opt->showDistance);
 
     refreshBullets(); // Statusbar
     checkBitmaps();

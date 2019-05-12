@@ -827,13 +827,13 @@ void OverView::writeSumColumn( int row, wxString logbook, wxString path, bool co
     grid->SetCellValue( row,FSTART,startdate );
     grid->SetCellValue( row,FEND,enddate );
 
-    wxString temp = wxString::Format( _T( "%6.2f %s" ),distance,opt->distance.c_str() );
+    wxString temp = wxString::Format( _T( "%6.2f %s" ),distance,opt->showDistance.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FDISTANCE,temp );
-    temp = wxString::Format( _T( "%6.2f %s" ),etmal,opt->distance.c_str() );
+    temp = wxString::Format( _T( "%6.2f %s" ),etmal,opt->showDistance.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FETMAL,temp );
-    temp = wxString::Format( _T( "%6.2f %s" ),bestetmal,opt->distance.c_str() );
+    temp = wxString::Format( _T( "%6.2f %s" ),bestetmal,opt->showDistance.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FBESTETMAL,temp );
 
@@ -905,13 +905,13 @@ void OverView::writeSumColumn( int row, wxString logbook, wxString path, bool co
     grid->SetCellValue( row,FCURRENTDIR,temp );
 
     if ( currentcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),current/currentcount,opt->speed.c_str() );
+        temp = wxString::Format( _T( "%6.2f %s" ),current/currentcount,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FCURRENT,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),currentpeak,opt->speed.c_str() );
+    temp = wxString::Format( _T( "%6.2f %s" ),currentpeak,opt->showBoatSpeed.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FCURRENTPEAK,temp );
 
@@ -937,13 +937,13 @@ void OverView::writeSumColumn( int row, wxString logbook, wxString path, bool co
 
 
     if ( speedcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),speed/speedcount,opt->speed.c_str() );
+        temp = wxString::Format( _T( "%6.2f %s" ),speed/speedcount,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FSPEED,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),speedpeak,opt->speed.c_str() );
+    temp = wxString::Format( _T( "%6.2f %s" ),speedpeak,opt->showBoatSpeed.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FBSPEED,temp );
 
@@ -1040,11 +1040,11 @@ void OverView::writeSumColumnLogbook( total data, int row, wxString logbook, boo
     grid->SetCellValue( row,FSTART,data.logbookStart );
     grid->SetCellValue( row,FEND,enddate );
 
-    wxString temp = wxString::Format( _T( "%6.2f %s" ),data.distance,opt->distance.c_str() );
+    wxString temp = wxString::Format( _T( "%6.2f %s" ),data.distance,opt->showDistance.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FDISTANCE,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.bestetmal,opt->distance.c_str() );
+    temp = wxString::Format( _T( "%6.2f %s" ),data.bestetmal,opt->showDistance.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FBESTETMAL,temp );
 
@@ -1116,13 +1116,13 @@ void OverView::writeSumColumnLogbook( total data, int row, wxString logbook, boo
     grid->SetCellValue( row,FCURRENTDIR,temp );
 
     if ( data.currentcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.current/data.currentcount,opt->speed.c_str() );
+        temp = wxString::Format( _T( "%6.2f %s" ),data.current/data.currentcount,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FCURRENT,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.currentpeak,opt->speed.c_str() );
+    temp = wxString::Format( _T( "%6.2f %s" ),data.currentpeak,opt->showBoatSpeed.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FCURRENTPEAK,temp );
 
@@ -1147,23 +1147,23 @@ void OverView::writeSumColumnLogbook( total data, int row, wxString logbook, boo
     grid->SetCellValue( row,FWATERMO,temp );
 
     if ( data.speedcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.speed/data.speedcount,opt->speed.c_str() );
+        temp = wxString::Format( _T( "%6.2f %s" ),data.speed/data.speedcount,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FSPEED,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.speedpeak,opt->speed.c_str() );
+    temp = wxString::Format( _T( "%6.2f %s" ),data.speedpeak,opt->showBoatSpeed.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
     grid->SetCellValue( row,FBSPEED,temp );
 
     if ( data.speedcountSTW )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.speedSTW/data.speedcountSTW,opt->speed.c_str() );
+        temp = wxString::Format( _T( "%6.2f %s" ),data.speedSTW/data.speedcountSTW,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
     temp.Replace( _T( "." ),parent->decimalPoint );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.speedpeakSTW,opt->speed.c_str() );
+    temp = wxString::Format( _T( "%6.2f %s" ),data.speedpeakSTW,opt->showBoatSpeed.c_str() );
     temp.Replace( _T( "." ),parent->decimalPoint );
 
     wxDateTime startdt, enddt, startdtd, enddtd, time;
