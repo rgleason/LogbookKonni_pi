@@ -5985,7 +5985,7 @@ void LogbookDialog::OnComboUpService( wxCommandEvent& event )
 {
     this->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( LogbookDialog::OnComboUpService ) );
 #ifdef __WXOSX__
-    m_gridMaintanence->SetCellValue( event.GetString(),maintenance->selectedRow,maintenance->selectedCol );
+    m_gridMaintanence->SetCellValue( maintenance->selectedRow,maintenance->selectedCol,event.GetString() );
     maintenance->cellCollChanged( maintenance->selectedCol,maintenance->selectedRow );
 #if wxCHECK_VERSION(2,9,0)
     wxUIActionSimulator sim;
@@ -6142,7 +6142,7 @@ void LogbookDialog::OnComboUpRepairs( wxCommandEvent& event )
 {
     this->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( LogbookDialog::OnComboUpRepairs ) );
 #ifdef __WXOSX__
-    m_gridMaintanenceRepairs->SetCellValue( event.GetString(),maintenance->selectedRowRepairs,maintenance->selectedColRepairs );
+    m_gridMaintanenceRepairs->SetCellValue( maintenance->selectedRowRepairs,maintenance->selectedColRepairs, event.GetString() );
     maintenance->checkRepairs();
 #if wxCHECK_VERSION(2,9,0)
     wxUIActionSimulator sim;
@@ -6371,7 +6371,7 @@ void LogbookDialog::OnComboUpBuyParts( wxCommandEvent& event )
 {
     this->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( LogbookDialog::OnComboUpBuyParts ) );
 #ifdef __WXOSX__
-    m_gridMaintenanceBuyParts->SetCellValue( event.GetString(),maintenance->selectedRowBuyParts,maintenance->selectedColBuyParts );
+    m_gridMaintenanceBuyParts->SetCellValue( maintenance->selectedRowBuyParts,maintenance->selectedColBuyParts, event.GetString() );
     maintenance->checkBuyParts();
 #if wxCHECK_VERSION(2,9,0)
     wxUIActionSimulator sim;
