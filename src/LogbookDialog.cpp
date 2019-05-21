@@ -2626,8 +2626,8 @@ void LogbookDialog::OnToggleButtonGenerator( wxCommandEvent& event )
 
 void LogbookDialog::setAbbreviations()
 {
-    m_gridMotorSails->SetRowLabelValue( LogbookHTML::RPM1, _T( "#1 " )+logbookPlugIn->opt->rpm);
-    m_gridMotorSails->SetRowLabelValue( LogbookHTML::RPM2, _T( "#2 " )+logbookPlugIn->opt->rpm);
+    m_gridMotorSails->SetColLabelValue( LogbookHTML::RPM1, _T( "#1 " )+logbookPlugIn->opt->rpm);
+    m_gridMotorSails->SetColLabelValue( LogbookHTML::RPM2, _T( "#2 " )+logbookPlugIn->opt->rpm);
 }
 
 void LogbookDialog::OnButtonClickResetSails( wxCommandEvent& event )

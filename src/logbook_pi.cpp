@@ -1296,7 +1296,10 @@ void logbookkonni_pi::LoadConfig()
 
             opt->abrSails.Empty();
             opt->sailsName.Empty();
-            
+
+            opt->abrSails.SetCount( opt->numberSails );
+            opt->sailsName.SetCount( opt->numberSails );
+
             for ( int i = 0; i < opt->numberSails; i++ )
             {
                 opt->abrSails.Item( i ) = tkz.GetNextToken();

@@ -173,7 +173,7 @@ void Logbook::SetPosition( PlugIn_Position_Fix &pfix )
     else
         sLon = this->toSDMMOpenCPN( 2, pfix.Lon, true );
 
-    if ( pfix.nSats != 0 )
+    if ( pfix.FixTime != 0 )
     {
         
 		double factor = 1;
@@ -387,7 +387,25 @@ void Logbook::SetSentence( wxString &sentence )
         {
             if ( m_NMEA0183.Parse() )
             {
-                sSOW = wxString::Format( _T( "%5.2f %s" ), m_NMEA0183.Vhw.Knots,opt->showBoatSpeed.c_str() );
+				double factor = 1;
+				double tboatspeed = 1;
+				if ( m_NMEA0183.Vhw.Knots != 999.0 )
+					switch (opt->showBoatSpeedchoice)
+					{
+					case 0:
+						factor = 1;
+						break;
+					case 1:							
+						factor = 0.51444;							
+						break;
+					case 2:
+						factor = 1.852;							
+						break;
+					}
+
+					tboatspeed = m_NMEA0183.Vhw.Knots * factor;
+
+                sSOW = wxString::Format( _T( "%5.2f %s" ), tboatspeed, opt->showBoatSpeed.c_str() );
                 dtSOW = wxDateTime::Now();
                 bSOW = true;
             }
