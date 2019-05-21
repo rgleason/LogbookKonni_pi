@@ -1,16 +1,24 @@
-version: 0.9.{build}
-clone_folder: c:\project\logbookkonni_pi
-shallow_clone: true
+# Build worker image (VM template)
 image:
 - Visual Studio 2017
-
+# scripts that are called at very beginning, before repo cloning
+# init:
+version: 0.9.{build}
+# clone directory
+clone_folder: c:\project\logbookkonni_pi
+# fetch repository as zip archive
+shallow_clone: false  # default is "false"
+# set clone depth, clone entire repository history if not defined
+# clone_depth:5
+# Build Configuration       #
+# build platform, i.e. x86, x64, Any CPU. This setting is optional.
 platform: 
 # - x64
   - Win32
-
+# build Configuration, i.e. Debug, Release, etc.
 configuration: Release
 test: OFF
-
+# scripts that run after cloning repository
 install:
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
 
@@ -30,31 +38,37 @@ install:
   - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/wxWidgets-3.1.2.7z
   - cmd: 7z x wxWidgets-3.1.2.7z -o%WXWIN% > null
 
-  #- set #Use only while debugging - it reveals the deploy token set on Appveyor
-
+#- set #Use only while debugging - it reveals the deploy token set on Appveyor
+# scripts to run before build
 before_build:
   - cd c:\project\logbookkonni_pi
+  - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z
+  - cmd: 7z x -y OpenCPN_buildwin-4.99a.7z -oc:\project\logbookkonni_pi\buildwin
   - mkdir build
   - cd build
   - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.99.1405-vc141_xp/opencpn.lib
-  - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z
-  - cmd: 7z x -y OpenCPN_buildwin-4.99a.7z -oc:\project\logbookkonni_pi\buildwin
+  - dir c:\project\logbookkonni_pi\buildwin
+  - dir c:\project\logbookkonni_pi\build
+  - dir c:\project\logbookkonni_pi
   - cmake -T v141_xp ..
-
+# to run your custom scripts instead of automatic MSBuild
 build_script:
   - cmake --build . --config Release --target package
-
+  - dir c:\project\logbookkonni_pi\build	  
+# Artifacts Configuration
 artifacts:
-  - path: build\logbookkonni_pi*.exe'
-    name: installer
-
+   path: build\*.exe
+   name: installer
+# Deploy to GitHub Releases
 deploy:
-   description: 'release created by AppVeyor CI'
    provider: GitHub
+   description: 'release created by AppVeyor CI'
    auth_token: '%GitHub_auth_token%'
-   artifact: installer
+   artifact: installer, portable
    draft: true
    prerelease: true
+   tag: $(APPVEYOR_REEPO_TAG_NAME)  # use pushed Tag or insert version name
    on:
-     appveyor_repo_tag: true # deploy on tag push only
      configuration: Release  # Debug contains non-redist MS DLLs
+     APPVEYOR_REPO_TAG: true # deploy on tag push only
+#    branch: master   # release from master branch only
