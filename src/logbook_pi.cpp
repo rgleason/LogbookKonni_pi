@@ -80,7 +80,7 @@ extern "C" DECL_EXP void destroy_pi( opencpn_plugin* p )
 //
 //---------------------------------------------------------------------------------------------------------
 logbookkonni_pi::logbookkonni_pi( void *ppimgr )
-    :opencpn_plugin_17( ppimgr )
+    :opencpn_plugin_116( ppimgr )
 {
     // Create the PlugIn icons
     initialize_images();
@@ -653,12 +653,12 @@ void logbookkonni_pi::UpdateAuiStatus( void )
 
 int logbookkonni_pi::GetAPIVersionMajor()
 {
-    return MY_API_VERSION_MAJOR;
+    return OCPN_API_VERSION_MAJOR;
 }
 
 int logbookkonni_pi::GetAPIVersionMinor()
 {
-    return MY_API_VERSION_MINOR;
+    return OCPN_API_VERSION_MINOR;
 }
 
 int logbookkonni_pi::GetPlugInVersionMajor()
@@ -678,15 +678,13 @@ wxString logbookkonni_pi::GetCommonName()
 
 wxString logbookkonni_pi::GetShortDescription()
 {
-    return _( "Logbook for OpenCPN" );
+    return _(PLUGIN_SHORT_DESCRIPTION);
 }
 
 wxString logbookkonni_pi::GetLongDescription()
 {
-    return _( "Logbook for OpenCPN\n\n\
-Thanks to the community for their helpful suggestions.\n\n\
-If you find a bug post it on\nhttp://www.cruisersforum.com/forums/f134/logbook-konni-for-opencpn-68945.html\n\
-Helpful videos are at Youtube, search for LogbookKonni." );
+   return _(PLUGIN_LONG_DESCRIPTION);
+
 }
 
 
