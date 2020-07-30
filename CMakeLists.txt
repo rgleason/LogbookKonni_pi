@@ -42,9 +42,9 @@ set(LONG_DESCRIPTION "Thanks to the community for their helpful suggestions. If 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
-set(VERSION_PATCH "10")
+set(VERSION_PATCH "11")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "07-29-2020")
+set(VERSION_DATE "07-30-2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -53,15 +53,22 @@ set(TP_COMMENT "  * Release for O5 using CI")
 set(PARENT "opencpn")
 
 # The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
+# This must be set for flatpak environment to build, so it has been moved to pluginconfigure
 #set(GIT_REPOSITORY_SERVER "github.com")
-
+#No longer needed, queried.
+#set(GIT_USER "rgleason")
+#set(GIT_REPOSITORY_NAME "testplugin_pi")
 # Specifies cloudsmith repository suffices
 set(PROD "prod") # Standard Repos
 set(BETA "beta") # Standard Repos
 set(ALPHA "alpha") # Standard Repos
 
-set(CLOUDSMITH_USER "jon-gough")
+#set(CLOUDSMITH_USER "rick-gleason")
+set(CLOUDSMITH_USER "opencpn")
+
 # set this if your cloudsmith repository name does not match your git repository name set(CLOUDSMITH_BASE_REPOSITORY "testplugin_pi")
+
+set (CLOUDSMITH_BASE_REPOSITORY "logbookkoni")  #without the pi 
 
 set(XML_INFO_URL "https://opencpn.org/wiki/dokuwiki/doku.php?id=opencpn:opencpn_user_manual:plugins:safety:odraw1.6_pi")
 set(XML_SUMMARY ${SHORT_DESCRIPTION})
@@ -249,38 +256,24 @@ SET(SRC_LNMEA0183
 		
 add_definitions(-DPLUGIN_USE_SVG)
 
-# VALIDATOR
-#if(APPLE)
-#    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
-#else(APPLE)
-#    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
-#endif(APPLE)
+if(APPLE)
+    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
+else(APPLE)
+    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
+endif(APPLE)
 
-#if(PI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Using JSON Schema validation - warning this changes the 'flavour' of the #executable and it may not be compatible with OpenCPN")
-#    add_definitions(-DPI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Adding JSON Schema validation")
-#    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp #extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
-#    set(EXTINCLUDE ${EXTINCLUDE} extinclude/nlohmann/json.hpp #extinclude/json-schema-validator/json-schema.hpp)
-#    include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
-#else(PI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause #unexpected crashes")
-#endif(PI_JSON_SCHEMA_VALIDATOR)
+if(PI_JSON_SCHEMA_VALIDATOR)
+    message(STATUS "${CMLOC}Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
+    add_definitions(-DPI_JSON_SCHEMA_VALIDATOR)
+    message(STATUS "${CMLOC}Adding JSON Schema validation")
+    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
+    set(EXTINCLUDE ${EXTINCLUDE} extinclude/nlohmann/json.hpp extinclude/json-schema-validator/json-schema.hpp)
+    include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
+else(PI_JSON_SCHEMA_VALIDATOR)
+    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
+endif(PI_JSON_SCHEMA_VALIDATOR)
 
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/lz4)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/bitmaps)		
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
-		
-
-# VALIDATOR		
-
-# ADD_DEFINITIONS(-DTIXML_USE_STL)
 
 add_library(${PACKAGE_NAME} SHARED ${SRC_LOGBOOKKONNI} ${SRC_LTINYXML} ${SRC_LNMEA0183})
 
@@ -288,28 +281,33 @@ add_definitions(-DTIXML_USE_STL)
 
 #add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 
-#if(UNIX AND NOT APPLE)
-#    if(PI_JSON_SCHEMA_VALIDATOR)
-#        # Change OS/ABI to be UNIX - System V to make it run with OCPN
-#        set(lib_name lib${PACKAGE_NAME}.so)
-#        message(STATUS "${CMLOC}lib-name: ${lib_name}")
-#        find_file(elfedit elfedit)
-#        if(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#            message(STATUS "${CMLOC}Will ensure OS/ABI is set to 0 to match OCPN")
-#            add_custom_command(
-#                TARGET ${PACKAGE_NAME}
-#                POST_BUILD
-#                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#                DEPENDS ${PACKAGE_NAME}
-#                COMMENT " Running post build action on ${lib_name}."
-#                COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) ')
-#        else(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#            message(STATUS "${CMLOC}Cannot correct OS/ABI to match OCPN if it is generated incorrectly. #Package binutils needed")
-#        endif(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#    endif(PI_JSON_SCHEMA_VALIDATOR)
-#endif(UNIX AND NOT APPLE)
+# Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages. 
 
+if(UNIX AND NOT APPLE)
+    if(PI_JSON_SCHEMA_VALIDATOR)
+        # Change OS/ABI to be UNIX - System V to make it run with OCPN
+        set(lib_name lib${PACKAGE_NAME}.so)
+        message(STATUS "${CMLOC}lib-name: ${lib_name}")
+        find_file(elfedit elfedit)
+        if(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+            message(STATUS "${CMLOC}Will ensure OS/ABI is set to 0 to match OCPN")
+            add_custom_command(
+                TARGET ${PACKAGE_NAME}
+                POST_BUILD
+                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                DEPENDS ${PACKAGE_NAME}
+                COMMENT " Running post build action on ${lib_name}."
+                COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) ')
+        else(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+            message(STATUS "${CMLOC}Cannot correct OS/ABI to match OCPN if it is generated incorrectly. #Package binutils needed")
+        endif(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+    endif(PI_JSON_SCHEMA_VALIDATOR)
+endif(UNIX AND NOT APPLE)
 
+#These are NOT used in Testplugin, used for other plugins
+#include("PluginJSON")
+#include("PluginXML")
+#include("PluginGL")														 
 ##
 ## ----- Change above to match project requirements ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
