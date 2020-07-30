@@ -42,8 +42,8 @@ set(LONG_DESCRIPTION "Thanks to the community for their helpful suggestions. If 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
-set(VERSION_PATCH "11")
-set(VERSION_TWEAK "1")
+set(VERSION_PATCH "12")
+set(VERSION_TWEAK "0")
 set(VERSION_DATE "07-30-2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
@@ -70,7 +70,7 @@ set(CLOUDSMITH_USER "opencpn")
 
 set (CLOUDSMITH_BASE_REPOSITORY "logbookkonni")  #without the pi 
 
-set(XML_INFO_URL "https://opencpn.org/wiki/dokuwiki/doku.php?id=opencpn:opencpn_user_manual:plugins:safety:odraw1.6_pi")
+set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/logbookkonni.html")
 set(XML_SUMMARY ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION ${LONG_DESCRIPTION})
 
