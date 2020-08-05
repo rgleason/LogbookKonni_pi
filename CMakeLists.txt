@@ -5,7 +5,7 @@
 ##---------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.131  
+# Frontend2 Version: 1.0.132  
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
 ## ----- Changes should only be made between the section blocks that identify where     ----- ##
@@ -43,8 +43,8 @@ set(LONG_DESCRIPTION "Thanks to the community for their helpful suggestions. If 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "12")
-set(VERSION_TWEAK "0")
-set(VERSION_DATE "07-30-2020")
+set(VERSION_TWEAK "2")
+set(VERSION_DATE "08-04-2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -104,9 +104,10 @@ message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
 project(${PACKAGE})
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;")
-										
 
+# -----------------------------------------
 include("PluginSetup")
+# -----------------------------------------
 
 ##
 ## ----- The above is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
@@ -123,29 +124,18 @@ option(Plugin_CXX11 "Use c++11" OFF)
 ##
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
-##
+
+# -----------------------------------------
 include("PluginConfigure")
+# -----------------------------------------
 
-##
 ## ----- do not change section above - needed to configure build process ----- ##
+## ----- Change below to match project requirements for source, headers, etc. ----- ##
 ##
-
-#
-# ----- Change below to match project requirements for source, headers, etc. ----- ##
-#
 
 add_definitions(-DUSE_S57)
 
-#---OUT
-# PROJECT(logbookkonni_pi)
 SET(BUNDLE_DATA TRUE)
-# INCLUDE( "VERSION.cmake" )
-#SET(PLUGIN_VERSION "${PLUGIN_VERSION_MAJOR}.${PLUGIN_VERSION_MINOR}.${PLUGIN_VERSION_PATCH}" )
-#SET(VERSION_MAJOR ${PLUGIN_VERSION_MAJOR})
-#SET(VERSION_MINOR "${PLUGIN_VERSION_MINOR}${PLUGIN_VERSION_PATCH}")
-#SET(VERSION_DATE ${PLUGIN_VERSION_DATE})
-#SET(CMAKE_BUILD_TYPE Debug)
-#---OUT
 
 SET(SRC_LOGBOOKKONNI
        		src/logbook_pi.h
@@ -305,18 +295,21 @@ if(UNIX AND NOT APPLE)
 endif(UNIX AND NOT APPLE)
 
 #These are NOT used in Testplugin, used for other plugins
+# -----------------------------------------
 #include("PluginJSON")
 #include("PluginXML")
 #include("PluginGL")														 
+# -----------------------------------------
+
 ##
 ## ----- Change above to match project requirements ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
-##
 
+# -----------------------------------------
 include("PluginInstall")
 include("PluginLocalization")
 include("PluginPackage")
+# -----------------------------------------
 
-##
 ## ----- do not change section above - needed to configure build process ----- ##
-##							  
+##

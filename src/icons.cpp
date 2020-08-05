@@ -12,6 +12,13 @@ const wxBitmap *_img_Bullet_green;
 const wxBitmap *_img_Bullet_red;
 const wxBitmap *_img_Bullet_yellow;
 
+#ifdef PLUGIN_USE_SVG
+#include "ocpn_plugin.h"
+wxString _svg_logbookkonni;
+wxString _svg_logbookkonni_rollover;
+wxString _svg_logbookkonni_toggled;
+#endif
+
 void initialize_images( void )
 {
     /* logbook_pi.png - 3327 bytes */
@@ -421,6 +428,19 @@ void initialize_images( void )
         wxMemoryInputStream sm( Bullet_yellow,sizeof( Bullet_yellow ) );
         _img_Bullet_yellow = new wxBitmap( wxImage( sm ) );
     }
+
+#ifdef PLUGIN_USE_SVG
+    wxFileName fn;
+    fn.SetPath(GetPluginDataDir("logbookkonni_pi"));
+    fn.AppendDir(_T("data"));
+    fn.SetFullName(_T("logbookkonni_pi.svg"));
+    _svg_logbookkonni = fn.GetFullPath();
+    wxLogMessage(_T("Loading toolbar icon: ") + _svg_logbookkonni); 
+    fn.SetFullName(_T("logbookkonni_pi_rollover.svg"));
+    _svg_logbookkonni_rollover = fn.GetFullPath();
+    fn.SetFullName(_T("logbookkonni_pi_toggled.svg"));
+    _svg_logbookkonni_toggled = fn.GetFullPath();
+#endif
 
     return;
 }

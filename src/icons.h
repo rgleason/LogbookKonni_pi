@@ -7,6 +7,9 @@
 #	include <wx/wx.h>
 #endif
 
+#include <wx/filename.h>
+#include <wx/mstream.h>
+
 extern void initialize_images( void );
 
 extern wxBitmap *_img_logbook_pi;
@@ -14,4 +17,12 @@ extern wxBitmap *_img_logbook;
 extern const wxBitmap *_img_Bullet_green;
 extern const wxBitmap *_img_Bullet_red;
 extern const wxBitmap *_img_Bullet_yellow;
+
+#ifdef PLUGIN_USE_SVG
+extern wxString _svg_logbookkonni;
+extern wxString _svg_logbookkonni_rollover;
+extern wxString _svg_logbookkonni_toggled;
+#endif
+
+
 #endif /* ICONS_H */
