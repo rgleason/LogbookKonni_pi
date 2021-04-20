@@ -37,10 +37,6 @@
 
 #include "version.h"
 
-#define     MY_API_VERSION_MAJOR    1
-#define     MY_API_VERSION_MINOR    7
-
-
 #include "ocpn_plugin.h"
 #include "Options.h"
 #include "nmea0183/nmea0183.h"
@@ -69,7 +65,7 @@ class LogbookTimer;
 class LogbookOptions;
 class Options;
 
-class logbookkonni_pi : public opencpn_plugin_17
+class logbookkonni_pi  :  public opencpn_plugin_116
 {
 public:
     enum states {OFF,ONNOEVENTS,ONWITHEVENTS};
