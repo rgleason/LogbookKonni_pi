@@ -43,8 +43,8 @@ set(LONG_DESCRIPTION "Thanks to the community for their helpful suggestions. If 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "0")
-set(VERSION_DATE "08-05-2020")
+set(VERSION_TWEAK "1")
+set(VERSION_DATE "04-28-2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -172,7 +172,7 @@ SET(SRC_LOGBOOKKONNI
 		 api-16/ocpn_plugin.h		
  	)
 
-IF(WIN32)
+#IF(WIN32)
 SET(SRC_LTINYXML
 		src/tinyxml/tinyxml.cpp
 		src/tinyxml/tinyxml.h
@@ -181,7 +181,7 @@ SET(SRC_LTINYXML
 		src/tinyxml/tinystr.cpp
 		src/tinyxml/tinystr.h 
 )
-ENDIF(WIN32)
+#ENDIF(WIN32)
 
 SET(SRC_LNMEA0183
 		src/nmea0183/LatLong.hpp
