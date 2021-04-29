@@ -5,7 +5,7 @@
 ##---------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.132  
+# Frontend2 Version: 1.0.132  partial update circleci ci 
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
 ## ----- Changes should only be made between the section blocks that identify where     ----- ##
@@ -38,12 +38,12 @@ set(TITLE_NAME "LOGBOOKKONNI")
 set(PACKAGE_CONTACT "Del Elson")
 set(PACKAGE "logbookkonni")
 set(SHORT_DESCRIPTION "Logbook for OpenCPN")
-set(LONG_DESCRIPTION "Thanks to the community for their helpful suggestions. If you find a bug post it on http://www.cruisersforum.com/forums/f134/logbook-konni-for-opencpn-68945.html Helpful videos are at Youtube, search for LogbookKonni.")
+set(LONG_DESCRIPTION "Helpful videos are at Youtube, search LogbookKonni.")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "2")
+set(VERSION_TWEAK "3")
 set(VERSION_DATE "04-28-2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
