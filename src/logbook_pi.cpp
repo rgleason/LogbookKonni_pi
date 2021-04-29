@@ -724,41 +724,6 @@ void logbookkonni_pi::SetDefaults( void )
 
 wxString logbookkonni_pi::StandardPath( void )
 {
-#    wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
-#    wxString s = wxFileName::GetPathSeparator();
-
-# #ifdef __WXMSW__
-#    wxString stdPath  = std_path.GetConfigDir();
-# #endif
-# #ifdef __WXGTK__
-#    wxString stdPath  = std_path.GetUserDataDir();
-# #endif
-# #ifdef __WXOSX__
-#    wxString stdPath  = ( std_path.GetUserConfigDir() + s + _T( "opencpn" ) );
-# #endif
-
-#    stdPath += s + _T( "plugins" );
-#    if ( !wxDirExists( stdPath ) )
-#        wxMkdir( stdPath );
-#
-#    stdPath += s + _T( "logbook" );
-#
-# #ifdef __WXOSX__
-#    // Compatibility with pre-OCPN-4.2; move config dir to
-#    // ~/Library/Preferences/opencpn if it exists
-#    wxString oldPath = ( std_path.GetUserConfigDir() + s + _T( "plugins" ) + s + _T( "logbook" ) );
-#    if ( wxDirExists( oldPath ) && !wxDirExists( stdPath ) )
-#    {
-#        wxLogMessage( "logbookkonni_pi: moving config dir %s to %s", oldPath, stdPath );
-#        wxRenameFile( oldPath, stdPath );
-#    }
-# #endif
-
-#    if ( !wxDirExists( stdPath ) )
-#        wxMkdir( stdPath );
-#
-#    stdPath += s; // is this necessary?
-#    return stdPath;
   wxString stdPath(GetPluginDataDir("Logbook"));
   stdPath += wxFileName::GetPathSeparator();
   return stdPath;
