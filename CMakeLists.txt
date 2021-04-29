@@ -268,6 +268,7 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 add_library(${PACKAGE_NAME} SHARED ${SRC_LOGBOOKKONNI} ${SRC_LTINYXML} ${SRC_LNMEA0183})
 
 add_definitions(-DTIXML_USE_STL)
+add_compile_definitions("LAYOUTS_HACK")  # Disable Install and Uninstall Preferences buttons.
 
 #add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 
