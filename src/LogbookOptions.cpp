@@ -412,6 +412,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_staticText751->Wrap( -1 );
     fgSizer28->Add( m_staticText751, 0, wxTOP|wxRIGHT|wxLEFT, 5 );
 
+#ifndef LAYOUTS_HACK
     m_buttonInstallHTMLFiles = new wxButton( m_panel15, wxID_ANY, _( "Install" ), wxDefaultPosition, wxDefaultSize, 0 );
     m_buttonInstallHTMLFiles->SetToolTip( _( "Install OpenCPN_Logbook_Layouts.zip" ) );
 
@@ -421,6 +422,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_buttonUninstall->SetToolTip( _( "Uninstalls\nLogbook-Plugin,\nall Logbook-Data,\nall Logbook-Layouts,\nall Logbook-Languages\nand cleans the OpenCPN.ini" ) );
 
     fgSizer28->Add( m_buttonUninstall, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+#endif
 
 
     fgSizer10->Add( fgSizer28, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL, 5 );
