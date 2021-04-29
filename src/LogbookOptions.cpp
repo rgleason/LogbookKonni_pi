@@ -1429,7 +1429,9 @@ void LogbookOptions::init()
 #ifdef __WXMSW__
     ;//m_buttonInstallLanguages->Enable(false);
 #else
+#ifndef LAYOUTS_HACK
     m_buttonUninstall->Enable( false );
+#endif
 #endif
 
     opt->setTimeFormat( m_checkBoxNoSeconds->GetValue() );
