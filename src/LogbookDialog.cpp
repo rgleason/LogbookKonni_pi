@@ -3724,6 +3724,7 @@ Backup Logbook(*.txt)|*.txt" );
     }
 
     data  = logbookkonni_pi::StandardPath();
+//    data  = logbook::StandardPath();
     data.Append( _T( "data" ) );
     appendOSDirSlash( &data ) ;
     Home_Locn = data;
@@ -3741,7 +3742,8 @@ Backup Logbook(*.txt)|*.txt" );
 
     wxString s = wxFileName::GetPathSeparator();
     // help_locn = *GetpSharedDataLocation() + _T( "plugins" ) + s + _T( "logbookkonni_pi" ) + s + _T( "data" ) + s;
-    help_locn =  GetPluginDataDir("logbookkonni_pi") + _T("/data/");
+    //    help_locn =  GetPluginDataDir("logbookkonni_pi") + _T("/data/");
+    help_locn =  GetPluginDataDir("logbook_pi") + _T("/data/");
 	image_locn = help_locn + _T( "Images" ) + s;
 
     lastRowSelectedRepairs = 0;
