@@ -43,7 +43,7 @@ set(LONG_DESCRIPTION "Helpful videos are at Youtube, search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "12")
+set(VERSION_TWEAK "13")
 set(VERSION_DATE "05-01-2020")  # mm-dd-yyyy
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
@@ -146,7 +146,7 @@ SET(SRC_LOGBOOKKONNI
  		src/icons.cpp
 		src/Logbook.h
 		src/Logbook.cpp
-		src/LogbookDialog.h
+		fsrc/LogbookDialog.h
 		src/LogbookDialog.cpp
 		src/LogbookOptions.h
 		src/LogbookOptions.cpp
@@ -268,7 +268,7 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 add_library(${PACKAGE_NAME} SHARED ${SRC_LOGBOOKKONNI} ${SRC_LTINYXML} ${SRC_LNMEA0183})
 
 add_definitions(-DTIXML_USE_STL)
-# add_compile_definitions("LAYOUTS_HACK")  # Disable Install and Uninstall Preferences buttons.
+add_compile_definitions("LAYOUTS_HACK")  # Disable Install and Uninstall Preferences buttons.
 
 #add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 
