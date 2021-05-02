@@ -146,7 +146,7 @@ SET(SRC_LOGBOOKKONNI
  		src/icons.cpp
 		src/Logbook.h
 		src/Logbook.cpp
-		fsrc/LogbookDialog.h
+		src/LogbookDialog.h
 		src/LogbookDialog.cpp
 		src/LogbookOptions.h
 		src/LogbookOptions.cpp
@@ -172,7 +172,7 @@ SET(SRC_LOGBOOKKONNI
 		 api-16/ocpn_plugin.h		
  	)
 
-#IF(WIN32)
+#IF(WIN32)  #flatpak needs this tooo, they all do
 SET(SRC_LTINYXML
 		src/tinyxml/tinyxml.cpp
 		src/tinyxml/tinyxml.h
@@ -265,13 +265,13 @@ endif(PI_JSON_SCHEMA_VALIDATOR)
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 
-add_library(${PACKAGE_NAME} SHARED ${SRC_LOGBOOKKONNI} ${SRC_LTINYXML} ${SRC_LNMEA0183})
+add_library( ${PACKAGE_NAME} SHARED ${SRC_LOGBOOKKONNI} ${SRC_LTINYXML} ${SRC_LNMEA0183} )
 
 add_definitions(-DTIXML_USE_STL)
-add_compile_definitions("LAYOUTS_HACK")  # Disable Install and Uninstall Preferences buttons.
+add_compile_definitions("LAYOUTS_HACK")  
 
+# Above Disables Install and Uninstall Preferences buttons.
 #add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
-
 # Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages. 
 
 if(UNIX AND NOT APPLE)
