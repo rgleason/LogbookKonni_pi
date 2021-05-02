@@ -43,7 +43,7 @@ set(LONG_DESCRIPTION "Helpful videos are at Youtube, search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "16")
+set(VERSION_TWEAK "17")
 set(VERSION_DATE "05-01-2020")  # mm-dd-yyyy
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
