@@ -724,7 +724,7 @@ void logbookkonni_pi::SetDefaults( void )
 
 wxString logbookkonni_pi::StandardPath( void )
 {
-  wxString stdPath(GetPluginDataDir("Logbook"));
+  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
   stdPath += wxFileName::GetPathSeparator();
   return stdPath;
 
