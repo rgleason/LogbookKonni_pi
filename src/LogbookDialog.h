@@ -12,7 +12,7 @@
 #include "Maintenance.h"
 #include "boat.h"
 #include "OverView.h"
-#include "tinyxml/tinyxml.h"
+#include "tinyxml.h"
 
 #include <wx/string.h>
 #include <wx/button.h>
