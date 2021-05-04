@@ -724,10 +724,10 @@ void logbookkonni_pi::SetDefaults( void )
 
 wxString logbookkonni_pi::StandardPath( void )
 {
-  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
+ //  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
+  wxString stdPath( GetpPrivateApplicationDataLocation("logbookkonni_pi"));
   stdPath += wxFileName::GetPathSeparator();
   return stdPath;
-
 }
 
 wxBitmap *logbookkonni_pi::GetPlugInBitmap()
