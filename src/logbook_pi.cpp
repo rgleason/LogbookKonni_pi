@@ -738,7 +738,7 @@ wxString logbookkonni_pi::StandardPath( void )
 //  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
 //  wxString stdPath( GetpPrivateApplicationDataLocation());
 //  stdPath += wxFileName::GetPathSeparator();
-//  return stdPath;
+    return stdPath;
 }
 
 wxBitmap *logbookkonni_pi::GetPlugInBitmap()
