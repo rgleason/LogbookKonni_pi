@@ -5,7 +5,7 @@
 ##---------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.161 20/04/2021 
+# Frontend2 Version: 1.0.162 20/05/2021 
 # ---------------------------------------------------------------------------
 ## buildCI:yes useODAPI:no validateJSON:no
 ##
@@ -45,8 +45,8 @@ set(LONG_DESCRIPTION "For Youtube Help Videos search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "23")
-set(VERSION_DATE "03-05-2020")  # DD/MM/YYYY format
+set(VERSION_TWEAK "24")
+set(VERSION_DATE "04-05-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -104,7 +104,7 @@ message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
 project(${PACKAGE})
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # -----------------------------------------
 include("PluginSetup")
@@ -266,9 +266,6 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 # include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/nmea0183/src)
 
-if(QT_ANDROID)
-    include_directories(BEFORE ${qt_android_include})
-endif(QT_ANDROID)
 
 # -----------------------------------------
 target_sources(${PACKAGE_NAME} PUBLIC ${SRCS}  ${SRC_LNMEA0183})
@@ -290,13 +287,20 @@ endif(NOT OCPN_FLATPAK_CONFIG)
 add_definitions(-DTIXML_USE_STL)
 
 # Disables Logbook Install and Uninstall Preferences buttons.
-add_compile_definitions("LAYOUTS_HACK")  
+#add_compile_definitions("_DLAYOUTS_HACK")
+add_definitions("-DLAYOUTS_HACK")  
 
 #add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 
 ## ----- Change above to match project requirements ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
-# -----------------------------------------
+
+# Needed for android builds
+if(QT_ANDROID)
+    include_directories(BEFORE ${qt_android_include})
+endif(QT_ANDROID)
+
+# Needed for all builds
 include("PluginInstall")
 include("PluginLocalization")
 include("PluginPackage")
