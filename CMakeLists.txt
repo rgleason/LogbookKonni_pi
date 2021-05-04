@@ -169,17 +169,8 @@ SET(SRCS
         	src/jsonreader.cpp
         	src/jsonval.cpp
         	src/jsonwriter.cpp
-#		 api-16/ocpn_plugin.h		
  	)
 
-#SET(SRC_LTINYXML
-#		src/tinyxml/tinyxml.cpp
-#		src/tinyxml/tinyxml.h
-#		src/tinyxml/tinyxmlerror.cpp
-#		src/tinyxml/tinyxmlparser.cpp
-#		src/tinyxml/tinystr.cpp
-#		src/tinyxml/tinystr.h 
-#)
 
 SET(SRC_LNMEA0183
 		src/nmea0183/LatLong.hpp
@@ -242,22 +233,7 @@ SET(SRC_LNMEA0183
 		
 add_definitions(-DPLUGIN_USE_SVG)
 
-#if(APPLE)
-#    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
-#else(APPLE)
-#    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
-#endif(APPLE)
-
-#if(PI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
-#    add_definitions(-DPI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Adding JSON Schema validation")
-#    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
-#    set(EXTINCLUDE ${EXTINCLUDE} extinclude/nlohmann/json.hpp extinclude/json-schema-validator/json-schema.hpp)
-#    include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
-#else(PI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
-#endif(PI_JSON_SCHEMA_VALIDATOR)
+# No PI_JSON_SCHEMA_VALIDATOR  needed
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
