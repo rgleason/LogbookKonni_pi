@@ -45,7 +45,7 @@ set(LONG_DESCRIPTION "For Youtube Help Videos search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "25")
+set(VERSION_TWEAK "26")
 set(VERSION_DATE "04-05-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
@@ -73,10 +73,9 @@ set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/logbookkonni.html")
 set(XML_SUMMARY ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION ${LONG_DESCRIPTION})
 
-##
 ## ----- Modify section above to include all the details for your plugin ----- ##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
-##
+
 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
@@ -98,9 +97,7 @@ endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
-##
 ## ----- The statements below are used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
-##
 
 project(${PACKAGE})
 
@@ -272,6 +269,7 @@ target_sources(${PACKAGE_NAME} PUBLIC ${SRCS}  ${SRC_LNMEA0183})
 # -----------------------------------------
 # target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 # add_library( ${PACKAGE_NAME} SHARED ${SRCS} ${SRC_LTINYXML} ${SRC_LNMEA0183} )
+# add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
@@ -290,7 +288,6 @@ add_definitions(-DTIXML_USE_STL)
 #add_compile_definitions("_DLAYOUTS_HACK")
 add_definitions("-DLAYOUTS_HACK")  
 
-#add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 
 ## ----- Change above to match project requirements ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
