@@ -5,7 +5,7 @@
 ##---------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.162 20/05/2021 
+# Frontend2 Version: 1.0.164 05/05/2021 
 # ---------------------------------------------------------------------------
 ## buildCI:yes useODAPI:no validateJSON:no
 ##
@@ -40,13 +40,13 @@ set(TITLE_NAME "LOGBOOKKONNI")
 set(PACKAGE_CONTACT "Del Elson")
 set(PACKAGE "logbookkonni")
 set(SHORT_DESCRIPTION "Logbook for OpenCPN")
-set(LONG_DESCRIPTION "For Youtube Help Videos search LogbookKonni.")
+set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni.")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "28")
-set(VERSION_DATE "04-05-2020")  # DD/MM/YYYY format
+set(VERSION_TWEAK "30")
+set(VERSION_DATE "06-05-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -55,7 +55,6 @@ set(TP_COMMENT "  * Release for O5 using CI")
 set(PARENT "opencpn")
 
 # The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
-# This must be set for flatpak environment to build, so it has been moved to pluginconfigure
 #set(GIT_REPOSITORY_SERVER "github.com")
 
 # Specific cloudsmith repository suffixes
@@ -75,7 +74,6 @@ set(XML_DESCRIPTION ${LONG_DESCRIPTION})
 
 ## ----- Modify section above to include all the details for your plugin ----- ##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
-
 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
@@ -137,12 +135,14 @@ add_definitions(-DUSE_S57)
 # what is this for, not in testplugin?
 SET(BUNDLE_DATA TRUE)
 
+# Keep this order there seems to be some dependency on that resulting in undefined. Leave ExGrid etc commented out.
+# Cannot move h files into separate include folder, errors occur.
 SET(SRCS
-       		src/logbook_pi.h
+  		src/logbook_pi.h
  		src/logbook_pi.cpp
- 		src/Options.h
- 		src/Options.cpp
- 		src/icons.h
+		src/Options.h
+		src/Options.cpp
+		src/icons.h
  		src/icons.cpp
 		src/Logbook.h
 		src/Logbook.cpp
@@ -150,7 +150,7 @@ SET(SRCS
 		src/LogbookDialog.cpp
 		src/LogbookOptions.h
 		src/LogbookOptions.cpp
- 		src/LogbookHTML.h
+		src/LogbookHTML.h
  		src/LogbookHTML.cpp
 		src/CrewList.h
 		src/CrewList.cpp
@@ -159,18 +159,34 @@ SET(SRCS
 		src/Maintenance.h
 		src/Maintenance.cpp	
 		src/OverView.h		
-		src/OverView.cpp	
+		src/OverView.cpp
 		src/Export.h
 		src/Export.cpp
-        	src/json_defs.h
-       		src/jsonreader.h
-        	src/jsonval.h
-        	src/jsonwriter.h
-        	src/jsonreader.cpp
-        	src/jsonval.cpp
-        	src/jsonwriter.cpp
+#		src/EzGrid.cpp       -when not commented - error C3861: 'getcol': identifier not found 
+#		src/FastComboEditor.cpp - when not commented - error C3861: 'getcol': identifier not found 
+#		src/GridCellChoiceRenderer.cpp  - when not commented - error C3861: 'getcol': identifier not found
+#		src/EzGrid.h
+#		src/FastComboEditor.h
+#		src/GridCellChoiceRenderer.h
  	)
 
+#SET(HDRS
+#  		include/logbook_pi.h
+#		include/Logbook.h
+#		include/LogbookDialog.h
+#		include/LogbookOptions.h
+#		include/LogbookHTML.h
+#		include/boat.h
+#		include/CrewList.h
+#		include/Export.h
+#		include/icons.h
+#		include/Maintenance.h
+#		include/EzGrid.h
+#		include/FastComboEditor.h
+#		include/GridCellChoiceRenderer.h
+#		include/Options.h
+#		include/OverView.h		
+#		)
 
 SET(SRC_LNMEA0183
 		src/nmea0183/LatLong.hpp
@@ -230,25 +246,34 @@ SET(SRC_LNMEA0183
 		src/nmea0183/rsa.cpp
 		src/nmea0183/SatInfo.h
        )
+	   
+set(LIBS_JSON
+        libs/json/json_defs.h
+      	libs/json/jsonreader.h
+        libs/json/jsonval.h
+        libs/json/jsonwriter.h
+        libs/json/jsonreader.cpp
+        libs/json/jsonval.cpp
+        libs/json/jsonwriter.cpp
+		) 
 		
 add_definitions(-DPLUGIN_USE_SVG)
 
 # No PI_JSON_SCHEMA_VALIDATOR  needed
-
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
 # include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/nmea0183/src)
 
-
 # -----------------------------------------
-target_sources(${PACKAGE_NAME} PUBLIC ${SRCS}  ${SRC_LNMEA0183})
+target_sources(${PACKAGE_NAME} PUBLIC ${SRCS}  ${LIBS_JSON}  ${SRC_LNMEA0183})
 # -----------------------------------------
 # target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 # add_library( ${PACKAGE_NAME} SHARED ${SRCS} ${SRC_LTINYXML} ${SRC_LNMEA0183} )
-# add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 
 if(NOT OCPN_FLATPAK_CONFIG)
-    # Build environment not available when flatpak is being configured so following statements will not work
+# Build environment is not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
 
 #    add_subdirectory(libs/nmea0183)
@@ -256,14 +281,13 @@ if(NOT OCPN_FLATPAK_CONFIG)
 
 #    target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183)
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+	
 endif(NOT OCPN_FLATPAK_CONFIG)
 
 add_definitions(-DTIXML_USE_STL)
 
 # Disables Logbook Install and Uninstall Preferences buttons.
-#add_compile_definitions("_DLAYOUTS_HACK")
 add_definitions("-DLAYOUTS_HACK")  
-
 
 ## ----- Change above to match project requirements ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##

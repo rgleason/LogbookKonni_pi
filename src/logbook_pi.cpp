@@ -48,7 +48,7 @@
 #include <wx/msgdlg.h>
 #include <memory>
 
-#include "jsonreader.h"
+#include "../libs/json/jsonreader.h"
 
 using namespace std;
 

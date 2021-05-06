@@ -44,7 +44,7 @@
 #include <wx/gdicmn.h>
 #include <wx/dnd.h>
 
-#include "jsonreader.h"
+#include "../libs/json/jsonreader.h"
 ///////////////////////////////////////////////////////////////////////////
 
 #define LOGGRIDS 3
