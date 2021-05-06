@@ -18,7 +18,7 @@ if(WIN32)
         # TARGET_LINK_LIBRARIES(${PACKAGE_NAME} gdiplus.lib glu32.lib)
         target_link_libraries(${PACKAGE_NAME} ${OPENGL_LIBRARIES})
 
-        set(OPENCPN_IMPORT_LIB "${CMAKE_SOURCE_DIR}/api-16/opencpn.lib")
+        set(OPENCPN_IMPORT_LIB "${PROJECT_SOURCE_DIR}/api-16/opencpn.lib")
     endif(MSVC)
 
     if(MINGW)
@@ -28,7 +28,7 @@ if(WIN32)
         # SET(OPENCPN_IMPORT_LIB "${PARENT}.dll")
         set(CMAKE_SHARED_LINKER_FLAGS "-L../buildwin")
         # target_link_libraries(${PACKAGE_NAME} ${OPENGL_LIBRARIES})
-        set(OPENCPN_IMPORT_LIB "${CMAKE_SOURCE_DIR}/api-16/libopencpn.dll.a")
+        set(OPENCPN_IMPORT_LIB "${PROJECT_SOURCE_DIR}/api-16/libopencpn.dll.a")
     endif(MINGW)
 
     target_link_libraries(${PACKAGE_NAME} ${OPENCPN_IMPORT_LIB})
@@ -132,7 +132,7 @@ if(APPLE)
     file(
         GLOB_RECURSE PACKAGE_DATA_FILES
         LIST_DIRECTORIES true
-        ${CMAKE_SOURCE_DIR}/data/*)
+        ${PROJECT_SOURCE_DIR}/data/*)
 
     foreach(_currentDataFile ${PACKAGE_DATA_FILES})
         message(STATUS "${CMLOC}copying: ${_currentDataFile}")
@@ -143,7 +143,7 @@ if(APPLE)
         file(
             GLOB_RECURSE PACKAGE_DATA_FILES
             LIST_DIRECTORIES true
-            ${CMAKE_SOURCE_DIR}/UserIcons/*)
+            ${PROJECT_SOURCE_DIR}/UserIcons/*)
 
         foreach(_currentDataFile ${PACKAGE_DATA_FILES})
             message(STATUS "${CMLOC}copying: ${_currentDataFile}")
