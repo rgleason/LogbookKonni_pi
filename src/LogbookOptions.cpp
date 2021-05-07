@@ -48,7 +48,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     bSizer29 = new wxBoxSizer( wxVERTICAL );
 
     m_notebook4 = new wxNotebook( m_scrolledWindow1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-    m_notebook4->SetBackgroundColour( wxColour( 255,255,255 ) );
+     m_notebook4->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
 
     m_panel15 = new wxPanel( m_notebook4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
     wxBoxSizer* bSizer51;
@@ -955,7 +955,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     bSizer42 = new wxBoxSizer( wxVERTICAL );
 
     m_notebook7 = new wxNotebook( m_panel24, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-    m_notebook7->SetBackgroundColour( wxColour( 255,255,255 ) );
+    m_notebook7->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
 
     m_panel27 = new wxPanel( m_notebook7, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
     wxBoxSizer* bSizer431;

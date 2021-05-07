@@ -522,11 +522,11 @@ void logbookkonni_pi::GetOriginalColors()
 {
     mcol = wxSystemSettings::GetColour( wxSYS_COLOUR_BTNFACE );
     mcol1 = wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVEBORDER  );
-    muitext = wxColour( 0,0,0 );
+    muitext = wxColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT) );
     mgridline = m_plogbook_window->m_gridGlobal->GetGridLineColour();
     mudkrd = m_plogbook_window->m_gridGlobal->GetCellTextColour( 0,0 );
-    mback_color = wxColour( 255,255,255 );
-    mtext_color = wxColour( 0,0,0 );
+    mback_color = wxColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+    mtext_color = wxColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT) );
 }
 
 void logbookkonni_pi::SetOriginalColors()
@@ -560,8 +560,8 @@ void logbookkonni_pi::SetColorScheme( PI_ColorScheme cs )
         }
 
         if ( cs == 0 || cs == 1 )
-            m_plogbook_window->SetBackgroundColour( wxColour( 255,255,255 ) );
-        else
+           m_plogbook_window->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+	   else
             m_plogbook_window->SetBackgroundColour( col );
 
         m_plogbook_window->SetForegroundColour( uitext );
@@ -587,8 +587,8 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
 
         else if ( win->IsKindOf( CLASSINFO( wxChoice ) ) )
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
-                ( ( wxChoice* )win )->SetBackgroundColour( wxColour( 255,255,255 ) );
-            else
+                ( ( wxChoice* )win )->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );           
+		else
                 ( ( wxChoice* )win )->SetBackgroundColour( col1 );
 
         else if ( win->IsKindOf( CLASSINFO( wxRadioButton ) ) )
@@ -600,7 +600,7 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
         else if ( win->IsKindOf( CLASSINFO( wxNotebook ) ) )
         {
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
-                ( ( wxNotebook* )win )->SetBackgroundColour( wxColour( 255,255,255 ) );
+                ( ( wxNotebook* )win )->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
             else
                 ( ( wxNotebook* )win )->SetBackgroundColour( col1 );
             ( ( wxNotebook* )win )->SetForegroundColour( text_color );
@@ -609,8 +609,8 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
         else if ( win->IsKindOf( CLASSINFO( wxGrid ) ) )
         {
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
-                ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( wxColour( 255,255,255 ) );
-            else
+                 ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+			else
                 ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( col1 );
             ( ( wxGrid* )win )->SetDefaultCellTextColour( uitext );
             ( ( wxGrid* )win )->SetLabelBackgroundColour( col );
