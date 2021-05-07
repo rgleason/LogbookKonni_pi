@@ -5,8 +5,10 @@
 ##---------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.132  partial update circleci ci 
+# Frontend2 Version: 1.0.164 05/05/2021 
 # ---------------------------------------------------------------------------
+## buildCI:yes useODAPI:no validateJSON:no
+##
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
 ## ----- Changes should only be made between the section blocks that identify where     ----- ##
 ## ----- these changes should be. The whole configuration process relies on this        ----- ##
@@ -38,13 +40,13 @@ set(TITLE_NAME "LOGBOOKKONNI")
 set(PACKAGE_CONTACT "Del Elson")
 set(PACKAGE "logbookkonni")
 set(SHORT_DESCRIPTION "Logbook for OpenCPN")
-set(LONG_DESCRIPTION "Helpful videos are at Youtube, search LogbookKonni.")
+set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni.")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "18")
-set(VERSION_DATE "05-01-2020")  # mm-dd-yyyy
+set(VERSION_TWEAK "31")
+set(VERSION_DATE "06-05-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -53,96 +55,94 @@ set(TP_COMMENT "  * Release for O5 using CI")
 set(PARENT "opencpn")
 
 # The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
-# This must be set for flatpak environment to build, so it has been moved to pluginconfigure
 #set(GIT_REPOSITORY_SERVER "github.com")
-#No longer needed, queried.
-#set(GIT_USER "rgleason")
-#set(GIT_REPOSITORY_NAME "testplugin_pi")
-# Specifies cloudsmith repository suffices
+
+# Specific cloudsmith repository suffixes
 set(PROD "prod") # Standard Repos
 set(BETA "beta") # Standard Repos
 set(ALPHA "alpha") # Standard Repos
 
-#set(CLOUDSMITH_USER "rick-gleason")
-set(CLOUDSMITH_USER "opencpn")
-
 # set this if your cloudsmith repository name does not match your git repository name set(CLOUDSMITH_BASE_REPOSITORY "testplugin_pi")
-
-set (CLOUDSMITH_BASE_REPOSITORY "logbookkonni")  #without the pi 
+set(CLOUDSMITH_BASE_REPOSITORY "logbookkonni")  #without the pi 
+# Set the following to use OpenCPN cloudsmith repositories instead of own repositories
+set(CLOUDSMITH_USER "opencpn")
+#set(CLOUDSMITH_USER "rick-gleason")
 
 set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/logbookkonni.html")
 set(XML_SUMMARY ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION ${LONG_DESCRIPTION})
 
-##
 ## ----- Modify section above to include all the details for your plugin ----- ##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
-##
 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# Use local version of GLU library
+#set(USE_LOCAL_GLU TRUE)
 # Prefer libGL.so to libOpenGL.so, see CMP0072
 set(OpenGL_GL_PREFERENCE "LEGACY")
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
+
 option(USE_GL "Enable OpenGL support" OFF)
 message(STATUS "${CMLOC}USE_GL: ${USE_GL}")
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
-    set(CMAKE_BUILD_TYPE
-        "Release"
-        CACHE STRING "Choose the type of build" FORCE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
 endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
-##
 ## ----- The statements below are used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
-##
 
 project(${PACKAGE})
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;")
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # -----------------------------------------
 include("PluginSetup")
 # -----------------------------------------
-
-##
 ## ----- The above is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
-##
-
-##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
-##
 
-set(CMAKE_VERBOSE_MAKEFILE ON)
+
+set(CMAKE_VERBOSE_MAKEFILE "Activate verbose mode for make files" ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
-##
+
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
-
 # -----------------------------------------
 include("PluginConfigure")
 # -----------------------------------------
-
 ## ----- do not change section above - needed to configure build process ----- ##
 ## ----- Change below to match project requirements for source, headers, etc. ----- ##
-##
 
+# ----Remember to Add your project Set(SRCS and set(HDRS  etc..
+# ++++++++++++++Section below is direct from Watchdog +++++++++##
+
+IF(PLUGIN_USE_SVG)
+    MESSAGE(STATUS "${CMLOC}SVG support enabled...")
+    IF(NOT QT_ANDROID)
+        ADD_DEFINITIONS(-DPLUGIN_USE_SVG)
+    ENDIF(NOT QT_ANDROID)
+ENDIF(PLUGIN_USE_SVG)
 add_definitions(-DUSE_S57)
 
+# what is this for, not in testplugin?
 SET(BUNDLE_DATA TRUE)
 
-SET(SRC_LOGBOOKKONNI
-       		src/logbook_pi.h
+# Keep this order there seems to be some dependency on that resulting in undefined. Leave ExGrid etc commented out.
+# Cannot move h files into separate include folder, errors occur.
+SET(SRCS
+  		src/logbook_pi.h
  		src/logbook_pi.cpp
- 		src/Options.h
- 		src/Options.cpp
- 		src/icons.h
+		src/Options.h
+		src/Options.cpp
+		src/icons.h
  		src/icons.cpp
 		src/Logbook.h
 		src/Logbook.cpp
@@ -150,7 +150,7 @@ SET(SRC_LOGBOOKKONNI
 		src/LogbookDialog.cpp
 		src/LogbookOptions.h
 		src/LogbookOptions.cpp
- 		src/LogbookHTML.h
+		src/LogbookHTML.h
  		src/LogbookHTML.cpp
 		src/CrewList.h
 		src/CrewList.cpp
@@ -159,29 +159,34 @@ SET(SRC_LOGBOOKKONNI
 		src/Maintenance.h
 		src/Maintenance.cpp	
 		src/OverView.h		
-		src/OverView.cpp	
+		src/OverView.cpp
 		src/Export.h
 		src/Export.cpp
-        	src/json_defs.h
-       		src/jsonreader.h
-        	src/jsonval.h
-        	src/jsonwriter.h
-        	src/jsonreader.cpp
-        	src/jsonval.cpp
-        	src/jsonwriter.cpp
-		 api-16/ocpn_plugin.h		
+#		src/EzGrid.cpp       -when not commented - error C3861: 'getcol': identifier not found 
+#		src/FastComboEditor.cpp - when not commented - error C3861: 'getcol': identifier not found 
+#		src/GridCellChoiceRenderer.cpp  - when not commented - error C3861: 'getcol': identifier not found
+#		src/EzGrid.h
+#		src/FastComboEditor.h
+#		src/GridCellChoiceRenderer.h
  	)
 
-#IF(WIN32)  #flatpak needs this tooo, they all do
-SET(SRC_LTINYXML
-		src/tinyxml/tinyxml.cpp
-		src/tinyxml/tinyxml.h
-		src/tinyxml/tinyxmlerror.cpp
-		src/tinyxml/tinyxmlparser.cpp
-		src/tinyxml/tinystr.cpp
-		src/tinyxml/tinystr.h 
-)
-#ENDIF(WIN32)
+#SET(HDRS
+#  		include/logbook_pi.h
+#		include/Logbook.h
+#		include/LogbookDialog.h
+#		include/LogbookOptions.h
+#		include/LogbookHTML.h
+#		include/boat.h
+#		include/CrewList.h
+#		include/Export.h
+#		include/icons.h
+#		include/Maintenance.h
+#		include/EzGrid.h
+#		include/FastComboEditor.h
+#		include/GridCellChoiceRenderer.h
+#		include/Options.h
+#		include/OverView.h		
+#		)
 
 SET(SRC_LNMEA0183
 		src/nmea0183/LatLong.hpp
@@ -240,77 +245,67 @@ SET(SRC_LNMEA0183
 		src/nmea0183/rsa.hpp
 		src/nmea0183/rsa.cpp
 		src/nmea0183/SatInfo.h
-
-        )
-		
+       )
+	   
+set(LIBS_JSON
+        libs/json/json_defs.h
+      	libs/json/jsonreader.h
+        libs/json/jsonval.h
+        libs/json/jsonwriter.h
+        libs/json/jsonreader.cpp
+        libs/json/jsonval.cpp
+        libs/json/jsonwriter.cpp
+		) 
 		
 add_definitions(-DPLUGIN_USE_SVG)
 
-if(APPLE)
-    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
-else(APPLE)
-    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
-endif(APPLE)
+# No PI_JSON_SCHEMA_VALIDATOR  needed
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include/)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
+# include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/nmea0183/src)
 
-if(PI_JSON_SCHEMA_VALIDATOR)
-    message(STATUS "${CMLOC}Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
-    add_definitions(-DPI_JSON_SCHEMA_VALIDATOR)
-    message(STATUS "${CMLOC}Adding JSON Schema validation")
-    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
-    set(EXTINCLUDE ${EXTINCLUDE} extinclude/nlohmann/json.hpp extinclude/json-schema-validator/json-schema.hpp)
-    include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
-else(PI_JSON_SCHEMA_VALIDATOR)
-    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
-endif(PI_JSON_SCHEMA_VALIDATOR)
+# -----------------------------------------
+target_sources(${PACKAGE_NAME} PUBLIC ${SRCS}  ${LIBS_JSON}  ${SRC_LNMEA0183})
+# -----------------------------------------
+# target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
+# add_library( ${PACKAGE_NAME} SHARED ${SRCS} ${SRC_LTINYXML} ${SRC_LNMEA0183} )
 
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
+if(NOT OCPN_FLATPAK_CONFIG)
+# Build environment is not available when flatpak is being configured so following statements will not work
+    message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
 
-add_library( ${PACKAGE_NAME} SHARED ${SRC_LOGBOOKKONNI} ${SRC_LTINYXML} ${SRC_LNMEA0183} )
+#    add_subdirectory(libs/nmea0183)
+    add_subdirectory(libs/tinyxml)
+
+#    target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183)
+    target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+	
+endif(NOT OCPN_FLATPAK_CONFIG)
 
 add_definitions(-DTIXML_USE_STL)
-add_compile_definitions("LAYOUTS_HACK")  
 
-# Above Disables Install and Uninstall Preferences buttons.
-#add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
-# Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages. 
+# Disables Logbook Install and Uninstall Preferences buttons.
+#add_definitions("-DLAYOUTS_HACK")  
 
-if(UNIX AND NOT APPLE)
-    if(PI_JSON_SCHEMA_VALIDATOR)
-        # Change OS/ABI to be UNIX - System V to make it run with OCPN
-        set(lib_name lib${PACKAGE_NAME}.so)
-        message(STATUS "${CMLOC}lib-name: ${lib_name}")
-        find_file(elfedit elfedit)
-        if(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-            message(STATUS "${CMLOC}Will ensure OS/ABI is set to 0 to match OCPN")
-            add_custom_command(
-                TARGET ${PACKAGE_NAME}
-                POST_BUILD
-                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                DEPENDS ${PACKAGE_NAME}
-                COMMENT " Running post build action on ${lib_name}."
-                COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) ')
-        else(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-            message(STATUS "${CMLOC}Cannot correct OS/ABI to match OCPN if it is generated incorrectly. #Package binutils needed")
-        endif(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-    endif(PI_JSON_SCHEMA_VALIDATOR)
-endif(UNIX AND NOT APPLE)
-
-#These are NOT used in Testplugin, used for other plugins
-# -----------------------------------------
-#include("PluginJSON")
-#include("PluginXML")
-#include("PluginGL")														 
-# -----------------------------------------
-
-##
 ## ----- Change above to match project requirements ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
 
-# -----------------------------------------
+# Needed for android builds
+if(QT_ANDROID)
+    include_directories(BEFORE ${qt_android_include})
+endif(QT_ANDROID)
+
+# Needed for all builds
 include("PluginInstall")
 include("PluginLocalization")
 include("PluginPackage")
 # -----------------------------------------
-
 ## ----- do not change section above - needed to configure build process ----- ##
-##
+
+message(STATUS "${CMLOC}include directories: ")
+get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+foreach(dir ${dirs})
+    message(STATUS "${CMLOC}dir='${dir}'")
+endforeach()

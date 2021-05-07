@@ -11,7 +11,7 @@
 #include "Logbook.h"
 #include "logbook_pi.h"
 #include "Options.h"
-#include "tinyxml/tinyxml.h"
+#include "tinyxml.h"
 #include "icons.h"
 #include <wx/string.h>
 #include <wx/button.h>
