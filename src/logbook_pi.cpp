@@ -134,7 +134,7 @@ int logbookkonni_pi::Init( void )
     timer = new LogbookTimer( this );
     m_timer = new wxTimer( timer,ID_LOGTIMER );
     timer->Connect( wxEVT_TIMER, wxObjectEventFunction( &LogbookTimer::OnTimer ) );
-    
+
     SendPluginMessage( _T( "LOGBOOK_READY_FOR_REQUESTS" ), _T( "TRUE" ) );
 
     return (
@@ -587,7 +587,7 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
 
         else if ( win->IsKindOf( CLASSINFO( wxChoice ) ) )
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
-                ( ( wxChoice* )win )->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );           
+                ( ( wxChoice* )win )->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
 		else
                 ( ( wxChoice* )win )->SetBackgroundColour( col1 );
 
@@ -725,7 +725,7 @@ void logbookkonni_pi::SetDefaults( void )
 
 wxString logbookkonni_pi::StandardPath( void )
 {
-	
+
     wxString s = wxFileName::GetPathSeparator();
     wxString stdPath  = *GetpPrivateApplicationDataLocation();
 
@@ -733,10 +733,10 @@ wxString logbookkonni_pi::StandardPath( void )
     if (!wxDirExists(stdPath))
       wxMkdir(stdPath);
       stdPath += s + _T("logbook");
-	  
+
 //  wxString stdPath( GetpPrivateApplicationDataLocation());
 //  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
-//  stdPath += wxFileName::GetPathSeparator();
+//   stdPath += wxFileName::GetPathSeparator();     This results in a double \\ in windows and Layouts don't work
     return stdPath;
 }
 
@@ -1027,7 +1027,7 @@ void logbookkonni_pi::SaveConfig()
         pConf->Write ( _T ( "toggleEngine2" ), opt->toggleEngine2 );
         pConf->Write ( _T ( "toggleGenerator" ), opt->toggleGenerator );
         pConf->Write ( _T ( "numberofSails" ), opt->numberSails );
-        
+
         wxString sails = wxEmptyString;
         sails = wxString::Format( _T( "%i,%i," ),opt->rowGap,opt->colGap );
         for ( int i = 0; i < opt->numberSails; i++ )
@@ -1566,7 +1566,7 @@ void logbookkonni_pi::loadLayouts( wxWindow *parent )
                                         ( !ret )?n.c_str():wxEmptyString,data.c_str(),data1.c_str(),data2.c_str(),data3.c_str() );
         wxMessageBox( ok );
 
-		if (ret ) 
+		if (ret )
 		{
 			opt->navGridLayoutChoice = 0;
         	opt->crewGridLayoutChoice = 0;

@@ -175,7 +175,7 @@ void Logbook::SetPosition( PlugIn_Position_Fix &pfix )
 
     if ( pfix.FixTime != 0 )
     {
-        
+
 		double factor = 1;
 		double tspeed = 1;
 
@@ -192,8 +192,8 @@ void Logbook::SetPosition( PlugIn_Position_Fix &pfix )
 			break;
 		}
 
-		tspeed = pfix.Sog * factor;			
-		
+		tspeed = pfix.Sog * factor;
+
 		sSOG = wxString::Format( _T( "%5.2f %s" ), tspeed , opt->showBoatSpeed.c_str() );
         sCOG = wxString::Format( _T( "%5.2f %s" ), pfix.Cog, opt->Deg.c_str() );
         SetGPSStatus( true );
@@ -351,18 +351,18 @@ void Logbook::SetSentence( wxString &sentence )
 						case 0:
 							factor = 1;
 							break;
-						case 1:							
-							factor = 0.51444;							
+						case 1:
+							factor = 0.51444;
 							break;
 						case 2:
-							factor = 1.852;							
+							factor = 1.852;
 							break;
 						}
 
 					tboatspeed = m_NMEA0183.Rmc.SpeedOverGroundKnots * factor;
 
 					sSOG = wxString::Format(_T("%5.2f %s"), tboatspeed, opt->showBoatSpeed.c_str());
-                    	
+
                 	if ( m_NMEA0183.Rmc.TrackMadeGoodDegreesTrue != 999.0 )
                     	sCOG = wxString::Format( _T( "%5.2f%s" ), m_NMEA0183.Rmc.TrackMadeGoodDegreesTrue, opt->Deg.c_str() );
                 	if ( m_NMEA0183.Rmc.TrackMadeGoodDegreesTrue != 999.0 )
@@ -395,11 +395,11 @@ void Logbook::SetSentence( wxString &sentence )
 					case 0:
 						factor = 1;
 						break;
-					case 1:							
-						factor = 0.51444;							
+					case 1:
+						factor = 0.51444;
 						break;
 					case 2:
-						factor = 1.852;							
+						factor = 1.852;
 						break;
 					}
 
@@ -416,7 +416,7 @@ void Logbook::SetSentence( wxString &sentence )
             {
                 double dWind = 0;
                 double factor = 1, twindspeed = 1;
-                
+
                 switch ( opt->showWindSpeedchoice  )
                 {
                 case 0:
@@ -445,7 +445,7 @@ void Logbook::SetSentence( wxString &sentence )
                     break;
                 }
                 twindspeed = m_NMEA0183.Mwv.WindSpeed * factor;
-                
+
                 if ( m_NMEA0183.Mwv.Reference == _T( "T" ) )
                 {
                     if ( opt->showWindHeading && bCOW )
@@ -510,7 +510,7 @@ void Logbook::SetSentence( wxString &sentence )
                 sWindT = wxString::Format( _T( "%3.0f%s" ), dWind,opt->Deg.c_str() );
 
                 double factor, twindspeed;
-                
+
                 switch ( opt->showWindSpeedchoice  )
                 {
                     case 0:
@@ -551,7 +551,7 @@ void Logbook::SetSentence( wxString &sentence )
                 sWindA = wxString::Format( _T( "%3.0f%s" ), dWind,opt->Deg.c_str() );
 
                 double factor, twindspeed;
-                
+
                 switch ( opt->showWindSpeedchoice  )
                 {
                     case 0:
@@ -662,7 +662,7 @@ void Logbook::SetSentence( wxString &sentence )
               * VolumeTransducer = 'V'
              */
 
-            if (m_NMEA0183.Parse()) { 
+            if (m_NMEA0183.Parse()) {
                 double xdrdata;
 				wxString tempopt;
 
@@ -2011,7 +2011,7 @@ void Logbook::appendRow( bool showlastline, bool autoline )
     dialog->setEqualRowHeight( lastRow );
 
     dialog->m_gridGlobal->SetReadOnly( lastRow,6 );
-                                              
+
     update(); /* Save to file with every newline */
 
     if ( showlastline )
@@ -2339,7 +2339,7 @@ void Logbook::checkDistance()
 	}
 
 	tdistance = sm * factor;
-	
+
 	if ( tdistance >= opt->dEverySM && !dialog->logbookPlugIn->eventsEnabled )
     {
         dialog->logbookTimerWindow->popUp();
@@ -2403,7 +2403,7 @@ wxString Logbook::calculateDistance( wxString fromstr, wxString tostr )
 	case 2:
 		factor = 1.852;
 		break;
-	}		
+	}
 
 	tdistance = sm * factor;
 
@@ -2688,8 +2688,8 @@ void  Logbook::getModifiedCellValue( int grid, int row, int selCol, int col )
     {
         s.Replace( _T( "," ),_T( "." ) );
 
-        s = wxString::Format( _T( "%.2f %s" ),wxAtof( s ),opt->showDistance.c_str() );	
-		
+        s = wxString::Format( _T( "%.2f %s" ),wxAtof( s ),opt->showDistance.c_str() );
+
 		s.Replace( _T( "." ),dialog->decimalPoint );
         dialog->logGrids[grid]->SetCellValue( row,col,s );
 

@@ -3724,7 +3724,7 @@ Backup Logbook(*.txt)|*.txt" );
     }
 
     data  = logbookkonni_pi::StandardPath();
-//    data  = logbook::StandardPath();
+//    data  = logbook::StandardPath();   This does not work. Must be logbookkonni_pi
     data.Append( _T( "data" ) );
     appendOSDirSlash( &data ) ;
     Home_Locn = data;
