@@ -45,7 +45,7 @@ set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "31")
+set(VERSION_TWEAK "32")
 set(VERSION_DATE "06-05-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")

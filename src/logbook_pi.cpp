@@ -732,11 +732,10 @@ wxString logbookkonni_pi::StandardPath( void )
     stdPath += s + _T("plugins");
     if (!wxDirExists(stdPath))
       wxMkdir(stdPath);
-
-    stdPath += s + _T("logbook");
-
-//  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
+      stdPath += s + _T("logbook");
+	  
 //  wxString stdPath( GetpPrivateApplicationDataLocation());
+//  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
 //  stdPath += wxFileName::GetPathSeparator();
     return stdPath;
 }
