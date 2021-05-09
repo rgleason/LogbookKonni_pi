@@ -2663,7 +2663,7 @@ void LogbookDialog::OnButtomClickShowHideLayout( wxCommandEvent& event )
         logbookPlugIn->opt->layoutShow = false;
         m_bpButtonShowHideLayout->SetBitmapLabel( forward_xpm );
     }
-    m_bpButtonShowHideLayout->SetToolTip( panelOnOff[!logbookPlugIn->opt->layoutShow] );
+    m_bpButtonShowHideLayout->SetToolTip( panelOnOff[!logbookPlugIn->show] );
     m_panel2->Layout();
     bSizer6->Layout();
     m_panel2->Refresh();
@@ -3723,8 +3723,10 @@ Backup Logbook(*.txt)|*.txt" );
         totalColumns += logGrids[i]->GetNumberCols();
     }
 
+	wxString sep = wxFileName::GetPathSeparator();
     data  = logbookkonni_pi::StandardPath();
 //    data  = logbook::StandardPath();
+	data.Append(sep);
     data.Append( _T( "data" ) );
     appendOSDirSlash( &data ) ;
     Home_Locn = data;
