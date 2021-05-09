@@ -735,6 +735,9 @@ wxString logbookkonni_pi::StandardPath( void )
 
     stdPath += s + _T("logbook");
 
+	if (!wxDirExists(stdPath))
+		wxMkdir(stdPath);
+
 //  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
 //  wxString stdPath( GetpPrivateApplicationDataLocation());
 //  stdPath += wxFileName::GetPathSeparator();
@@ -1446,7 +1449,8 @@ void logbookkonni_pi::loadLayouts( wxWindow *parent )
     sep = wxFileName::GetPathSeparator();
 
     wxString data = StandardPath();
-    data.Append( _T( "data" ) );
+	data.append(sep);
+    data.Append( _T("data"));
     data.append( sep );
     if ( !wxDir::Exists( data ) )
         wxMkdir( data );
