@@ -9,10 +9,23 @@ Del
 SV Chiara Stella   
 http://sailchiarastella.blogspot.com/
 
+Since Del wrote this, Peter Tulp has maintained it for a number of years.
+Now Rick Gleason is maintaining the frontend and distribution.
+Peter is still accepting PR's from Rick and others.
+
+Install via OpenCPN Plugin Manager
+======================
+Current released version is available via OpenCPN > Options > Plugin Manager (PIM)
+(Requires a good internet connection)
+
+Maintenance Repository: https://github.com/rgleason/LogbookKonni_pi
+Source Repository: https://github.com/delatbabel/LogbookKonni-1.2
+
+Please push all Pull Requests to both maintenance and source repositories.
+
 Downloading the Plugin
 ======================
-
-The latest binary release can be found here:
+An earlier binary release can be found here:
 
 https://github.com/delatbabel/LogbookKonni-1.2/releases/tag/v1.2011
 
