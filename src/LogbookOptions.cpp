@@ -1459,7 +1459,8 @@ void LogbookOptions::init()
         stdPath = logbookkonni_pi::StandardPath();
 
         wxString sep = wxFileName::GetPathSeparator();
-        wxString data_locn = stdPath + _T( "data" ) + sep + _T( "logbook.txt" );
+
+        wxString data_locn = stdPath + sep + _T( "data" ) + sep + _T( "logbook.txt" );
         if ( wxFile::Exists( data_locn ) )
         {
             wxFileInputStream input( data_locn );

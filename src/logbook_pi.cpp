@@ -722,7 +722,6 @@ void logbookkonni_pi::SetDefaults( void )
     }
 }
 
-
 wxString logbookkonni_pi::StandardPath( void )
 {
 
@@ -734,6 +733,15 @@ wxString logbookkonni_pi::StandardPath( void )
       wxMkdir(stdPath);
       stdPath += s + _T("logbook");
 
+// From MIke
+//    stdPath += s + _T("logbook");
+//
+//	if (!wxDirExists(stdPath))
+//		wxMkdir(stdPath);
+
+//     //  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
+//  End of From Mike
+  
 //  wxString stdPath( GetpPrivateApplicationDataLocation());
 //  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
 //   stdPath += wxFileName::GetPathSeparator();     This results in a double \\ in windows and Layouts don't work
@@ -1445,7 +1453,8 @@ void logbookkonni_pi::loadLayouts( wxWindow *parent )
     sep = wxFileName::GetPathSeparator();
 
     wxString data = StandardPath();
-    data.Append( _T( "data" ) );
+	data.append(sep);
+    data.Append( _T("data"));
     data.append( sep );
     if ( !wxDir::Exists( data ) )
         wxMkdir( data );
