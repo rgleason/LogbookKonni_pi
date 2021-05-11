@@ -3742,7 +3742,6 @@ Backup Logbook(*.txt)|*.txt" );
     layoutODT.append( _T( "ODTLayouts" ) );
     appendOSDirSlash( &layoutODT );
 
-
     wxString s = wxFileName::GetPathSeparator();
     // help_locn = *GetpSharedDataLocation() + _T( "plugins" ) + s + _T( "logbookkonni_pi" ) + s + _T( "data" ) + s;
     help_locn =  GetPluginDataDir("logbookkonni_pi") + _T("/data/");
