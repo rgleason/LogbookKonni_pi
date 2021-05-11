@@ -1,11 +1,11 @@
 ##---------------------------------------------------------------------------
 ## Author:      nohal aka. Pavel Kalian
-## Copyright:   
+## Copyright:
 ## License:     wxWidgets License
 ##---------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.164 05/05/2021 
+# Frontend2 Version: 1.0.165 08/05/2021
 # ---------------------------------------------------------------------------
 ## buildCI:yes useODAPI:no validateJSON:no
 ##
@@ -46,7 +46,7 @@ set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "13")
 set(VERSION_TWEAK "36")
-set(VERSION_DATE "06-05-2020")  # DD/MM/YYYY format
+set(VERSION_DATE "08-05-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -63,7 +63,7 @@ set(BETA "beta") # Standard Repos
 set(ALPHA "alpha") # Standard Repos
 
 # set this if your cloudsmith repository name does not match your git repository name set(CLOUDSMITH_BASE_REPOSITORY "testplugin_pi")
-set(CLOUDSMITH_BASE_REPOSITORY "logbookkonni")  #without the pi 
+set(CLOUDSMITH_BASE_REPOSITORY "logbookkonni")  #without the pi
 # Set the following to use OpenCPN cloudsmith repositories instead of own repositories
 set(CLOUDSMITH_USER "opencpn")
 #set(CLOUDSMITH_USER "rick-gleason")
@@ -157,13 +157,13 @@ SET(SRCS
 		src/boat.h
 		src/boat.cpp
 		src/Maintenance.h
-		src/Maintenance.cpp	
-		src/OverView.h		
+		src/Maintenance.cpp
+		src/OverView.h
 		src/OverView.cpp
 		src/Export.h
 		src/Export.cpp
-#		src/EzGrid.cpp       -when not commented - error C3861: 'getcol': identifier not found 
-#		src/FastComboEditor.cpp - when not commented - error C3861: 'getcol': identifier not found 
+#		src/EzGrid.cpp       -when not commented - error C3861: 'getcol': identifier not found
+#		src/FastComboEditor.cpp - when not commented - error C3861: 'getcol': identifier not found
 #		src/GridCellChoiceRenderer.cpp  - when not commented - error C3861: 'getcol': identifier not found
 #		src/EzGrid.h
 #		src/FastComboEditor.h
@@ -185,7 +185,7 @@ SET(SRCS
 #		include/FastComboEditor.h
 #		include/GridCellChoiceRenderer.h
 #		include/Options.h
-#		include/OverView.h		
+#		include/OverView.h
 #		)
 
 SET(SRC_LNMEA0183
@@ -246,7 +246,7 @@ SET(SRC_LNMEA0183
 		src/nmea0183/rsa.cpp
 		src/nmea0183/SatInfo.h
        )
-	   
+
 set(LIBS_JSON
         libs/json/json_defs.h
       	libs/json/jsonreader.h
@@ -255,8 +255,8 @@ set(LIBS_JSON
         libs/json/jsonreader.cpp
         libs/json/jsonval.cpp
         libs/json/jsonwriter.cpp
-		) 
-		
+		)
+
 add_definitions(-DPLUGIN_USE_SVG)
 
 # No PI_JSON_SCHEMA_VALIDATOR  needed
@@ -281,13 +281,13 @@ if(NOT OCPN_FLATPAK_CONFIG)
 
 #    target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183)
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
-	
+
 endif(NOT OCPN_FLATPAK_CONFIG)
 
 add_definitions(-DTIXML_USE_STL)
 
 # Disables Logbook Install and Uninstall Preferences buttons.
-#add_definitions("-DLAYOUTS_HACK")  
+#add_definitions("-DLAYOUTS_HACK")
 
 ## ----- Change above to match project requirements ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##

@@ -134,7 +134,7 @@ int logbookkonni_pi::Init( void )
     timer = new LogbookTimer( this );
     m_timer = new wxTimer( timer,ID_LOGTIMER );
     timer->Connect( wxEVT_TIMER, wxObjectEventFunction( &LogbookTimer::OnTimer ) );
-    
+
     SendPluginMessage( _T( "LOGBOOK_READY_FOR_REQUESTS" ), _T( "TRUE" ) );
 
     return (
@@ -522,11 +522,11 @@ void logbookkonni_pi::GetOriginalColors()
 {
     mcol = wxSystemSettings::GetColour( wxSYS_COLOUR_BTNFACE );
     mcol1 = wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVEBORDER  );
-    muitext = wxColour( 0,0,0 );
+    muitext = wxColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT) );
     mgridline = m_plogbook_window->m_gridGlobal->GetGridLineColour();
     mudkrd = m_plogbook_window->m_gridGlobal->GetCellTextColour( 0,0 );
-    mback_color = wxColour( 255,255,255 );
-    mtext_color = wxColour( 0,0,0 );
+    mback_color = wxColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+    mtext_color = wxColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT) );
 }
 
 void logbookkonni_pi::SetOriginalColors()
@@ -560,8 +560,8 @@ void logbookkonni_pi::SetColorScheme( PI_ColorScheme cs )
         }
 
         if ( cs == 0 || cs == 1 )
-            m_plogbook_window->SetBackgroundColour( wxColour( 255,255,255 ) );
-        else
+           m_plogbook_window->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+	   else
             m_plogbook_window->SetBackgroundColour( col );
 
         m_plogbook_window->SetForegroundColour( uitext );
@@ -587,8 +587,8 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
 
         else if ( win->IsKindOf( CLASSINFO( wxChoice ) ) )
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
-                ( ( wxChoice* )win )->SetBackgroundColour( wxColour( 255,255,255 ) );
-            else
+                ( ( wxChoice* )win )->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+		else
                 ( ( wxChoice* )win )->SetBackgroundColour( col1 );
 
         else if ( win->IsKindOf( CLASSINFO( wxRadioButton ) ) )
@@ -600,7 +600,7 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
         else if ( win->IsKindOf( CLASSINFO( wxNotebook ) ) )
         {
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
-                ( ( wxNotebook* )win )->SetBackgroundColour( wxColour( 255,255,255 ) );
+                ( ( wxNotebook* )win )->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
             else
                 ( ( wxNotebook* )win )->SetBackgroundColour( col1 );
             ( ( wxNotebook* )win )->SetForegroundColour( text_color );
@@ -609,8 +609,8 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
         else if ( win->IsKindOf( CLASSINFO( wxGrid ) ) )
         {
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
-                ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( wxColour( 255,255,255 ) );
-            else
+                 ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+			else
                 ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( col1 );
             ( ( wxGrid* )win )->SetDefaultCellTextColour( uitext );
             ( ( wxGrid* )win )->SetLabelBackgroundColour( col );
@@ -722,25 +722,29 @@ void logbookkonni_pi::SetDefaults( void )
     }
 }
 
-
 wxString logbookkonni_pi::StandardPath( void )
 {
-	
+
     wxString s = wxFileName::GetPathSeparator();
     wxString stdPath  = *GetpPrivateApplicationDataLocation();
 
     stdPath += s + _T("plugins");
     if (!wxDirExists(stdPath))
       wxMkdir(stdPath);
+      stdPath += s + _T("logbook");
 
-    stdPath += s + _T("logbook");
+// From MIke
+//    stdPath += s + _T("logbook");
+//
+//	if (!wxDirExists(stdPath))
+//		wxMkdir(stdPath);
 
-	if (!wxDirExists(stdPath))
-		wxMkdir(stdPath);
-
-//  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
+//     //  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
+//  End of From Mike
+  
 //  wxString stdPath( GetpPrivateApplicationDataLocation());
-//  stdPath += wxFileName::GetPathSeparator();
+//  wxString stdPath(GetPluginDataDir("logbookkonni_pi"));
+//   stdPath += wxFileName::GetPathSeparator();     This results in a double \\ in windows and Layouts don't work
     return stdPath;
 }
 
@@ -1031,7 +1035,7 @@ void logbookkonni_pi::SaveConfig()
         pConf->Write ( _T ( "toggleEngine2" ), opt->toggleEngine2 );
         pConf->Write ( _T ( "toggleGenerator" ), opt->toggleGenerator );
         pConf->Write ( _T ( "numberofSails" ), opt->numberSails );
-        
+
         wxString sails = wxEmptyString;
         sails = wxString::Format( _T( "%i,%i," ),opt->rowGap,opt->colGap );
         for ( int i = 0; i < opt->numberSails; i++ )
@@ -1571,7 +1575,7 @@ void logbookkonni_pi::loadLayouts( wxWindow *parent )
                                         ( !ret )?n.c_str():wxEmptyString,data.c_str(),data1.c_str(),data2.c_str(),data3.c_str() );
         wxMessageBox( ok );
 
-		if (ret ) 
+		if (ret )
 		{
 			opt->navGridLayoutChoice = 0;
         	opt->crewGridLayoutChoice = 0;
