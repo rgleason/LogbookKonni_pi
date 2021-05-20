@@ -2,7 +2,6 @@
 ## Author:      nohal aka. Pavel Kalian
 ## Copyright:
 ## License:     wxWidgets License
-##---------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
 # Frontend2 Version: 1.0.167 19/05/2021
@@ -45,7 +44,7 @@ set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "2")
+set(VERSION_TWEAK "3")
 set(VERSION_DATE "19-05-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
