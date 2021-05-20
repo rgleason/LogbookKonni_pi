@@ -5,7 +5,7 @@
 ##---------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.165 08/05/2021
+# Frontend2 Version: 1.0.167 19/05/2021
 # ---------------------------------------------------------------------------
 ## buildCI:yes useODAPI:no validateJSON:no
 ##
@@ -45,8 +45,8 @@ set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "1")
-set(VERSION_DATE "12-05-2020")  # DD/MM/YYYY format
+set(VERSION_TWEAK "2")
+set(VERSION_DATE "19-05-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -257,7 +257,7 @@ set(LIBS_JSON
         libs/json/jsonwriter.cpp
 		)
 
-add_definitions(-DPLUGIN_USE_SVG)
+#add_definitions(-DPLUGIN_USE_SVG)
 
 # No PI_JSON_SCHEMA_VALIDATOR  needed
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include/)
