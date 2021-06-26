@@ -58,7 +58,6 @@ else()
     set(GIT_HASH "")
     set(GIT_COMMIT_DATE "")
 endif()
-
 message(STATUS "${CMLOC}OCPN_FLATPAK_CONFIG: ${OCPN_FLATPAK_CONFIG}, UNIX: ${UNIX}")
 if(OCPN_FLATPAK_CONFIG OR OCPN_FLATPAK_BUILD)
     set(PKG_TARGET "flatpak")

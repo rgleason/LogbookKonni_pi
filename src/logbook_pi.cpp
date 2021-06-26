@@ -611,6 +611,7 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
                  ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
 			else
+
                 ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( col1 );
             ( ( wxGrid* )win )->SetDefaultCellTextColour( uitext );
             ( ( wxGrid* )win )->SetLabelBackgroundColour( col );

@@ -48,8 +48,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     bSizer29 = new wxBoxSizer( wxVERTICAL );
 
     m_notebook4 = new wxNotebook( m_scrolledWindow1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-     m_notebook4->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
-
+    m_notebook4->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
     m_panel15 = new wxPanel( m_notebook4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
     wxBoxSizer* bSizer51;
     bSizer51 = new wxBoxSizer( wxVERTICAL );
@@ -215,7 +214,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     wxString m_choicePositionFormatChoices[] = { wxString::Format( _T( "054%s 12.1234%s" ),opt->Deg.c_str(),opt->Min.c_str() ),
                                                  wxString::Format( _T( "054%s 12%s.12,34%s" ),opt->Deg.c_str(),opt->Min.c_str(),opt->Sec.c_str() )
-                                               };//_T("054° 12.1234'"), _T("054° 12' 12.34\"") };
+                                               };//_T("054Â° 12.1234'"), _T("054Â° 12' 12.34\"") };
     int m_choicePositionFormatNChoices = sizeof( m_choicePositionFormatChoices ) / sizeof( wxString );
     m_choicePositionFormat = new wxChoice( m_panel15, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choicePositionFormatNChoices, m_choicePositionFormatChoices, 0 );
     m_choicePositionFormat->SetSelection( 0 );
