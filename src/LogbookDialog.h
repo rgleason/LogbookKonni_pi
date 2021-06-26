@@ -12,7 +12,7 @@
 #include "Maintenance.h"
 #include "boat.h"
 #include "OverView.h"
-#include "tinyxml/tinyxml.h"
+#include "tinyxml.h"
 
 #include <wx/string.h>
 #include <wx/button.h>
@@ -44,7 +44,7 @@
 #include <wx/gdicmn.h>
 #include <wx/dnd.h>
 
-#include "jsonreader.h"
+#include "../libs/json/jsonreader.h"
 ///////////////////////////////////////////////////////////////////////////
 
 #define LOGGRIDS 3

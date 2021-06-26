@@ -48,7 +48,7 @@
 #include <wx/msgdlg.h>
 #include <memory>
 
-#include "jsonreader.h"
+#include "../libs/json/jsonreader.h"
 
 using namespace std;
 
@@ -134,7 +134,7 @@ int logbookkonni_pi::Init( void )
     timer = new LogbookTimer( this );
     m_timer = new wxTimer( timer,ID_LOGTIMER );
     timer->Connect( wxEVT_TIMER, wxObjectEventFunction( &LogbookTimer::OnTimer ) );
-    
+
     SendPluginMessage( _T( "LOGBOOK_READY_FOR_REQUESTS" ), _T( "TRUE" ) );
 
     return (
@@ -560,8 +560,8 @@ void logbookkonni_pi::SetColorScheme( PI_ColorScheme cs )
         }
 
         if ( cs == 0 || cs == 1 )
-            m_plogbook_window->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
-        else
+           m_plogbook_window->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+	   else
             m_plogbook_window->SetBackgroundColour( col );
 
         m_plogbook_window->SetForegroundColour( uitext );
@@ -588,7 +588,7 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
         else if ( win->IsKindOf( CLASSINFO( wxChoice ) ) )
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
                 ( ( wxChoice* )win )->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
-            else
+		else
                 ( ( wxChoice* )win )->SetBackgroundColour( col1 );
 
         else if ( win->IsKindOf( CLASSINFO( wxRadioButton ) ) )
@@ -609,8 +609,9 @@ void logbookkonni_pi::dialogDimmer( PI_ColorScheme cs,wxWindow* ctrl,wxColour co
         else if ( win->IsKindOf( CLASSINFO( wxGrid ) ) )
         {
             if ( cs == PI_GLOBAL_COLOR_SCHEME_DAY || cs == PI_GLOBAL_COLOR_SCHEME_RGB )
-                ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
-            else
+                 ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
+			else
+
                 ( ( wxGrid* )win )->SetDefaultCellBackgroundColour( col1 );
             ( ( wxGrid* )win )->SetDefaultCellTextColour( uitext );
             ( ( wxGrid* )win )->SetLabelBackgroundColour( col );
@@ -724,40 +725,20 @@ void logbookkonni_pi::SetDefaults( void )
 
 wxString logbookkonni_pi::StandardPath( void )
 {
-    wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
+	
     wxString s = wxFileName::GetPathSeparator();
+    wxString stdPath  = *GetpPrivateApplicationDataLocation();
 
-#ifdef __WXMSW__
-    wxString stdPath  = std_path.GetConfigDir();
-#endif
-#ifdef __WXGTK__
-    wxString stdPath  = std_path.GetUserDataDir();
-#endif
-#ifdef __WXOSX__
-    wxString stdPath  = ( std_path.GetUserConfigDir() + s + _T( "opencpn" ) );
-#endif
+    stdPath += s + _T("plugins");
+	
+    if (!wxDirExists(stdPath))
+      wxMkdir(stdPath);
 
-    stdPath += s + _T( "plugins" );
-    if ( !wxDirExists( stdPath ) )
-        wxMkdir( stdPath );
+    stdPath += s + _T("logbook");
 
-    stdPath += s + _T( "logbook" );
+	if (!wxDirExists(stdPath))
+		wxMkdir(stdPath);
 
-#ifdef __WXOSX__
-    // Compatibility with pre-OCPN-4.2; move config dir to
-    // ~/Library/Preferences/opencpn if it exists
-    wxString oldPath = ( std_path.GetUserConfigDir() + s + _T( "plugins" ) + s + _T( "logbook" ) );
-    if ( wxDirExists( oldPath ) && !wxDirExists( stdPath ) )
-    {
-        wxLogMessage( "logbookkonni_pi: moving config dir %s to %s", oldPath, stdPath );
-        wxRenameFile( oldPath, stdPath );
-    }
-#endif
-
-    if ( !wxDirExists( stdPath ) )
-        wxMkdir( stdPath );
-
-    stdPath += s; // is this necessary?
     return stdPath;
 }
 
@@ -1048,7 +1029,7 @@ void logbookkonni_pi::SaveConfig()
         pConf->Write ( _T ( "toggleEngine2" ), opt->toggleEngine2 );
         pConf->Write ( _T ( "toggleGenerator" ), opt->toggleGenerator );
         pConf->Write ( _T ( "numberofSails" ), opt->numberSails );
-        
+
         wxString sails = wxEmptyString;
         sails = wxString::Format( _T( "%i,%i," ),opt->rowGap,opt->colGap );
         for ( int i = 0; i < opt->numberSails; i++ )
@@ -1466,7 +1447,8 @@ void logbookkonni_pi::loadLayouts( wxWindow *parent )
     sep = wxFileName::GetPathSeparator();
 
     wxString data = StandardPath();
-    data.Append( _T( "data" ) );
+	data.append(sep);
+    data.Append( _T("data"));
     data.append( sep );
     if ( !wxDir::Exists( data ) )
         wxMkdir( data );
@@ -1587,7 +1569,7 @@ void logbookkonni_pi::loadLayouts( wxWindow *parent )
                                         ( !ret )?n.c_str():wxEmptyString,data.c_str(),data1.c_str(),data2.c_str(),data3.c_str() );
         wxMessageBox( ok );
 
-		if (ret ) 
+		if (ret )
 		{
 			opt->navGridLayoutChoice = 0;
         	opt->crewGridLayoutChoice = 0;

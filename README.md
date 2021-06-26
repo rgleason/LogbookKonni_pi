@@ -9,10 +9,26 @@ Del
 SV Chiara Stella   
 http://sailchiarastella.blogspot.com/
 
+Since Del wrote this, Peter Tulp has maintained it for a number of years.
+Now Rick Gleason is maintaining the frontend and distribution.
+Peter is still accepting PR's from Rick and others.
+
+Install via OpenCPN Plugin Manager (PIM)
+========================================
+Current released version is available via OpenCPN > Options > Plugin Manager (PIM)
+(Requires a good internet connection)
+
+Github Accounts
+===================
+
+Maintenance Repository: https://github.com/rgleason/LogbookKonni_pi
+Source Repository: https://github.com/delatbabel/LogbookKonni-1.2
+
+Please push all Pull Requests to both maintenance and source repositories.
+
 Downloading the Plugin
 ======================
-
-The latest binary release can be found here:
+An earlier binary release can be found here:
 
 https://github.com/delatbabel/LogbookKonni-1.2/releases/tag/v1.2011
 
@@ -60,9 +76,33 @@ These are necessary to display data e.g. in a browser.
 * In the dialog click "Install" below the label "Install Layouts"
 * In the file dialog select the file 'LogbookKonni_Layouts.zip'
 
-Note that the layouts are customisable by the user and can be distributed to
+Note that the layouts are customizable by the user and can be distributed to
 and shared with other OpenCPN logbook users.  If you have developed a useful
 custom layout for your logbook then please feel free to send us details.
+
+###Layouts - Installation Details by OS
+
+First, (if you do not have any layouts previously installed, don't forget to Install layouts.zip from "Preferences" > "Install Layouts" button, into the user writable plugin data directory from the protected plugin data directory.
+
+This plugin requires the HTMLLayout, ODTLayout & Clouds Directories be installed in the User writable PluginData Directory. The Layouts.zip file should be unziped into the User writable Plugin Data Directory. Logbook "Preferences" has a button to help doing this.
+
+Windows
+Layouts.zip - Plugin Data Directory = C:\Users\AppData\Local\opencpn\plugins\logbookkonni_pi\data 
+                                  OR %localappdata%\opencpn\plugins\logbookkonni_pi\data
+User writable Data Directory = C:\ProgramData\opencpn\plugins\logbook\data
+
+Linux
+Layouts.zip - Plugin Data Directory = /usr/share/opencpn/plugins/logbookkonni_pi/data/
+User writable Data Directory = /home/myusername/.opencpn/plugins/logbook/data/
+
+Flatpak
+For Flatpak inside a Linux host system
+Layouts.zip - Plugin Data Directory = /home/myusername/.var/app/org.opencpn.OpenCPN/data/opencpn/plugins/logbookkonni_pi/data/
+User writable Data Directory = /home/myusername/.var/app/org.opencpn.OpenCPN/config/opencpn/plugins/logbook/data/
+
+MacOS
+Layouts.zip - Plugin Data Directory = ./.OpenCPN/plugins/logbook/plugins//data
+User writable Data Directory = ~/Library/Preferences/OpenCPN/plugins/logbook
 
 ###Languages
 

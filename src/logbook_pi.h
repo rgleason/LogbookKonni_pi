@@ -52,7 +52,7 @@
 #include <wx/fileconf.h>
 #include <wx/dynarray.h>
 
-#include "jsonwriter.h"
+#include "../libs/json/jsonwriter.h"
 //----------------------------------------------------------------------------------------------------------
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
@@ -88,6 +88,7 @@ public:
     wxLocale*			local;
     int				state;
     bool				eventsEnabled;
+	bool				show;
 
     //    The required PlugIn Methods
     int Init( void );
@@ -142,7 +143,7 @@ private:
 
     int               m_show_id;
     int               m_hide_id;
-    bool				show;
+    
     int				m_leftclick_tool_id;
 
     bool              m_bLOGShowIcon;

@@ -49,7 +49,6 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     m_notebook4 = new wxNotebook( m_scrolledWindow1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
     m_notebook4->SetBackgroundColour( wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) );
-
     m_panel15 = new wxPanel( m_notebook4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
     wxBoxSizer* bSizer51;
     bSizer51 = new wxBoxSizer( wxVERTICAL );
@@ -215,7 +214,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     wxString m_choicePositionFormatChoices[] = { wxString::Format( _T( "054%s 12.1234%s" ),opt->Deg.c_str(),opt->Min.c_str() ),
                                                  wxString::Format( _T( "054%s 12%s.12,34%s" ),opt->Deg.c_str(),opt->Min.c_str(),opt->Sec.c_str() )
-                                               };//_T("054° 12.1234'"), _T("054° 12' 12.34\"") };
+                                               };//_T("054Â° 12.1234'"), _T("054Â° 12' 12.34\"") };
     int m_choicePositionFormatNChoices = sizeof( m_choicePositionFormatChoices ) / sizeof( wxString );
     m_choicePositionFormat = new wxChoice( m_panel15, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choicePositionFormatNChoices, m_choicePositionFormatChoices, 0 );
     m_choicePositionFormat->SetSelection( 0 );
@@ -412,6 +411,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_staticText751->Wrap( -1 );
     fgSizer28->Add( m_staticText751, 0, wxTOP|wxRIGHT|wxLEFT, 5 );
 
+#ifndef LAYOUTS_HACK
     m_buttonInstallHTMLFiles = new wxButton( m_panel15, wxID_ANY, _( "Install" ), wxDefaultPosition, wxDefaultSize, 0 );
     m_buttonInstallHTMLFiles->SetToolTip( _( "Install OpenCPN_Logbook_Layouts.zip" ) );
 
@@ -421,6 +421,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_buttonUninstall->SetToolTip( _( "Uninstalls\nLogbook-Plugin,\nall Logbook-Data,\nall Logbook-Layouts,\nall Logbook-Languages\nand cleans the OpenCPN.ini" ) );
 
     fgSizer28->Add( m_buttonUninstall, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+#endif
 
 
     fgSizer10->Add( fgSizer28, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL, 5 );
@@ -1289,10 +1290,14 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_bpButtonODT->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonClickODT ), NULL, this );
     m_bpButtonDatamanager->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonClickDataManager ), NULL, this );
     m_bpButtonMail->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonClickMail ), NULL, this );
+#ifndef LAYOUTS_HACK
     m_buttonInstallHTMLFiles->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonClickInstallHTMLFiles ), NULL, this );
+#endif
     m_bpButtonHTMLEditor->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonHTMLEditor ), NULL, this );
     m_sdbSizer1OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::OnButtonOKClick ), NULL, this );
+#ifndef LAYOUTS_HACK
     m_buttonUninstall->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::OnButtonClickUninstall ), NULL, this );
+#endif
     m_buttonResetPath->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::OnButtonResetPaths ), NULL, this );
     m_sLiter->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( LogbookOptions::onTextm_sLiter ), NULL, this );
     m_textCtrlWatermaker->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( LogbookOptions::OnTextEnterm_textCtrlWatermaker ), NULL, this );
@@ -1352,10 +1357,14 @@ LogbookOptions::~LogbookOptions()
     m_bpButtonODT->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonClickODT ), NULL, this );
     m_bpButtonDatamanager->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonClickDataManager ), NULL, this );
     m_bpButtonMail->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonClickMail ), NULL, this );
+#ifndef LAYOUTS_HACK
     m_buttonInstallHTMLFiles->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonClickInstallHTMLFiles ), NULL, this );
+#endif
     m_bpButtonHTMLEditor->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::onButtonHTMLEditor ), NULL, this );
     m_sdbSizer1OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::OnButtonOKClick ), NULL, this );
+#ifndef LAYOUTS_HACK
     m_buttonUninstall->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::OnButtonClickUninstall ), NULL, this );
+#endif
     m_buttonResetPath->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LogbookOptions::OnButtonResetPaths ), NULL, this );
     m_sLiter->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( LogbookOptions::onTextm_sLiter ), NULL, this );
     m_textCtrlWatermaker->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( LogbookOptions::OnTextEnterm_textCtrlWatermaker ), NULL, this );
@@ -1419,7 +1428,9 @@ void LogbookOptions::init()
 #ifdef __WXMSW__
     ;//m_buttonInstallLanguages->Enable(false);
 #else
+#ifndef LAYOUTS_HACK
     m_buttonUninstall->Enable( false );
+#endif
 #endif
 
     opt->setTimeFormat( m_checkBoxNoSeconds->GetValue() );
@@ -1447,6 +1458,7 @@ void LogbookOptions::init()
         stdPath = logbookkonni_pi::StandardPath();
 
         wxString sep = wxFileName::GetPathSeparator();
+
         wxString data_locn = stdPath + _T( "data" ) + sep + _T( "logbook.txt" );
         if ( wxFile::Exists( data_locn ) )
         {
