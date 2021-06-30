@@ -33,6 +33,7 @@
 
 #include "wx/wxprec.h"
 
+#include "icons.h"
 #include "logbook_pi.h"
 #include "Logbook.h"
 #include "LogbookDialog.h"
@@ -120,9 +121,26 @@ int logbookkonni_pi::Init( void )
 
     LoadConfig();
     if ( m_bLOGShowIcon )
+
+// FOR SVG ICONS  - CMakeLists.txt line 72  PLUGIN_USE_SVG=ON
+		
+#ifdef PLUGIN_USE_SVG
+      m_leftclick_tool_id = InsertPlugInToolSVG(_T( "Logbook" ),
+          _svg_logbookkonni,  _svg_logbookkonni_toggled, _svg_logbookkonni_toggled, 
+          wxITEM_CHECK, _("Logbook"), _T( "" ), NULL, LOGBOOK_TOOL_POSITION, 0, this);
+#else
+      m_leftclick_tool_id  = InsertPlugInTool
+		  ( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
+          _( "Logbook" ), _T( "" ), NULL,
+          LOGBOOK_TOOL_POSITION, 0, this );		  		  
+#endif
+
+
+/*  OLD _IMG Ccde
         m_leftclick_tool_id  = InsertPlugInTool( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
                                _( "Logbook" ), _T( "" ), NULL,
                                LOGBOOK_TOOL_POSITION, 0, this );
+*/
 
     // Create the Context Menu Items
 
@@ -716,9 +734,24 @@ void logbookkonni_pi::SetDefaults( void )
     if ( !m_bLOGShowIcon )
     {
         m_bLOGShowIcon = true;
+		
+#ifdef PLUGIN_USE_SVG
+      m_leftclick_tool_id = InsertPlugInToolSVG(_T( "Logbook" ),
+          _svg_logbookkonni,  _svg_logbookkonni_toggled, _svg_logbookkonni_toggled, 
+          wxITEM_CHECK, _("Logbook"), _T( "" ), NULL, LOGBOOK_TOOL_POSITION, 0, this);
+#else
+      m_leftclick_tool_id  = InsertPlugInTool
+		  ( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
+          _( "Logbook" ), _T( "" ), NULL,
+          LOGBOOK_TOOL_POSITION, 0, this );		  		  
+#endif
+
+
+/*    OLD _img code
         m_leftclick_tool_id  = InsertPlugInTool( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
                                _( "Logbook" ), _T( "" ), NULL,
                                LOGBOOK_TOOL_POSITION, 0, this );
+*/
 
     }
 }
@@ -790,9 +823,24 @@ void logbookkonni_pi::ShowPreferencesDialog( wxWindow* parent )
             m_bLOGShowIcon= optionsDialog->m_checkBoxShowLogbook->GetValue();
 
             if ( m_bLOGShowIcon )
+
+#ifdef PLUGIN_USE_SVG
+      m_leftclick_tool_id = InsertPlugInToolSVG(_T( "Logbook" ),
+          _svg_logbookkonni,  _svg_logbookkonni_toggled, _svg_logbookkonni_toggled, 
+          wxITEM_CHECK, _("Logbook"), _T( "" ), NULL, LOGBOOK_TOOL_POSITION, 0, this);
+#else
+      m_leftclick_tool_id  = InsertPlugInTool
+		  ( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
+          _( "Logbook" ), _T( "" ), NULL,
+          LOGBOOK_TOOL_POSITION, 0, this );		  		  
+#endif
+
+/*    OLD _img code
                 m_leftclick_tool_id  = InsertPlugInTool( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
                                        _( "Logbook" ), _T( "" ), NULL, LOGBOOK_TOOL_POSITION,
                                        0, this );
+*/
+									   
             else
                 RemovePlugInTool( m_leftclick_tool_id );
         }

@@ -435,7 +435,7 @@ void initialize_images( void )
     fn.AppendDir(_T("data"));
     fn.SetFullName(_T("logbookkonni_pi.svg"));
     _svg_logbookkonni = fn.GetFullPath();
-    wxLogMessage(_T("Loading toolbar icon: ") + _svg_logbookkonni); 
+	wxLogMessage(_T("Loading toolbar icon: ") + _svg_logbookkonni); 
     fn.SetFullName(_T("logbookkonni_pi_rollover.svg"));
     _svg_logbookkonni_rollover = fn.GetFullPath();
     fn.SetFullName(_T("logbookkonni_pi_toggled.svg"));

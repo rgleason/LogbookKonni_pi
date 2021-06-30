@@ -4,7 +4,7 @@
 ## License:     wxWidgets License
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.167 19/05/2021
+# Frontend2 Version: 1.0.172 28/06/2021
 # ---------------------------------------------------------------------------
 ## buildCI:yes useODAPI:no validateJSON:no
 ##
@@ -44,8 +44,8 @@ set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "3")
-set(VERSION_DATE "19-05-2020")  # DD/MM/YYYY format
+set(VERSION_TWEAK "8")
+set(VERSION_DATE "30-06-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -123,19 +123,12 @@ include("PluginConfigure")
 # ----Remember to Add your project Set(SRCS and set(HDRS  etc..
 # ++++++++++++++Section below is direct from Watchdog +++++++++##
 
-IF(PLUGIN_USE_SVG)
-    MESSAGE(STATUS "${CMLOC}SVG support enabled...")
-    IF(NOT QT_ANDROID)
-        ADD_DEFINITIONS(-DPLUGIN_USE_SVG)
-    ENDIF(NOT QT_ANDROID)
-ENDIF(PLUGIN_USE_SVG)
-add_definitions(-DUSE_S57)
 
-# what is this for, not in testplugin?
-SET(BUNDLE_DATA TRUE)
+add_definitions(-DUSE_S57)
 
 # Keep this order there seems to be some dependency on that resulting in undefined. Leave ExGrid etc commented out.
 # Cannot move h files into separate include folder, errors occur.
+
 SET(SRCS
   		src/logbook_pi.h
  		src/logbook_pi.cpp
@@ -161,14 +154,18 @@ SET(SRCS
 		src/OverView.cpp
 		src/Export.h
 		src/Export.cpp
-#		src/EzGrid.cpp       -when not commented - error C3861: 'getcol': identifier not found
-#		src/FastComboEditor.cpp - when not commented - error C3861: 'getcol': identifier not found
-#		src/GridCellChoiceRenderer.cpp  - when not commented - error C3861: 'getcol': identifier not found
+#		src/EzGrid.cpp  
+#  -when not commented - error C3861: 'getcol': identifier not found
+#		src/FastComboEditor.cpp
+#  - when not commented - error C3861: 'getcol': identifier not found
+#		src/GridCellChoiceRenderer.cpp
+#  - when not commented - error C3861: 'getcol': identifier not found
 #		src/EzGrid.h
 #		src/FastComboEditor.h
 #		src/GridCellChoiceRenderer.h
  	)
 
+# Cannot move h files into separate include folder, errors occur.
 #SET(HDRS
 #  		include/logbook_pi.h
 #		include/Logbook.h
@@ -187,6 +184,7 @@ SET(SRCS
 #		include/OverView.h
 #		)
 
+# See Try-Lib-Nmea0183-Issue-Class=NMEA0183L..txt
 SET(SRC_LNMEA0183
 		src/nmea0183/LatLong.hpp
 		src/nmea0183/latlong.cpp
@@ -244,31 +242,63 @@ SET(SRC_LNMEA0183
 		src/nmea0183/rsa.hpp
 		src/nmea0183/rsa.cpp
 		src/nmea0183/SatInfo.h
-       )
+        )
 
-set(LIBS_JSON
-        libs/json/json_defs.h
-      	libs/json/jsonreader.h
-        libs/json/jsonval.h
-        libs/json/jsonwriter.h
-        libs/json/jsonreader.cpp
-        libs/json/jsonval.cpp
-        libs/json/jsonwriter.cpp
-		)
+#   now using libs/wxJSON
+# set(LIBS_JSON
+#        libs/json/json_defs.h
+#      	libs/json/jsonreader.h
+#        libs/json/jsonval.h
+#        libs/json/jsonwriter.h
+#        libs/json/jsonreader.cpp
+#        libs/json/jsonval.cpp
+#        libs/json/jsonwriter.cpp
+#		)
 
-#add_definitions(-DPLUGIN_USE_SVG)
+set(OCPNSRC ocpnsrc/TexFont.cpp)
+
+# Don't have these files and dont need them
+#set(OCPNHDRS
+#    ocpninclude/ocpn_plugin.h
+#    ocpninclude/pluginmanager.h
+#    ocpninclude/TexFont.h
+#    libs/ocpn-api/ocpn_plugin.h
+#)
+
+set(EXTSRC
+)
+
+set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
+
+set(LIBHDRS
+    libs/GL/gl.h
+    libs/GL/gl_private.h
+    libs/GL/glext.h
+    libs/GL/glu.h
+    libs/wxJSON/include/json_defs.h
+    libs/wxJSON/include/jsonreader.h
+    libs/wxJSON/include/jsonval.h
+    libs/wxJSON/include/jsonwriter.h)
+
+add_definitions(-DPLUGIN_USE_SVG)
 
 # No PI_JSON_SCHEMA_VALIDATOR  needed
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include/)
+
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include/)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/glu/include)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
-# include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/nmea0183/src)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/nmea0183/src)
 
 # -----------------------------------------
-target_sources(${PACKAGE_NAME} PUBLIC ${SRCS}  ${LIBS_JSON}  ${SRC_LNMEA0183})
+target_sources(${PACKAGE_NAME} PUBLIC ${SRCS}  ${SRC_LNMEA0183} ${LIBSSRC} ${LIBHDRS}  ${OCPNSRC} ${EXTSRC})
 # -----------------------------------------
-# target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
+#target_sources(${PACKAGE_NAME} PUBLIC ${SRCS}  ${SRC_LNMEA0183} ${LIBSSRC} ${LIBHDRS}  ${OCPNSRC} ${OCPNHDRS} ${EXTSRC})
+# target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} ${HDRS} ${LIBHDRS} ${LIBSSRC} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
 # add_library( ${PACKAGE_NAME} SHARED ${SRCS} ${SRC_LTINYXML} ${SRC_LNMEA0183} )
 
 if(NOT OCPN_FLATPAK_CONFIG)
@@ -287,6 +317,7 @@ add_definitions(-DTIXML_USE_STL)
 
 # Disables Logbook Install and Uninstall Preferences buttons.
 #add_definitions("-DLAYOUTS_HACK")
+# Not doing json schema validation
 
 ## ----- Change above to match project requirements ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
