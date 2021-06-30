@@ -1,5 +1,3 @@
-//#include <wx/textctrl.h>
-
 #define wxDatePickerCtrlNameStr wxT("datectrl")
 
 // wxDatePickerCtrl styles
@@ -37,7 +35,7 @@ public:
                      long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                      const wxValidator& validator = wxDefaultValidator,
                      const wxString& name = wxDatePickerCtrlNameStr)
-        : wxTextCtrl(parent, id, date.IsValid() ? date.Format() :"N/A", pos, size, 0, validator, name)
+        : wxTextCtrl(parent, id, date.Format(), pos, size, 0, validator, name)
     {}
     // wxDatePickerCtrl methods
     void SetValue(const wxDateTime& date) { wxTextCtrl::SetValue(date.FormatISODate()); }

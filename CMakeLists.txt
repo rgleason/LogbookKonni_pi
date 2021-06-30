@@ -44,7 +44,7 @@ set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni.")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "8")
+set(VERSION_TWEAK "9")
 set(VERSION_DATE "30-06-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
@@ -285,6 +285,7 @@ add_definitions(-DPLUGIN_USE_SVG)
 # No PI_JSON_SCHEMA_VALIDATOR  needed
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include/)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include/android/wx)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/glu/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
@@ -292,6 +293,7 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
+
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/nmea0183/src)
 
 # -----------------------------------------
