@@ -491,7 +491,7 @@ void Maintenance::setRowBackground( int row, wxColour &c )
         grid->SetCellValue( row,PRIORITY,_T( "3" ) );
     else if ( c == wxColour( 0,255,0 ) )
         grid->SetCellValue( row,PRIORITY,_T( "5" ) );
-	else if ( c == wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) )
+  	else if ( c == wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) )
         grid->SetCellValue( row,PRIORITY,_T( "0" ) );
 }
 
