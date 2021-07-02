@@ -760,7 +760,7 @@ wxString logbookkonni_pi::StandardPath( void )
 {
 	
     wxString s = wxFileName::GetPathSeparator();
-    wxString stdPath  = *GetpPrivateApplicationDataLocation();
+    wxString stdPath  =( *GetpPrivateApplicationDataLocation());
 
     stdPath += s + _T("plugins");
 	
