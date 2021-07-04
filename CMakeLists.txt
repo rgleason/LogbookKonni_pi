@@ -33,19 +33,19 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 # define plugin name, owner and versions
-set(VERBOSE_NAME "Logbookkonni")
-set(COMMON_NAME "Logbook")
-set(TITLE_NAME "LOGBOOKKONNI")
-set(PACKAGE_CONTACT "Del Elson")
-set(PACKAGE "logbookkonni")
-set(SHORT_DESCRIPTION "Logbook for OpenCPN")
-set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni.")
+set(VERBOSE_NAME "Logbookkonni" )
+set(COMMON_NAME "Logbook" )
+set(TITLE_NAME "LOGBOOKKONNI" )
+set(PACKAGE_CONTACT "Del Elson" )
+set(PACKAGE "logbookkonni" )
+set(SHORT_DESCRIPTION "Logbook for OpenCPN" )
+set(LONG_DESCRIPTION "Help on YouTube search LogbookKonni." )
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "4")
-set(VERSION_PATCH "14")
-set(VERSION_TWEAK "10")
-set(VERSION_DATE "02-07-2020")  # DD/MM/YYYY format
+set(VERSION_PATCH "15")
+set(VERSION_TWEAK "01")
+set(VERSION_DATE "04-07-2020")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -62,12 +62,12 @@ set(BETA "beta") # Standard Repos
 set(ALPHA "alpha") # Standard Repos
 
 # set this if your cloudsmith repository name does not match your git repository name set(CLOUDSMITH_BASE_REPOSITORY "testplugin_pi")
-set(CLOUDSMITH_BASE_REPOSITORY "logbookkonni")  #without the pi
+set(CLOUDSMITH_BASE_REPOSITORY "logbookkonni" )  #without the pi
 # Set the following to use OpenCPN cloudsmith repositories instead of own repositories
-set(CLOUDSMITH_USER "opencpn")
-#set(CLOUDSMITH_USER "rick-gleason")
+set(CLOUDSMITH_USER "opencpn" )
+#set(CLOUDSMITH_USER "rick-gleason" )
 
-set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/logbookkonni.html")
+set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/logbookkonni.html" )
 set(XML_SUMMARY ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION ${LONG_DESCRIPTION})
 
@@ -86,22 +86,22 @@ set(OpenGL_GL_PREFERENCE "LEGACY")
 set(USE_LOCAL_GLU FALSE)
 
 option(USE_GL "Enable OpenGL support" OFF)
-message(STATUS "${CMLOC}USE_GL: ${USE_GL}")
+message(STATUS "${CMLOC}USE_GL: ${USE_GL}" )
 
-if("${CMAKE_BUILD_TYPE}" STREQUAL "")
+if("${CMAKE_BUILD_TYPE}" STREQUAL "" )
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
 endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
-set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
+set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel" )
 message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
 ## ----- The statements below are used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
 
 project(${PACKAGE})
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" )
 
 # -----------------------------------------
-include("PluginSetup")
+include( "PluginSetup" )
 # -----------------------------------------
 ## ----- The above is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
@@ -115,7 +115,7 @@ option(Plugin_CXX11 "Use c++11" OFF)
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
 ## ----- do not change next section - needed to configure build process ----- ##
 # -----------------------------------------
-include("PluginConfigure")
+include( "PluginConfigure" )
 # -----------------------------------------
 ## ----- do not change section above - needed to configure build process ----- ##
 ## ----- Change below to match project requirements for source, headers, etc. ----- ##
@@ -154,7 +154,7 @@ SET(SRCS
 		src/OverView.cpp
 		src/Export.h
 		src/Export.cpp
-#		src/EzGrid.cpp  
+#		src/EzGrid.cpp
 #  -when not commented - error C3861: 'getcol': identifier not found
 #		src/FastComboEditor.cpp
 #  - when not commented - error C3861: 'getcol': identifier not found
@@ -330,14 +330,14 @@ if(QT_ANDROID)
 endif(QT_ANDROID)
 
 # Needed for all builds
-include("PluginInstall")
-include("PluginLocalization")
-include("PluginPackage")
+include( "PluginInstall" )
+include( "PluginLocalization" )
+include( "PluginPackage" )
 # -----------------------------------------
 ## ----- do not change section above - needed to configure build process ----- ##
 
-message(STATUS "${CMLOC}include directories: ")
+message(STATUS "${CMLOC}include directories: " )
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 foreach(dir ${dirs})
-    message(STATUS "${CMLOC}dir='${dir}'")
+    message(STATUS "${CMLOC}dir='${dir}'" )
 endforeach()
