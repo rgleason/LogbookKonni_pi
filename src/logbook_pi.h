@@ -35,7 +35,7 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
-#include "version.h"
+#include "config.h"
 
 #include "ocpn_plugin.h"
 #include "Options.h"

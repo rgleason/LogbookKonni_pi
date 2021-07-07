@@ -31,6 +31,8 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
+#include "config.h"
+
 #include "wx/wxprec.h"
 
 #include "icons.h"
@@ -672,12 +674,12 @@ void logbookkonni_pi::UpdateAuiStatus( void )
 
 int logbookkonni_pi::GetAPIVersionMajor()
 {
-    return OCPN_API_VERSION_MAJOR;
+    return API_VERSION_MAJOR;
 }
 
 int logbookkonni_pi::GetAPIVersionMinor()
 {
-    return OCPN_API_VERSION_MINOR;
+    return API_VERSION_MINOR;
 }
 
 int logbookkonni_pi::GetPlugInVersionMajor()
@@ -697,12 +699,12 @@ wxString logbookkonni_pi::GetCommonName()
 
 wxString logbookkonni_pi::GetShortDescription()
 {
-    return _(PLUGIN_SHORT_DESCRIPTION);
+    return _(CPACK_PACKAGE_DESCRIPTION_SUMMARY);
 }
 
 wxString logbookkonni_pi::GetLongDescription()
 {
-   return _(PLUGIN_LONG_DESCRIPTION);
+   return _(CPACK_PACKAGE_DESCRIPTION);
 
 }
 
