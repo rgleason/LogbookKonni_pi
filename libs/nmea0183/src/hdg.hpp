@@ -44,34 +44,34 @@
 class HDG : public RESPONSE
 {
 
-   public:
+public:
 
-      HDG();
-     ~HDG();
+    HDG();
+    ~HDG();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double   MagneticSensorHeadingDegrees;
-      double   MagneticDeviationDegrees;
-      EASTWEST MagneticDeviationDirection;
-      double   MagneticVariationDegrees;
-      EASTWEST MagneticVariationDirection;
+    double   MagneticSensorHeadingDegrees;
+    double   MagneticDeviationDegrees;
+    EASTWEST MagneticDeviationDirection;
+    double   MagneticVariationDegrees;
+    EASTWEST MagneticVariationDirection;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const HDG& operator = ( const HDG& source );
+    virtual const HDG& operator = ( const HDG& source );
 };
 
 #endif // HDG_CLASS_HEADER

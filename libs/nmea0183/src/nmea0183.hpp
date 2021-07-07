@@ -102,18 +102,13 @@
 #include "gga.hpp"
 #include "dbt.hpp"
 #include "dpt.hpp"
-#include "mta.hpp" //Air temperature
-#include "mtw.hpp" //Water temperature
-#include "mda.hpp" //barometric pressure
-#include "mwd.hpp"
+#include "mtw.hpp"
 #include "mwv.hpp"
 #include "vhw.hpp"
 #include "vwr.hpp"
 #include "vwt.hpp"
+#include "xdr.hpp"
 #include "zda.hpp"
-#include "vlw.hpp"
-#include "xdr.hpp" //transducer data
-#include "xte.hpp"
 /*
 #include "ROT.hpp"
 #include "RPM.hpp"
@@ -130,7 +125,6 @@
 #include "VTG.hpp"
 #include "WCV.hpp"
 #include "WNC.hpp"
-#include "XDR.hpp"
 #include "XTE.hpp"
 #include "XTR.hpp"
 #include "ZDA.hpp"
@@ -138,137 +132,133 @@
 #include "ZTG.hpp"
 */
 
-WX_DECLARE_LIST(RESPONSE, MRL);
+WX_DECLARE_LIST( RESPONSE, MRL );
 
-class NMEA0183
+class NMEA0183L
 {
 
-   private:
+private:
 
-      SENTENCE sentence;
+    SENTENCE sentence;
 
-      void initialize( void );
+    void initialize( void );
 
-   protected:
+protected:
 
-      MRL response_table;
+    MRL response_table;
 
-      void set_container_pointers( void );
-      void sort_response_table( void );
+    void set_container_pointers( void );
+    void sort_response_table( void );
 
-   public:
+public:
 
-      NMEA0183();
-      virtual ~NMEA0183();
+    NMEA0183L();
+    virtual ~NMEA0183L();
 
-      /*
-      ** NMEA 0183 Sentences we understand
-      */
+    /*
+    ** NMEA 0183 Sentences we understand
+    */
 
-/*
-      AAM Aam;
-      ALM Alm;
-      APB Apb;
-      ASD Asd;
-      BEC Bec;
-      BOD Bod;
-      BWC Bwc;
-      BWR Bwr;
-      BWW Bww;
-*/
-      DBT Dbt;
-/*
-      DCN Dcn;
-*/
-      DPT Dpt;
-/*
-      FSI Fsi;
-*/
-      GGA Gga;
-/*
-      GLC Glc;
-*/
-      GLL Gll;
-      GSV Gsv;
-/*
-      GXA Gxa;
-*/
-      HDM Hdm;
-      HDG Hdg;
-      HDT Hdt;
-/*
-      HSC Hsc;
-      LCD Lcd;
-*/
-      MTA Mta; //Air temperature
-      MTW Mtw;
-      MWD Mwd;
-      MWV Mwv;
-      MDA Mda; //Metrological comopsite	
-/*
-      OLN Oln;
-      OSD Osd;
-      P   Proprietary;
-      RMA Rma;
-*/
-      RMB Rmb;
-      RMC Rmc;
-/*
-      ROT Rot;
-      RPM Rpm;
-*/
-      RSA Rsa;
-/*
-      RSD Rsd;
-*/
-      RTE Rte;
-/*
-      SFI Sfi;
-      STN Stn;
-      TRF Trf;
-      TTM Ttm;
-      VBW Vbw;
-      VDR Vdr;
-*/
-      VHW Vhw;
-	  VLW Vlw;
-/*
-      
-      VPW Vpw;
-*/
-      VTG Vtg;
-      VWR Vwr;
-      VWT Vwt;
-/*
-      WCV Wcv;
-      WNC Wnc;
-*/
-      WPL Wpl;
+    /*
+          AAM Aam;
+          ALM Alm;
+          APB Apb;
+          ASD Asd;
+          BEC Bec;
+          BOD Bod;
+          BWC Bwc;
+          BWR Bwr;
+          BWW Bww;
+    */
+    DBT Dbt;
+    /*
+          DCN Dcn;
+    */
+    DPT Dpt;
+    /*
+          FSI Fsi;
+    */
+    GGA Gga;
+    /*
+          GLC Glc;
+    */
+    GLL Gll;
+    GSV Gsv;
+    /*
+          GXA Gxa;
+    */
+    HDM Hdm;
+    HDG Hdg;
+    HDT Hdt;
+    /*
+          HSC Hsc;
+          LCD Lcd;
+    */
+    MTW Mtw;
+    MWV Mwv;
+    /*
+          OLN Oln;
+          OSD Osd;
+          P   Proprietary;
+          RMA Rma;
+    */
+    RMB Rmb;
+    RMC Rmc;
+    /*
+          ROT Rot;
+          RPM Rpm;
+    */
+    RSA Rsa;
+    /*
+          RSD Rsd;
+    */
+    RTE Rte;
+    /*
+          SFI Sfi;
+          STN Stn;
+          TRF Trf;
+          TTM Ttm;
+          VBW Vbw;
+          VDR Vdr;
+    */
+    VHW Vhw;
+    /*
+          VLW Vlw;
+          VPW Vpw;
+    */
+    VTG Vtg;
+    VWR Vwr;
+    VWT Vwt;
+    /*
+          WCV Wcv;
+          WNC Wnc;
+    */
+    WPL Wpl;
+    XDR Xdr;
+    /*
+          XTE Xte;
+          XTR Xtr;
+    */
+    ZDA Zda;
+    /*
+          ZFO Zfo;
+          ZTG Ztg;
+    */
+    wxString ErrorMessage; // Filled when Parse returns FALSE
+    wxString LastSentenceIDParsed; // ID of the lst sentence successfully parsed
+    wxString LastSentenceIDReceived; // ID of the last sentence received, may not have parsed successfully
 
-      XDR Xdr;
-/*    XTE Xte;
-      XTR Xtr;
-*/
-      ZDA Zda;
-/*
-      ZFO Zfo;
-      ZTG Ztg;
-*/
-      wxString ErrorMessage; // Filled when Parse returns FALSE
-      wxString LastSentenceIDParsed; // ID of the lst sentence successfully parsed
-      wxString LastSentenceIDReceived; // ID of the last sentence received, may not have parsed successfully
-
-      wxString TalkerID;
-      wxString ExpandedTalkerID;
+    wxString TalkerID;
+    wxString ExpandedTalkerID;
 
 //      MANUFACTURER_LIST Manufacturers;
 
-      bool IsGood( void ) const;
-      bool Parse( void );
-      bool PreParse( void );
+    virtual bool IsGood( void ) const;
+    virtual bool Parse( void );
+    virtual bool PreParse( void );
 
-      NMEA0183& operator << ( wxString& source );
-      NMEA0183& operator >> ( wxString& destination );
+    NMEA0183L& operator << ( wxString& source );
+    NMEA0183L& operator >> ( wxString& destination );
 };
 
 #endif // NMEA_0183_CLASS_HEADER

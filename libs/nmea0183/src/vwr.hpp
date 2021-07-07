@@ -44,34 +44,34 @@ class VWR : public RESPONSE
 {
 //   DECLARE_DYNAMIC( MWV )
 
-   public:
+public:
 
-      VWR();
-     ~VWR();
+    VWR();
+    ~VWR();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double           WindDirectionMagnitude;
-	  LEFTRIGHT			DirectionOfWind;
-      double           WindSpeedKnots;
-      double           WindSpeedms;
-      double           WindSpeedKmh;
+    double           WindDirectionMagnitude;
+    LEFTRIGHT			DirectionOfWind;
+    double           WindSpeedKnots;
+    double           WindSpeedms;
+    double           WindSpeedKmh;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const VWR& operator = ( const VWR& source );
+    virtual const VWR& operator = ( const VWR& source );
 };
 
 #endif // VWR_CLASS_HEADER

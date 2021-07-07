@@ -44,34 +44,34 @@ class MWV : public RESPONSE
 {
 //   DECLARE_DYNAMIC( MWV )
 
-   public:
+public:
 
-      MWV();
-     ~MWV();
+    MWV();
+    ~MWV();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double           WindAngle;
-      wxString          Reference;
-      double           WindSpeed;
-      wxString          WindSpeedUnits;
-      NMEA0183_BOOLEAN IsDataValid;
+    double           WindAngle;
+    wxString          Reference;
+    double           WindSpeed;
+    wxString          WindSpeedUnits;
+    NMEA0183L_BOOLEAN IsDataValid;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const MWV& operator = ( const MWV& source );
+    virtual const MWV& operator = ( const MWV& source );
 };
 
 #endif // MWV_CLASS_HEADER

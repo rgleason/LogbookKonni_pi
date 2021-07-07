@@ -116,6 +116,7 @@ SET(SRC
   src/OverView.cpp
   src/Export.h
   src/Export.cpp
+  ocpnsrc/TexFont.cpp
 )
 
 # -------- Setup completed, build the plugin --------

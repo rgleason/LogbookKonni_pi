@@ -41,40 +41,40 @@
 ** You can use it any way you like.
 */
 
-class NMEA0183;
+class NMEA0183L;
 
-class RESPONSE 
+class RESPONSE
 {
 
-   private:
+private:
 
-      NMEA0183 *container_p;
+    NMEA0183L *container_p;
 
-   public:
+public:
 
-      RESPONSE();
-      virtual ~RESPONSE();
+    RESPONSE();
+    virtual ~RESPONSE();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      wxString ErrorMessage;
-      wxString Mnemonic;
-      wxString Talker;
+    wxString ErrorMessage;
+    wxString Mnemonic;
+    wxString Talker;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void ) = 0;
-      virtual bool Parse( const SENTENCE& sentence ) = 0;
-      virtual const wxString& PlainEnglish( void );
-      virtual void SetErrorMessage( const wxString& );
-      virtual void SetContainer( NMEA0183 *container );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void ) = 0;
+    virtual bool Parse( const SENTENCE& sentence ) = 0;
+    virtual const wxString& PlainEnglish( void );
+    virtual void SetErrorMessage( const wxString& );
+    virtual void SetContainer( NMEA0183L *container );
+    virtual bool Write( SENTENCE& sentence );
 };
 
 
- 
+
 #endif // RESPONSE_CLASS_HEADER

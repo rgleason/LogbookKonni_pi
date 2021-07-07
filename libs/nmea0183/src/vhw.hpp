@@ -42,35 +42,35 @@
 
 class VHW : public RESPONSE
 {
-   //DECLARE_DYNAMIC( VHW )
+    //DECLARE_DYNAMIC( VHW )
 
-   public:
+public:
 
-      VHW();
-     ~VHW();
+    VHW();
+    ~VHW();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double DegreesTrue;
-      double DegreesMagnetic;
-      double Knots;
-      double KilometersPerHour;
+    double DegreesTrue;
+    double DegreesMagnetic;
+    double Knots;
+    double KilometersPerHour;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const VHW& operator = ( const VHW& source );
+    virtual const VHW& operator = ( const VHW& source );
 };
 
 #endif // VHW_CLASS_HEADER

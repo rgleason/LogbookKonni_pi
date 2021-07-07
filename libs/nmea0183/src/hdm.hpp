@@ -44,30 +44,30 @@
 class HDM : public RESPONSE
 {
 
-   public:
+public:
 
-      HDM();
-     ~HDM();
+    HDM();
+    ~HDM();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-     double DegreesMagnetic;
+    double DegreesMagnetic;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const HDM& operator = ( const HDM& source );
+    virtual const HDM& operator = ( const HDM& source );
 };
 
 #endif // HDM_CLASS_HEADER

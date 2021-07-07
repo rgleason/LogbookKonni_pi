@@ -43,96 +43,96 @@
 
 MWV::MWV()
 {
-   Mnemonic = _T("MWV");
-   Empty();
+    Mnemonic = _T( "MWV" );
+    Empty();
 }
 
 MWV::~MWV()
 {
-   Mnemonic.Empty();
-   Empty();
+    Mnemonic.Empty();
+    Empty();
 }
 
 void MWV::Empty( void )
 {
 //   ASSERT_VALID( this );
 
-   WindAngle   = 0.0;
-   Reference.Empty();
-   WindSpeed   = 0.0;
-   WindSpeedUnits.Empty();
-   IsDataValid = Unknown0183;
+    WindAngle   = 0.0;
+    Reference.Empty();
+    WindSpeed   = 0.0;
+    WindSpeedUnits.Empty();
+    IsDataValid = Unknown0183;
 }
 
 bool MWV::Parse( const SENTENCE& sentence )
 {
 //   ASSERT_VALID( this );
 
-   /*
-   ** MWV - Wind Speed and Angle
-   **
-   **        1   2 3   4 5
-   **        |   | |   | |
-   ** $--MWV,x.x,a,x.x,a*hh<CR><LF>
-   **
-   ** Field Number: 
-   **  1) Wind Angle, 0 to 360 degrees
-   **  2) Reference, R = Relative, T = True
-   **  3) Wind Speed
-   **  4) Wind Speed Units, K/M/N
-   **  5) Status, A = Data Valid
-   **  6) Checksum
-   */
+    /*
+    ** MWV - Wind Speed and Angle
+    **
+    **        1   2 3   4 5
+    **        |   | |   | |
+    ** $--MWV,x.x,a,x.x,a*hh<CR><LF>
+    **
+    ** Field Number:
+    **  1) Wind Angle, 0 to 360 degrees
+    **  2) Reference, R = Relative, T = True
+    **  3) Wind Speed
+    **  4) Wind Speed Units, K/M/N
+    **  5) Status, A = Data Valid
+    **  6) Checksum
+    */
 
-   /*
-   ** First we check the checksum...
-   */
+    /*
+    ** First we check the checksum...
+    */
 
-   if ( sentence.IsChecksumBad( 6 ) == TRUE )
-   {
-      SetErrorMessage( _T("Invalid Checksum") );
-      return( FALSE );
-   } 
+    if ( sentence.IsChecksumBad( 6 ) == TRUE )
+    {
+        SetErrorMessage( _T( "Invalid Checksum" ) );
+        return ( FALSE );
+    }
 
-   WindAngle      = sentence.Double( 1 );
-   Reference      = sentence.Field( 2 );
-   WindSpeed      = sentence.Double( 3 );
-   WindSpeedUnits = sentence.Field( 4 );
-   IsDataValid    = sentence.Boolean( 5 );
+    WindAngle      = sentence.Double( 1 );
+    Reference      = sentence.Field( 2 );
+    WindSpeed      = sentence.Double( 3 );
+    WindSpeedUnits = sentence.Field( 4 );
+    IsDataValid    = sentence.Boolean( 5 );
 
-   return( TRUE );
+    return ( TRUE );
 }
 
 bool MWV::Write( SENTENCE& sentence )
 {
 //   ASSERT_VALID( this );
 
-   /*
-   ** Let the parent do its thing
-   */
-   
-   RESPONSE::Write( sentence );
+    /*
+    ** Let the parent do its thing
+    */
 
-   sentence += WindAngle;
-   sentence += Reference;
-   sentence += WindSpeed;
-   sentence += WindSpeedUnits;
-   sentence += IsDataValid;
+    RESPONSE::Write( sentence );
 
-   sentence.Finish();
+    sentence += WindAngle;
+    sentence += Reference;
+    sentence += WindSpeed;
+    sentence += WindSpeedUnits;
+    sentence += IsDataValid;
 
-   return( TRUE );
+    sentence.Finish();
+
+    return ( TRUE );
 }
 
 const MWV& MWV::operator = ( const MWV& source )
 {
 //   ASSERT_VALID( this );
- 
-   WindAngle      = source.WindAngle;
-   Reference      = source.Reference;
-   WindSpeed      = source.WindSpeed;
-   WindSpeedUnits = source.WindSpeedUnits;
-   IsDataValid    = source.IsDataValid;
 
-   return( *this );
+    WindAngle      = source.WindAngle;
+    Reference      = source.Reference;
+    WindSpeed      = source.WindSpeed;
+    WindSpeedUnits = source.WindSpeedUnits;
+    IsDataValid    = source.IsDataValid;
+
+    return ( *this );
 }

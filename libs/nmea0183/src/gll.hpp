@@ -44,33 +44,33 @@
 class GLL : public RESPONSE
 {
 
-   public:
+public:
 
-      GLL();
-     ~GLL();
+    GLL();
+    ~GLL();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      wxString          UTCTime;
-      NMEA0183_BOOLEAN IsDataValid;
-      LATLONG          Position;
+    wxString          UTCTime;
+    NMEA0183L_BOOLEAN IsDataValid;
+    LATLONG          Position;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual const wxString& PlainEnglish( void );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual const wxString& PlainEnglish( void );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const GLL& operator = ( const GLL& source );
+    virtual const GLL& operator = ( const GLL& source );
 };
 
 #endif // GLL_CLASS_HEADER

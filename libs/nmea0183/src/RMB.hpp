@@ -44,39 +44,39 @@
 class RMB : public RESPONSE
 {
 
-   public:
+public:
 
-      RMB();
-      virtual ~RMB();
+    RMB();
+    virtual ~RMB();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      NMEA0183_BOOLEAN IsDataValid;
-      double           CrossTrackError;
-      LEFTRIGHT        DirectionToSteer;
-      wxString          To;
-      wxString          From;
-      LATLONG          DestinationPosition;
-      double           RangeToDestinationNauticalMiles;
-      double           BearingToDestinationDegreesTrue;
-      double           DestinationClosingVelocityKnots;
-      NMEA0183_BOOLEAN IsArrivalCircleEntered;
+    NMEA0183L_BOOLEAN IsDataValid;
+    double           CrossTrackError;
+    LEFTRIGHT        DirectionToSteer;
+    wxString          To;
+    wxString          From;
+    LATLONG          DestinationPosition;
+    double           RangeToDestinationNauticalMiles;
+    double           BearingToDestinationDegreesTrue;
+    double           DestinationClosingVelocityKnots;
+    NMEA0183L_BOOLEAN IsArrivalCircleEntered;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const RMB& operator = ( const RMB& source );
+    virtual const RMB& operator = ( const RMB& source );
 };
 
 #endif // RMB_CLASS_HEADER
