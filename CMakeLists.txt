@@ -180,6 +180,9 @@ if (NOT ${BUILD_TYPE} STREQUAL "flatpak")
   target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
 endif ()
 
+# For OSX pkg generation.
+file(COPY ${PROJECT_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})
+
 configure_file(
   ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include//config.h
   @ONLY
