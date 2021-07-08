@@ -43,8 +43,8 @@
 #include <wx/listctrl.h>
 #include <wx/gdicmn.h>
 #include <wx/dnd.h>
+#include <wx/jsonreader.h>
 
-#include "../libs/json/jsonreader.h"
 ///////////////////////////////////////////////////////////////////////////
 
 #define LOGGRIDS 3

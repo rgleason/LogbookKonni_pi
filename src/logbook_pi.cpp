@@ -31,6 +31,8 @@
 #include "wx/wx.h"
 #endif  // precompiled headers
 
+#include <memory>
+
 #include <wx/datectrl.h>
 #include <wx/dir.h>
 #include <wx/event.h>
@@ -41,10 +43,8 @@
 #include <wx/timer.h>
 #include <wx/stdpaths.h>
 #include <wx/wxprec.h>
+#include <wx/jsonreader.h>
 
-#include <memory>
-
-#include "../libs/json/jsonreader.h"
 #include "Logbook.h"
 #include "LogbookDialog.h"
 #include "LogbookOptions.h"

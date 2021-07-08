@@ -3771,7 +3771,11 @@ void LogbookSearch::OnButtonClickForward(wxCommandEvent& event) {
   wxString ss = this->m_textCtrl72->GetValue().Lower();
   wxDateTime dt, dlgDt;
 
+#ifdef __OCPN__ANDROID__
+  dlgDt = m_datePicker->GetDateCtrlValue();
+#else
   dlgDt = m_datePicker->GetValue();
+#endif
   if (searchrow < 0) searchrow = 0;
   if (!direction) searchrow++;
   direction = true;
@@ -3807,7 +3811,11 @@ void LogbookSearch::OnButtonClickBack(wxCommandEvent& event) {
   if (direction) searchrow--;
   direction = false;
 
+#ifdef __OCPN__ANDROID__
+  dlgDt = m_datePicker->GetDateCtrlValue();
+#else
   dlgDt = m_datePicker->GetValue();
+#endif
   if (searchrow > parent->logGrids[gridNo]->GetNumberRows() - 1) searchrow--;
 
   for (; searchrow >= 0; searchrow--) {

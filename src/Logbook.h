@@ -5,20 +5,19 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
-#include <wx/datectrl.h>
-#include <wx/string.h>
-#include <wx/stattext.h>
-#include <wx/gdicmn.h>
-#include <wx/font.h>
-#include <wx/colour.h>
-#include <wx/settings.h>
-#include <wx/statline.h>
-#include <wx/textfile.h>
-#include <wx/sizer.h>
+
 #include <wx/button.h>
+#include <wx/colour.h>
+#include <wx/datectrl.h>
 #include <wx/dialog.h>
-
-
+#include <wx/font.h>
+#include <wx/gdicmn.h>
+#include <wx/settings.h>
+#include <wx/sizer.h>
+#include <wx/statline.h>
+#include <wx/stattext.h>
+#include <wx/string.h>
+#include <wx/textfile.h>
 #include "ocpn_plugin.h"
 #include "LogbookHTML.h"
 #include "nmea0183/nmea0183.h"
@@ -283,7 +282,6 @@ public:
 
 };
 
-#include <wx/datectrl.h>
 ///////////////////////////////////////////////////////////////////////////////
 /// Class LogbookSearch
 ///////////////////////////////////////////////////////////////////////////////

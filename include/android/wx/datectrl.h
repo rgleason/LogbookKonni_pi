@@ -1,6 +1,9 @@
-#define wxDatePickerCtrlNameStr wxT("datectrl")
+#ifndef WX_DATEPICKER_SHIM
+#define WX_DATEPICKER_SHIM
 
-#error Including the Android header
+#include <wx/textctrl.h>
+
+#define wxDatePickerCtrlNameStr wxT("datectrl")
 
 // wxDatePickerCtrl styles
 enum
@@ -23,11 +26,14 @@ enum
     wxDP_ALLOWNONE = 8
 };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverloaded-virtual"
+
 class WXDLLIMPEXP_ADV wxDatePickerCtrl : public wxTextCtrl
 {
 public:
     // creating the control
-//    wxDatePickerCtrl() { Init(); }
+    //    wxDatePickerCtrl() { Init(); }
     virtual ~wxDatePickerCtrl() {}
     wxDatePickerCtrl(wxWindow *parent,
                      wxWindowID id,
@@ -49,3 +55,7 @@ public:
     bool SetDateRange(const wxDateTime& lowerdate = wxDefaultDateTime,
                       const wxDateTime& upperdate = wxDefaultDateTime) {return true;}
 };
+
+#pragma clang diagnostic pop
+
+#endif   // WX_DATEPICKER_SHIM
