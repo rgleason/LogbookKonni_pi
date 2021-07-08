@@ -61,8 +61,8 @@
 ** Response Classes
 */
 
-#include "apb.hpp"
 /*
+#include "apb.hpp"
 #include "AAM.hpp"
 #include "ALM.hpp"
 #include "ASD.hpp"
@@ -168,8 +168,8 @@ public:
           BWC Bwc;
           BWR Bwr;
           BWW Bww;
+          APB Apb;
     */
-    APB Apb;
     DBT Dbt;
     /*
           DCN Dcn;

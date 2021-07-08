@@ -10,8 +10,6 @@ if (TARGET ocpn::nmea0183)
 endif ()
 
 SET(SRC
-    src/apb.cpp
-    src/apb.hpp
     src/dbt.cpp
     src/dbt.hpp
     src/dpt.cpp
