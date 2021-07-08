@@ -708,7 +708,7 @@ wxString LogbookHTML::readLayoutFile( wxString layout )
 
 wxString LogbookHTML::readLayoutFileODT( wxString layout )
 {
-    auto_ptr<wxZipEntry> entry;
+    unique_ptr<wxZipEntry> entry;
     wxString odt = _T( "" );
     wxString filename = layout_locn + layout + _T( ".odt" );
     if ( wxFileExists( filename ) )
@@ -854,13 +854,13 @@ wxString LogbookHTML::toODT( wxString path,wxString layout, bool mode )
     if ( ::wxFileExists( filename ) )
         ::wxRemoveFile( filename );
 
-    auto_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + _T( ".odt" ) ) );
+    unique_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + _T( ".odt" ) ) );
     wxTempFileOutputStream out( filename );
 
     wxZipInputStream inzip( *in );
     wxZipOutputStream outzip( out );
     wxTextOutputStream odtFile( outzip );
-    auto_ptr<wxZipEntry> entry;
+    unique_ptr<wxZipEntry> entry;
 
     outzip.CopyArchiveMetaData( inzip );
 

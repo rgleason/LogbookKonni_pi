@@ -2326,13 +2326,13 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
     wxString newMiddleODT;
     wxString newWakeODT;
 
-    auto_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + _T( ".odt" ) ) );
+    unique_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + _T( ".odt" ) ) );
     wxTempFileOutputStream out( path );
 
     wxZipInputStream inzip( *in );
     wxZipOutputStream outzip( out );
     wxTextOutputStream odtFile( outzip );
-    auto_ptr<wxZipEntry> entry;
+    unique_ptr<wxZipEntry> entry;
 
     outzip.CopyArchiveMetaData( inzip );
 
@@ -2479,7 +2479,7 @@ wxString CrewList::readLayoutODT( wxString layout )
     if ( wxFileExists( filename ) )
     {
 #ifdef __WXOSX__
-        auto_ptr<wxZipEntry> entry;
+        unique_ptr<wxZipEntry> entry;
         static const wxString fn = _T( "content.xml" );
         wxString name = wxZipEntry::GetInternalName( fn );
         wxFFileInputStream in( filename );

@@ -1508,7 +1508,7 @@ static std::string get_layoutdir(const std::string base,
 void logbookkonni_pi::loadLayouts( wxWindow *parent )
 {
     wxString FILE = _T( "LogbookKonni*.zip" );
-    std::auto_ptr<wxZipEntry> entry;
+    std::unique_ptr<wxZipEntry> entry;
     wxString path;
     wxString sep = wxFileName::GetPathSeparator();
     wxString basedir = GetPluginDataDir("LogbookKonni_pi") + sep + "data";

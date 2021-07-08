@@ -239,7 +239,7 @@ wxString Boat::readLayoutFileODT( wxString layout )
     if ( wxFileExists( filename ) )
     {
 //#ifdef __WXOSX__
-        auto_ptr<wxZipEntry> entry;
+        unique_ptr<wxZipEntry> entry;
         static const wxString fn = _T( "content.xml" );
         wxString name = wxZipEntry::GetInternalName( fn );
         wxFFileInputStream in( filename );
@@ -453,13 +453,13 @@ wxString Boat::toODT( wxString path,wxString layout,bool mode )
     if ( ::wxFileExists( fn ) )
         ::wxRemoveFile( fn );
 
-    auto_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + _T( ".odt" ) ) );
+    unique_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + _T( ".odt" ) ) );
     wxTempFileOutputStream out( fn );
 
     wxZipInputStream inzip( *in );
     wxZipOutputStream outzip( out );
     wxTextOutputStream odtFile( outzip );
-    auto_ptr<wxZipEntry> entry;
+    unique_ptr<wxZipEntry> entry;
 
     outzip.CopyArchiveMetaData( inzip );
 

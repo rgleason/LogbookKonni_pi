@@ -34,7 +34,7 @@ wxString Export::readLayoutODT( wxString path,wxString layout )
     if ( wxFileExists( filename ) )
     {
 //#ifdef __WXOSX__
-        auto_ptr<wxZipEntry> entry;
+        unique_ptr<wxZipEntry> entry;
         static const wxString fn = _T( "content.xml" );
         wxString name = wxZipEntry::GetInternalName( fn );
         wxFFileInputStream in( filename );
@@ -178,13 +178,13 @@ wxTextFile* Export::setFiles( wxString savePath, wxString *path, int mode )
 bool Export::writeToODT( wxTextFile* logFile,wxGrid* grid, wxString filenameOut,wxString filenameIn, wxString top,wxString header,
                          wxString middle,wxString bottom, int mode )
 {
-    auto_ptr<wxFFileInputStream> in( new wxFFileInputStream( filenameIn ) );
+    unique_ptr<wxFFileInputStream> in( new wxFFileInputStream( filenameIn ) );
     wxTempFileOutputStream out( filenameOut );
 
     wxZipInputStream inzip( *in );
     wxZipOutputStream outzip( out );
     wxTextOutputStream odtFile( outzip );
-    auto_ptr<wxZipEntry> entry;
+    unique_ptr<wxZipEntry> entry;
 
     outzip.CopyArchiveMetaData( inzip );
 

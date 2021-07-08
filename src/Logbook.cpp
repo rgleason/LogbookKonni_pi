@@ -389,7 +389,7 @@ void Logbook::SetSentence( wxString &sentence )
             {
 				double factor = 1;
 				double tboatspeed = 1;
-				if ( m_NMEA0183.Vhw.Knots != 999.0 )
+				if ( m_NMEA0183.Vhw.Knots != 999.0 ) {
 					switch (opt->showBoatSpeedchoice)
 					{
 					case 0:
@@ -402,8 +402,8 @@ void Logbook::SetSentence( wxString &sentence )
 						factor = 1.852;
 						break;
 					}
-
-					tboatspeed = m_NMEA0183.Vhw.Knots * factor;
+                                }
+			        tboatspeed = m_NMEA0183.Vhw.Knots * factor;
 
                 sSOW = wxString::Format( _T( "%5.2f %s" ), tboatspeed, opt->showBoatSpeed.c_str() );
                 dtSOW = wxDateTime::Now();
