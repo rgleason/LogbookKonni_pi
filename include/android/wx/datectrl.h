@@ -1,5 +1,7 @@
 #define wxDatePickerCtrlNameStr wxT("datectrl")
 
+#error Including the Android header
+
 // wxDatePickerCtrl styles
 enum
 {
