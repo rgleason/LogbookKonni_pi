@@ -61,10 +61,10 @@
 ** Response Classes
 */
 
+#include "apb.hpp"
 /*
 #include "AAM.hpp"
 #include "ALM.hpp"
-#include "APB.hpp"
 #include "ASD.hpp"
 #include "BEC.hpp"
 #include "BOD.hpp"
@@ -91,8 +91,8 @@
 #include "hdm.hpp"
 #include "hdg.hpp"
 #include "hdt.hpp"
-#include "RMB.hpp"
-#include "RMC.HPP"
+#include "rmb.hpp"
+#include "rmc.hpp"
 #include "rsa.hpp"
 #include "wpl.hpp"
 #include "rte.hpp"
@@ -125,13 +125,13 @@
 #include "VTG.hpp"
 #include "WCV.hpp"
 #include "WNC.hpp"
-#include "XTE.hpp"
 #include "XTR.hpp"
 #include "ZDA.hpp"
 #include "ZFO.hpp"
 #include "ZTG.hpp"
 */
 
+#include "xte.hpp"
 WX_DECLARE_LIST( RESPONSE, MRL );
 
 class NMEA0183L
@@ -162,7 +162,6 @@ public:
     /*
           AAM Aam;
           ALM Alm;
-          APB Apb;
           ASD Asd;
           BEC Bec;
           BOD Bod;
@@ -170,6 +169,7 @@ public:
           BWR Bwr;
           BWW Bww;
     */
+    APB Apb;
     DBT Dbt;
     /*
           DCN Dcn;
@@ -235,8 +235,8 @@ public:
     */
     WPL Wpl;
     XDR Xdr;
+    XTE Xte;
     /*
-          XTE Xte;
           XTR Xtr;
     */
     ZDA Zda;
