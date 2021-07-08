@@ -5,6 +5,7 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
+#include <wx/datectrl.h>
 #include <wx/string.h>
 #include <wx/stattext.h>
 #include <wx/gdicmn.h>

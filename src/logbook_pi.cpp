@@ -31,6 +31,7 @@
 #include "wx/wx.h"
 #endif  // precompiled headers
 
+#include <wx/datectrl.h>
 #include <wx/dir.h>
 #include <wx/event.h>
 #include <wx/filefn.h>
@@ -38,6 +39,8 @@
 #include <wx/stdpaths.h>
 #include <wx/sysopt.h>
 #include <wx/timer.h>
+#include <wx/stdpaths.h>
+#include <wx/wxprec.h>
 
 #include <memory>
 
@@ -49,8 +52,6 @@
 #include "config.h"
 #include "icons.h"
 #include "logbook_pi.h"
-#include "wx/stdpaths.h"
-#include "wx/wxprec.h"
 
 using namespace std;
 
