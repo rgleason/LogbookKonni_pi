@@ -431,8 +431,7 @@ void initialize_images( void )
 
 #ifdef PLUGIN_USE_SVG
     wxFileName fn;
-    fn.SetPath(GetPluginDataDir("logbookkonni_pi"));
-//  fn.SetPath(GetpPrivateApplicationDataLocation());
+    fn.SetPath(GetPluginDataDir("LogbookKonni_pi"));
     fn.AppendDir(_T("data"));
     fn.SetFullName(_T("logbookkonni_pi.svg"));
     _svg_logbookkonni = fn.GetFullPath();

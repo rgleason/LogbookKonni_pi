@@ -5,7 +5,7 @@
 #   - stable     Flathub main branch, x86_64 with 18.08 runtime.
 #
 #
-id: org.opencpn.OpenCPN.Plugin.logbook
+id: org.opencpn.OpenCPN.Plugin.Logbook
 runtime: org.opencpn.OpenCPN
 runtime-version: stable
 sdk: org.freedesktop.Sdk//18.08
@@ -13,12 +13,12 @@ build-extension: true
 separate-locales: false
 appstream-compose: false
 modules:
-  - name: logbook
+  - name: Logbook
     no-autogen: true
     buildsystem: cmake
     builddir: true
     config-opts:
-      - -DCMAKE_INSTALL_PREFIX=/app/extensions/logbook/
+      - -DCMAKE_INSTALL_PREFIX=/app/extensions/Logbook/
       - -DCMAKE_BUILD_TYPE:STRING=Release
       - -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
       - -DBUILD_TYPE:STRING=tarball

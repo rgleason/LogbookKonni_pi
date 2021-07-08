@@ -1489,142 +1489,156 @@ ArrayOfGridColWidth logbookkonni_pi::readColsOld( wxFileConfig *pConf, ArrayOfGr
     return ar;
 }
 
+
+static std::string get_layoutdir(const std::string base,
+                                 const std::string subdir)
+{
+    wxString path = base;
+    const wxString sep = wxFileName::GetPathSeparator();
+    path.append(sep);
+    path.append("data");
+    path.append(sep);
+    path.append(subdir);
+    if (!wxDir::Exists(path)) {
+        wxFileName::Mkdir(path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
+    }
+    return path.ToStdString();
+}
+
 void logbookkonni_pi::loadLayouts( wxWindow *parent )
 {
     wxString FILE = _T( "LogbookKonni*.zip" );
     std::auto_ptr<wxZipEntry> entry;
-    wxString path, sep;
-    sep = wxFileName::GetPathSeparator();
+    wxString path;
+    wxString sep = wxFileName::GetPathSeparator();
+    wxString basedir = GetPluginDataDir("LogbookKonni_pi") + sep + "data";
 
-    wxString data = StandardPath();
-	data.append(sep);
-    data.Append( _T("data"));
-    data.append( sep );
-    if ( !wxDir::Exists( data ) )
-        wxMkdir( data );
-
-    wxString data1 = data;
-    wxString data2 = data;
-    wxString data3 = data;
-    wxString help  = data;
-
-    data.Append( _T( "HTMLLayouts" ) );
-    data.append( sep );
-    if ( !wxDir::Exists( data ) )
-        wxMkdir( data );
-
-    data1.Append( _T( "ODTLayouts" ) );
-    data1.append( sep );
-    if ( !wxDir::Exists( data1 ) )
-        wxMkdir( data1 );
-
-    data2.Append( _T( "Clouds" ) );
-    data2.append( sep );
-    if ( !wxDir::Exists( data2 ) )
-        wxMkdir( data2 );
-
-    data3.Append( _T( "Images" ) );
-    data3.append( sep );
-    if ( !wxDir::Exists( data3 ) )
-        wxMkdir( data3 );
 #ifdef __WXOSX__
     wxFileDialog* openFileDialog =
-        new wxFileDialog( parent, _( "Select zipped Layout-Files" ), _T( "" ), _T( "" ), _T( "*.zip" ),
-                          wxFD_DEFAULT_STYLE, wxDefaultPosition, wxDefaultSize );
+        new wxFileDialog(parent, _( "Select zipped Layout-Files" ),
+                         basedir, "", "*.zip");
 #else
     wxFileDialog* openFileDialog =
-        new wxFileDialog( parent, _( "Select zipped Layout-Files" ), _T( "" ), _T( "" ), _T( "*.zip" ),
-                          wxFD_OPEN, wxDefaultPosition );
+        new wxFileDialog(parent, _( "Select zipped Layout-Files" ),
+                         basedir, "", "*.zip", wxFD_OPEN);
 #endif
-    wxString n = _T( "not " );
     int ret = true;
-
     if ( openFileDialog->ShowModal() == wxID_OK )
     {
         wxFFileInputStream in( openFileDialog->GetPath() );
         wxZipInputStream zip( in );
-
+        wxString ok = wxString(_("Layouts installed at\n"));
+        std::string configdir(StandardPath().ToStdString());
+ 
         while ( entry.reset( zip.GetNextEntry() ), entry.get() != NULL )
         {
-            if ( entry->GetName().Contains( _T( "HTMLLayouts" ) ) )
-                path = data;
-            else if ( entry->GetName().Contains( _T( "ODTLayouts" ) ) )
-                path = data1;
-            else if ( entry->GetName().Contains( _T( "Clouds" ) ) )
-                path = data2;
+            if ( entry->GetName().Contains("HTMLLayouts"))
+                path = get_layoutdir(configdir, "HTMLLayouts");
+            else if ( entry->GetName().Contains("ODTLayouts"))
+                path =  get_layoutdir(configdir, "ODTLayouts");
+            else if ( entry->GetName().Contains("Clouds" ))
+                path =  get_layoutdir(configdir, "Clouds");
             else
-                path = data3;
+                path =  get_layoutdir(configdir, "Images");
+            path += sep;
 
             wxString name = entry->GetName();
-
-            if ( !name.Contains( _T( ".htm" ) ) && !name.Contains( _T( ".odt" ) ) &&
-                    !name.Contains( _T( ".jpg" ) ) && !name.Contains( _T( ".PNG" ) ) )
-                continue;
-            wxString fn = name.AfterLast( wxFileName::GetPathSeparator() );
-
-            if ( name.Contains( sep+_T( "boat" ) ) )
-                path.append( _T( "boat" ) );
-            else if ( name.Contains( sep+_T( "logbook" ) ) )
-                path.append( _T( "logbook" ) );
-            else if ( name.Contains( sep + _T( "crew" ) ) )
-                path.append( _T( "crew" ) );
-            else if ( name.Contains( sep + _T( "overview" ) ) )
-                path.append( _T( "overview" ) );
-            else if ( name.Contains( sep + _T( "service" ) ) )
-                path.append( _T( "service" ) );
-            else if ( name.Contains( sep + _T( "repairs" ) ) )
-                path.append( _T( "repairs" ) );
-            else if ( name.Contains( sep + _T( "buyparts" ) ) )
-                path.append( _T( "buyparts" ) );
-
-            if ( !name.Contains( _T( "Help" ) ) )
+            if (!name.Contains(".htm") && !name.Contains(".odt") &&
+                !name.Contains(".jpg") && !name.Contains(".PNG"))
             {
-                path.append( sep );
-                if ( !wxFileName::DirExists( path ) )
-                    wxMkdir( path );
+                continue;
             }
-            else
-                path = help+sep;
+            if (ok.Find(path) == wxNOT_FOUND) {
+                ok += path + "\n";
+            }
+            wxString fn = name.AfterLast(wxFileName::GetPathSeparator());
 
-            path.append( fn );
+            if ( name.Contains( sep +"boat" ))
+                path.append("boat");
+            else if (name.Contains( sep + "logbook"))
+                path.append("logbook");
+            else if (name.Contains( sep + "crew" ))
+                path.append( _T( "crew" ) );
+            else if (name.Contains( sep + "overview" ))
+                path.append("overview");
+            else if (name.Contains(sep + "service"))
+                path.append("service");
+            else if (name.Contains(sep + "repairs"))
+                path.append("repairs");
+            else if (name.Contains( sep + "buyparts" ))
+                path.append("buyparts");
 
-            wxFileOutputStream out( path );
-            if ( zip.OpenEntry( *entry ) != true )
+            if (!name.Contains("Help")) {
+                path.append(sep);
+                if ( !wxFileName::DirExists(path))
+                    wxMkdir(path);
+            }
+            else {
+                path = StandardPath() + sep + "data" + sep;
+            }
+            path.append(fn);
+
+            wxFileOutputStream out(path);
+            if (zip.OpenEntry(*entry ) != true )
             {
                 out.Close();
                 ret = false;
                 break;
             }
-            zip.Read( out );
+            zip.Read(out);
             out.Close();
         }
-        if ( m_plogbook_window != NULL )
-        {
-            m_plogbook_window->loadLayoutChoice( LogbookDialog::LOGBOOK,
-                                                 m_plogbook_window->logbook->layout_locn,m_plogbook_window->logbookChoice,opt->layoutPrefix[LogbookDialog::LOGBOOK] );
-            m_plogbook_window->loadLayoutChoice( LogbookDialog::CREW,
-                                                 m_plogbook_window->crewList->layout_locn,m_plogbook_window->crewChoice,opt->layoutPrefix[LogbookDialog::CREW] );
-            m_plogbook_window->loadLayoutChoice( LogbookDialog::BOAT,
-                                                 m_plogbook_window->boat->layout_locn,m_plogbook_window->boatChoice,opt->layoutPrefix[LogbookDialog::BOAT] );
-            m_plogbook_window->loadLayoutChoice( LogbookDialog::OVERVIEW,
-                                                 m_plogbook_window->logbook->layout_locn,m_plogbook_window->overviewChoice,opt->layoutPrefix[LogbookDialog::OVERVIEW] );
-            m_plogbook_window->loadLayoutChoice( LogbookDialog::GSERVICE,
-                                                 m_plogbook_window->maintenance->layout_locnService,m_plogbook_window->m_choiceSelectLayoutService,opt->layoutPrefix[LogbookDialog::GSERVICE] );
-            m_plogbook_window->loadLayoutChoice( LogbookDialog::GREPAIRS,
-                                                 m_plogbook_window->maintenance->layout_locnRepairs,m_plogbook_window->m_choiceSelectLayoutRepairs,opt->layoutPrefix[LogbookDialog::GREPAIRS] );
-            m_plogbook_window->loadLayoutChoice( LogbookDialog::GBUYPARTS,
-                                                 m_plogbook_window->maintenance->layout_locnBuyParts,m_plogbook_window->m_choiceSelectLayoutBuyParts,opt->layoutPrefix[LogbookDialog::GBUYPARTS] );
+        if (m_plogbook_window) {
+            m_plogbook_window->loadLayoutChoice(
+                LogbookDialog::LOGBOOK,
+                m_plogbook_window->logbook->layout_locn,
+                m_plogbook_window->logbookChoice,
+                opt->layoutPrefix[LogbookDialog::LOGBOOK]
+            );
+            m_plogbook_window->loadLayoutChoice(
+                LogbookDialog::CREW,
+                m_plogbook_window->crewList->layout_locn,
+                m_plogbook_window->crewChoice,
+                opt->layoutPrefix[LogbookDialog::CREW]
+            );
+            m_plogbook_window->loadLayoutChoice(
+                LogbookDialog::BOAT,
+                m_plogbook_window->boat->layout_locn,
+                m_plogbook_window->boatChoice,
+                opt->layoutPrefix[LogbookDialog::BOAT]
+            );
+            m_plogbook_window->loadLayoutChoice(
+                LogbookDialog::OVERVIEW,
+                m_plogbook_window->logbook->layout_locn,
+                m_plogbook_window->overviewChoice,
+                opt->layoutPrefix[LogbookDialog::OVERVIEW]
+            );
+            m_plogbook_window->loadLayoutChoice(
+                LogbookDialog::GSERVICE,
+                m_plogbook_window->maintenance->layout_locnService,
+                m_plogbook_window->m_choiceSelectLayoutService,
+                opt->layoutPrefix[LogbookDialog::GSERVICE]
+            );
+            m_plogbook_window->loadLayoutChoice(
+                LogbookDialog::GREPAIRS,
+                m_plogbook_window->maintenance->layout_locnRepairs,
+                m_plogbook_window->m_choiceSelectLayoutRepairs,
+                opt->layoutPrefix[LogbookDialog::GREPAIRS]
+            );
+            m_plogbook_window->loadLayoutChoice(
+                LogbookDialog::GBUYPARTS,
+                m_plogbook_window->maintenance->layout_locnBuyParts,
+                m_plogbook_window->m_choiceSelectLayoutBuyParts,
+                opt->layoutPrefix[LogbookDialog::GBUYPARTS]
+            );
         }
-        wxString ok = wxString::Format( _( "Layouts %sinstalled at\n\n%s\n%s\n%s\n%s" ),
-                                        ( !ret )?n.c_str():wxEmptyString,data.c_str(),data1.c_str(),data2.c_str(),data3.c_str() );
-        wxMessageBox( ok );
-
-		if (ret )
-		{
-			opt->navGridLayoutChoice = 0;
-        	opt->crewGridLayoutChoice = 0;
-        	opt->boatGridLayoutChoice = 0;
-		}
+        ok = ret ? ok : "";
+        wxMessageBox(ok);
+        if (ret) {
+            opt->navGridLayoutChoice = 0;
+            opt->crewGridLayoutChoice = 0;
+            opt->boatGridLayoutChoice = 0;
+        }
     }
 }
 
