@@ -5,6 +5,19 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
+#include <wx/string.h>
+#include <wx/stattext.h>
+#include <wx/gdicmn.h>
+#include <wx/font.h>
+#include <wx/colour.h>
+#include <wx/settings.h>
+#include <wx/statline.h>
+#include <wx/textfile.h>
+#include <wx/sizer.h>
+#include <wx/button.h>
+#include <wx/dialog.h>
+
+
 #include "ocpn_plugin.h"
 #include "LogbookHTML.h"
 #include "nmea0183/nmea0183.h"
@@ -212,18 +225,7 @@ private:
     wxString	logbookDescription;
 };
 
-
-#include <wx/string.h>
-#include <wx/stattext.h>
-#include <wx/gdicmn.h>
-#include <wx/font.h>
-#include <wx/colour.h>
-#include <wx/settings.h>
-#include <wx/sizer.h>
-#include <wx/button.h>
-#include <wx/dialog.h>
-
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 /// Class NoAppendDialog
 ///////////////////////////////////////////////////////////////////////////////
 class NoAppendDialog : public wxDialog
