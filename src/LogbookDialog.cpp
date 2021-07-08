@@ -331,13 +331,13 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
 
 #ifdef __WXOSX__
     fgSizer53->SetMinSize( wxSize( -1,45 ) );  // war ,25
-    m_staticTextStatusText = new wxStaticText( Statusbar, wxID_ANY, _T( "T\nT" ), wxDefaultPosition, wxSize( 350,-1 ), 0 );
+    m_staticTextStatusText = new wxStaticText( Statusbar, wxID_ANY, "T\nT", wxDefaultPosition, wxSize( 350,-1 ), 0 );
 #else
-    m_staticTextStatusText = new wxStaticText( Statusbar, wxID_ANY, _T( "T\nT" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_staticTextStatusText = new wxStaticText( Statusbar, wxID_ANY, "T\nT", wxDefaultPosition, wxDefaultSize, 0 );
 #endif
     m_staticTextStatusText->Wrap( -1 );
     fgSizer53->Add( m_staticTextStatusText, 0, wxRIGHT|wxLEFT, 5 );
-    m_staticTextStatusText->SetFont( wxFont( 7, 74, 90, 90, false, wxT( "Tahoma" ) ) );
+    m_staticTextStatusText->SetFont( wxFont( 7, 74, 90, 90, false, "Tahoma" ) );
 
     bSizer39->Add( fgSizer53, 1, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 0 );
 
@@ -567,10 +567,10 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
     m_gridMotorSails->SetColLabelSize( 40 );
     m_gridMotorSails->SetColLabelValue( 0, _( "Engine #1" ) );
     m_gridMotorSails->SetColLabelValue( 1, _( "#1 Total" ) );
-    m_gridMotorSails->SetColLabelValue( 2, _T( "#1 " ) );
+    m_gridMotorSails->SetColLabelValue( 2, "#1 " );
     m_gridMotorSails->SetColLabelValue( 3, _( "Engine #2" ) );
     m_gridMotorSails->SetColLabelValue( 4, _( "#2 Total" ) );
-    m_gridMotorSails->SetColLabelValue( 5, _T( "#2 " ) );
+    m_gridMotorSails->SetColLabelValue( 5, "#2 " );
     m_gridMotorSails->SetColLabelValue( 6, _( "Fuel" ) );
     m_gridMotorSails->SetColLabelValue( 7, _( "FuelTotal" ) );
     m_gridMotorSails->SetColLabelValue( 8, _( "Sails" ) );
@@ -671,11 +671,11 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
 
     bSizer61->Add( m_buttonEditLayoutOview, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnHTMLOverview = new wxRadioButton( m_panel142, wxID_ANY, _T( "HTML" ), wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
+    m_radioBtnHTMLOverview = new wxRadioButton( m_panel142, wxID_ANY, "HTML", wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
     m_radioBtnHTMLOverview->SetValue( true );
     bSizer61->Add( m_radioBtnHTMLOverview, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnODTOverview = new wxRadioButton( m_panel142, wxID_ANY, wxT( "ODT" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnODTOverview = new wxRadioButton( m_panel142, wxID_ANY, "ODT", wxDefaultPosition, wxDefaultSize, 0 );
     bSizer61->Add( m_radioBtnODTOverview, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
     logViewOverview = new wxButton( m_panel142, wxID_ANY, _( "View" ), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1017,7 +1017,7 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
     m_staticText1161->Wrap( -1 );
     sbSizer61->Add( m_staticText1161, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlWakeTrip = new wxTextCtrl( m_panel22, wxID_ANY, _T( "10" ), wxDefaultPosition, wxSize( 30,-1 ), 0 );
+    m_textCtrlWakeTrip = new wxTextCtrl( m_panel22, wxID_ANY, "10", wxDefaultPosition, wxSize( 30,-1 ), 0 );
     m_textCtrlWakeTrip->SetToolTip( _( "Length of your sailing trip" ) );
 
     sbSizer61->Add( m_textCtrlWakeTrip, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
@@ -1041,7 +1041,7 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
     m_staticline35 = new wxStaticLine( m_panel22, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_VERTICAL );
     sbSizer61->Add( m_staticline35, 0, wxEXPAND | wxALL, 5 );
 
-    m_buttonDayMinus = new wxButton( m_panel22, wxID_ANY, _T( "<" ), wxDefaultPosition, wxSize( 30,-1 ), 0 );
+    m_buttonDayMinus = new wxButton( m_panel22, wxID_ANY, "<", wxDefaultPosition, wxSize( 30,-1 ), 0 );
     m_buttonDayMinus->Enable( false );
     m_buttonDayMinus->SetToolTip( _( "Day backward" ) );
 
@@ -1053,7 +1053,7 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
 
     sbSizer61->Add( m_buttonNow, 0, wxALL, 5 );
 
-    m_buttonDayPlus = new wxButton( m_panel22, wxID_ANY, _T( ">" ), wxDefaultPosition, wxSize( 30,-1 ), 0 );
+    m_buttonDayPlus = new wxButton( m_panel22, wxID_ANY, ">", wxDefaultPosition, wxSize( 30,-1 ), 0 );
     m_buttonDayPlus->Enable( false );
     m_buttonDayPlus->SetToolTip( _( "Day forward" ) );
 
@@ -1063,7 +1063,7 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
     m_staticTextWakeDay->Wrap( -1 );
     sbSizer61->Add( m_staticTextWakeDay, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlWakeDay = new wxTextCtrl( m_panel22, wxID_ANY, _T( "0" ), wxDefaultPosition, wxSize( 30,-1 ), wxTE_CENTRE|wxTE_PROCESS_ENTER );
+    m_textCtrlWakeDay = new wxTextCtrl( m_panel22, wxID_ANY, "0", wxDefaultPosition, wxSize( 30,-1 ), wxTE_CENTRE|wxTE_PROCESS_ENTER );
     m_textCtrlWakeDay->SetToolTip( _( "Shows/Sets the day\nDisplays the data in your ODT/Browser-program from this day to end" ) );
 
     sbSizer61->Add( m_textCtrlWakeDay, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
@@ -1072,7 +1072,7 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
     m_staticText1181->Wrap( -1 );
     sbSizer61->Add( m_staticText1181, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    wxString m_choiceWakeDisplayChoices[] = { _( "all" ), _( "this day" ), _T( "+1" ), _T( "+2" ), _T( "+3" ), _T( "+4" ), _T( "+5" ), _T( "+6" ), _T( "+7" ), _T( "+8" ), _T( "+9" ), _T( "+10" ) };
+    wxString m_choiceWakeDisplayChoices[] = { _( "all" ), _( "this day" ), "+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9", "+10" };
     int m_choiceWakeDisplayNChoices = sizeof( m_choiceWakeDisplayChoices ) / sizeof( wxString );
     m_choiceWakeDisplay = new wxChoice( m_panel22, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), m_choiceWakeDisplayNChoices, m_choiceWakeDisplayChoices, 0 );
     m_choiceWakeDisplay->SetSelection( 0 );
@@ -1156,7 +1156,7 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
     wxBoxSizer* bSizer371;
     bSizer371 = new wxBoxSizer( wxHORIZONTAL );
 
-    m_staticTextStatusWatch = new wxStaticText( m_panel24, wxID_ANY, _T( "" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_staticTextStatusWatch = new wxStaticText( m_panel24, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0 );
     m_staticTextStatusWatch->Wrap( -1 );
     bSizer371->Add( m_staticTextStatusWatch, 0, wxRIGHT|wxLEFT|wxALIGN_CENTER_VERTICAL, 5 );
 
@@ -1227,11 +1227,11 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
 
     bSizer10->Add( m_buttonEditLayoutBoat, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnHTMLBoat = new wxRadioButton( m_panel3, wxID_ANY, wxT( "HTML" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnHTMLBoat = new wxRadioButton( m_panel3, wxID_ANY, "HTML", wxDefaultPosition, wxDefaultSize, 0 );
     m_radioBtnHTMLBoat->SetValue( true );
     bSizer10->Add( m_radioBtnHTMLBoat, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnODTBoat = new wxRadioButton( m_panel3, wxID_ANY, wxT( "ODT" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnODTBoat = new wxRadioButton( m_panel3, wxID_ANY, "ODT", wxDefaultPosition, wxDefaultSize, 0 );
     bSizer10->Add( m_radioBtnODTBoat, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
     boatView = new wxButton( m_panel3, wxID_ANY, _( "View" ), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1668,11 +1668,11 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
 
     bSizer1011->Add( m_buttonEditLayoutODTService, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnHTMLService = new wxRadioButton( m_panel14, wxID_ANY, wxT( "HTML" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnHTMLService = new wxRadioButton( m_panel14, wxID_ANY, "HTML", wxDefaultPosition, wxDefaultSize, 0 );
     m_radioBtnHTMLService->SetValue( true );
     bSizer1011->Add( m_radioBtnHTMLService, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnODTService = new wxRadioButton( m_panel14, wxID_ANY, wxT( "ODT" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnODTService = new wxRadioButton( m_panel14, wxID_ANY, "ODT", wxDefaultPosition, wxDefaultSize, 0 );
     bSizer1011->Add( m_radioBtnODTService, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
     m_buttonViewService = new wxButton( m_panel14, wxID_ANY, _( "View" ), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1794,11 +1794,11 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
 
     bSizer10113->Add( m_buttonEditLayoutODTRepairs, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnHTMLRepairs = new wxRadioButton( m_panel141, wxID_ANY, wxT( "HTML" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnHTMLRepairs = new wxRadioButton( m_panel141, wxID_ANY, "HTML", wxDefaultPosition, wxDefaultSize, 0 );
     m_radioBtnHTMLRepairs->SetValue( true );
     bSizer10113->Add( m_radioBtnHTMLRepairs, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnODTRepairs = new wxRadioButton( m_panel141, wxID_ANY, wxT( "ODT" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnODTRepairs = new wxRadioButton( m_panel141, wxID_ANY, "ODT", wxDefaultPosition, wxDefaultSize, 0 );
     bSizer10113->Add( m_radioBtnODTRepairs, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
     m_buttonViewRepairs = new wxButton( m_panel141, wxID_ANY, _( "View" ), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1911,11 +1911,11 @@ LogbookDialog::LogbookDialog( logbookkonni_pi * d, wxTimer* t, LogbookTimer* lt,
 
     bSizer10111->Add( m_buttonEditLayoutODTBuyParts, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnHTMLBuyParts = new wxRadioButton( m_panel16, wxID_ANY, wxT( "HTML" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnHTMLBuyParts = new wxRadioButton( m_panel16, wxID_ANY, "HTML", wxDefaultPosition, wxDefaultSize, 0 );
     m_radioBtnHTMLBuyParts->SetValue( true );
     bSizer10111->Add( m_radioBtnHTMLBuyParts, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_radioBtnODTBuyParts = new wxRadioButton( m_panel16, wxID_ANY, wxT( "ODT" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_radioBtnODTBuyParts = new wxRadioButton( m_panel16, wxID_ANY, "ODT", wxDefaultPosition, wxDefaultSize, 0 );
     bSizer10111->Add( m_radioBtnODTBuyParts, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
     m_buttonViewBuyParts = new wxButton( m_panel16, wxID_ANY, _( "View" ), wxDefaultPosition, wxDefaultSize, 0 );
@@ -2582,14 +2582,14 @@ void LogbookDialog::OnToggleButtonEngine1( wxCommandEvent& event )
 {
     if ( event.IsChecked() )
     {
-        SendPluginMessage( _T( "LOGBOOK_ENGINEBUTTON1" ), _T( "ON" ) );
+        SendPluginMessage( "LOGBOOK_ENGINEBUTTON1", "ON" );
         if ( logbookPlugIn->opt->engineMessageSails && logbookPlugIn->opt->engineAllwaysSailsDown )
             resetSails();
         startEngine1( true, true, true );
     }
     else
     {
-        SendPluginMessage( _T( "LOGBOOK_ENGINEBUTTON1" ), _T( "OFF" ) );
+        SendPluginMessage( "LOGBOOK_ENGINEBUTTON1", "OFF" );
         stopEngine1( true, true );
     }
 }
@@ -2598,14 +2598,14 @@ void LogbookDialog::OnToggleButtonEngine2( wxCommandEvent& event )
 {
     if ( event.IsChecked() )
     {
-        SendPluginMessage( _T( "LOGBOOK_ENGINEBUTTON2" ), _T( "ON" ) );
+        SendPluginMessage( "LOGBOOK_ENGINEBUTTON2", "ON" );
         if ( logbookPlugIn->opt->engineMessageSails && logbookPlugIn->opt->engineAllwaysSailsDown )
             resetSails();
         startEngine2( true, true, true );
     }
     else
     {
-        SendPluginMessage( _T( "LOGBOOK_ENGINEBUTTON2" ), _T( "OFF" ) );
+        SendPluginMessage( "LOGBOOK_ENGINEBUTTON2", "OFF" );
         stopEngine2( true, true, true );
     }
 }
@@ -2614,20 +2614,20 @@ void LogbookDialog::OnToggleButtonGenerator( wxCommandEvent& event )
 {
     if ( event.IsChecked() )
     {
-        SendPluginMessage( _T( "LOGBOOK_GENERATORBUTTON" ), _T( "ON" ) );
+        SendPluginMessage( "LOGBOOK_GENERATORBUTTON", "ON" );
         startGenerator( true, true, true );
     }
     else
     {
-        SendPluginMessage( _T( "LOGBOOK_GENERATORBUTTON" ), _T( "OFF" ) );
+        SendPluginMessage( "LOGBOOK_GENERATORBUTTON", "OFF" );
         stopGenerator( true, true, true );
     }
 }
 
 void LogbookDialog::setAbbreviations()
 {
-    m_gridMotorSails->SetColLabelValue( LogbookHTML::RPM1, _T( "#1 " )+logbookPlugIn->opt->rpm);
-    m_gridMotorSails->SetColLabelValue( LogbookHTML::RPM2, _T( "#2 " )+logbookPlugIn->opt->rpm);
+    m_gridMotorSails->SetColLabelValue( LogbookHTML::RPM1, "#1 "+logbookPlugIn->opt->rpm);
+    m_gridMotorSails->SetColLabelValue( LogbookHTML::RPM2, "#2 "+logbookPlugIn->opt->rpm);
 }
 
 void LogbookDialog::OnButtonClickResetSails( wxCommandEvent& event )
@@ -2688,7 +2688,7 @@ void LogbookDialog::OnButtomClickStatusbarGlobal( wxCommandEvent& event )
 
 void LogbookDialog::OnClickButtonHelpGlobal( wxCommandEvent& event )
 {
-    startBrowser( help_locn+_T( "Help.html" ) );
+    startBrowser( help_locn+"Help.html" );
 }
 
 void LogbookDialog::OnChoiceGlobal( wxCommandEvent& event )
@@ -2811,7 +2811,7 @@ void LogbookDialog::OnMenuSelectionFlip( wxCommandEvent& event )
 
         if ( a > 11 )
         {
-            wxMessageBox( _T( "Cannot flip, month would be > 12" ) );
+            wxMessageBox( "Cannot flip, month would be > 12" );
             return;
         }
 
@@ -2824,40 +2824,40 @@ void LogbookDialog::OnMenuSelectionFlip( wxCommandEvent& event )
 void LogbookDialog::OnTextEnterStatusDistance( wxCommandEvent& event )
 {
     wxString s = event.GetString();
-    s.Replace( _T( "," ),_T( "." ) );
+    s.Replace( ",","." );
     double i = wxAtof( s );
     if ( i < 0.01 )
         i = 0.01;
 
     logbookPlugIn->opt->dEverySM = i;
-    wxString tmp = wxString::Format( _T( "%0.2f" ),i );
-    tmp.Replace( _T( "." ),decimalPoint );
+    wxString tmp = wxString::Format( "%0.2f",i );
+    tmp.Replace( ".",decimalPoint );
     logbookPlugIn->opt->everySMAmount = tmp;
-    m_textCtrlStatusDistance->SetValue( wxString::Format( _T( "%0.2f %s" ),i,logbookPlugIn->opt->showDistance.c_str() ) );
+    m_textCtrlStatusDistance->SetValue( wxString::Format( "%0.2f %s",i,logbookPlugIn->opt->showDistance.c_str() ) );
 }
 
 void LogbookDialog::OnTextEnterStatusCourseDeg( wxCommandEvent& event )
 {
     wxString s = event.GetString();
-    s.Replace( _T( "," ),_T( "." ) );
+    s.Replace( ",","." );
     int i = wxAtoi( s );
     if ( i < 1 || i > 180 )
         i = 1;
 
-    logbookPlugIn->opt->courseChangeDegrees = wxString::Format( _T( "%i" ),i );
+    logbookPlugIn->opt->courseChangeDegrees = wxString::Format( "%i",i );
     logbookPlugIn->opt->dCourseChangeDegrees = wxAtof( logbookPlugIn->opt->courseChangeDegrees );
-    m_textCtrlStatusCourseDeg->SetValue( wxString::Format( _T( "%i %s" ),i,logbookPlugIn->opt->Deg.c_str() ) );
+    m_textCtrlStatusCourseDeg->SetValue( wxString::Format( "%i %s",i,logbookPlugIn->opt->Deg.c_str() ) );
 }
 
 void LogbookDialog::OnTextEnterStatusMinutes( wxCommandEvent& event )
 {
     wxString s = event.GetString();
-    s.Replace( _T( "," ),_T( "." ) );
+    s.Replace( ",","." );
     int i = wxAtoi( s );
     if ( i < 0 || i > 59 )
         i = 0;
-    logbookPlugIn->opt->courseTextAfterMinutes = wxString::Format( _T( "%i" ),i );
-    m_textCtrlStatusCourseMin->SetValue( wxString::Format( _T( "%i m" ),i ) );
+    logbookPlugIn->opt->courseTextAfterMinutes = wxString::Format( "%i",i );
+    m_textCtrlStatusCourseMin->SetValue( wxString::Format( "%i m",i ) );
 }
 
 void LogbookDialog::OnButtonClickStatusTimer( wxCommandEvent& event )
@@ -3105,21 +3105,21 @@ void LogbookDialog::clearDataDir()
 {
     wxString data = Home_Locn;
 
-    wxString f = wxFindFirstFile( data+_T( "*.tmp" ) );
+    wxString f = wxFindFirstFile( data+"*.tmp" );
     while ( !f.empty() )
     {
         wxRemoveFile( f );
         f = wxFindNextFile();
     }
 
-    f = wxFindFirstFile( data+_T( "*.html" ) );
+    f = wxFindFirstFile( data+"*.html" );
     while ( !f.empty() )
     {
         wxRemoveFile( f );
         f = wxFindNextFile();
     }
 
-    f = wxFindFirstFile( data+_T( "*.odt" ) );
+    f = wxFindFirstFile( data+"*.odt" );
     while ( !f.empty() )
     {
         wxRemoveFile( f );
@@ -3192,7 +3192,7 @@ void LogbookDialog::m_gridGlobalOnKeyDown( wxKeyEvent& ev )
     if ( ev.ShiftDown() && ev.GetKeyCode() == WXK_RETURN )
     {
         if ( ev.GetEventObject()->IsKindOf( CLASSINFO( wxTextCtrl ) ) )
-            ctrl->WriteText( wxT( "\n" ) );
+            ctrl->WriteText( "\n" );
         return;
     }
 
@@ -3390,9 +3390,9 @@ int LogbookDialog::showLayoutDialog( int grid, wxChoice *choice, wxString locati
     wxString fmt;
 
     if ( format )
-        fmt = _T( ".odt" );
+        fmt = ".odt";
     else
-        fmt = _T( ".html" );
+        fmt = ".html";
 
     LayoutDialog* dlg = new LayoutDialog( this,location,choice );
     dlg->SetTitle( layout );
@@ -3406,7 +3406,7 @@ int LogbookDialog::showLayoutDialog( int grid, wxChoice *choice, wxString locati
     {
         wxFileName fn( files[r] );
         wxString g = fn.GetName();
-        if ( !g.Contains( _T( "_" ) ) ) continue;
+        if ( !g.Contains( "_" ) ) continue;
         if ( m_logbook->GetSelection() == 0 )
             g.Remove( 0,1 );
         g = g.substr( 0,g.find_first_of( '_' )+1 );
@@ -3497,17 +3497,17 @@ int LogbookDialog::showLayoutDialog( int grid, wxChoice *choice, wxString locati
     {
         wxString command = logbookPlugIn->opt->mailClient;
 #ifdef __WXMSW__
-        wxExecute( command + _T( " /mailurl:mailto:myfriend@xy.xy?subject=LogbookKonni-Layout&body=Drag and Drop file here" ) );
-        wxExecute( _T( "explorer.exe /select," )+layout );
+        wxExecute( command + " /mailurl:mailto:myfriend@xy.xy?subject=LogbookKonni-Layout&body=Drag and Drop file here" );
+        wxExecute( "explorer.exe /select,"+layout );
 #endif
 #ifdef __WXGTK__
-        wxExecute( _T( "/bin/bash -c \"" ) + logbookPlugIn->opt->mailClient +  _T( " -s Logbook-Layout --attach " ) +
-                   layout + _T( "\"\"" ) );
-        wxExecute( logbookPlugIn->opt->dataManager+_T( " " )+layout );
+        wxExecute( "/bin/bash -c \"" + logbookPlugIn->opt->mailClient +  " -s Logbook-Layout --attach " +
+                   layout + "\"\"" );
+        wxExecute( logbookPlugIn->opt->dataManager+" "+layout );
 #endif
 #ifdef __WXOSX__
 // worked in Mac-OS X
-        wxExecute( command + _T( " mailto:carcode@me.com?subject=LogbookKonni-Layout&body=Drag-And-Drop-File-Here" ) );
+        wxExecute( command + " mailto:carcode@me.com?subject=LogbookKonni-Layout&body=Drag-And-Drop-File-Here" );
 #endif
         return 4;
     }
@@ -3638,7 +3638,7 @@ void LogbookDialog::setTitleExt()
     switch ( logbookPlugIn->opt->timerType )
     {
     case 0:
-        titleExt = _( " - Normal Timer - Interval: " )+wxString::Format( _T( "%s h %s m" ),
+        titleExt = _( " - Normal Timer - Interval: " )+wxString::Format( "%s h %s m",
                    logbookPlugIn->opt->thour.c_str(),logbookPlugIn->opt->tmin.c_str() );
         break;
     case 1:
@@ -3670,16 +3670,16 @@ void LogbookDialog::init()
 
 //	wxInitAllImageHandlers();
 
-    clouds[0] = wxT( "Cirrus" );
-    clouds[1] = wxT( "Cirrocumulus" );
-    clouds[2] = wxT( "Cirrostratus" );
-    clouds[3] = wxT( "Altocumulus" );
-    clouds[4] = wxT( "Altostratus" );
-    clouds[5] = wxT( "Stratocumulus" );
-    clouds[6] = wxT( "Stratus" );
-    clouds[7] = wxT( "Cumulus" );
-    clouds[8] = wxT( "Nimbostratus" );
-    clouds[9] = wxT( "Cumulonimbus" );
+    clouds[0] = "Cirrus";
+    clouds[1] = "Cirrocumulus";
+    clouds[2] = "Cirrostratus";
+    clouds[3] = "Altocumulus";
+    clouds[4] = "Altostratus";
+    clouds[5] = "Stratocumulus";
+    clouds[6] = "Stratus";
+    clouds[7] = "Cumulus";
+    clouds[8] = "Nimbostratus";
+    clouds[9] = "Cumulonimbus";
 
     statusText[0] = _( "no Event/s\nClick one or more bullets to start" );
     statusText[1] = _( "Event/s suspended\nClick the button to restart all events" );
@@ -3727,7 +3727,7 @@ Backup Logbook(*.txt)|*.txt" );
     data  = logbookkonni_pi::StandardPath();
 //    data  = logbook::StandardPath();
 	data.Append(sep);
-    data.Append( _T( "data" ) );
+    data.Append( "data" );
     appendOSDirSlash( &data ) ;
     Home_Locn = data;
 
@@ -3735,17 +3735,17 @@ Backup Logbook(*.txt)|*.txt" );
         wxMkdir( data );
 
     layoutHTML = data;
-    layoutHTML.append( _T( "HTMLLayouts" ) );
+    layoutHTML.append( "HTMLLayouts" );
     appendOSDirSlash( &layoutHTML );
 
     layoutODT = data;
-    layoutODT.append( _T( "ODTLayouts" ) );
+    layoutODT.append( "ODTLayouts" );
     appendOSDirSlash( &layoutODT );
 
     wxString s = wxFileName::GetPathSeparator();
-    // help_locn = *GetpSharedDataLocation() + _T( "plugins" ) + s + _T( "logbookkonni_pi" ) + s + _T( "data" ) + s;
-    help_locn =  GetPluginDataDir("LogbookKonni_pi") + _T("/data/");
-	image_locn = help_locn + _T( "Images" ) + s;
+    // help_locn = *GetpSharedDataLocation() + "plugins" + s + "logbookkonni_pi" + s + "data" + s;
+    help_locn =  GetPluginDataDir("LogbookKonni_pi") + "/data/";
+	image_locn = help_locn + "Images" + s;
 
     lastRowSelectedRepairs = 0;
     lastRowSelectedBuyParts = 0;
@@ -3792,9 +3792,9 @@ Backup Logbook(*.txt)|*.txt" );
     if ( logbookPlugIn->opt->checkStateOfEvents() )
         logbookPlugIn->eventsEnabled = true;
 
-    m_textCtrlStatusCourseDeg->SetValue( logbookPlugIn->opt->courseChangeDegrees+_T( " " )+logbookPlugIn->opt->Deg );
-    m_textCtrlStatusCourseMin->SetValue( logbookPlugIn->opt->courseTextAfterMinutes+_T( " m" ) );
-    m_textCtrlStatusDistance->SetValue( logbookPlugIn->opt->everySMAmount+_T( " " )+logbookPlugIn->opt->showDistance);
+    m_textCtrlStatusCourseDeg->SetValue( logbookPlugIn->opt->courseChangeDegrees+" "+logbookPlugIn->opt->Deg );
+    m_textCtrlStatusCourseMin->SetValue( logbookPlugIn->opt->courseTextAfterMinutes+" m" );
+    m_textCtrlStatusDistance->SetValue( logbookPlugIn->opt->everySMAmount+" "+logbookPlugIn->opt->showDistance);
 
     refreshBullets(); // Statusbar
     checkBitmaps();
@@ -4231,7 +4231,7 @@ void LogbookDialog::startGenerator( bool enabled, bool active, bool print )
 
 void LogbookDialog::loadTimerEx()
 {
-    wxTextFile txt( data+wxFileName::GetPathSeparator()+_T( "Timer.txt" ) );
+    wxTextFile txt( data+wxFileName::GetPathSeparator()+"Timer.txt" );
     if ( !txt.Exists() ) return;
 
     TimerFull.clear();
@@ -4240,7 +4240,7 @@ void LogbookDialog::loadTimerEx()
 
     txt.Open();
     wxString full = txt.GetFirstLine();
-    wxStringTokenizer tkzf( full,_T( "," ) );
+    wxStringTokenizer tkzf( full,"," );
     fullHourPlus = wxAtoi( tkzf.GetNextToken() );
 
     while ( tkzf.HasMoreTokens() )
@@ -4248,18 +4248,18 @@ void LogbookDialog::loadTimerEx()
 
     wxString ind = txt.GetNextLine();
     wxDateTime dt = wxDateTime::Now();
-    wxStringTokenizer tkzi( ind,_T( "#" ) );
+    wxStringTokenizer tkzi( ind,"#" );
     long h, m;
     while ( tkzi.HasMoreTokens() )
     {
         wxString s = tkzi.GetNextToken();
-        wxStringTokenizer f( s,_T( "," ) );
+        wxStringTokenizer f( s,"," );
 
         dt.SetHour( wxAtoi( f.GetNextToken() ) );
         dt.SetMinute( wxAtoi( f.GetNextToken() ) );
 
         wxString ss = dt.Format( logbookPlugIn->opt->stimeformat );
-        wxStringTokenizer tkz( ss,_T( ":" ) );
+        wxStringTokenizer tkz( ss,":" );
         tkz.GetNextToken().ToLong( &h );
         tkz.GetNextToken().ToLong( &m );
         TimerIndividualH.Add( h );
@@ -4267,7 +4267,7 @@ void LogbookDialog::loadTimerEx()
 
         if ( logbookPlugIn->opt->timeformat == 1 )
         {
-            ss = dt.Format( _T( "%p" ) );
+            ss = dt.Format( "%p" );
             TimerIndidividualAMPM.Add( ss );
         }
     }
@@ -4315,7 +4315,7 @@ void LogbookDialog::m_menuItem1OnMenuSelection( wxCommandEvent& ev )
             m_notebook8->SetSelection( item->grid );
             wxString insert = logGrids[item->grid]->GetCellValue( selGridRow,item->gridcol );
 
-            logGrids[item->grid]->SetCellValue( selGridRow,item->gridcol,insert+( ( insert.Length() == 0 )?_T( "" ):_T( "\n" ) )+item->text);
+            logGrids[item->grid]->SetCellValue( selGridRow,item->gridcol,insert+( ( insert.Length() == 0 )?"":"\n" )+item->text);
 
             logGrids[item->grid]->SetFocus();
             logGrids[item->grid]->SetGridCursor( selGridRow,item->gridcol );
@@ -4333,19 +4333,19 @@ void LogbookDialog::m_menuItem1OnMenuSelection( wxCommandEvent& ev )
             wxJSONWriter w;
             wxString out;
             wxJSONValue v;
-            v[_T( "mode" )] =  _T( "Route" );
+            v["mode"] =  "Route";
             w.Write( v, out );
-            SendPluginMessage( wxString( _T( "OCPN_ROUTELIST_REQUEST" ) ),out );
+            SendPluginMessage( wxString( "OCPN_ROUTELIST_REQUEST" ),out );
         }
         else
         {
             wxJSONWriter w;
             wxString out;
             wxJSONValue v;
-            v[_T( "mode" )] =  _T( "Track" );
+            v["mode"] =  "Track";
             w.Write( v, out );
-            SendPluginMessage( wxString( _T( "OCPN_ROUTELIST_REQUEST" ) ),out );
-            search = _T( "<rte>" );
+            SendPluginMessage( wxString( "OCPN_ROUTELIST_REQUEST" ),out );
+            search = "<rte>";
             itemCol.SetText( _( "Track" ) );
         }
     }
@@ -4356,7 +4356,7 @@ void LogbookDialog::m_menuItem1OnMenuSelection( wxCommandEvent& ev )
             selGridRow,selGridCol,
             ( s.IsEmpty() )
             ? m_menu1->GetLabelText( ev.GetId() )
-            : s + _T( "\n" ) + m_menu1->GetLabelText( ev.GetId() )
+            : s + "\n" + m_menu1->GetLabelText( ev.GetId() )
         );
         setEqualRowHeight( selGridRow );
         logGrids[m_notebook8->GetSelection()]->Refresh();
@@ -4375,7 +4375,7 @@ void LogbookDialog::m_menuItem1OnMenuSelection( wxCommandEvent& ev )
         wxString text = ( ( myTreeItem* )coldfinger->m_treeCtrl3->GetItemData( id ) )->text;
         int grid = ( ( myTreeItem* )coldfinger->m_treeCtrl3->GetItemData( id ) )->grid;
 
-        logGrids[grid]->SetCellValue( selGridRow,selGridCol,s+( ( s.Length() == 0 )?_T( "" ):_T( "\n" ) )+text );
+        logGrids[grid]->SetCellValue( selGridRow,selGridCol,s+( ( s.Length() == 0 )?"":"\n" )+text );
         logGrids[grid]->SetGridCursor( selGridRow,selGridCol );
     }
     else if ( selGridCol == LogbookHTML::CLOUDS && m_notebook8->GetSelection() == 1 )
@@ -4390,8 +4390,8 @@ void LogbookDialog::writeToRouteDlg( wxJSONValue data )
     int n = 1;
     bool isTrack = false;
 
-    if ( data[0].HasMember( _T( "isTrack" ) ) )
-        isTrack = data[0][_T( "isTrack" )].AsBool();
+    if ( data[0].HasMember( "isTrack" ) )
+        isTrack = data[0]["isTrack"].AsBool();
 
     RouteDialog *dlg = new RouteDialog( this );
     if ( isTrack )
@@ -4414,11 +4414,11 @@ void LogbookDialog::writeToRouteDlg( wxJSONValue data )
     dlg->m_listCtrlRoute->InsertColumn( 0, itemCol );
     dlg->m_listCtrlRoute->InsertColumn( 1, itemCol1 );
 
-    while ( data[n].HasMember( _T( "error" ) ) && !data[n][_T( "error" )].AsBool() )
+    while ( data[n].HasMember( "error" ) && !data[n]["error"].AsBool() )
     {
-        int ind = dlg->m_listCtrlRoute->InsertItem( n,data[n][_T( "name" )].AsString() );
-        dlg->m_listCtrlRoute->SetItem( ind,1,data[n][_T( "GUID" )].AsString() );
-        if ( data[n][_T( "active" )].AsBool() )
+        int ind = dlg->m_listCtrlRoute->InsertItem( n,data[n]["name"].AsString() );
+        dlg->m_listCtrlRoute->SetItem( ind,1,data[n]["GUID"].AsString() );
+        if ( data[n]["active"].AsBool() )
         {
             wxFont font = dlg->m_listCtrlRoute->GetItemFont( ind );
             font.SetWeight( wxBOLD );
@@ -4525,7 +4525,7 @@ void LogbookDialog::OnNoteBookPageChangedLogbook( wxNotebookEvent & ev )
 
 void LogbookDialog::m_gridGlobalOnGridCellRightClick( wxGridEvent& ev )
 {
-    wxString sails = _T( "" );
+    wxString sails = "";
 
     for ( int i = 0; i < LOGGRIDS; i++ )
         logGrids[i]->ClearSelection();
@@ -4578,14 +4578,14 @@ void LogbookDialog::m_gridGlobalOnGridCellRightClick( wxGridEvent& ev )
     {
         m_menu1->PrependSeparator();
         wxString s = wxFileName::GetPathSeparator();
-        clouds_locn = data  + _T( "Clouds" ) + s;
+        clouds_locn = data  + "Clouds" + s;
 
         for ( int i = 0; i < 10; i++ )
         {
             wxMenu *temp = new wxMenu();
             wxMenuItem *item = new wxMenuItem( temp, wxID_ANY, clouds[i], wxEmptyString,wxITEM_NORMAL );
 
-            const wxBitmap bmp ( ( clouds_locn+clouds[i].Lower()+_T( ".jpg" ) ), wxBITMAP_TYPE_ANY );
+            const wxBitmap bmp ( ( clouds_locn+clouds[i].Lower()+".jpg" ), wxBITMAP_TYPE_ANY );
             item->SetBitmap( bmp );
             temp->Append( item );
             m_menu1->Prepend( -1, clouds[i], temp );
@@ -4728,14 +4728,14 @@ void LogbookDialog::logSaveOnButtonClick( wxCommandEvent& ev )
 {
     wxString layout;
     wxString filter = saveDialogFilter;
-    filter.Prepend( _T( "Google-Format(*.kml)|*.kml|" ) );
+    filter.Prepend( "Google-Format(*.kml)|*.kml|" );
     if ( m_radioBtnHTML->GetValue() )
-        filter.Prepend( _T( "HTML Format(*.html)|*.html|" ) );
+        filter.Prepend( "HTML Format(*.html)|*.html|" );
     else
-        filter.Prepend( _T( "Opendocument Text(*.odt)|*.odt|" ) );
+        filter.Prepend( "Opendocument Text(*.odt)|*.odt|" );
 
     wxFileDialog *saveFileDialog =
-        new wxFileDialog( this, _( "Save Logbook File" ), _T( "" ), backupFile,
+        new wxFileDialog( this, _( "Save Logbook File" ), "", backupFile,
                           filter,
                           wxFD_SAVE|wxFD_OVERWRITE_PROMPT );
 
@@ -4777,7 +4777,7 @@ void LogbookDialog::logSaveOnButtonClick( wxCommandEvent& ev )
         logbook->backup( path );
         break;
     default:
-        wxMessageBox( _T( "Not implemented yet" ),_T( "Information" ) );
+        wxMessageBox( "Not implemented yet","Information" );
         break;
 
     }
@@ -4790,9 +4790,9 @@ void LogbookDialog::logViewOnButtonClick( wxCommandEvent& ev )
     ev.Skip();
 
     if ( this->m_radioBtnHTML->GetValue() )
-        logbook->viewHTML( _T( "" ),logbookChoice->GetString( logbookChoice->GetSelection() ),false );
+        logbook->viewHTML( "",logbookChoice->GetString( logbookChoice->GetSelection() ),false );
     else
-        logbook->viewODT( _T( "" ),logbookChoice->GetString( logbookChoice->GetSelection() ),false );
+        logbook->viewODT( "",logbookChoice->GetString( logbookChoice->GetSelection() ),false );
 }
 
 void LogbookDialog::m_button4OnButtonClick( wxCommandEvent& ev )
@@ -4807,7 +4807,7 @@ void LogbookDialog::startNormalTimer()
     while ( logbookPlugIn->opt->timerSec <= 0 )
     {
         TimerInterval* ti = new TimerInterval( this,logbookPlugIn->opt );
-        wxMessageBox( _( "Normal Timer has 0 h 0 Min.\n\nPlease change settings (Timer-Interval)" ),_T( "" ) );
+        wxMessageBox( _( "Normal Timer has 0 h 0 Min.\n\nPlease change settings (Timer-Interval)" ),"" );
         ti->ShowModal();
         sec = logbookPlugIn->opt->timerSec;
         delete ti;
@@ -4868,7 +4868,7 @@ void LogbookDialog::loadLayoutChoice( int grid, wxString path, wxChoice* choice,
 
     wxString e;
     e = path.SubString( path.Len()-8,path.Len() );
-    if ( e.Contains( _T( "logbook" ) ) )
+    if ( e.Contains( "logbook" ) )
         filter.Prepend( logbookPlugIn->opt->engineStr[logbookPlugIn->opt->engines] );
 
     int i = wxDir::GetAllFiles( path,&files );
@@ -4876,7 +4876,7 @@ void LogbookDialog::loadLayoutChoice( int grid, wxString path, wxChoice* choice,
 
     for ( int n = 0; n < i; n++ )
     {
-        if ( wxFileName( files[n] ).GetExt().Upper() != _T( "ODT" ) && wxFileName( files[n] ).GetExt().Upper() != _T( "HTML" ) ) continue;
+        if ( wxFileName( files[n] ).GetExt().Upper() != "ODT" && wxFileName( files[n] ).GetExt().Upper() != "HTML" ) continue;
 
         if ( logbookPlugIn->opt->filterLayout[grid] )
         {
@@ -4924,28 +4924,28 @@ void LogbookDialog::appendOSDirSlash( wxString* pString )
 
 wxString LogbookDialog::replaceDangerChar( wxString s )
 {
-    s.Replace( wxT( "\n" ),wxT( "\\n" ) );
+    s.Replace( "\n","\\n" );
     return s;
 }
 
 wxString LogbookDialog::restoreDangerChar( wxString s )
 {
-    s.Replace( wxT( "\\n" ),wxT( "\n" ) );
+    s.Replace( "\\n","\n" );
     return s;
 }
 
 void LogbookDialog::startBrowser( wxString filename )
 {
-    if ( !wxLaunchDefaultBrowser( wxString( _T( "file://" ) )+filename ) )
+    if ( !wxLaunchDefaultBrowser( wxString( "file://" )+filename ) )
     {
         if ( wxGetOsVersion() & wxOS_WINDOWS ) // maybe old XP-Versions needs it
         {
-            filename.Replace( wxT( "/" ),wxT( "\\" ) );
-            wxFileType *filetype = wxTheMimeTypesManager->GetFileTypeFromExtension( _T( "html" ) );
-            wxString cmd = filetype->GetOpenCommand( wxT( "file:///" )+filename );
+            filename.Replace( "/", "\\" );
+            wxFileType *filetype = wxTheMimeTypesManager->GetFileTypeFromExtension( "html" );
+            wxString cmd = filetype->GetOpenCommand( "file:///"+filename );
 
-            if ( cmd.Contains( wxT( "IEXPLORE" ) ) )
-                wxExecute( wxString::Format( wxT( "explorer.exe " )+filename ) );
+            if ( cmd.Contains( "IEXPLORE" ) )
+                wxExecute( wxString::Format( "explorer.exe "+filename ) );
             else
                 wxExecute( cmd );
         }
@@ -4955,19 +4955,19 @@ void LogbookDialog::startBrowser( wxString filename )
 void LogbookDialog::startApplication( wxString filename, wxString ext )
 {
 
-    if ( ext == _T( ".odt" ) )
+    if ( ext == ".odt" )
     {
-        wxString command = logbookPlugIn->opt->odtEditor +  _T( " \"" ) +filename + _T( "\"" );
+        wxString command = logbookPlugIn->opt->odtEditor +  " \"" +filename + "\"";
 
 #ifdef __WXOSX__
-        command = _T( "/bin/bash -c \"open " )+filename+_T( "\"" );
+        command = "/bin/bash -c \"open "+filename+"\"";
 #endif
         wxExecute( command );
     }
     else
     {
         if ( !logbookPlugIn->opt->htmlEditor.IsEmpty() )
-            wxExecute( wxString::Format( wxT( "%s \"%s\" " ),logbookPlugIn->opt->htmlEditor.c_str(),filename.c_str() ) );
+            wxExecute( wxString::Format( "%s \"%s\" ",logbookPlugIn->opt->htmlEditor.c_str(),filename.c_str() ) );
         else
             wxMessageBox( _( "No Path set to HTML-Editor\nin ToolBox/Plugins/LogbookKonni/Preferences" ) );
     }
@@ -5038,7 +5038,7 @@ void LogbookDialog::getIniValues()
     colCount[2] = opt->MotorColWidth.Count();
 
 
-    opt->everySMAmount.Replace( _T( "," ),_T( "." ) );
+    opt->everySMAmount.Replace( ",","." );
     opt->dEverySM = wxAtof( opt->everySMAmount );
 
     opt->dCourseChangeDegrees = wxAtof( opt->courseChangeDegrees );
@@ -5378,13 +5378,13 @@ void LogbookDialog::crewSaveOnButtonClick( wxCommandEvent& ev )
     wxString layout;
     wxString filter = saveDialogFilter;
     if ( m_radioBtnHTMLCrew->GetValue() )
-        filter.Prepend( _T( "HTML Format(*.html)|*.html|" ) );
+        filter.Prepend( "HTML Format(*.html)|*.html|" );
     else
-        filter.Prepend( _T( "Opendocument Text(*.odt)|*.odt|" ) );
+        filter.Prepend( "Opendocument Text(*.odt)|*.odt|" );
 
-    filter.Replace( _T( "Logbook" ),_T( "CrewList" ) );
+    filter.Replace( "Logbook","CrewList" );
     wxFileDialog *saveFileDialog =
-        new wxFileDialog( this, _( "Save CrewList File" ), _T( "" ), _T( "CrewList" ),
+        new wxFileDialog( this, _( "Save CrewList File" ), "", "CrewList",
                           filter,
                           wxFD_SAVE|wxFD_OVERWRITE_PROMPT );
 
@@ -5419,7 +5419,7 @@ void LogbookDialog::crewSaveOnButtonClick( wxCommandEvent& ev )
         crewList->backup( path );
         break;
     default:
-        wxMessageBox( _T( "Not implemented yet" ),_T( "Information" ) );
+        wxMessageBox( "Not implemented yet","Information" );
         break;
     }
 }
@@ -5427,9 +5427,9 @@ void LogbookDialog::crewSaveOnButtonClick( wxCommandEvent& ev )
 void LogbookDialog::crewViewOnButtonClick( wxCommandEvent& ev )
 {
     if ( this->m_radioBtnHTMLCrew->GetValue() )
-        crewList->viewHTML( _T( "" ),crewChoice->GetString( crewChoice->GetSelection() ) );
+        crewList->viewHTML( "",crewChoice->GetString( crewChoice->GetSelection() ) );
     else
-        crewList->viewODT( _T( "" ),crewChoice->GetString( crewChoice->GetSelection() ) );
+        crewList->viewODT( "",crewChoice->GetString( crewChoice->GetSelection() ) );
 }
 
 void LogbookDialog::onButtonClickReloadLayoutsCrew( wxCommandEvent &ev )
@@ -5749,12 +5749,12 @@ void LogbookDialog::boatSaveOnButtonClick( wxCommandEvent& ev )
     wxString layout;
 
     if ( m_radioBtnHTMLBoat->GetValue() )
-        filter.Prepend( _T( "HTML Format(*.html)|*.html|" ) );
+        filter.Prepend( "HTML Format(*.html)|*.html|" );
     else
-        filter.Prepend( _T( "Opendocument Text(*.odt)|*.odt|" ) );
-    filter.Replace( _T( "Logbook" ),_T( "Boat" ) );
+        filter.Prepend( "Opendocument Text(*.odt)|*.odt|" );
+    filter.Replace( "Logbook","Boat" );
     wxFileDialog *saveFileDialog =
-        new wxFileDialog( this, _( "Save Boat File" ), _T( "" ), _T( "Boat" ),
+        new wxFileDialog( this, _( "Save Boat File" ), "", "Boat",
                           filter,
                           wxFD_SAVE|wxFD_OVERWRITE_PROMPT );
 
@@ -5789,7 +5789,7 @@ void LogbookDialog::boatSaveOnButtonClick( wxCommandEvent& ev )
         boat->backup( path );
         break;
     default:
-        wxMessageBox( _T( "Not implemented yet" ),_T( "Information" ) );
+        wxMessageBox( "Not implemented yet","Information" );
         break;
     }
 }
@@ -5797,9 +5797,9 @@ void LogbookDialog::boatSaveOnButtonClick( wxCommandEvent& ev )
 void LogbookDialog::boatViewOnButtonClick( wxCommandEvent& ev )
 {
     if ( this->m_radioBtnHTMLBoat->GetValue() )
-        boat->viewHTML( _T( "" ),boatChoice->GetString( boatChoice->GetSelection() ),false );
+        boat->viewHTML( "",boatChoice->GetString( boatChoice->GetSelection() ),false );
     else
-        boat->viewODT( _T( "" ),boatChoice->GetString( boatChoice->GetSelection() ),false );
+        boat->viewODT( "",boatChoice->GetString( boatChoice->GetSelection() ),false );
 }
 
 void LogbookDialog::onButtonClickReloadLayoutsBoat( wxCommandEvent & ev )
@@ -5868,7 +5868,7 @@ wxDateTime LogbookDialog::getDateTo( wxString filename )
     to = filename.substr( filename.find_first_of( '_' )+1 );
     to = to.substr( 0,to.find_first_of( '_' )+1 );
     to = to.RemoveLast();
-    wxStringTokenizer tkz( to,_T( "-" ) );
+    wxStringTokenizer tkz( to,"-" );
     year = tkz.GetNextToken();
     month = tkz.GetNextToken();
     day = tkz.GetNextToken();
@@ -5924,14 +5924,14 @@ void LogbookDialog::OnGridLabelLeftClickService( wxGridEvent& event )
 void LogbookDialog::onButtobClickSaveService( wxCommandEvent & ev )
 {
     wxString layout;
-    wxString filter = _T( "" );
+    wxString filter = "";
     if ( m_radioBtnHTMLService->GetValue() )
-        filter = _T( "HTML Format(*.html)|*.html" );
+        filter = "HTML Format(*.html)|*.html";
     else
-        filter = _T( "Opendocument Text(*.odt)|*.odt" );
+        filter = "Opendocument Text(*.odt)|*.odt";
 
     wxFileDialog *saveFileDialog =
-        new wxFileDialog( this, _( "Save Service File" ), _T( "" ), _T( "Service" ),
+        new wxFileDialog( this, _( "Save Service File" ), "", "Service",
                           filter,
                           wxFD_SAVE|wxFD_OVERWRITE_PROMPT );
 
@@ -5953,7 +5953,7 @@ void LogbookDialog::onButtobClickSaveService( wxCommandEvent & ev )
             maintenance->toODT( 0, path, layout, 2 );
         break;
     default:
-        wxMessageBox( _T( "Not implemented yet" ),_T( "Information" ) );
+        wxMessageBox( "Not implemented yet","Information" );
         break;
     }
     delete saveFileDialog;
@@ -6068,10 +6068,10 @@ void LogbookDialog::onRadioButtonODTService( wxCommandEvent &ev )
 void LogbookDialog::onButtonClickViewService( wxCommandEvent &ev )
 {
     if ( this->m_radioBtnHTMLService->GetValue() )
-        maintenance->viewHTML( SERVICE,_T( "" ),
+        maintenance->viewHTML( SERVICE,"",
                                m_choiceSelectLayoutService->GetString( m_choiceSelectLayoutService->GetSelection() ),false );
     else
-        maintenance->viewODT( SERVICE,_T( "" ),
+        maintenance->viewODT( SERVICE,"",
                               m_choiceSelectLayoutService->GetString( m_choiceSelectLayoutService->GetSelection() ),true );
 }
 
@@ -6182,14 +6182,14 @@ void LogbookDialog::onMenuSelectionRepairsBuyParts( wxCommandEvent &ev )
 void LogbookDialog::onButtobClickSaveRepairs( wxCommandEvent& event )
 {
     wxString layout;
-    wxString filter = _T( "" );
+    wxString filter = "";
     if ( m_radioBtnHTMLRepairs->GetValue() )
-        filter = _T( "HTML Format(*.html)|*.html" );
+        filter = "HTML Format(*.html)|*.html";
     else
-        filter = _T( "Opendocument Text(*.odt)|*.odt" );
+        filter = "Opendocument Text(*.odt)|*.odt";
 
     wxFileDialog *saveFileDialog =
-        new wxFileDialog( this, _( "Save Repairs File" ), _T( "" ), _T( "Repairs" ),
+        new wxFileDialog( this, _( "Save Repairs File" ), "", "Repairs",
                           filter,
                           wxFD_SAVE|wxFD_OVERWRITE_PROMPT );
 
@@ -6213,7 +6213,7 @@ void LogbookDialog::onButtobClickSaveRepairs( wxCommandEvent& event )
         break;
 
     default:
-        wxMessageBox( _T( "Not implemented yet" ),_T( "Information" ) );
+        wxMessageBox( "Not implemented yet","Information" );
         break;
     }
     delete saveFileDialog;
@@ -6248,10 +6248,10 @@ void LogbookDialog::onRadioButtonODTRepairs( wxCommandEvent& event )
 void LogbookDialog::onButtonClickViewRepairs( wxCommandEvent& event )
 {
     if ( this->m_radioBtnHTMLRepairs->GetValue() )
-        maintenance->viewHTML( REPAIRS,_T( "" ),
+        maintenance->viewHTML( REPAIRS,"",
                                m_choiceSelectLayoutRepairs->GetString( m_choiceSelectLayoutRepairs->GetSelection() ),false );
     else
-        maintenance->viewODT( REPAIRS,_T( "" ),
+        maintenance->viewODT( REPAIRS,"",
                               m_choiceSelectLayoutRepairs->GetString( m_choiceSelectLayoutRepairs->GetSelection() ),true );
 }
 
@@ -6271,7 +6271,7 @@ void LogbookDialog::OnKeyDownRepairs( wxKeyEvent& ev )
     {
         if ( maintenance->selectedColRepairs != maintenance->RTEXT ) return;
         if ( ev.GetEventObject()->IsKindOf( CLASSINFO( wxTextCtrl ) ) )
-            ctrl->WriteText( wxT( "\n" ) );
+            ctrl->WriteText( "\n" );
         return;
     }
 
@@ -6406,14 +6406,14 @@ void LogbookDialog::onGridCellChangeBuyParts( wxGridEvent &ev )
 void LogbookDialog::onButtobClickSaveBuyParts( wxCommandEvent& event )
 {
     wxString layout;
-    wxString filter = _T( "" );
+    wxString filter = "";
     if ( m_radioBtnHTMLBuyParts->GetValue() )
-        filter = _T( "HTML Format(*.html)|*.html" );
+        filter = "HTML Format(*.html)|*.html";
     else
-        filter = _T( "Opendocument Text(*.odt)|*.odt" );
+        filter = "Opendocument Text(*.odt)|*.odt";
 
     wxFileDialog *saveFileDialog =
-        new wxFileDialog( this, _( "Save BuyParts File" ), _T( "" ), _T( "BuyParts" ),
+        new wxFileDialog( this, _( "Save BuyParts File" ), "", "BuyParts",
                           filter,
                           wxFD_SAVE|wxFD_OVERWRITE_PROMPT );
 
@@ -6437,7 +6437,7 @@ void LogbookDialog::onButtobClickSaveBuyParts( wxCommandEvent& event )
         break;
 
     default:
-        wxMessageBox( _T( "Not implemented yet" ),_T( "Information" ) );
+        wxMessageBox( "Not implemented yet","Information" );
         break;
     }
     delete saveFileDialog;
@@ -6475,10 +6475,10 @@ void LogbookDialog::onRadioButtonODTBuyParts( wxCommandEvent& event )
 void LogbookDialog::onButtonClickViewBuyParts( wxCommandEvent& event )
 {
     if ( this->m_radioBtnHTMLBuyParts->GetValue() )
-        maintenance->viewHTML( BUYPARTS,_T( "" ),
+        maintenance->viewHTML( BUYPARTS,"",
                                m_choiceSelectLayoutBuyParts->GetString( m_choiceSelectLayoutBuyParts->GetSelection() ),false );
     else
-        maintenance->viewODT( BUYPARTS,_T( "" ),
+        maintenance->viewODT( BUYPARTS,"",
                               m_choiceSelectLayoutBuyParts->GetString( m_choiceSelectLayoutBuyParts->GetSelection() ),true );
 }
 
@@ -6506,7 +6506,7 @@ void LogbookDialog::OnKeyDownBuyParts( wxKeyEvent& ev )
     {
         if ( maintenance->selectedColBuyParts != maintenance->PARTS ) return;
         if ( ev.GetEventObject()->IsKindOf( CLASSINFO( wxTextCtrl ) ) )
-            ctrl->WriteText( wxT( "\n" ) );
+            ctrl->WriteText( "\n" );
         return;
     }
 
@@ -6634,14 +6634,14 @@ void LogbookDialog::OnMenuSelectionHideColumnOverView( wxCommandEvent& ev )
 void LogbookDialog::OnButtonClickOverviewSave( wxCommandEvent& ev )
 {
     wxString layout;
-    wxString filter = _T( "" );
+    wxString filter = "";
     if ( m_radioBtnHTMLOverview->GetValue() )
-        filter = _T( "HTML Format(*.html)|*.html" );
+        filter = "HTML Format(*.html)|*.html";
     else
-        filter = _T( "Opendocument Text(*.odt)|*.odt" );
+        filter = "Opendocument Text(*.odt)|*.odt";
 
     wxFileDialog *saveFileDialog =
-        new wxFileDialog( this, _( "Save Overview File" ), _T( "" ), _T( "Overview" ),
+        new wxFileDialog( this, _( "Save Overview File" ), "", "Overview",
                           filter,
                           wxFD_SAVE|wxFD_OVERWRITE_PROMPT );
 
@@ -6665,7 +6665,7 @@ void LogbookDialog::OnButtonClickOverviewSave( wxCommandEvent& ev )
         break;
 
     default:
-        wxMessageBox( _T( "Not implemented yet" ),_T( "Information" ) );
+        wxMessageBox( "Not implemented yet","Information" );
         break;
     }
     delete saveFileDialog;
@@ -6703,10 +6703,10 @@ void LogbookDialog::onRadioButtonODTOverView( wxCommandEvent& ev )
 void LogbookDialog::OnButtonClickOverView( wxCommandEvent& ev )
 {
     if ( m_radioBtnHTMLOverview->GetValue() )
-        overview->viewHTML( _T( "" ),
+        overview->viewHTML( "",
                             overviewChoice->GetString( overviewChoice->GetSelection() ),false );
     else
-        overview->viewODT( _T( "" ),
+        overview->viewODT( "",
                            overviewChoice->GetString( overviewChoice->GetSelection() ),true );
 }
 
@@ -6820,9 +6820,9 @@ bool LogbookDialog::myParseDate( wxString s, wxDateTime &dt )
         break;
     }
 #ifdef __WXOSX__
-    s = wxString::Format( _T( "%i/%i/%i" ),( wchar_t )month,( wchar_t )day,( wchar_t )year );
+    s = wxString::Format( "%i/%i/%i",( wchar_t )month,( wchar_t )day,( wchar_t )year );
 #else
-    s = wxString::Format( _T( "%i/%i/%i" ),( int )month,( int )day,( int )year );
+    s = wxString::Format( "%i/%i/%i",( int )month,( int )day,( int )year );
 #endif
 #if wxCHECK_VERSION(2, 9, 0)
     wxString::const_iterator end;
@@ -6831,11 +6831,11 @@ bool LogbookDialog::myParseDate( wxString s, wxDateTime &dt )
     else if ( end == s.end() )
         return true;
     else
-        wxMessageBox( _T( "Parse Error myParseDate " )+wxString( end, s.end() ) ); // left over ...
+        wxMessageBox( "Parse Error myParseDate "+wxString( end, s.end() ) ); // left over ...
     return false;
 #else
-    s = wxString::Format( _T( "%i/%i/%i" ),month,day,year );
-    if ( dt.ParseFormat( s, _T( "%m/%d/%Y" ) ) )
+    s = wxString::Format( "%i/%i/%i",month,day,year );
+    if ( dt.ParseFormat( s, "%m/%d/%Y" ) )
         return true;
     else
         return false;
@@ -6846,7 +6846,7 @@ bool LogbookDialog::myParseTime( wxString s, wxDateTime& dt )
 {
     //bool correction = false;
 
-    if ( !s.Contains( _T( ":" ) ) ) return false;
+    if ( !s.Contains( ":" ) ) return false;
 
     /*	if((int) s.GetChar(0) == 19979 || (int) s.GetChar(0) == 19978 )  // chinese time starts with this two chars
     	{																 // ParseTime will not handle this correct
@@ -6863,7 +6863,7 @@ bool LogbookDialog::myParseTime( wxString s, wxDateTime& dt )
     wxString am = wxEmptyString,pm = wxEmptyString;
     wxDateTime::GetAmPmStrings( &am,&pm );
 
-    wxStringTokenizer tkz( s,_T( ":" ) );
+    wxStringTokenizer tkz( s,":" );
     wxDateTime::wxDateTime_t hour = wxAtoi( tkz.GetNextToken() );
     wxDateTime::wxDateTime_t minute = wxAtoi( tkz.GetNextToken() );
     wxDateTime::wxDateTime_t sec = 0;
@@ -6898,7 +6898,7 @@ bool LogbookDialog::myParseTime( wxString s, wxDateTime& dt )
 }
 
 
-wxString LogbookDialog::datePattern = _T( "" );
+wxString LogbookDialog::datePattern = "";
 wxChar   LogbookDialog::dateSeparator = 0;
 void LogbookDialog::setDatePattern()
 {
@@ -6913,102 +6913,102 @@ void LogbookDialog::setDatePattern()
     if ( s.Length() > 8 ) // Format for locale year can be 2 digits or 4 digits.
     {
         int i = 0;
-        if ( s.SubString( i,1 ) == _T( "14" ) )
+        if ( s.SubString( i,1 ) == "14" )
         {
-            LogbookDialog::datePattern = _T( "dd" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern = "dd" + wxString( dateSeparator );
             i += 3;
         }
-        if ( s.SubString( i,1 ) == _T( "12" ) )
+        if ( s.SubString( i,1 ) == "12" )
         {
-            LogbookDialog::datePattern = _T( "mm" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern = "mm" + wxString( dateSeparator );
             i += 3;
         }
-        if ( s.SubString( i,3 ) == _T( "2011" ) )
+        if ( s.SubString( i,3 ) == "2011" )
         {
-            LogbookDialog::datePattern = _T( "yyyy" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern = "yyyy" + wxString( dateSeparator );
             i += 5;
         }
 
-        if ( s.SubString( i,i+1 ) == _T( "14" ) )
+        if ( s.SubString( i,i+1 ) == "14" )
         {
-            LogbookDialog::datePattern += _T( "dd" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern += "dd" + wxString( dateSeparator );
             i += 3;
         }
-        if ( s.SubString( i,i+1 ) == _T( "12" ) )
+        if ( s.SubString( i,i+1 ) == "12" )
         {
-            LogbookDialog::datePattern += _T( "mm" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern += "mm" + wxString( dateSeparator );
             i += 3;
         }
-        if ( s.SubString( i,i+3 ) == _T( "2011" ) )
+        if ( s.SubString( i,i+3 ) == "2011" )
         {
-            LogbookDialog::datePattern += _T( "yyyy" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern += "yyyy" + wxString( dateSeparator );
             i += 5;
         }
 
-        if ( s.SubString( i,i+1 ) == _T( "14" ) )
+        if ( s.SubString( i,i+1 ) == "14" )
         {
-            LogbookDialog::datePattern += _T( "dd" );
+            LogbookDialog::datePattern += "dd";
             i += 3;
         }
-        if ( s.SubString( i,i+1 ) == _T( "12" ) )
+        if ( s.SubString( i,i+1 ) == "12" )
         {
-            LogbookDialog::datePattern += _T( "mm" );
+            LogbookDialog::datePattern += "mm";
             i += 3;
         }
-        if ( s.SubString( i,i+3 ) == _T( "2011" ) )
+        if ( s.SubString( i,i+3 ) == "2011" )
         {
-            LogbookDialog::datePattern += _T( "yyyy" );
+            LogbookDialog::datePattern += "yyyy";
             i += 5;
         }
     }
     else
     {
         int i = 0;
-        if ( s.SubString( i,1 ) == _T( "14" ) )
+        if ( s.SubString( i,1 ) == "14" )
         {
-            LogbookDialog::datePattern = _T( "dd" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern = "dd" + wxString( dateSeparator );
             i += 3;
         }
-        if ( s.SubString( i,1 ) == _T( "12" ) )
+        if ( s.SubString( i,1 ) == "12" )
         {
-            LogbookDialog::datePattern = _T( "mm" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern = "mm" + wxString( dateSeparator );
             i += 3;
         }
-        if ( s.SubString( i,1 ) == _T( "11" ) )
+        if ( s.SubString( i,1 ) == "11" )
         {
-            LogbookDialog::datePattern = _T( "yyyy" ) + wxString( dateSeparator );
-            i += 3;
-        }
-
-        if ( s.SubString( i,i+1 ) == _T( "14" ) )
-        {
-            LogbookDialog::datePattern += _T( "dd" ) + wxString( dateSeparator );
-            i += 3;
-        }
-        if ( s.SubString( i,i+1 ) == _T( "12" ) )
-        {
-            LogbookDialog::datePattern += _T( "mm" ) + wxString( dateSeparator );
-            i += 3;
-        }
-        if ( s.SubString( i,i+1 ) == _T( "11" ) )
-        {
-            LogbookDialog::datePattern += _T( "yyyy" ) + wxString( dateSeparator );
+            LogbookDialog::datePattern = "yyyy" + wxString( dateSeparator );
             i += 3;
         }
 
-        if ( s.SubString( i,i+1 ) == _T( "14" ) )
+        if ( s.SubString( i,i+1 ) == "14" )
         {
-            LogbookDialog::datePattern += _T( "dd" );
+            LogbookDialog::datePattern += "dd" + wxString( dateSeparator );
             i += 3;
         }
-        if ( s.SubString( i,i+1 ) == _T( "12" ) )
+        if ( s.SubString( i,i+1 ) == "12" )
         {
-            LogbookDialog::datePattern += _T( "mm" );
+            LogbookDialog::datePattern += "mm" + wxString( dateSeparator );
             i += 3;
         }
-        if ( s.SubString( i,i+1 ) == _T( "11" ) )
+        if ( s.SubString( i,i+1 ) == "11" )
         {
-            LogbookDialog::datePattern += _T( "yyyy" );
+            LogbookDialog::datePattern += "yyyy" + wxString( dateSeparator );
+            i += 3;
+        }
+
+        if ( s.SubString( i,i+1 ) == "14" )
+        {
+            LogbookDialog::datePattern += "dd";
+            i += 3;
+        }
+        if ( s.SubString( i,i+1 ) == "12" )
+        {
+            LogbookDialog::datePattern += "mm";
+            i += 3;
+        }
+        if ( s.SubString( i,i+1 ) == "11" )
+        {
+            LogbookDialog::datePattern += "yyyy";
             i += 3;
         }
     }
@@ -7257,7 +7257,7 @@ Seite\
         <name>#NAME#</name>\n\
         <description></description>\n" );
 
-    kmlEndFolder = _T( "		</Folder>\n" );
+    kmlEndFolder = "		</Folder>\n";
 
     kmlBody =_T( "        <Placemark>\n\
             <name>#NAME#</name>\n\
@@ -7431,7 +7431,7 @@ LayoutDialog::LayoutDialog( wxWindow* parent, wxString location, wxChoice* choic
     m_textCtrlRename->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( LayoutDialog::OnText ), NULL, this );
     m_bpButtonLoadLayout->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( LayoutDialog::OnButtonClickLoadLayout ), NULL, this );
 
-    layoutFileName= _T( "" );
+    layoutFileName= "";
     dialog = ( LogbookDialog* )parent;
 
 }
@@ -7545,7 +7545,7 @@ void SelectLogbook::OnKeyDown( wxKeyEvent& event )
     if ( event.ShiftDown() && event.GetKeyCode() == WXK_RETURN )
     {
         if ( event.GetEventObject()->IsKindOf( CLASSINFO( wxTextCtrl ) ) )
-            ctrl->WriteText( wxT( "\n" ) );
+            ctrl->WriteText( "\n" );
         return;
     }
 
@@ -7594,12 +7594,12 @@ void SelectLogbook::OnGridCellChange( wxGridEvent& event )
         wxTextFile text( f );
         text.Open();
 
-        wxString str = _T( "#1.2#\t" )+m_grid13->GetCellValue( selRow,2 );
+        wxString str = "#1.2#\t"+m_grid13->GetCellValue( selRow,2 );
         str = parent->replaceDangerChar( str );
         text.RemoveLine( 0 );
         text.InsertLine( str,0 );
         text.Write();
-//		wxMessageBox(wxString::Format(_T("%i %s %s %i"),u,f,str,h));
+//		wxMessageBox(wxString::Format("%i %s %s %i",u,f,str,h));
         text.Close();
 
         m_grid13->AutoSize();
@@ -7619,7 +7619,7 @@ void SelectLogbook::OnInit( wxInitDialogEvent& ev )
 
     m_grid13->SetSelectionMode( wxGrid::wxGridSelectRows );
 
-    unsigned int i = wxDir::GetAllFiles( path,&files,_T( "*logbook.txt" ),wxDIR_FILES );
+    unsigned int i = wxDir::GetAllFiles( path,&files,"*logbook.txt",wxDIR_FILES );
 
     for ( i = 0; i < files.Count(); i++ )
     {
@@ -7629,7 +7629,7 @@ void SelectLogbook::OnInit( wxInitDialogEvent& ev )
         description = routeFrom = routeTo = wxEmptyString;
 
 
-        if ( filename == _T( "logbook" ) )
+        if ( filename == "logbook" )
             back = true;
         else
             back = false;
@@ -7641,12 +7641,12 @@ void SelectLogbook::OnInit( wxInitDialogEvent& ev )
             wxString z = text.GetFirstLine();
             if ( !z.IsEmpty() )
             {
-                wxStringTokenizer header( z,_T( "\t" ) );
+                wxStringTokenizer header( z,"\t" );
                 header.GetNextToken();
                 description = header.GetNextToken();
                 description = parent->restoreDangerChar( description );
                 wxString t = text.GetNextLine();
-                wxStringTokenizer tk( t,_T( "\t" ) );
+                wxStringTokenizer tk( t,"\t" );
                 routeFrom = tk.GetNextToken();
                 int month = wxAtoi( tk.GetNextToken() );
                 int day = wxAtoi( tk.GetNextToken() );
@@ -7657,7 +7657,7 @@ void SelectLogbook::OnInit( wxInitDialogEvent& ev )
             wxString last = text.GetLastLine();
             if ( !last.IsEmpty() )
             {
-                wxStringTokenizer ll( last,_T( "\t" ) );
+                wxStringTokenizer ll( last,"\t" );
                 routeTo = ll.GetNextToken();
                 int monthTo = wxAtoi( ll.GetNextToken() );
                 int dayTo = wxAtoi( ll.GetNextToken() );
@@ -7670,7 +7670,7 @@ void SelectLogbook::OnInit( wxInitDialogEvent& ev )
         if ( back )
         {
             for ( int col = 0; col < m_grid13->GetNumberCols(); col++ )
-                m_grid13->SetCellBackgroundColour( i,col, wxColour( _T( "Green" ) ));
+                m_grid13->SetCellBackgroundColour( i,col, wxColour( "Green" ));
 
             description = _( "Active Logbook" );
             m_grid13->SetReadOnly( i,2 );
@@ -7680,11 +7680,11 @@ void SelectLogbook::OnInit( wxInitDialogEvent& ev )
         m_grid13->SetReadOnly( i,3 );
         if ( text.GetLineCount() > 1 )
         {
-            m_grid13->SetCellValue( i,0,routeFrom+_T( " -> " )+routeTo );
+            m_grid13->SetCellValue( i,0,routeFrom+" -> "+routeTo );
             if ( dtfrom.IsValid() && dtto.IsValid() )
                 m_grid13->SetCellValue( i,1,
 
-                                        wxString::Format( _T( "%s - %s" ),dtfrom.Format( parent->logbookPlugIn->opt->sdateformat ).c_str(),dtto.Format( parent->logbookPlugIn->opt->sdateformat ).c_str() ) );
+                                        wxString::Format( "%s - %s",dtfrom.Format( parent->logbookPlugIn->opt->sdateformat ).c_str(),dtto.Format( parent->logbookPlugIn->opt->sdateformat ).c_str() ) );
         }
         m_grid13->SetCellValue( i,2,description );
         m_grid13->SetCellEditor( i,2,new wxGridCellAutoWrapStringEditor );
@@ -7737,7 +7737,7 @@ wxString myGridStringTable::GetValue( int row, int col )
 {
     wxCHECK_MSG( ( row < GetNumberRows() ) && ( col < GetNumberCols() ),
                  wxEmptyString,
-                 _T( "invalid row or column index in myGridStringTable" ) );
+                 "invalid row or column index in myGridStringTable" );
 
     return m_data[row][col];
 }
@@ -7745,7 +7745,7 @@ wxString myGridStringTable::GetValue( int row, int col )
 void myGridStringTable::SetValue( int row, int col, const wxString& value )
 {
     wxCHECK_RET( ( row < GetNumberRows() ) && ( col < GetNumberCols() ),
-                 _T( "invalid row or column index in myGridStringTable" ) );
+                 "invalid row or column index in myGridStringTable" );
 
     m_data[row][col] = value;
 }
@@ -7754,7 +7754,7 @@ bool myGridStringTable::IsEmptyCell( int row, int col )
 {
     wxCHECK_MSG( ( row < GetNumberRows() ) && ( col < GetNumberCols() ),
                  true,
-                 _T( "invalid row or column index in myGridStringTable" ) );
+                 "invalid row or column index in myGridStringTable" );
 
     return ( m_data[row][col] == wxEmptyString );
 }
@@ -7844,7 +7844,7 @@ bool myGridStringTable::DeleteRows( size_t pos, size_t numRows )
     {
         wxFAIL_MSG( wxString::Format
                     (
-                        wxT( "Called myGridStringTable::DeleteRows(pos=%lu, N=%lu)\nPos value is invalid for present table with %lu rows" ),
+                        "Called myGridStringTable::DeleteRows(pos=%lu, N=%lu)\nPos value is invalid for present table with %lu rows",
                         ( unsigned long )pos,
                         ( unsigned long )numRows,
                         ( unsigned long )curNumRows
@@ -7935,7 +7935,7 @@ bool myGridStringTable::AppendCols( size_t numCols )
     {
         // TODO: something better than this ?
         //
-        wxFAIL_MSG( wxT( "Unable to append cols to a grid table with no rows.\nCall AppendRows() first" ) );
+        wxFAIL_MSG( "Unable to append cols to a grid table with no rows.\nCall AppendRows() first" );
         return false;
     }
 #endif
@@ -7969,7 +7969,7 @@ bool myGridStringTable::DeleteCols( size_t pos, size_t numCols )
     {
         wxFAIL_MSG( wxString::Format
                     (
-                        wxT( "Called myGridStringTable::DeleteCols(pos=%lu, N=%lu)\nPos value is invalid for present table with %lu cols" ),
+                        "Called myGridStringTable::DeleteCols(pos=%lu, N=%lu)\nPos value is invalid for present table with %lu cols",
                         ( unsigned long )pos,
                         ( unsigned long )numCols,
                         ( unsigned long )curNumCols
@@ -8252,84 +8252,84 @@ void ColdFinger::init()
     m_treeCtrl3->SetImageList( imageList );
 
     dataPath = dialog->Home_Locn;
-    dataPath += _T( "Textblocks.xml" );
+    dataPath += "Textblocks.xml";
 
     loadTextBlocks();
 
     if ( !m_treeCtrl3->GetRootItem().IsOk() )
     {
         myTreeItem *item = new myTreeItem( NODE,_( "Textblocks" ),
-                                           _( "Help\n-----\n\nOpen treenode\n  \'Texts when using this Dialog only\'\n  and select e.g. \'Remarks\'\n\nRightclick in TreeView for menu\n\nAdd a item and rename it\n   USE UNIQUE NAMES FOR ITEMS !\n\nInsert text\n\nIn \'Texts when using this Dialog only\' you can insert/delete treenodes only\n\nUse Drag \'n Drop to move item from/to menu\n\nsee next treenodes for more help" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),0,0,false,true,false );
+                                           _( "Help\n-----\n\nOpen treenode\n  \'Texts when using this Dialog only\'\n  and select e.g. \'Remarks\'\n\nRightclick in TreeView for menu\n\nAdd a item and rename it\n   USE UNIQUE NAMES FOR ITEMS !\n\nInsert text\n\nIn \'Texts when using this Dialog only\' you can insert/delete treenodes only\n\nUse Drag \'n Drop to move item from/to menu\n\nsee next treenodes for more help" ),"","","","",0,0,false,true,false );
         selectedItem = m_treeCtrl3->AddRoot( item->name,fo,-1,item );
         m_textCtrl73->SetValue( item->text );
 
-        item = new myTreeItem( NODE,_T( "" ),_( "The itemname is shown in the rightcklick-menu of the following Columns\nBy clicking on it the text is inserted\n\n" )+
-                               dialog->m_gridGlobal->GetColLabelValue( LogbookHTML::REMARKS )+_T( "\n" )+
-                               dialog->m_gridWeather->GetColLabelValue( LogbookHTML::WEATHER )+_T( "\n" )+
-                               dialog->m_gridWeather->GetColLabelValue( LogbookHTML::VISIBILITY )+_T( "\n" )+
-                               dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::SAILS )+_T( "\n" )+
-                               dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::REEF )+_T( "\n" )+
+        item = new myTreeItem( NODE,"",_( "The itemname is shown in the rightcklick-menu of the following Columns\nBy clicking on it the text is inserted\n\n" )+
+                               dialog->m_gridGlobal->GetColLabelValue( LogbookHTML::REMARKS )+"\n"+
+                               dialog->m_gridWeather->GetColLabelValue( LogbookHTML::WEATHER )+"\n"+
+                               dialog->m_gridWeather->GetColLabelValue( LogbookHTML::VISIBILITY )+"\n"+
+                               dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::SAILS )+"\n"+
+                               dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::REEF )+"\n"+
                                dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::MREMARKS )
-                               ,_T( "" ),_T( "" ),_T( "" ),_T( "" ),-1,0,false,false,true );
+                               ,"","","","",-1,0,false,false,true );
         wxTreeItemId menu = this->m_treeCtrl3->AppendItem( selectedItem,_( "Texts for Rightclick-Menu" ),fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),0,LogbookHTML::REMARKS,false,false,true );
-        wxTreeItemId test = this->m_treeCtrl3->AppendItem( menu,dialog->m_gridGlobal->GetColLabelValue( LogbookHTML::REMARKS )+_T( " (" )+
-                            dialog->m_notebook8->GetPageText( 0 )+_T( ")" ),-fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",0,LogbookHTML::REMARKS,false,false,true );
+        wxTreeItemId test = this->m_treeCtrl3->AppendItem( menu,dialog->m_gridGlobal->GetColLabelValue( LogbookHTML::REMARKS )+" ("+
+                            dialog->m_notebook8->GetPageText( 0 )+")",-fo,-1,item );
 
-        item = new myTreeItem( ITEM,_T( "" ),_( "Sails up\nEngine stopped\n\nDemo - Rightclick-Menu \'use Testextblocks\' for help" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),0,LogbookHTML::REMARKS,true,false,true );
+        item = new myTreeItem( ITEM,"",_( "Sails up\nEngine stopped\n\nDemo - Rightclick-Menu \'use Testextblocks\' for help" ),"","","","",0,LogbookHTML::REMARKS,true,false,true );
         this->m_treeCtrl3->AppendItem( test,_( "Demo Sails up" ),it,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),1,LogbookHTML::WEATHER,false,false,true );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridWeather->GetColLabelValue( LogbookHTML::WEATHER )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 1 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",1,LogbookHTML::WEATHER,false,false,true );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridWeather->GetColLabelValue( LogbookHTML::WEATHER )+" ("+
+                                       dialog->m_notebook8->GetPageText( 1 )+")",fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),1,LogbookHTML::VISIBILITY,false,false,true );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridWeather->GetColLabelValue( LogbookHTML::VISIBILITY )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 1 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",1,LogbookHTML::VISIBILITY,false,false,true );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridWeather->GetColLabelValue( LogbookHTML::VISIBILITY )+" ("+
+                                       dialog->m_notebook8->GetPageText( 1 )+")",fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),2,LogbookHTML::SAILS,false,false,true );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::SAILS )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 2 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",2,LogbookHTML::SAILS,false,false,true );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::SAILS )+" ("+
+                                       dialog->m_notebook8->GetPageText( 2 )+")",fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),2,LogbookHTML::REEF,false,false,true );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::REEF )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 2 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",2,LogbookHTML::REEF,false,false,true );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::REEF )+" ("+
+                                       dialog->m_notebook8->GetPageText( 2 )+")",fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),2,LogbookHTML::MREMARKS,false,false,true );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::MREMARKS )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 2 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",2,LogbookHTML::MREMARKS,false,false,true );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::MREMARKS )+" ("+
+                                       dialog->m_notebook8->GetPageText( 2 )+")",fo,-1,item );
 
 /////////////////// in dialog only ////////////
-        item = new myTreeItem( NODE,_T( "" ),_( "These texts are inserted into the grid-colmn\nby calling this dialog\n\nSelect Item\nClick OK-Button\n\nUse Drag \'n Drop to place a item in menu" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),-2,0,false,false,false );
+        item = new myTreeItem( NODE,"",_( "These texts are inserted into the grid-colmn\nby calling this dialog\n\nSelect Item\nClick OK-Button\n\nUse Drag \'n Drop to place a item in menu" ),"","","","",-2,0,false,false,false );
         menu = this->m_treeCtrl3->AppendItem( selectedItem,_( "Texts when using this Dialog only" ),fo,0,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),0,LogbookHTML::REMARKS,false,true,false );
-        test = this->m_treeCtrl3->AppendItem( menu,dialog->m_gridGlobal->GetColLabelValue( LogbookHTML::REMARKS )+_T( " (" )+
-                                              dialog->m_notebook8->GetPageText( 0 )+_T( ")" ),-fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",0,LogbookHTML::REMARKS,false,true,false );
+        test = this->m_treeCtrl3->AppendItem( menu,dialog->m_gridGlobal->GetColLabelValue( LogbookHTML::REMARKS )+" ("+
+                                              dialog->m_notebook8->GetPageText( 0 )+")",-fo,-1,item );
 
-        item = new myTreeItem( ITEM,_T( "" ),_( "Engine stopped\n\nDemo - Rightclick-Menu \'use Testextblocks\' for help" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),0,LogbookHTML::REMARKS,true,true,false );
+        item = new myTreeItem( ITEM,"",_( "Engine stopped\n\nDemo - Rightclick-Menu \'use Testextblocks\' for help" ),"","","","",0,LogbookHTML::REMARKS,true,true,false );
         this->m_treeCtrl3->AppendItem( test,_( "Demo Engine stopped" ),it,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),1,LogbookHTML::WEATHER,false,true,false );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridWeather->GetColLabelValue( LogbookHTML::WEATHER )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 1 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",1,LogbookHTML::WEATHER,false,true,false );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridWeather->GetColLabelValue( LogbookHTML::WEATHER )+" ("+
+                                       dialog->m_notebook8->GetPageText( 1 )+")",fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),1,LogbookHTML::VISIBILITY,false,true,false );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridWeather->GetColLabelValue( LogbookHTML::VISIBILITY )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 1 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",1,LogbookHTML::VISIBILITY,false,true,false );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridWeather->GetColLabelValue( LogbookHTML::VISIBILITY )+" ("+
+                                       dialog->m_notebook8->GetPageText( 1 )+")",fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),2,LogbookHTML::SAILS,false,true,false );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::SAILS )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 2 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",2,LogbookHTML::SAILS,false,true,false );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::SAILS )+" ("+
+                                       dialog->m_notebook8->GetPageText( 2 )+")",fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),2,LogbookHTML::REEF,false,true,false );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::REEF )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 2 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",2,LogbookHTML::REEF,false,true,false );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::REEF )+" ("+
+                                       dialog->m_notebook8->GetPageText( 2 )+")",fo,-1,item );
 
-        item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),2,LogbookHTML::MREMARKS,false,true,false );
-        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::MREMARKS )+_T( " (" )+
-                                       dialog->m_notebook8->GetPageText( 2 )+_T( ")" ),fo,-1,item );
+        item = new myTreeItem( NODE,"","","","","","",2,LogbookHTML::MREMARKS,false,true,false );
+        this->m_treeCtrl3->AppendItem( menu,dialog->m_gridMotorSails->GetColLabelValue( LogbookHTML::MREMARKS )+" ("+
+                                       dialog->m_notebook8->GetPageText( 2 )+")",fo,-1,item );
 
         modified = true;
         this->writeTextblocks();
@@ -8368,7 +8368,7 @@ void ColdFinger::OnMenuSelectionaddNodeCold( wxCommandEvent& event )
     static int i = 1;
     wxTreeItemId parent;
 
-    myTreeItem *item = new myTreeItem( NODE,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),fo,0,true,true,false );
+    myTreeItem *item = new myTreeItem( NODE,"","","","","","",fo,0,true,true,false );
 
     if ( ( ( myTreeItem* )this->m_treeCtrl3->GetItemData( selectedItem ) )->type ==  ITEM )
         parent = this->m_treeCtrl3->GetItemParent( selectedItem );
@@ -8405,7 +8405,7 @@ void ColdFinger::OnMenuSelectionAddCold( wxCommandEvent& event )
     static int i = 1;
     wxTreeItemId parent;
 
-    myTreeItem *item = new myTreeItem( ITEM,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),it,0,true,true,false );
+    myTreeItem *item = new myTreeItem( ITEM,"","","","","","",it,0,true,true,false );
 
     if ( ( ( myTreeItem* )this->m_treeCtrl3->GetItemData( m_treeCtrl3->GetSelection() ) )->type ==  ITEM )
         parent = this->m_treeCtrl3->GetItemParent( selectedItem );
@@ -8517,18 +8517,18 @@ wxTreeItemId ColdFinger::recursiveWrite( wxTreeItemId id, TiXmlElement *elem )
 
         newElement = new TiXmlElement( ( data->type )?"ITEM":"NODE" );
 
-        addElement( newElement,"Type",wxString::Format( _T( "%i" ),data->type ).mb_str() );
+        addElement( newElement,"Type",wxString::Format( "%i",data->type ).mb_str() );
         addElement( newElement,"Name",sData.mb_str( wxConvUTF8 ) );
         addElement( newElement,"Text",data->text.mb_str( wxConvUTF8 ) );
         addElement( newElement,"GUID",data->guid.mb_str( wxConvUTF8 ) );
         addElement( newElement,"Route",data->route.mb_str( wxConvUTF8 ) );
         addElement( newElement,"GUIDWP",data->guidWP.mb_str( wxConvUTF8 ) );
         addElement( newElement,"WP",data->WP.mb_str( wxConvUTF8 ) );
-        addElement( newElement,"Grid",wxString::Format( _T( "%i" ),data->grid ).mb_str() );
-        addElement( newElement,"Column",wxString::Format( _T( "%i" ),data->gridcol ).mb_str() );
-        addElement( newElement,"Deleteable",wxString::Format( _T( "%s" ),( data->deleteable )?_T( "true" ):_T( "false" ) ).mb_str() );
-        addElement( newElement,"Add",wxString::Format( _T( "%s" ),( data->add )?_T( "true" ):_T( "false" ) ).mb_str() );
-        addElement( newElement,"Menu",wxString::Format( _T( "%s" ),( data->menu )?_T( "true" ):_T( "false" ) ).mb_str() );
+        addElement( newElement,"Grid",wxString::Format( "%i",data->grid ).mb_str() );
+        addElement( newElement,"Column",wxString::Format( "%i",data->gridcol ).mb_str() );
+        addElement( newElement,"Deleteable",wxString::Format( "%s",( data->deleteable )?"true":"false" ).mb_str() );
+        addElement( newElement,"Add",wxString::Format( "%s",( data->add )?"true":"false" ).mb_str() );
+        addElement( newElement,"Menu",wxString::Format( "%s",( data->menu )?"true":"false" ).mb_str() );
 
         if ( m_treeCtrl3->ItemHasChildren( item ) )
             recursiveWrite( item, newElement );
@@ -8562,60 +8562,60 @@ void ColdFinger::fillTree( wxTreeItemId id, TiXmlNode* node )
     switch ( t )
     {
     case TiXmlNode::TINYXML_ELEMENT:
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "TextblocksXML" ) )
+        if ( wxString( node->Value(),wxConvUTF8 ) == "TextblocksXML" )
         {
             wxString name,text;
             TiXmlAttribute* pAttrib=node->ToElement()->FirstAttribute();
-            if ( wxString( pAttrib->Name(),wxConvUTF8 ) == _T( "Name" ) )
+            if ( wxString( pAttrib->Name(),wxConvUTF8 ) == "Name" )
                 name = wxString( pAttrib->Value(),wxConvUTF8 );
             pAttrib=pAttrib->Next();
-            if ( wxString( pAttrib->Name(),wxConvUTF8 ) == _T( "Helptext" ) )
+            if ( wxString( pAttrib->Name(),wxConvUTF8 ) == "Helptext" )
                 text = wxString( pAttrib->Value(),wxConvUTF8 );
 
-            elem = new myTreeItem( NODE,name,text,_T( "" ),_T( "" ),_T( "" ),_T( "" ),0,0,false,false,false );
+            elem = new myTreeItem( NODE,name,text,"","","","",0,0,false,false,false );
             id = m_treeCtrl3->AddRoot( name,fo,-1,elem );
         }
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "NODE" ) )
+        if ( wxString( node->Value(),wxConvUTF8 ) == "NODE" )
         {
-            elem = new myTreeItem( 0,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),0,0,false,false,false );
-            id = m_treeCtrl3->AppendItem( id,_T( "" ),fo,-1,elem );
+            elem = new myTreeItem( 0,"","","","","","",0,0,false,false,false );
+            id = m_treeCtrl3->AppendItem( id,"",fo,-1,elem );
         }
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "ITEM" ) )
+        if ( wxString( node->Value(),wxConvUTF8 ) == "ITEM" )
         {
-            elem = new myTreeItem( 1,_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),_T( "" ),0,0,false,false,false );
-            id = m_treeCtrl3->AppendItem( id,_T( "" ),it,-1,elem );
+            elem = new myTreeItem( 1,"","","","","","",0,0,false,false,false );
+            id = m_treeCtrl3->AppendItem( id,"",it,-1,elem );
         }
 
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "Type" ) )
+        if ( wxString( node->Value(),wxConvUTF8 ) == "Type" )
         {
             elem->type = atoi( node->ToElement()->GetText() );
             m_treeCtrl3->SetItemText( id,elem->name );
         }
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "Name" ) )
+        if ( wxString( node->Value(),wxConvUTF8 ) == "Name" )
         {
             elem->name = wxString( node->ToElement()->GetText(),wxConvUTF8 );
             m_treeCtrl3->SetItemText( id,elem->name );
         }
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "Text" ) )
+        if ( wxString( node->Value(),wxConvUTF8 ) == "Text" )
             elem->text = wxString( node->ToElement()->GetText(),wxConvUTF8 );
 
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "Grid" ) )
+        if ( wxString( node->Value(),wxConvUTF8 ) == "Grid" )
         {
             elem->grid = atoi( node->ToElement()->GetText() );
             m_treeCtrl3->SetItemText( id,elem->name );
         }
 
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "Column" ) )
+        if ( wxString( node->Value(),wxConvUTF8 ) == "Column" )
             elem->gridcol = atoi( node->ToElement()->GetText() );
 
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "Deleteable" ) )
-            elem->deleteable = ( wxString( node->ToElement()->GetText(),wxConvUTF8 ) == _T( "true" ) )?true:false;
+        if ( wxString( node->Value(),wxConvUTF8 ) == "Deleteable" )
+            elem->deleteable = ( wxString( node->ToElement()->GetText(),wxConvUTF8 ) == "true" )?true:false;
 
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "Add" ) )
-            elem->add = ( wxString( node->ToElement()->GetText(),wxConvUTF8 ) == _T( "true" ) )?true:false;
+        if ( wxString( node->Value(),wxConvUTF8 ) == "Add" )
+            elem->add = ( wxString( node->ToElement()->GetText(),wxConvUTF8 ) == "true" )?true:false;
 
-        if ( wxString( node->Value(),wxConvUTF8 ) == _T( "Menu" ) )
-            elem->menu = ( wxString( node->ToElement()->GetText(),wxConvUTF8 ) == _T( "true" ) )?true:false;
+        if ( wxString( node->Value(),wxConvUTF8 ) == "Menu" )
+            elem->menu = ( wxString( node->ToElement()->GetText(),wxConvUTF8 ) == "true" )?true:false;
         break;
     }
 
@@ -8747,7 +8747,7 @@ TimerInterval::TimerInterval( wxWindow* parent, Options* opt,  wxWindowID id, co
     m_spinCtrlS = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
     fgSizer46->Add( m_spinCtrlS, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_staticTextS = new wxStaticText( this, wxID_ANY, _T( "s" ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_staticTextS = new wxStaticText( this, wxID_ANY, "s", wxDefaultPosition, wxDefaultSize, 0 );
     m_staticTextS->Wrap( -1 );
     fgSizer46->Add( m_staticTextS, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0 );
 
@@ -8996,9 +8996,9 @@ void TimerInterval::clearAll()
 
 void TimerInterval::OnButtonOKClick( wxCommandEvent& event )
 {
-    opt->thour = wxString::Format( _T( "%i" ),m_spinCtrlH->GetValue() );
-    opt->tmin  = wxString::Format( _T( "%i" ),m_spinCtrlM->GetValue() );
-    opt->tsec  = wxString::Format( _T( "%i" ),m_spinCtrlS->GetValue() );
+    opt->thour = wxString::Format( "%i",m_spinCtrlH->GetValue() );
+    opt->tmin  = wxString::Format( "%i",m_spinCtrlM->GetValue() );
+    opt->tsec  = wxString::Format( "%i",m_spinCtrlS->GetValue() );
 
     opt->timerSec = ( m_spinCtrlH->GetValue()  * 3600000 +
                       m_spinCtrlM->GetValue() * 60000   +
@@ -9086,7 +9086,7 @@ void TimerInterval::OnSpinCtrlFullh( wxSpinEvent& event )
 
 void TimerInterval::saveData()
 {
-    wxString fn = dialog->data+wxFileName::GetPathSeparator()+_T( "Timer.txt" );
+    wxString fn = dialog->data+wxFileName::GetPathSeparator()+"Timer.txt";
 
     wxTextFile data( fn );
     data.Create();
@@ -9097,12 +9097,12 @@ void TimerInterval::saveData()
     wxString full;
     wxString ind;
 
-    full = wxString::Format( _T( "%i," ),m_spinCtrl4->GetValue() );
+    full = wxString::Format( "%i,",m_spinCtrl4->GetValue() );
     for ( int i = 0; i < m_gridFull->GetNumberRows()-1; i++ )
-        full += m_gridFull->GetCellValue( i,0 ) + _T( "," );
+        full += m_gridFull->GetCellValue( i,0 ) + ",";
     full.RemoveLast();
 
-    out << full + _T( "\n" );
+    out << full + "\n";
 
     wxDateTime dt = wxDateTime::Now();
     for ( int i = 0; i < m_gridIndividual->GetNumberRows()-1; i++ )
@@ -9111,7 +9111,7 @@ void TimerInterval::saveData()
             dt.SetHour( wxAtoi( m_gridIndividual->GetCellValue( i,0 ) ) );
         else
         {
-            if ( m_gridIndividual->GetCellValue( i,2 ) == _T( "PM" ) )
+            if ( m_gridIndividual->GetCellValue( i,2 ) == "PM" )
             {
                 if ( wxAtoi( m_gridIndividual->GetCellValue( i,0 ) ) != 12 )
                 {
@@ -9130,10 +9130,10 @@ void TimerInterval::saveData()
 
         dt.SetMinute( wxAtoi( m_gridIndividual->GetCellValue( i,1 ) ) );
 
-        ind += wxString::Format( _T( "%i,%i#" ),dt.GetHour(),dt.GetMinute() );
+        ind += wxString::Format( "%i,%i#",dt.GetHour(),dt.GetMinute() );
     }
     ind.RemoveLast();
-    out << ind + _T( "\n" );
+    out << ind + "\n";
 
     dout.Close();
 }
@@ -9148,7 +9148,7 @@ bool TimerInterval::loadData()
     for ( unsigned int i = 0; i < TimerFull.Count(); i++ )
     {
         m_gridFull->AppendRows();
-        m_gridFull->SetCellValue( i,0,wxString::Format( _T( "%i" ),TimerFull[i] ) );
+        m_gridFull->SetCellValue( i,0,wxString::Format( "%i",TimerFull[i] ) );
     }
 
     m_gridIndividual->DeleteRows( 0,m_gridIndividual->GetNumberRows()-1 );
@@ -9156,8 +9156,8 @@ bool TimerInterval::loadData()
     {
         m_gridIndividual->AppendRows();
 
-        m_gridIndividual->SetCellValue( i,0,wxString::Format( _T( "%i" ),TimerIndividualH[i] ) );
-        m_gridIndividual->SetCellValue( i,1,wxString::Format( _T( "%i" ),TimerIndividualM[i] ) );
+        m_gridIndividual->SetCellValue( i,0,wxString::Format( "%i",TimerIndividualH[i] ) );
+        m_gridIndividual->SetCellValue( i,1,wxString::Format( "%i",TimerIndividualM[i] ) );
         if ( TimerIndidividualAMPM.Count() >0 )
             m_gridIndividual->SetCellValue( i,2,TimerIndidividualAMPM[i] );
     }
@@ -9228,7 +9228,7 @@ void TimerInterval::setCellValue( wxGrid* grid, int row, int col )
         if ( min < 0 || min > 59 )
         {
             min = 0;
-            grid->SetCellValue( row,col,_T( "" ) );
+            grid->SetCellValue( row,col,"" );
             return;
         }
     }
@@ -9238,7 +9238,7 @@ void TimerInterval::setCellValue( wxGrid* grid, int row, int col )
         if ( ( opt->timeformat == 0 && ( hr < 0 || hr > 23 ) ) )
         {
             hr = 0;
-            grid->SetCellValue( row,col,_T( "" ) );
+            grid->SetCellValue( row,col,"" );
             return;
         }
 
@@ -9246,7 +9246,7 @@ void TimerInterval::setCellValue( wxGrid* grid, int row, int col )
         {
             if ( hr > 12 )
             {
-                m_gridIndividual->SetCellValue( row,col,wxString::Format( _T( "%i" ),hr-12 ) );
+                m_gridIndividual->SetCellValue( row,col,wxString::Format( "%i",hr-12 ) );
                 m_gridIndividual->SetCellValue( row,2,_( "PM" ) );
             }
             else
@@ -9340,7 +9340,7 @@ void TimerInterval::init( Options* opt, LogbookDialog* dialog )
 
 
 
-    opt->tsec = _T( "0" );
+    opt->tsec = "0";
     m_spinCtrlS->Hide();
     m_staticTextS->Hide();
     m_staticText120->Hide();
@@ -9373,12 +9373,12 @@ void TimerInterval::init( Options* opt, LogbookDialog* dialog )
 
     if ( !loadData() )
     {
-        m_gridFull->SetCellValue( 0,0,_T( "00" ) );
-        m_gridIndividual->SetCellValue( 0,0,_T( "00" ) );
-        m_gridIndividual->SetCellValue( 0,1,_T( "00" ) );
+        m_gridFull->SetCellValue( 0,0,"00" );
+        m_gridIndividual->SetCellValue( 0,0,"00" );
+        m_gridIndividual->SetCellValue( 0,1,"00" );
     }
 
-    opt->tsec = _T( "0" );
+    opt->tsec = "0";
     m_spinCtrlH->SetValue( opt->thour );
     m_spinCtrlM->SetValue( opt->tmin );
     m_spinCtrlS->SetValue( opt->tsec );
@@ -9423,7 +9423,7 @@ PositionDlg::PositionDlg( wxWindow* parent, wxWindowID id, const wxString& title
     m_staticTextsec1->Wrap( -1 );
     fgSizer44->Add( m_staticTextsec1, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlNS = new wxTextCtrl( this, wxID_ANY, wxT( "N" ), wxDefaultPosition, wxSize( 25,-1 ), 0 );
+    m_textCtrlNS = new wxTextCtrl( this, wxID_ANY, "N", wxDefaultPosition, wxSize( 25,-1 ), 0 );
     fgSizer44->Add( m_textCtrlNS, 0, wxALL, 5 );
 
     bSizer34->Add( fgSizer44, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
@@ -9453,7 +9453,7 @@ PositionDlg::PositionDlg( wxWindow* parent, wxWindowID id, const wxString& title
     m_staticTextsec2->Wrap( -1 );
     fgSizer441->Add( m_staticTextsec2, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlWE = new wxTextCtrl( this, wxID_ANY, wxT( "W" ), wxDefaultPosition, wxSize( 25,-1 ), 0 );
+    m_textCtrlWE = new wxTextCtrl( this, wxID_ANY, "W", wxDefaultPosition, wxSize( 25,-1 ), 0 );
     fgSizer441->Add( m_textCtrlWE, 0, wxALL, 5 );
 
     bSizer34->Add( fgSizer441, 0, wxALIGN_RIGHT, 5 );
@@ -9506,8 +9506,8 @@ void PositionDlg::init( LogbookDialog* dlg )
     m_staticTextsec1->SetLabel( opt->Sec );
     m_staticTextsec2->SetLabel( opt->Sec );
 
-    m_choiceFormat->Append( wxT( "054\xB0 12.1234'" ) );
-    m_choiceFormat->Append( wxT( "054\xB0 12' 12.34\"" ) );
+    m_choiceFormat->Append( "054\xB0 12.1234'" );
+    m_choiceFormat->Append( "054\xB0 12' 12.34\"" );
     m_choiceFormat->Select( opt->traditional );
     oldSel = m_choiceFormat->GetSelection();
 
@@ -9515,7 +9515,7 @@ void PositionDlg::init( LogbookDialog* dlg )
     if ( tmp.IsEmpty() && dlg->selGridRow != 0 )
         tmp = dlg->m_gridGlobal->GetCellValue( dlg->selGridRow-1,LogbookHTML::POSITION );
 
-    if ( tmp.Contains( _T( "\"" ) ) )
+    if ( tmp.Contains( "\"" ) )
     {
         m_textCtrlDeg1->SetValue( tmp.substr( 0,3 ) );
         m_textCtrlmin1->SetValue( tmp.substr( 5,2 ) );
@@ -9585,8 +9585,8 @@ void PositionDlg::setFormat( int fmt )
         min1 += sec1;
         min2 += sec2;
 
-        m_textCtrlmin1->SetValue( wxString::Format( _T( "%07.4f" ),min1 ) );
-        m_textCtrlmin2->SetValue( wxString::Format( _T( "%07.4f" ),min2 ) );
+        m_textCtrlmin1->SetValue( wxString::Format( "%07.4f",min1 ) );
+        m_textCtrlmin2->SetValue( wxString::Format( "%07.4f",min2 ) );
         m_textCtrlsec1->Clear();
         m_textCtrlsec2->Clear();
     }
@@ -9607,17 +9607,17 @@ void PositionDlg::setFormat( int fmt )
             sec2 = wxAtof( replaceComma( m_textCtrlsec2->GetValue() ) );
         }
 
-        m_textCtrlmin1->SetValue( wxString::Format( _T( "%02.0f" ),min1 ) );
-        m_textCtrlmin2->SetValue( wxString::Format( _T( "%02.0f" ),min2 ) );
-        m_textCtrlsec1->SetValue( wxString::Format( _T( "%06.3f" ),sec1 ) );
-        m_textCtrlsec2->SetValue( wxString::Format( _T( "%06.3f" ),sec2 ) );
+        m_textCtrlmin1->SetValue( wxString::Format( "%02.0f",min1 ) );
+        m_textCtrlmin2->SetValue( wxString::Format( "%02.0f",min2 ) );
+        m_textCtrlsec1->SetValue( wxString::Format( "%06.3f",sec1 ) );
+        m_textCtrlsec2->SetValue( wxString::Format( "%06.3f",sec2 ) );
     }
 }
 
 wxString PositionDlg::replaceComma( wxString s )
 {
     wxString tmp = s;
-    tmp.Replace( _T( "," ),_T( "." ) );
+    tmp.Replace( ",","." );
     return tmp;
 }
 
@@ -9636,8 +9636,8 @@ void PositionDlg::OnOKButtonClick( wxCommandEvent& event )
 
     degf1 = wxAtof( m_textCtrlDeg1->GetValue() );
     degf2 = wxAtof( m_textCtrlDeg2->GetValue() );
-    wxString deg1    = wxString::Format( _T( "%03.0f" ),wxAtof( m_textCtrlDeg1->GetValue() ) );
-    wxString deg2    = wxString::Format( _T( "%03.0f" ),wxAtof( m_textCtrlDeg2->GetValue() ) );
+    wxString deg1    = wxString::Format( "%03.0f",wxAtof( m_textCtrlDeg1->GetValue() ) );
+    wxString deg2    = wxString::Format( "%03.0f",wxAtof( m_textCtrlDeg2->GetValue() ) );
     min1 = wxAtof( replaceComma( m_textCtrlmin1->GetValue() ) );
     min2 = wxAtof( replaceComma( m_textCtrlmin2->GetValue() ) );
 
@@ -9656,10 +9656,10 @@ void PositionDlg::OnOKButtonClick( wxCommandEvent& event )
             sec2 = wxAtof( replaceComma( m_textCtrlsec2->GetValue() ) );
         }
 
-        min1str = wxString::Format( _T( "%02.0f" ),min1 );
-        min2str = wxString::Format( _T( "%02.0f" ),min2 );
-        sec1str = wxString::Format( _T( "%05.2f" ),sec1 );
-        sec2str = wxString::Format( _T( "%05.2f" ),sec2 );
+        min1str = wxString::Format( "%02.0f",min1 );
+        min2str = wxString::Format( "%02.0f",min2 );
+        sec1str = wxString::Format( "%05.2f",sec1 );
+        sec2str = wxString::Format( "%05.2f",sec2 );
 
         retstr = deg1+min1str+sec1str+m_textCtrlNS->GetValue().Lower()+deg2+min2str+sec2str+m_textCtrlWE->GetValue().Lower();
     }
@@ -9671,8 +9671,8 @@ void PositionDlg::OnOKButtonClick( wxCommandEvent& event )
         min1 += sec1;
         min2 += sec2;
 
-        min1str = wxString::Format( _T( "%07.4f" ),min1 );
-        min2str = wxString::Format( _T( "%07.4f" ),min2 );
+        min1str = wxString::Format( "%07.4f",min1 );
+        min2str = wxString::Format( "%07.4f",min2 );
 
         retstr = deg1+min1str+m_textCtrlNS->GetValue().Lower()+deg2+min2str+m_textCtrlWE->GetValue().Lower();
     }
@@ -9710,19 +9710,19 @@ void PositionDlg::OnOKButtonClick( wxCommandEvent& event )
         m_textCtrlsec2->SetFocus();
         m_textCtrlsec2->SetSelection( -1,-1 );
     }
-    else if ( NS != _T( "N" ) && NS != _T( "S" ) )
+    else if ( NS != "N" && NS != "S" )
     {
         m_textCtrlNS->SetFocus();
         m_textCtrlNS->SetSelection( -1,-1 );
     }
-    else if ( WE != _T( "W" ) && WE != _T( "E" ) )
+    else if ( WE != "W" && WE != "E" )
     {
         m_textCtrlWE->SetFocus();
         m_textCtrlWE->SetSelection( -1,-1 );
     }
     else
     {
-        retstr.Replace( _T( "." ),dlg->decimalPoint );
+        retstr.Replace( ".",dlg->decimalPoint );
         EndModal( wxID_OK );
     }
 }

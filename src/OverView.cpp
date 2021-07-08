@@ -25,7 +25,7 @@ OverView::OverView( LogbookDialog* d, wxString data, wxString lay, wxString layo
     ODTLayout_locn = layoutODT;
     HTMLLayout_locn = lay;
     data_locn = data;
-    data_file = data + _T( "overview.html" );
+    data_file = data + "overview.html";
     grid = d->m_gridOverview;
     opt = d->logbookPlugIn->opt;
     selectedRow = 0;
@@ -61,10 +61,10 @@ void OverView::viewODT( wxString path,wxString layout,int mode )
 
     fn = toODT( path, layout, mode );
 
-    if ( layout != _T( "" ) )
+    if ( layout != "" )
     {
-        fn.Replace( _T( "txt" ),_T( "odt" ) );
-        parent->startApplication( fn,_T( ".odt" ) );
+        fn.Replace( "txt","odt" );
+        parent->startApplication( fn,".odt" );
     }
 }
 
@@ -77,9 +77,9 @@ void OverView::viewHTML( wxString path,wxString layout,int mode )
 
     fn = toHTML( path, layout, mode );
 
-    if ( layout != _T( "" ) )
+    if ( layout != "" )
     {
-        fn.Replace( _T( "txt" ),_T( "html" ) );
+        fn.Replace( "txt","html" );
         parent->startBrowser( fn );
     }
 }
@@ -94,12 +94,12 @@ wxString OverView::toODT( wxString path,wxString layout,int mode )
 
     wxString odt = readLayoutODT( layout_locn,layout );
     if ( !cutInPartsODT( odt, &top, &header,	&middle, &bottom ) )
-        return _T( "" );
+        return "";
 
     if ( mode == 1 )
-        tempPath.Replace( _T( "html" ),_T( "txt" ) );
+        tempPath.Replace( "html","txt" );
     wxTextFile* text = setFiles( path, &tempPath, mode );
-    writeToODT( text,parent->m_gridOverview,tempPath,layout_locn+layout+_T( ".odt" ), top,header,middle,bottom,mode );
+    writeToODT( text,parent->m_gridOverview,tempPath,layout_locn+layout+".odt", top,header,middle,bottom,mode );
 
     return tempPath;
 }
@@ -114,10 +114,10 @@ wxString OverView::toHTML( wxString path,wxString layout,int mode )
 
     wxString html = readLayoutHTML( layout_locn,layout );
     if ( !cutInPartsHTML( html, &top, &header, &middle, &bottom ) )
-        return _T( "" );
+        return "";
 
     wxTextFile* text = setFiles( path, &tempPath, mode );
-    writeToHTML( text,parent->m_gridOverview,tempPath,layout_locn+layout+_T( ".html" ), top,header,middle,bottom,mode );
+    writeToHTML( text,parent->m_gridOverview,tempPath,layout_locn+layout+".html", top,header,middle,bottom,mode );
 
     return tempPath;
 }
@@ -127,12 +127,12 @@ void OverView::loadAllLogbooks()
     wxArrayString		files;
 
     logbooks.clear();
-    int i = wxDir::GetAllFiles( data_locn,&files,_T( "*logbook*.txt" ),wxDIR_FILES );
+    int i = wxDir::GetAllFiles( data_locn,&files,"*logbook*.txt",wxDIR_FILES );
 
     for ( int f = 0; f < i; f++ )
     {
         //wxFileName name(files.Item(f));
-        //if(name.GetName().Contains(_T("logbook")))
+        //if(name.GetName().Contains("logbook"))
         logbooks.Add( files[f] );
     }
 }
@@ -161,7 +161,7 @@ void OverView::actualLogbook()
     showAllLogbooks = false;
     clearGrid();
     for ( unsigned int i=0; i < logbooks.size(); i++ )
-        if ( !logbooks[i].Contains( _T( "until" ) ) )
+        if ( !logbooks[i].Contains( "until" ) )
         {
             loadLogbookData( logbooks[i],false );
             break;
@@ -212,7 +212,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
     wxString path = logbook;
     wxFileName fn( logbook );
     logbook = fn.GetName();
-    if ( logbook == _T( "logbook" ) )
+    if ( logbook == "logbook" )
         logbook = _( "Active Logbook" );
     else
     {
@@ -223,7 +223,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
     int lastrow = 0;
     oneLogbookTotalReset();
 
-    wxString route = _T( "xxx" );
+    wxString route = "xxx";
     int rowNewLogbook = -1;
 
     stream->ReadLine(); // skip line with #1.2#
@@ -233,13 +233,13 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
     {
         sign = wxEmptyString;
         rowNewLogbook++;
-        wxStringTokenizer tkz( t, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( t, "\t",wxTOKEN_RET_EMPTY );
         int c = 0;
         while ( tkz.HasMoreTokens() )
         {
             s = parent->restoreDangerChar( tkz.GetNextToken() );
             s.RemoveLast();
-            s.Replace( _T( "," ),_T( "." ) );
+            s.Replace( ",","." );
 
             switch ( c )
             {
@@ -382,7 +382,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
             case HEADING:
                 break;
             case SOG:
-                if ( !s.IsEmpty() && sign == _T( "S" ) )
+                if ( !s.IsEmpty() && sign == "S" )
                 {
                     s.ToDouble( &x );
                     speed += x;
@@ -394,7 +394,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
                 }
                 break;
             case STW:
-                if ( !s.IsEmpty() && sign == _T( "S" ) )
+                if ( !s.IsEmpty() && sign == "S" )
                 {
                     s.ToDouble( &x );
                     speedSTW += x;
@@ -436,7 +436,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
                     else
                     {
                         wxArrayString WS;
-                        WS = wxStringTokenize( s,_T( "|" ) );
+                        WS = wxStringTokenize( s,"|" );
                         WS[1].ToDouble( &x );
                         wind += x;
                         oneLogbookTotal.wind += x;
@@ -497,7 +497,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
             case ENGINE1:
                 if ( s.IsEmpty() ) continue;
 
-                tkz1.SetString( s, _T( ":" ),wxTOKEN_RET_EMPTY );
+                tkz1.SetString( s, ":",wxTOKEN_RET_EMPTY );
                 long hours, minutes;
                 tkz1.GetNextToken().ToLong( &hours );
                 tkz1.GetNextToken().ToLong( &minutes );
@@ -520,7 +520,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
                 if ( s.IsEmpty() ) continue;
 
                 {
-                    tkz1.SetString( s, _T( ":" ),wxTOKEN_RET_EMPTY );
+                    tkz1.SetString( s, ":",wxTOKEN_RET_EMPTY );
                     long hours, minutes;
                     tkz1.GetNextToken().ToLong( &hours );
                     tkz1.GetNextToken().ToLong( &minutes );
@@ -544,7 +544,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
                 if ( s.IsEmpty() ) continue;
 
                 {
-                    tkz1.SetString( s, _T( ":" ),wxTOKEN_RET_EMPTY );
+                    tkz1.SetString( s, ":",wxTOKEN_RET_EMPTY );
                     long hours, minutes;
                     tkz1.GetNextToken().ToLong( &hours );
                     tkz1.GetNextToken().ToLong( &minutes );
@@ -568,7 +568,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
                 if ( s.IsEmpty() ) continue;
 
                 {
-                    tkz1.SetString( s, _T( ":" ),wxTOKEN_RET_EMPTY );
+                    tkz1.SetString( s, ":",wxTOKEN_RET_EMPTY );
                     long hours, minutes;
                     tkz1.GetNextToken().ToLong( &hours );
                     tkz1.GetNextToken().ToLong( &minutes );
@@ -595,7 +595,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
 
                 if ( s.GetChar( 0 ) == '+' ) break;
                 s.ToDouble( &x );
-                if ( s.GetChar( 0 ) != '-' ) s.Prepend( _T( "-" ) ); // version 0.910 has no minus sign
+                if ( s.GetChar( 0 ) != '-' ) s.Prepend( "-" ); // version 0.910 has no minus sign
 
                 //	if(x < 0)
                 //	{
@@ -625,7 +625,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
                         {
                             int a = it->second;
                             it->second = ++a;
-                            result += it->first+_T( "\n" );
+                            result += it->first+"\n";
                             found = true;
                         }
                     }
@@ -645,7 +645,7 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
             case WATER:
                 if ( s.IsEmpty() ) continue;
                 if ( s.GetChar( 0 ) == '+' ) break;				 // add water used only
-                if ( s.GetChar( 0 ) != '-' ) s.Prepend( _T( "-" ) ); // version 0.910 has no minus sign
+                if ( s.GetChar( 0 ) != '-' ) s.Prepend( "-" ); // version 0.910 has no minus sign
                 s.ToDouble( &x );
 
                 x = fabs( x );
@@ -701,11 +701,11 @@ void OverView::loadLogbookData( wxString logbook, bool colour )
 
 void OverView::resetValues()
 {
-    startdate =_T( "" );
-    enddate = _T( "" );
-    starttime =_T( "" );
-    endtime = _T( "" );
-    etmaldate = _T( "" );
+    startdate ="";
+    enddate = "";
+    starttime ="";
+    endtime = "";
+    etmaldate = "";
     etmal = 0;
     bestetmal = 0;
     bestetmaltemp = 0;
@@ -804,7 +804,7 @@ void OverView::oneLogbookTotalReset()
 void OverView::writeSumColumn( int row, wxString logbook, wxString path, bool colour )
 {
     wxString d, sail;
-    wxString nothing = _T( "-----" );
+    wxString nothing = "-----";
 
     switch ( opt->showWaveSwell )
     {
@@ -827,135 +827,135 @@ void OverView::writeSumColumn( int row, wxString logbook, wxString path, bool co
     grid->SetCellValue( row,FSTART,startdate );
     grid->SetCellValue( row,FEND,enddate );
 
-    wxString temp = wxString::Format( _T( "%6.2f %s" ),distance,opt->showDistance.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    wxString temp = wxString::Format( "%6.2f %s",distance,opt->showDistance.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FDISTANCE,temp );
-    temp = wxString::Format( _T( "%6.2f %s" ),etmal,opt->showDistance.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",etmal,opt->showDistance.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FETMAL,temp );
-    temp = wxString::Format( _T( "%6.2f %s" ),bestetmal,opt->showDistance.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",bestetmal,opt->showDistance.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBESTETMAL,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),fabs( fuel ),opt->vol.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",fabs( fuel ),opt->vol.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FFUEL,temp );
-    temp = wxString::Format( _T( "%6.2f %s" ),fabs( water ),opt->vol.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",fabs( water ),opt->vol.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWATER,temp );
 
-    temp = wxString::Format( _T( "%3.2f %s" ),bank1u,opt->ampereh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",bank1u,opt->ampereh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBANK1U,temp );
-    temp = wxString::Format( _T( "%3.2f %s" ),bank1g,opt->ampereh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",bank1g,opt->ampereh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBANK1G,temp );
-    temp = wxString::Format( _T( "%3.2f %s" ),bank2u,opt->ampereh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",bank2u,opt->ampereh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBANK2U,temp );
-    temp = wxString::Format( _T( "%3.2f %s" ),bank2g,opt->ampereh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",bank2g,opt->ampereh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBANK2G,temp );
 
     if ( windcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),wind/windcount,_T( "kts" ) );
+        temp = wxString::Format( "%6.2f %s",wind/windcount,"kts" );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWIND,temp );
 
     if ( windcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),winddir/windcount,opt->Deg.c_str() );
+        temp = wxString::Format( "%6.2f %s",winddir/windcount,opt->Deg.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWINDDIR,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),windpeak,_T( "kts" ) );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",windpeak,"kts" );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWINDPEAK,temp );
 
     if ( wavecount )
-        temp = wxString::Format( _T( "%6.2f %s" ),wave/wavecount,d.c_str() );
+        temp = wxString::Format( "%6.2f %s",wave/wavecount,d.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWAVE,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),wavepeak,d.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",wavepeak,d.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWAVEPEAK,temp );
 
     if ( swellcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),swell/swellcount,d.c_str() );
+        temp = wxString::Format( "%6.2f %s",swell/swellcount,d.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FSWELL,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),swellpeak,d.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",swellpeak,d.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FSWELLPEAK,temp );
 
     if ( currentcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),currentdir/currentcount,opt->Deg.c_str() );
+        temp = wxString::Format( "%6.2f %s",currentdir/currentcount,opt->Deg.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FCURRENTDIR,temp );
 
     if ( currentcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),current/currentcount,opt->showBoatSpeed.c_str() );
+        temp = wxString::Format( "%6.2f %s",current/currentcount,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FCURRENT,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),currentpeak,opt->showBoatSpeed.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",currentpeak,opt->showBoatSpeed.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FCURRENTPEAK,temp );
 
-    temp = wxString::Format( _T( "%0002i:%02i %s" ),enginehours,enginemin,opt->motorh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%0002i:%02i %s",enginehours,enginemin,opt->motorh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FENGINE1,temp );
 
-    temp = wxString::Format( _T( "%0002i:%02i %s" ),enginehours2,enginemin2,opt->motorh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%0002i:%02i %s",enginehours2,enginemin2,opt->motorh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FENGINE2,temp );
 
-    temp = wxString::Format( _T( "%0002i:%02i %s" ),generatorhours,generatormin,opt->motorh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%0002i:%02i %s",generatorhours,generatormin,opt->motorh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FGENERATOR,temp );
 
-    temp = wxString::Format( _T( "%0002i:%02i %s" ),watermhours,watermmin,opt->motorh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%0002i:%02i %s",watermhours,watermmin,opt->motorh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWATERM,temp );
 
-    temp = wxString::Format( _T( "%3.2f %s" ),watermo,opt->vol.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",watermo,opt->vol.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWATERMO,temp );
 
 
     if ( speedcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),speed/speedcount,opt->showBoatSpeed.c_str() );
+        temp = wxString::Format( "%6.2f %s",speed/speedcount,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FSPEED,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),speedpeak,opt->showBoatSpeed.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",speedpeak,opt->showBoatSpeed.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBSPEED,temp );
 
     //	if(speedcountSTW)
-    //		temp = wxString::Format(_T("%6.2f %s"),speedSTW/speedcountSTW,opt->speed.c_str());
+    //		temp = wxString::Format("%6.2f %s",speedSTW/speedcountSTW,opt->speed.c_str());
     //	else
     //		temp = nothing;
-    //	temp.Replace(_T("."),parent->decimalPoint);
+    //	temp.Replace(".",parent->decimalPoint);
     //	grid->SetCellValue(row,FSPEEDSTW,temp);
 
-    //	temp = wxString::Format(_T("%6.2f %s"),speedpeakSTW,opt->speed.c_str());
-    //	temp.Replace(_T("."),parent->decimalPoint);
+    //	temp = wxString::Format("%6.2f %s",speedpeakSTW,opt->speed.c_str());
+    //	temp.Replace(".",parent->decimalPoint);
     //	grid->SetCellValue(row,FBSPEEDSTW,temp);
 
     grid->SetCellValue( row,FPATH,path );
@@ -989,8 +989,8 @@ void OverView::writeSumColumn( int row, wxString logbook, wxString path, bool co
         wxTimeSpan t( 0,journey.GetMinutes() );
         time = t;
     }
-    grid->SetCellValue( row,FJOURNEY,wxString::Format( _T( "%s %s %s %s" ),
-                        journey.Format( _T( "%D" ) ).c_str(),opt->days.c_str(),time.Format( _T( "%H:%M" ) ).c_str(),opt->motorh.c_str() ) );
+    grid->SetCellValue( row,FJOURNEY,wxString::Format( "%s %s %s %s",
+                        journey.Format( "%D" ).c_str(),opt->days.c_str(),time.Format( "%H:%M" ).c_str(),opt->motorh.c_str() ) );
 
     int max = 0;
     wxString result;
@@ -1011,7 +1011,7 @@ void OverView::writeSumColumn( int row, wxString logbook, wxString path, bool co
 
 void OverView::writeSumColumnLogbook( total data, int row, wxString logbook, bool colour )
 {
-    wxString nothing = _T( "-----" );
+    wxString nothing = "-----";
 
     parent->m_gridOverview->AppendRows();
     row = parent->m_gridOverview->GetNumberRows()-1;
@@ -1040,131 +1040,131 @@ void OverView::writeSumColumnLogbook( total data, int row, wxString logbook, boo
     grid->SetCellValue( row,FSTART,data.logbookStart );
     grid->SetCellValue( row,FEND,enddate );
 
-    wxString temp = wxString::Format( _T( "%6.2f %s" ),data.distance,opt->showDistance.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    wxString temp = wxString::Format( "%6.2f %s",data.distance,opt->showDistance.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FDISTANCE,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.bestetmal,opt->showDistance.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",data.bestetmal,opt->showDistance.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBESTETMAL,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),fabs( data.fuel ),opt->vol.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",fabs( data.fuel ),opt->vol.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FFUEL,temp );
-    temp = wxString::Format( _T( "%6.2f %s" ),fabs( data.water ),opt->vol.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",fabs( data.water ),opt->vol.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWATER,temp );
 
-    temp = wxString::Format( _T( "%3.2f %s" ),data.bank1u,opt->ampereh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",data.bank1u,opt->ampereh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBANK1U,temp );
-    temp = wxString::Format( _T( "%3.2f %s" ),data.bank1g,opt->ampereh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",data.bank1g,opt->ampereh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBANK1G,temp );
-    temp = wxString::Format( _T( "%3.2f %s" ),data.bank2u,opt->ampereh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",data.bank2u,opt->ampereh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBANK2U,temp );
-    temp = wxString::Format( _T( "%3.2f %s" ),data.bank2g,opt->ampereh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",data.bank2g,opt->ampereh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBANK2G,temp );
 
     if ( data.windcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.wind/data.windcount,_T( "kts" ) );
+        temp = wxString::Format( "%6.2f %s",data.wind/data.windcount,"kts" );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWIND,temp );
 
     if ( data.windcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.winddir/data.windcount,opt->Deg.c_str() );
+        temp = wxString::Format( "%6.2f %s",data.winddir/data.windcount,opt->Deg.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWINDDIR,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.windpeak,_T( "kts" ) );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",data.windpeak,"kts" );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWINDPEAK,temp );
 
     if ( data.wavecount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.wave/data.wavecount,d.c_str() );
+        temp = wxString::Format( "%6.2f %s",data.wave/data.wavecount,d.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWAVE,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.wavepeak,d.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",data.wavepeak,d.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWAVEPEAK,temp );
 
     if ( data.swellcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.swell/data.swellcount,d.c_str() );
+        temp = wxString::Format( "%6.2f %s",data.swell/data.swellcount,d.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FSWELL,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.swellpeak,d.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",data.swellpeak,d.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FSWELLPEAK,temp );
 
     if ( data.currentcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.currentdir/data.currentcount,opt->Deg.c_str() );
+        temp = wxString::Format( "%6.2f %s",data.currentdir/data.currentcount,opt->Deg.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FCURRENTDIR,temp );
 
     if ( data.currentcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.current/data.currentcount,opt->showBoatSpeed.c_str() );
+        temp = wxString::Format( "%6.2f %s",data.current/data.currentcount,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FCURRENT,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.currentpeak,opt->showBoatSpeed.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",data.currentpeak,opt->showBoatSpeed.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FCURRENTPEAK,temp );
 
-    temp = wxString::Format( _T( "%0002i:%02i %s" ),data.enginehours,data.enginemin,opt->motorh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%0002i:%02i %s",data.enginehours,data.enginemin,opt->motorh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FENGINE1,temp );
 
-    temp = wxString::Format( _T( "%0002i:%02i %s" ),data.enginehours2,data.enginemin2,opt->motorh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%0002i:%02i %s",data.enginehours2,data.enginemin2,opt->motorh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FENGINE2,temp );
 
-    temp = wxString::Format( _T( "%0002i:%02i %s" ),data.generatorhours,data.generatormin,opt->motorh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%0002i:%02i %s",data.generatorhours,data.generatormin,opt->motorh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FGENERATOR,temp );
 
-    temp = wxString::Format( _T( "%0002i:%02i %s" ),data.watermhours,data.watermmin,opt->motorh.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%0002i:%02i %s",data.watermhours,data.watermmin,opt->motorh.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWATERM,temp );
 
-    temp = wxString::Format( _T( "%3.2f %s" ),data.watermo,opt->vol.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%3.2f %s",data.watermo,opt->vol.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FWATERMO,temp );
 
     if ( data.speedcount )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.speed/data.speedcount,opt->showBoatSpeed.c_str() );
+        temp = wxString::Format( "%6.2f %s",data.speed/data.speedcount,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FSPEED,temp );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.speedpeak,opt->showBoatSpeed.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",data.speedpeak,opt->showBoatSpeed.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
     grid->SetCellValue( row,FBSPEED,temp );
 
     if ( data.speedcountSTW )
-        temp = wxString::Format( _T( "%6.2f %s" ),data.speedSTW/data.speedcountSTW,opt->showBoatSpeed.c_str() );
+        temp = wxString::Format( "%6.2f %s",data.speedSTW/data.speedcountSTW,opt->showBoatSpeed.c_str() );
     else
         temp = nothing;
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp.Replace( ".",parent->decimalPoint );
 
-    temp = wxString::Format( _T( "%6.2f %s" ),data.speedpeakSTW,opt->showBoatSpeed.c_str() );
-    temp.Replace( _T( "." ),parent->decimalPoint );
+    temp = wxString::Format( "%6.2f %s",data.speedpeakSTW,opt->showBoatSpeed.c_str() );
+    temp.Replace( ".",parent->decimalPoint );
 
     wxDateTime startdt, enddt, startdtd, enddtd, time;
 
@@ -1262,7 +1262,7 @@ void OverView::setLayoutLocation()
         layout_locn = ODTLayout_locn;
     this->layout_locn = layout_locn;
 
-    this->layout_locn.Append( _T( "overview" ) );
+    this->layout_locn.Append( "overview" );
     parent->appendOSDirSlash( &layout_locn );
 
     parent->loadLayoutChoice( LogbookDialog::OVERVIEW,layout_locn,parent->overviewChoice,opt->layoutPrefix[LogbookDialog::OVERVIEW] );
@@ -1313,72 +1313,72 @@ wxString OverView::setPlaceHolders( int mode, wxGrid *grid, int row, wxString mi
 {
     wxString newMiddleODT = middle;
 
-    newMiddleODT.Replace( wxT( "#FLOG#" ),replaceNewLine( mode,grid->GetCellValue( row,FLOG ),false ) );
-    newMiddleODT.Replace( wxT( "#LLOG#" ),grid->GetTable()->GetColLabelValue( FLOG ) );
-    newMiddleODT.Replace( wxT( "#FROUTE#" ),replaceNewLine( mode,grid->GetCellValue( row,FROUTE ),false ) );
-    newMiddleODT.Replace( wxT( "#LROUTE#" ),grid->GetTable()->GetColLabelValue( FROUTE ) );
-    newMiddleODT.Replace( wxT( "#FSTART#" ),replaceNewLine( mode,grid->GetCellValue( row,FSTART ),false ) );
-    newMiddleODT.Replace( wxT( "#LSTART#" ),grid->GetTable()->GetColLabelValue( FSTART ) );
-    newMiddleODT.Replace( wxT( "#FEND#" ),replaceNewLine( mode,grid->GetCellValue( row,FEND ),false ) );
-    newMiddleODT.Replace( wxT( "#LEND#" ),grid->GetTable()->GetColLabelValue( FEND ) );
-    newMiddleODT.Replace( wxT( "#FJOURNEY#" ),replaceNewLine( mode,grid->GetCellValue( row,FJOURNEY ),false ) );
-    newMiddleODT.Replace( wxT( "#LJOURNEY#" ),grid->GetTable()->GetColLabelValue( FJOURNEY ) );
-    newMiddleODT.Replace( wxT( "#FDISTANCE#" ),replaceNewLine( mode,grid->GetCellValue( row,FDISTANCE ),false ) );
-    newMiddleODT.Replace( wxT( "#LDISTANCE#" ),grid->GetTable()->GetColLabelValue( FDISTANCE ) );
-    newMiddleODT.Replace( wxT( "#FETMAL#" ),replaceNewLine( mode,grid->GetCellValue( row,FETMAL ),false ) );
-    newMiddleODT.Replace( wxT( "#LETMAL#" ),grid->GetTable()->GetColLabelValue( FETMAL ) );
-    newMiddleODT.Replace( wxT( "#FBESTETMAL#" ),replaceNewLine( mode,grid->GetCellValue( row,FBESTETMAL ),false ) );
-    newMiddleODT.Replace( wxT( "#LBESTETMAL#" ),grid->GetTable()->GetColLabelValue( FBESTETMAL ) );
-    newMiddleODT.Replace( wxT( "#FSPEED#" ),replaceNewLine( mode,grid->GetCellValue( row,FSPEED ),false ) );
-    newMiddleODT.Replace( wxT( "#LSPEED#" ),grid->GetTable()->GetColLabelValue( FSPEED ) );
-    newMiddleODT.Replace( wxT( "#FBSPEED#" ),replaceNewLine( mode,grid->GetCellValue( row,FBSPEED ),false ) );
-    newMiddleODT.Replace( wxT( "#LBSPEED#" ),grid->GetTable()->GetColLabelValue( FBSPEED ) );
-    newMiddleODT.Replace( wxT( "#FENGINE1#" ),replaceNewLine( mode,grid->GetCellValue( row,FENGINE2 ),false ) );
-    newMiddleODT.Replace( wxT( "#LENGINE1#" ),grid->GetTable()->GetColLabelValue( FENGINE2 ) );
-    newMiddleODT.Replace( wxT( "#FGENERATOR#" ),replaceNewLine( mode,grid->GetCellValue( row,FGENERATOR ),false ) );
-    newMiddleODT.Replace( wxT( "#LGENERATOR#" ),grid->GetTable()->GetColLabelValue( FGENERATOR ) );
-    newMiddleODT.Replace( wxT( "#FWATERM#" ),replaceNewLine( mode,grid->GetCellValue( row,FWATERM ),false ) );
-    newMiddleODT.Replace( wxT( "#LWATERM#" ),grid->GetTable()->GetColLabelValue( FWATERM ) );
-    newMiddleODT.Replace( wxT( "#FWATERMO#" ),replaceNewLine( mode,grid->GetCellValue( row,FWATERMO ),false ) );
-    newMiddleODT.Replace( wxT( "#LWATERMO#" ),grid->GetTable()->GetColLabelValue( FWATERMO ) );
-    newMiddleODT.Replace( wxT( "#FBANK1G#" ),replaceNewLine( mode,grid->GetCellValue( row,FBANK1G ),false ) );
-    newMiddleODT.Replace( wxT( "#LBANK1G#" ),grid->GetTable()->GetColLabelValue( FBANK1G ) );
-    newMiddleODT.Replace( wxT( "#FBANK1U#" ),replaceNewLine( mode,grid->GetCellValue( row,FBANK1U ),false ) );
-    newMiddleODT.Replace( wxT( "#LBANK1U#" ),grid->GetTable()->GetColLabelValue( FBANK1U ) );
-    newMiddleODT.Replace( wxT( "#FBANK2G#" ),replaceNewLine( mode,grid->GetCellValue( row,FBANK2G ),false ) );
-    newMiddleODT.Replace( wxT( "#LBANK2G#" ),grid->GetTable()->GetColLabelValue( FBANK2G ) );
-    newMiddleODT.Replace( wxT( "#FBANK2U#" ),replaceNewLine( mode,grid->GetCellValue( row,FBANK2U ),false ) );
-    newMiddleODT.Replace( wxT( "#LBANK2U#" ),grid->GetTable()->GetColLabelValue( FBANK2U ) );
+    newMiddleODT.Replace( "#FLOG#",replaceNewLine( mode,grid->GetCellValue( row,FLOG ),false ) );
+    newMiddleODT.Replace( "#LLOG#",grid->GetTable()->GetColLabelValue( FLOG ) );
+    newMiddleODT.Replace( "#FROUTE#",replaceNewLine( mode,grid->GetCellValue( row,FROUTE ),false ) );
+    newMiddleODT.Replace( "#LROUTE#",grid->GetTable()->GetColLabelValue( FROUTE ) );
+    newMiddleODT.Replace( "#FSTART#",replaceNewLine( mode,grid->GetCellValue( row,FSTART ),false ) );
+    newMiddleODT.Replace( "#LSTART#",grid->GetTable()->GetColLabelValue( FSTART ) );
+    newMiddleODT.Replace( "#FEND#",replaceNewLine( mode,grid->GetCellValue( row,FEND ),false ) );
+    newMiddleODT.Replace( "#LEND#",grid->GetTable()->GetColLabelValue( FEND ) );
+    newMiddleODT.Replace( "#FJOURNEY#",replaceNewLine( mode,grid->GetCellValue( row,FJOURNEY ),false ) );
+    newMiddleODT.Replace( "#LJOURNEY#",grid->GetTable()->GetColLabelValue( FJOURNEY ) );
+    newMiddleODT.Replace( "#FDISTANCE#",replaceNewLine( mode,grid->GetCellValue( row,FDISTANCE ),false ) );
+    newMiddleODT.Replace( "#LDISTANCE#",grid->GetTable()->GetColLabelValue( FDISTANCE ) );
+    newMiddleODT.Replace( "#FETMAL#",replaceNewLine( mode,grid->GetCellValue( row,FETMAL ),false ) );
+    newMiddleODT.Replace( "#LETMAL#",grid->GetTable()->GetColLabelValue( FETMAL ) );
+    newMiddleODT.Replace( "#FBESTETMAL#",replaceNewLine( mode,grid->GetCellValue( row,FBESTETMAL ),false ) );
+    newMiddleODT.Replace( "#LBESTETMAL#",grid->GetTable()->GetColLabelValue( FBESTETMAL ) );
+    newMiddleODT.Replace( "#FSPEED#",replaceNewLine( mode,grid->GetCellValue( row,FSPEED ),false ) );
+    newMiddleODT.Replace( "#LSPEED#",grid->GetTable()->GetColLabelValue( FSPEED ) );
+    newMiddleODT.Replace( "#FBSPEED#",replaceNewLine( mode,grid->GetCellValue( row,FBSPEED ),false ) );
+    newMiddleODT.Replace( "#LBSPEED#",grid->GetTable()->GetColLabelValue( FBSPEED ) );
+    newMiddleODT.Replace( "#FENGINE1#",replaceNewLine( mode,grid->GetCellValue( row,FENGINE2 ),false ) );
+    newMiddleODT.Replace( "#LENGINE1#",grid->GetTable()->GetColLabelValue( FENGINE2 ) );
+    newMiddleODT.Replace( "#FGENERATOR#",replaceNewLine( mode,grid->GetCellValue( row,FGENERATOR ),false ) );
+    newMiddleODT.Replace( "#LGENERATOR#",grid->GetTable()->GetColLabelValue( FGENERATOR ) );
+    newMiddleODT.Replace( "#FWATERM#",replaceNewLine( mode,grid->GetCellValue( row,FWATERM ),false ) );
+    newMiddleODT.Replace( "#LWATERM#",grid->GetTable()->GetColLabelValue( FWATERM ) );
+    newMiddleODT.Replace( "#FWATERMO#",replaceNewLine( mode,grid->GetCellValue( row,FWATERMO ),false ) );
+    newMiddleODT.Replace( "#LWATERMO#",grid->GetTable()->GetColLabelValue( FWATERMO ) );
+    newMiddleODT.Replace( "#FBANK1G#",replaceNewLine( mode,grid->GetCellValue( row,FBANK1G ),false ) );
+    newMiddleODT.Replace( "#LBANK1G#",grid->GetTable()->GetColLabelValue( FBANK1G ) );
+    newMiddleODT.Replace( "#FBANK1U#",replaceNewLine( mode,grid->GetCellValue( row,FBANK1U ),false ) );
+    newMiddleODT.Replace( "#LBANK1U#",grid->GetTable()->GetColLabelValue( FBANK1U ) );
+    newMiddleODT.Replace( "#FBANK2G#",replaceNewLine( mode,grid->GetCellValue( row,FBANK2G ),false ) );
+    newMiddleODT.Replace( "#LBANK2G#",grid->GetTable()->GetColLabelValue( FBANK2G ) );
+    newMiddleODT.Replace( "#FBANK2U#",replaceNewLine( mode,grid->GetCellValue( row,FBANK2U ),false ) );
+    newMiddleODT.Replace( "#LBANK2U#",grid->GetTable()->GetColLabelValue( FBANK2U ) );
 
-    newMiddleODT.Replace( wxT( "#FENGINE#" ),replaceNewLine( mode,grid->GetCellValue( row,FENGINE1 ),false ) );
-    newMiddleODT.Replace( wxT( "#LENGINE#" ),grid->GetTable()->GetColLabelValue( FENGINE1 ) );
-    newMiddleODT.Replace( wxT( "#FFUEL#" ),replaceNewLine( mode,grid->GetCellValue( row,FFUEL ),false ) );
-    newMiddleODT.Replace( wxT( "#LFUEL#" ),grid->GetTable()->GetColLabelValue( FFUEL ) );
-    newMiddleODT.Replace( wxT( "#FWATER#" ),replaceNewLine( mode,grid->GetCellValue( row,FWATER ),false ) );
-    newMiddleODT.Replace( wxT( "#LWATER#" ),grid->GetTable()->GetColLabelValue( FWATER ) );
-    newMiddleODT.Replace( wxT( "#FWINDDIR#" ),replaceNewLine( mode,grid->GetCellValue( row,FWINDDIR ),false ) );
-    newMiddleODT.Replace( wxT( "#LWINDDIR#" ),grid->GetTable()->GetColLabelValue( FWINDDIR ) );
-    newMiddleODT.Replace( wxT( "#FWIND#" ),replaceNewLine( mode,grid->GetCellValue( row,FWIND ),false ) );
-    newMiddleODT.Replace( wxT( "#LWIND#" ),grid->GetTable()->GetColLabelValue( FWIND ) );
-    newMiddleODT.Replace( wxT( "#FWINDPEAK#" ),replaceNewLine( mode,grid->GetCellValue( row,FWINDPEAK ),false ) );
-    newMiddleODT.Replace( wxT( "#LWINDPEAK#" ),grid->GetTable()->GetColLabelValue( FWINDPEAK ) );
-    newMiddleODT.Replace( wxT( "#FCURRENTDIR#" ),replaceNewLine( mode,grid->GetCellValue( row,FCURRENTDIR ),false ) );
-    newMiddleODT.Replace( wxT( "#LCURRENTDIR#" ),grid->GetTable()->GetColLabelValue( FCURRENTDIR ) );
+    newMiddleODT.Replace( "#FENGINE#",replaceNewLine( mode,grid->GetCellValue( row,FENGINE1 ),false ) );
+    newMiddleODT.Replace( "#LENGINE#",grid->GetTable()->GetColLabelValue( FENGINE1 ) );
+    newMiddleODT.Replace( "#FFUEL#",replaceNewLine( mode,grid->GetCellValue( row,FFUEL ),false ) );
+    newMiddleODT.Replace( "#LFUEL#",grid->GetTable()->GetColLabelValue( FFUEL ) );
+    newMiddleODT.Replace( "#FWATER#",replaceNewLine( mode,grid->GetCellValue( row,FWATER ),false ) );
+    newMiddleODT.Replace( "#LWATER#",grid->GetTable()->GetColLabelValue( FWATER ) );
+    newMiddleODT.Replace( "#FWINDDIR#",replaceNewLine( mode,grid->GetCellValue( row,FWINDDIR ),false ) );
+    newMiddleODT.Replace( "#LWINDDIR#",grid->GetTable()->GetColLabelValue( FWINDDIR ) );
+    newMiddleODT.Replace( "#FWIND#",replaceNewLine( mode,grid->GetCellValue( row,FWIND ),false ) );
+    newMiddleODT.Replace( "#LWIND#",grid->GetTable()->GetColLabelValue( FWIND ) );
+    newMiddleODT.Replace( "#FWINDPEAK#",replaceNewLine( mode,grid->GetCellValue( row,FWINDPEAK ),false ) );
+    newMiddleODT.Replace( "#LWINDPEAK#",grid->GetTable()->GetColLabelValue( FWINDPEAK ) );
+    newMiddleODT.Replace( "#FCURRENTDIR#",replaceNewLine( mode,grid->GetCellValue( row,FCURRENTDIR ),false ) );
+    newMiddleODT.Replace( "#LCURRENTDIR#",grid->GetTable()->GetColLabelValue( FCURRENTDIR ) );
 
-    newMiddleODT.Replace( wxT( "#FCURRENT#" ),replaceNewLine( mode,grid->GetCellValue( row,FCURRENT ),false ) );
-    newMiddleODT.Replace( wxT( "#LCURRENT#" ),grid->GetTable()->GetColLabelValue( FCURRENT ) );
-    newMiddleODT.Replace( wxT( "#FCURRENTPEAK#" ),replaceNewLine( mode,grid->GetCellValue( row,FCURRENTPEAK ),false ) );
-    newMiddleODT.Replace( wxT( "#LCURRENTPEAK#" ),grid->GetTable()->GetColLabelValue( FCURRENTPEAK ) );
-    newMiddleODT.Replace( wxT( "#FWAVE#" ),replaceNewLine( mode,grid->GetCellValue( row,FWAVE ),false ) );
-    newMiddleODT.Replace( wxT( "#LWAVE#" ),grid->GetTable()->GetColLabelValue( FWAVE ) );
-    newMiddleODT.Replace( wxT( "#FWAVEPEAK#" ),replaceNewLine( mode,grid->GetCellValue( row,FWAVEPEAK ),false ) );
-    newMiddleODT.Replace( wxT( "#LWAVEPEAK#" ),grid->GetTable()->GetColLabelValue( FWAVEPEAK ) );
-    newMiddleODT.Replace( wxT( "#FSWELL#" ),replaceNewLine( mode,grid->GetCellValue( row,FSWELL ),false ) );
-    newMiddleODT.Replace( wxT( "#LSWELL#" ),grid->GetTable()->GetColLabelValue( FSWELL ) );
-    newMiddleODT.Replace( wxT( "#FSWELLPEAK#" ),replaceNewLine( mode,grid->GetCellValue( row,FSWELLPEAK ),false ) );
-    newMiddleODT.Replace( wxT( "#LSWELLPEAK#" ),grid->GetTable()->GetColLabelValue( FSWELLPEAK ) );
-    newMiddleODT.Replace( wxT( "#FSAILS#" ),replaceNewLine( mode,grid->GetCellValue( row,FSAILS ),false ) );
-    newMiddleODT.Replace( wxT( "#LSAILS#" ),grid->GetTable()->GetColLabelValue( FSAILS ) );
+    newMiddleODT.Replace( "#FCURRENT#",replaceNewLine( mode,grid->GetCellValue( row,FCURRENT ),false ) );
+    newMiddleODT.Replace( "#LCURRENT#",grid->GetTable()->GetColLabelValue( FCURRENT ) );
+    newMiddleODT.Replace( "#FCURRENTPEAK#",replaceNewLine( mode,grid->GetCellValue( row,FCURRENTPEAK ),false ) );
+    newMiddleODT.Replace( "#LCURRENTPEAK#",grid->GetTable()->GetColLabelValue( FCURRENTPEAK ) );
+    newMiddleODT.Replace( "#FWAVE#",replaceNewLine( mode,grid->GetCellValue( row,FWAVE ),false ) );
+    newMiddleODT.Replace( "#LWAVE#",grid->GetTable()->GetColLabelValue( FWAVE ) );
+    newMiddleODT.Replace( "#FWAVEPEAK#",replaceNewLine( mode,grid->GetCellValue( row,FWAVEPEAK ),false ) );
+    newMiddleODT.Replace( "#LWAVEPEAK#",grid->GetTable()->GetColLabelValue( FWAVEPEAK ) );
+    newMiddleODT.Replace( "#FSWELL#",replaceNewLine( mode,grid->GetCellValue( row,FSWELL ),false ) );
+    newMiddleODT.Replace( "#LSWELL#",grid->GetTable()->GetColLabelValue( FSWELL ) );
+    newMiddleODT.Replace( "#FSWELLPEAK#",replaceNewLine( mode,grid->GetCellValue( row,FSWELLPEAK ),false ) );
+    newMiddleODT.Replace( "#LSWELLPEAK#",grid->GetTable()->GetColLabelValue( FSWELLPEAK ) );
+    newMiddleODT.Replace( "#FSAILS#",replaceNewLine( mode,grid->GetCellValue( row,FSAILS ),false ) );
+    newMiddleODT.Replace( "#LSAILS#",grid->GetTable()->GetColLabelValue( FSAILS ) );
 
     return newMiddleODT;
 }

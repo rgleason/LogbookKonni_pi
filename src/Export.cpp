@@ -27,15 +27,15 @@ Export::~Export( void )
 
 wxString Export::readLayoutODT( wxString path,wxString layout )
 {
-    wxString odt = _T( "" );
+    wxString odt = "";
 
-    wxString filename = path + layout + _T( ".odt" );
+    wxString filename = path + layout + ".odt";
 
     if ( wxFileExists( filename ) )
     {
 //#ifdef __WXOSX__
         unique_ptr<wxZipEntry> entry;
-        static const wxString fn = _T( "content.xml" );
+        static const wxString fn = "content.xml";
         wxString name = wxZipEntry::GetInternalName( fn );
         wxFFileInputStream in( filename );
         wxZipInputStream zip( in );
@@ -46,12 +46,12 @@ wxString Export::readLayoutODT( wxString path,wxString layout )
         while ( entry.get() != NULL && entry->GetInternalName() != name );
         if ( entry.get() != NULL )
         {
-            wxTextInputStream txt( zip,_T( "\n" ),wxConvUTF8 );
+            wxTextInputStream txt( zip,"\n",wxConvUTF8 );
             while ( !zip.Eof() )
                 odt += txt.ReadLine();
         }
 //#else
-        /*	static const wxString fn = _T("content.xml");
+        /*	static const wxString fn = "content.xml";
         	wxFileInputStream in(filename);
         	wxZipInputStream zip(in);
         	wxTextInputStream txt(zip);
@@ -67,8 +67,8 @@ bool Export::cutInPartsODT( wxString odt, wxString* top, wxString* header,
 {
     int indexTop;
     int indexBottom;
-    wxString seperatorTop        = wxT( "[[" );
-    wxString seperatorBottom     = wxT( "]]" );
+    wxString seperatorTop        = "[[";
+    wxString seperatorBottom     = "]]";
 
     if ( odt.Contains( seperatorTop ) )
     {
@@ -81,10 +81,10 @@ bool Export::cutInPartsODT( wxString odt, wxString* top, wxString* header,
         *middle			= odt.substr( indexTop+11 );
         *middle			= ( *middle ).substr( 0,( *middle ).Find( seperatorBottom ) );
         *middle			= ( *middle ).substr( 0,( *middle ).find_last_of( '<' ) );
-        return _T( "OK" );
+        return "OK";
     }
     else
-        return _T( "" );
+        return "";
 
 }
 
@@ -96,11 +96,11 @@ bool Export::writeToHTML( wxTextFile* logFile, wxGrid* grid, wxString filenameOu
     wxFileOutputStream output( filenameOut );
     wxTextOutputStream htmlFile( output );
 
-    top.Replace( wxT( "#TYPE#" ),dialog->boatType->GetValue() );
-    top.Replace( wxT( "#BOATNAME#" ),dialog->boatName->GetValue() );
-    top.Replace( wxT( "#HOMEPORT#" ),dialog->homeport->GetValue() );
-    top.Replace( wxT( "#CALLSIGN#" ),dialog->callsign->GetValue() );
-    top.Replace( wxT( "#REGISTRATION#" ),dialog->registration->GetValue() );
+    top.Replace( "#TYPE#",dialog->boatType->GetValue() );
+    top.Replace( "#BOATNAME#",dialog->boatName->GetValue() );
+    top.Replace( "#HOMEPORT#",dialog->homeport->GetValue() );
+    top.Replace( "#CALLSIGN#",dialog->callsign->GetValue() );
+    top.Replace( "#REGISTRATION#",dialog->registration->GetValue() );
 
     htmlFile << top;
 
@@ -121,14 +121,14 @@ wxString Export::readLayoutHTML( wxString path,wxString layoutFileName )
 {
     wxString html, path1;
 
-    path1 = path + layoutFileName + wxT( ".html" );;
+    path1 = path + layoutFileName + ".html";;
     wxTextFile layout( path1 );
 
     layout.Open();
 
     for ( unsigned int i = 0; i < layout.GetLineCount(); i++ )
     {
-        html += layout.GetLine( i )+_T( "\n" );
+        html += layout.GetLine( i )+"\n";
     }
 
     layout.Close();
@@ -138,8 +138,8 @@ wxString Export::readLayoutHTML( wxString path,wxString layoutFileName )
 
 bool Export::cutInPartsHTML( wxString html, wxString* top, wxString* header, wxString* middle, wxString* bottom )
 {
-    wxString seperatorTop = _T( "<!-- Repeat -->" );
-    wxString seperatorBottom = _T( "<!-- Repeat End -->" );
+    wxString seperatorTop = "<!-- Repeat -->";
+    wxString seperatorBottom = "<!-- Repeat End -->";
 
     int indexTop = html.Find( seperatorTop );
     indexTop += seperatorTop.Len();
@@ -157,11 +157,11 @@ wxTextFile* Export::setFiles( wxString savePath, wxString *path, int mode )
 {
     if ( mode == 0 )
     {
-        ( *path ).Replace( wxT( "txt" ),wxT( "html" ) );
+        ( *path ).Replace( "txt","html" );
     }
     else if ( mode == 1 )
     {
-        ( *path ).Replace( wxT( "txt" ),wxT( "odt" ) );
+        ( *path ).Replace( "txt","odt" );
     }
     else
     {
@@ -189,13 +189,13 @@ bool Export::writeToODT( wxTextFile* logFile,wxGrid* grid, wxString filenameOut,
     outzip.CopyArchiveMetaData( inzip );
 
     while ( entry.reset( inzip.GetNextEntry() ), entry.get() != NULL )
-        if ( !entry->GetName().Matches( _T( "content.xml" ) ) )
+        if ( !entry->GetName().Matches( "content.xml" ) )
             if ( !outzip.CopyEntry( entry.release(), inzip ) )
                 break;
 
     in.reset();
 
-    outzip.PutNextEntry( _T( "content.xml" ) );
+    outzip.PutNextEntry( "content.xml" );
 
     odtFile << top;
 
@@ -217,30 +217,30 @@ bool Export::writeToODT( wxTextFile* logFile,wxGrid* grid, wxString filenameOut,
 
 wxString Export::replaceNewLine( int mode, wxString str, bool label )
 {
-    str.Replace( wxT( "&" ),wxT( "&amp;" ) );
-    str.Replace( wxT( "<" ),wxT( "&lt;" ) );
-    str.Replace( wxT( ">" ),wxT( "&gt;" ) );
-    str.Replace( wxT( "'" ),wxT( "&apos;" ) );
-    str.Replace( wxT( "\"" ),wxT( "&quot;" ) );
-//	str.Replace(wxT("°"),wxT("&deg;"));
+    str.Replace( "&","&amp;" );
+    str.Replace( "<","&lt;" );
+    str.Replace( ">","&gt;" );
+    str.Replace( "'","&apos;" );
+    str.Replace( "\"","&quot;" );
+//	str.Replace("°","&deg;");
 
     if ( mode == 0 )
     {
         // HTML
-        str.Replace( wxT( "\n" ),wxT( "<br>" ) );
+        str.Replace( "\n","<br>" );
     }
     else
     {
         // ODT
         if ( !label )
         {
-            str.Replace( wxT( "\n" ),wxT( "<text:line-break/>" ) );
-            str.Replace( wxT( "\xD\xA" ),wxT( "<text:line-break/>" ) );
+            str.Replace( "\n","<text:line-break/>" );
+            str.Replace( "\xD\xA","<text:line-break/>" );
         }
         else
         {
-            str.Replace( wxT( "\n" ),wxT( " " ) );
-            str.Replace( wxT( "\xD\xA" ),wxT( " " ) );
+            str.Replace( "\n"," " );
+            str.Replace( "\xD\xA"," " );
         }
     }
 

@@ -51,19 +51,19 @@ CrewList::CrewList( LogbookDialog* d, wxString data, wxString layout, wxString l
         layout_locn = layoutODT;
 
     wxString watchData = data;
-    watchData.Append( _T( "watchlist.txt" ) );
+    watchData.Append( "watchlist.txt" );
     wxFileName wxHomeFiledir( watchData ) ;
     if ( true != wxHomeFiledir.FileExists() )
     {
         watchListFile = new wxTextFile( watchData );
         watchListFile->Create();
-//		watchListFile->AddLine(_T("#1.2#"));
+//		watchListFile->AddLine("#1.2#");
     }
     else
         watchListFile = new wxTextFile( watchData );
 
     wxString crewData = data;
-    crewData.Append( _T( "crewlist.txt" ) );
+    crewData.Append( "crewlist.txt" );
     wxFileName wxHomeFiledir1( crewData ) ;
     if ( true != wxHomeFiledir1.FileExists() )
     {
@@ -74,13 +74,13 @@ CrewList::CrewList( LogbookDialog* d, wxString data, wxString layout, wxString l
         crewListFile = new wxTextFile( crewData );
 
     wxString crewLay = layout_locn;
-    crewLay.Append( _T( "crew" ) );
+    crewLay.Append( "crew" );
     dialog->appendOSDirSlash( &crewLay );
 
     data_locn = crewData;
     layout_locn = crewLay;
     html_locn = data_locn;
-    html_locn.Replace( _T( "txt" ),_T( "html" ) );
+    html_locn.Replace( "txt","html" );
 
     setLayoutLocation( layout_locn );
 
@@ -120,18 +120,18 @@ void CrewList::gridWakeInit()
 void CrewList::firstColumn()
 {
     gridWake->SetCellEditor( 3,0,new wxGridCellAutoWrapStringEditor );
-    dialog->m_textCtrlWatchStartTime->SetValue( _T( "08:00" ) );
+    dialog->m_textCtrlWatchStartTime->SetValue( "08:00" );
     dialog->m_textCtrlWatchStartDate->SetValue( wxDateTime::Now().Format( dialog->logbookPlugIn->opt->sdateformat ) );
 
-    gridWake->SetCellValue( 0,0,wxString::Format( _T( "00:00%s" ),dialog->logbookPlugIn->opt->motorh.c_str() ) );
+    gridWake->SetCellValue( 0,0,wxString::Format( "00:00%s",dialog->logbookPlugIn->opt->motorh.c_str() ) );
     wxDateTime dt,e;
     dt = wxDateTime::Now();
     e = dt;
     dt.Set( 8,0 );
     e.Set( 7,59 );
     gridWake->SetCellValue( 1,0,wxDateTime::Now().Format( dialog->logbookPlugIn->opt->sdateformat ) );
-    gridWake->SetCellValue( 2,0,wxString::Format( _T( "%s-%s" ),dt.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
-                            e.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str() ) ); //_T("08:00-07:59"));
+    gridWake->SetCellValue( 2,0,wxString::Format( "%s-%s",dt.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
+                            e.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str() ) ); //"08:00-07:59");
     gridWake->SetCellValue( 3,0,wxEmptyString );
 
     gridWake->SetReadOnly( 1,0 );
@@ -148,7 +148,7 @@ void CrewList::setLayoutLocation( wxString loc )
         layout_locn = ODTLayout;
     wxString crewLay = layout_locn;
 
-    crewLay.Append( _T( "crew" ) );
+    crewLay.Append( "crew" );
     dialog->appendOSDirSlash( &crewLay );
     layout_locn = crewLay;
     dialog->loadLayoutChoice( LogbookDialog::CREW,crewLay,dialog->crewChoice,opt->layoutPrefix[LogbookDialog::CREW] );
@@ -181,7 +181,7 @@ void CrewList::loadData()
     for ( int i = 0; i < lineCount; i++ )
     {
         line = crewListFile->GetLine( i );
-        if ( line.Contains( _T( "#1.2#" ) ) )
+        if ( line.Contains( "#1.2#" ) )
             continue;
         gridCrew->AppendRows();
         numRows = gridCrew->GetNumberRows()-1;
@@ -190,7 +190,7 @@ void CrewList::loadData()
         gridCrew->SetCellEditor( numRows,0,boolEditor );
         gridCrew->SetCellAlignment( numRows,0,wxALIGN_CENTRE, wxALIGN_CENTER );
 
-        wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
         int c;
         int colCount = gridCrew->GetNumberCols();
         if ( tkz.CountTokens() != ( unsigned int ) colCount )
@@ -242,15 +242,15 @@ void CrewList::loadData()
     }
 
     line = watchListFile->GetFirstLine();
-    wxStringTokenizer tkz( line,_T( "\t" ) );
+    wxStringTokenizer tkz( line,"\t" );
     s = tkz.GetNextToken();
-    if ( s != _T( "#1.2#" ) ) return;
+    if ( s != "#1.2#" ) return;
     s = tkz.GetNextToken();
     dialog->m_textCtrlWatchStartDate->SetValue( s );
     s = tkz.GetNextToken();
     dialog->m_textCtrlWatchStartTime->SetValue( s );
     s = tkz.GetNextToken();
-    if ( s == _T( "1" ) )
+    if ( s == "1" )
         setDayButtons( true );
     dialog->m_buttonReset->Enable();
     s = tkz.GetNextToken();
@@ -273,7 +273,7 @@ void CrewList::filterCrewMembers()
 
     for ( int row = 0; row < gridCrew->GetNumberRows(); row++ )
     {
-        if ( gridCrew->GetCellValue( row,ONBOARD ) == _T( "" ) )
+        if ( gridCrew->GetCellValue( row,ONBOARD ) == "" )
         {
             gridCrew->SetRowSize( row,0 );
             i++;
@@ -294,7 +294,7 @@ void CrewList::showAllCrewMembers()
 {
     for ( int row = 0; row < gridCrew->GetNumberRows(); row++ )
     {
-        if ( gridCrew->GetCellValue( row,ONBOARD ) == _T( "" ) )
+        if ( gridCrew->GetCellValue( row,ONBOARD ) == "" )
             gridCrew->SetRowSize( row,rowHeight );
     }
 
@@ -306,12 +306,12 @@ void CrewList::saveData()
     if ( !modified ) return;
     modified = false;
 
-    wxString s = _T( "" );
+    wxString s = "";
     crewListFile->Open();
     crewListFile->Clear();
 
     int count = gridCrew->GetNumberRows();
-    crewListFile->AddLine( _T( "#1.2#" ) );
+    crewListFile->AddLine( "#1.2#" );
     for ( int r = 0; r < count; r++ )
     {
         for ( int c = 0; c < gridCrew->GetNumberCols(); c++ )
@@ -321,20 +321,20 @@ void CrewList::saveData()
             {
                 wxDateTime dt;
                 dialog->myParseDate( temp,dt );
-                s += wxString::Format( _T( "%i/%i/%i \t" ),dt.GetMonth(), dt.GetDay(), dt.GetYear() );
+                s += wxString::Format( "%i/%i/%i \t",dt.GetMonth(), dt.GetDay(), dt.GetYear() );
             }
             else if ( c == EST_ON && ( !temp.IsEmpty() && temp.GetChar( 0 ) != ' ' ) )
             {
                 wxDateTime dt;
                 dialog->myParseDate( temp,dt );
-                s += wxString::Format( _T( "%i/%i/%i \t" ),dt.GetMonth(), dt.GetDay(), dt.GetYear() );
+                s += wxString::Format( "%i/%i/%i \t",dt.GetMonth(), dt.GetDay(), dt.GetYear() );
             }
             else
-                s += temp +_T( " \t" );
+                s += temp +" \t";
         }
         s.RemoveLast();
         crewListFile->AddLine( s );
-        s = _T( "" );
+        s = "";
     }
     crewListFile->Write();
     crewListFile->Close();
@@ -359,7 +359,7 @@ void CrewList::addCrew( wxGrid* grid, wxGrid* wake )
     gridCrew->MakeCellVisible( numRows,NAME );
 
     if ( dialog->m_menu2->IsChecked( MENUCREWALL ) )
-        grid->SetCellValue( numRows,ONBOARD,_T( "" ) );
+        grid->SetCellValue( numRows,ONBOARD,"" );
     else
         grid->SetCellValue( numRows,ONBOARD,_( "Yes" ) );
 
@@ -376,7 +376,7 @@ void CrewList::changeCrew( wxGrid* grid, int row, int col, int offset )
 
     if ( col == ONBOARD && dialog->m_menu2->IsChecked( MENUCREWONBOARD ) )
     {
-        if ( grid->GetCellValue( row,col ) == _T( "" ) )
+        if ( grid->GetCellValue( row,col ) == "" )
         {
             filterCrewMembers();
             grid->ForceRefresh();
@@ -419,7 +419,7 @@ void CrewList::changeCrewWake( wxGrid* grid, int row, int col, bool* toggle )
     {
         s = gridWake->GetCellValue( 0,col );
 
-        if ( s.Contains( _T( " " ) ) )
+        if ( s.Contains( " " ) )
         {
             s = s.RemoveLast();
             s = s.RemoveLast();
@@ -427,7 +427,7 @@ void CrewList::changeCrewWake( wxGrid* grid, int row, int col, bool* toggle )
 
         if ( !checkHourFormat( s, 0, col, &dt ) ) return;
 
-        wxString t = wxString::Format( _T( "%s %s" ),dt.Format( _T( "%H:%M" ) ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() );
+        wxString t = wxString::Format( "%s %s",dt.Format( "%H:%M" ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() );
 
         if ( t == s || ( dt.GetHour() == 0 && dt.GetMinute() == 0 ) ) return;
         gridWake->SetCellValue( 0,col,t );
@@ -438,7 +438,7 @@ void CrewList::changeCrewWake( wxGrid* grid, int row, int col, bool* toggle )
         s = gridWake->GetCellValue( row,col );
         if ( s.IsEmpty() )
         {
-            gridWake->SetCellValue( row,col,_T( " " ) );
+            gridWake->SetCellValue( row,col," " );
             return;
         }
         if ( s.GetChar( 0 ) == '\n' )
@@ -466,7 +466,7 @@ void CrewList::insertDefaultCols( bool *insertCols )
         wxDateTime e = dt;
         e.Add( df );
         e.Subtract( ed );
-//		wxMessageBox(wxString::Format(_T("%s %s %s \n%s\n%i"),dt.FormatDate(),dtend.FormatDate(),time.FormatISOTime(),e.FormatDate(),df.GetHours()));
+//		wxMessageBox(wxString::Format("%s %s %s \n%s\n%i",dt.FormatDate(),dtend.FormatDate(),time.FormatISOTime(),e.FormatDate(),df.GetHours()));
         if ( e < dtend )
         {
             insertWatchColumn( i,t,time,dt,e,insertCols );
@@ -502,7 +502,7 @@ wxTimeSpan CrewList::createDefaultDateTime( wxDateTime &dt, wxDateTime &dtend, w
     dtend.Add( hr );
 
     t = gridWake->GetCellValue( 0,0 );
-    wxStringTokenizer tkz( t,_T( ":" ) );
+    wxStringTokenizer tkz( t,":" );
     long h,m;
     tkz.GetNextToken().ToLong( &h );
     tkz.GetNextToken().ToLong( &m );
@@ -511,7 +511,7 @@ wxTimeSpan CrewList::createDefaultDateTime( wxDateTime &dt, wxDateTime &dtend, w
     wxDateTime e = dt;
     e.Add( df );
     e.Subtract( ed );
-    gridWake->SetCellValue( 2,0,wxString::Format( _T( "%s-%s" ),dt.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
+    gridWake->SetCellValue( 2,0,wxString::Format( "%s-%s",dt.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
                             e.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str() ) );
     dt.Add( df );
 
@@ -524,16 +524,16 @@ void CrewList::insertWatchColumn( int col, wxString time, wxDateTime wtime, wxDa
     gridWake->AppendCols();
     gridWake->SetCellEditor( 3,col,new wxGridCellAutoWrapStringEditor );
 
-    gridWake->SetColLabelValue( col,wxString::Format( _T( "%d. %s" ),col+1,dialog->m_gridGlobal->GetColLabelValue( LogbookDialog::WAKE ).c_str() ) );
-    gridWake->SetCellValue( 0,col,wxString::Format( _T( "%s %s" ),wtime.Format( _T( "%H:%M" ) ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() ) );
+    gridWake->SetColLabelValue( col,wxString::Format( "%d. %s",col+1,dialog->m_gridGlobal->GetColLabelValue( LogbookDialog::WAKE ).c_str() ) );
+    gridWake->SetCellValue( 0,col,wxString::Format( "%s %s",wtime.Format( "%H:%M" ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() ) );
     if ( dt.GetDateOnly() != dtend.GetDateOnly() )
-        gridWake->SetCellValue( 1,col,wxString::Format( _T( "%s\n%s" ),dt.Format( dialog->logbookPlugIn->opt->sdateformat ).c_str(),
+        gridWake->SetCellValue( 1,col,wxString::Format( "%s\n%s",dt.Format( dialog->logbookPlugIn->opt->sdateformat ).c_str(),
                                 dtend.Format( dialog->logbookPlugIn->opt->sdateformat ).c_str() ) );
     else
         gridWake->SetCellValue( 1,col,dt.Format( dialog->logbookPlugIn->opt->sdateformat ) );
-    gridWake->SetCellValue( 2,col,wxString::Format( _T( "%s-%s" ),dt.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
+    gridWake->SetCellValue( 2,col,wxString::Format( "%s-%s",dt.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
                             dtend.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str() ) );
-    gridWake->SetCellValue( 3,col,_T( " " ) );
+    gridWake->SetCellValue( 3,col," " );
     gridWake->SetReadOnly( 1,col );
     gridWake->SetReadOnly( 2,col );
     gridWake->EndBatch();
@@ -553,7 +553,7 @@ wxString CrewList::updateWatchTime( unsigned int day, int col, bool* insertCols 
 
     for ( int i = 0; i < gridWake->GetNumberCols(); i++ )
     {
-        gridWake->SetColLabelValue( i,wxString::Format( _T( "%i. %s" ),i+1,dialog->m_gridGlobal->GetColLabelValue( LogbookDialog::WAKE ).c_str() ) );
+        gridWake->SetColLabelValue( i,wxString::Format( "%i. %s",i+1,dialog->m_gridGlobal->GetColLabelValue( LogbookDialog::WAKE ).c_str() ) );
         dialog->myParseTime( gridWake->GetCellValue( 0,i ),time );
         wxTimeSpan df( ( long )time.GetHour(),( long )time.GetMinute() );
 
@@ -568,7 +568,7 @@ wxString CrewList::updateWatchTime( unsigned int day, int col, bool* insertCols 
         else
         {
             str = gridWake->GetCellValue( 2,i-1 );
-            wxStringTokenizer tkz( str,_T( "-" ) );
+            wxStringTokenizer tkz( str,"-" );
             str1 = tkz.GetNextToken();
             str2 = tkz.GetNextToken();
             //dialog->myParseTime(str1,dtst);
@@ -580,17 +580,17 @@ wxString CrewList::updateWatchTime( unsigned int day, int col, bool* insertCols 
 //			dtend.Add(tse);
         }
 
-        //wxMessageBox(wxString::Format(_T("ohne %i %s %s\n%s %s"),i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
+        //wxMessageBox(wxString::Format("ohne %i %s %s\n%s %s",i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
         if ( i != 0 )
         {
             //dtst.Add(df);
-            //	wxMessageBox(wxString::Format(_T("%i %s %s\n%s %s"),i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
+            //	wxMessageBox(wxString::Format("%i %s %s\n%s %s",i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
             dtst = dtend;
-            //	wxMessageBox(wxString::Format(_T("%i %s %s\n%s %s"),i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
+            //	wxMessageBox(wxString::Format("%i %s %s\n%s %s",i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
             dtst.Add( ed );
-            //	wxMessageBox(wxString::Format(_T("%i %s %s\n%s %s"),i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
+            //	wxMessageBox(wxString::Format("%i %s %s\n%s %s",i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
             dtend.Add( df );
-            //	wxMessageBox(wxString::Format(_T("%i %s %s\n%s %s"),i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
+            //	wxMessageBox(wxString::Format("%i %s %s\n%s %s",i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
             //dtend.Subtract(ed);
 
         }
@@ -599,21 +599,21 @@ wxString CrewList::updateWatchTime( unsigned int day, int col, bool* insertCols 
             dtend = dtst;
             dtend.Add( df );
             dtend.Subtract( ed );
-//			wxMessageBox(wxString::Format(_T("%i %s %s\n%s %s"),i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
+//			wxMessageBox(wxString::Format("%i %s %s\n%s %s",i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
         }
-//		wxMessageBox(wxString::Format(_T("%i %s %s\n%s %s"),i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
+//		wxMessageBox(wxString::Format("%i %s %s\n%s %s",i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
 
 //		dtend.Add(df);
 
 
         if ( gridWake->GetNumberCols() == 1 ) return ret;
-        //	wxMessageBox(wxString::Format(_T("%i %s  %s\n%s  %s"),i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
+        //	wxMessageBox(wxString::Format("%i %s  %s\n%s  %s",i,dtst.FormatDate(),dtst.FormatTime(),dtend.FormatDate(),dtend.FormatTime()));
         if ( dtend.GetDateOnly() == dtst.GetDateOnly() )
             gridWake->SetCellValue( 1,i,dtst.Format( dialog->logbookPlugIn->opt->sdateformat ) );
         else
-            gridWake->SetCellValue( 1,i,dtst.Format( dialog->logbookPlugIn->opt->sdateformat )+_T( "\n" )+dtend.Format( dialog->logbookPlugIn->opt->sdateformat ) );
+            gridWake->SetCellValue( 1,i,dtst.Format( dialog->logbookPlugIn->opt->sdateformat )+"\n"+dtend.Format( dialog->logbookPlugIn->opt->sdateformat ) );
 
-        gridWake->SetCellValue( 2,i,wxString::Format( _T( "%s-%s" ),dtst.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
+        gridWake->SetCellValue( 2,i,wxString::Format( "%s-%s",dtst.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
                                 dtend.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str() ) );
 
         h.Subtract( df );
@@ -633,14 +633,14 @@ wxString CrewList::updateWatchTime( unsigned int day, int col, bool* insertCols 
         e = dt;
         e.Add( h );
         e.Subtract( ed );
-        insertWatchColumn( gridWake->GetNumberCols(), _T( "" ), t,dt,e, insertCols );
+        insertWatchColumn( gridWake->GetNumberCols(), "", t,dt,e, insertCols );
     }
     else if ( h.GetMinutes() < 0 ) // end > startvalue in textctrl
     {
         //gridWake->DeleteCols(delcol);
-        wxStringTokenizer date( gridWake->GetCellValue( 1,delcol ),_T( "\n" ) ); // start and end can be different date
+        wxStringTokenizer date( gridWake->GetCellValue( 1,delcol ),"\n" ); // start and end can be different date
 
-        wxStringTokenizer tkz ( gridWake->GetCellValue( 2,delcol ),_T( "-" ) );
+        wxStringTokenizer tkz ( gridWake->GetCellValue( 2,delcol ),"-" );
         wxString tmp = tkz.GetNextToken();
         dialog->myParseTime( tmp,dt ); // now i have the actuall starting date/time
 
@@ -665,13 +665,13 @@ wxString CrewList::updateWatchTime( unsigned int day, int col, bool* insertCols 
             gridWake->SetCellValue( 1,delcol,dt.Format( dialog->logbookPlugIn->opt->sdateformat ) );
         else
         {
-            gridWake->SetCellValue( 1,delcol,dt.Format( dialog->logbookPlugIn->opt->sdateformat )+_T( "\n" )+dtend.Format( dialog->logbookPlugIn->opt->sdateformat ) );
+            gridWake->SetCellValue( 1,delcol,dt.Format( dialog->logbookPlugIn->opt->sdateformat )+"\n"+dtend.Format( dialog->logbookPlugIn->opt->sdateformat ) );
         }
 
-        gridWake->SetCellValue( 2,delcol,wxString::Format( _T( "%s-%s" ),dt.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
+        gridWake->SetCellValue( 2,delcol,wxString::Format( "%s-%s",dt.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
                                 dtend.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str() ) );
         gridWake->BeginBatch();
-        gridWake->SetCellValue( 0,delcol,t.Format( _T( "%H:%M" ) ) );
+        gridWake->SetCellValue( 0,delcol,t.Format( "%H:%M" ) );
         gridWake->EndBatch();
         gridWake->ForceRefresh();
         int z = gridWake->GetNumberCols();
@@ -699,7 +699,7 @@ wxString CrewList::updateWatchTime( unsigned int day, int col, bool* insertCols 
 
 void CrewList::getStartEndDate( wxString date, wxDateTime &dtstart, wxDateTime &dtend )
 {
-    wxStringTokenizer d( date,_T( "\n" ) ); // start and end can be different date
+    wxStringTokenizer d( date,"\n" ); // start and end can be different date
     if ( d.CountTokens() == 1 ) // start and end are same date
     {
         dialog->myParseDate( d.GetNextToken(),dtstart );
@@ -719,7 +719,7 @@ wxDateTime CrewList::getStartTimeWatch( wxString s )
 {
     wxDateTime dtstart;
 
-    wxStringTokenizer tkz( s,_T( "-" ) );
+    wxStringTokenizer tkz( s,"-" );
     s = tkz.GetNextToken();
     dialog->myParseTime( s,dtstart );
     return dtstart;
@@ -729,7 +729,7 @@ wxDateTime CrewList::getEndTimeWatch( wxString s )
 {
     wxDateTime dtend;
 
-    wxStringTokenizer tkz( s,_T( "-" ) );
+    wxStringTokenizer tkz( s,"-" );
     tkz.GetNextToken();
     s = tkz.GetNextToken();
     dialog->myParseTime( s,dtend );
@@ -766,32 +766,32 @@ void CrewList::Calculate()
 
     for ( int c = 0; c < gridWake->GetNumberCols(); c++ ) // write the base = day 0
     {
-        s = wxString::Format( _T( "%i\t" ),0 );
+        s = wxString::Format( "%i\t",0 );
 
         for ( int r = 0; r < gridWake->GetNumberRows(); r++ )
         {
             if ( r == 0 )
             {
-                s += wxString::Format( _T( "%i\t" ),gridWake->GetColSize( c ) );
-                s += dialog->replaceDangerChar( gridWake->GetCellValue( r,c ) )+_T( "\t" );
+                s += wxString::Format( "%i\t",gridWake->GetColSize( c ) );
+                s += dialog->replaceDangerChar( gridWake->GetCellValue( r,c ) )+"\t";
             }
 
             if ( r == 1 )
             {
                 wxDateTime dtstart1, dtend1;
                 wxString t = gridWake->GetCellValue( r,c );
-                if ( t.Contains( _T( "\n" ) ) )
+                if ( t.Contains( "\n" ) )
                 {
-                    wxStringTokenizer tkz( t,_T( "\n" ) );
+                    wxStringTokenizer tkz( t,"\n" );
                     dialog->myParseDate( tkz.GetNextToken(),dtstart1 );
                     dialog->myParseDate( tkz.GetNextToken(),dtend1 );
-                    s += dialog->replaceDangerChar( wxString::Format( _T( "%i/%i/%i\n%i/%i/%i\t" ),dtstart1.GetMonth(),dtstart1.GetDay(),dtstart1.GetYear(),															dtend1.GetMonth(),dtend1.GetDay(),dtend1.GetYear() ) );
+                    s += dialog->replaceDangerChar( wxString::Format( "%i/%i/%i\n%i/%i/%i\t",dtstart1.GetMonth(),dtstart1.GetDay(),dtstart1.GetYear(),															dtend1.GetMonth(),dtend1.GetDay(),dtend1.GetYear() ) );
                 }
                 else
                 {
                     dialog->myParseDate( gridWake->GetCellValue( r,c ),dtstart1 );
                     dtend1 = dtstart1;
-                    s += wxString::Format( _T( "%i/%i/%i\t" ),dtstart1.GetMonth(),dtstart1.GetDay(),dtstart1.GetYear() );
+                    s += wxString::Format( "%i/%i/%i\t",dtstart1.GetMonth(),dtstart1.GetDay(),dtstart1.GetYear() );
                 }
             }
 
@@ -800,17 +800,17 @@ void CrewList::Calculate()
                 wxDateTime from, to;
                 dtNoShift = getStartTimeWatch( gridWake->GetCellValue( r,c ) );
                 wxString g = gridWake->GetCellValue( r,c );
-                wxStringTokenizer sep( g,_T( "-" ) );
+                wxStringTokenizer sep( g,"-" );
                 dialog->myParseTime( sep.GetNextToken(),from );
                 dialog->myParseTime( sep.GetNextToken(),to );
-                s += wxString::Format( _T( "%02i,%02i,%02i,%02i\t" ),from.GetHour(),from.GetMinute(),to.GetHour(),to.GetMinute() );
+                s += wxString::Format( "%02i,%02i,%02i,%02i\t",from.GetHour(),from.GetMinute(),to.GetHour(),to.GetMinute() );
             }
 
             if ( r == 3 )
             {
                 w = gridWake->GetCellValue( r,c );
                 //if(w.IsEmpty() || w.GetChar(0) == ' ') continue;
-                wxStringTokenizer l( w,_T( "\n" ) );
+                wxStringTokenizer l( w,"\n" );
                 int z = l.CountTokens();
                 int cc = 0;
                 while ( l.HasMoreTokens() )
@@ -819,7 +819,7 @@ void CrewList::Calculate()
 
                 if ( z != 0 && cc == z )
                     singleNoShift.Add( 1 );
-                else if ( !w.Contains( _T( "\n" ) ) && w.Contains( _T( "*" ) ) )
+                else if ( !w.Contains( "\n" ) && w.Contains( "*" ) )
                     singleNoShift.Add( 1 );
                 else
                     singleNoShift.Add( 0 );
@@ -828,14 +828,14 @@ void CrewList::Calculate()
                     noshift = new wxArrayString();
                     noshift->clear();
                     wxString g = wxEmptyString;
-                    wxStringTokenizer tkz( w,_T( "\n" ) );
+                    wxStringTokenizer tkz( w,"\n" );
 
                     while ( tkz.HasMoreTokens() )
                     {
                         wxString tmp = tkz.GetNextToken();
 
                         if ( tmp.GetChar( 0 ) != '*' )
-                            g += tmp + _T( "\n" );
+                            g += tmp + "\n";
                         else
                         {
                             if ( !tmp.IsEmpty() )
@@ -852,14 +852,14 @@ void CrewList::Calculate()
 
                     noShiftMap[dtNoShift] = noshift;
 
-                    s += dialog->replaceDangerChar( gridWake->GetCellValue( r,c ) )+_T( "\t" );
+                    s += dialog->replaceDangerChar( gridWake->GetCellValue( r,c ) )+"\t";
                 }
             }
         }
         s.RemoveLast();
         s = dialog->replaceDangerChar( s );
         watchListFile->AddLine( s );
-        s = _T( "" );
+        s = "";
     }
 
     dialog->myParseTime( dialog->m_textCtrlWatchStartTime->GetValue(),dtstart );
@@ -872,15 +872,15 @@ void CrewList::Calculate()
     {
         for ( int c = 0; c < gridWake->GetNumberCols(); c++ )
         {
-            s = wxString::Format( _T( "%i\t" ),d );
+            s = wxString::Format( "%i\t",d );
             ins = false;
 
             for ( int r = 0; r < gridWake->GetNumberRows(); r++ )
             {
                 if ( r == 0 )
                 {
-                    s += wxString::Format( _T( "%i\t" ),gridWake->GetColSize( c ) );
-                    s += gridWake->GetCellValue( r,c )+_T( "\t" );
+                    s += wxString::Format( "%i\t",gridWake->GetColSize( c ) );
+                    s += gridWake->GetCellValue( r,c )+"\t";
                     dialog->myParseTime( gridWake->GetCellValue( r,c ),time );
                 }
                 if ( r == 2 )
@@ -893,12 +893,12 @@ void CrewList::Calculate()
                     dtend.Subtract( ed );
 
                     if ( dtend.GetDateOnly() != dtstart.GetDateOnly() )
-                        s += wxString::Format( _T( "%i/%i/%i\n%i/%i/%i\t" ),dtstart.GetMonth(),dtstart.GetDay(),dtstart.GetYear(),
+                        s += wxString::Format( "%i/%i/%i\n%i/%i/%i\t",dtstart.GetMonth(),dtstart.GetDay(),dtstart.GetYear(),
                                                dtend.GetMonth(),dtend.GetDay(),dtend.GetYear() );
                     else
-                        s += wxString::Format( _T( "%i/%i/%i\t" ),dtstart.GetMonth(),dtstart.GetDay(),dtstart.GetYear() );
+                        s += wxString::Format( "%i/%i/%i\t",dtstart.GetMonth(),dtstart.GetDay(),dtstart.GetYear() );
 
-                    s += wxString::Format( _T( "%02i,%02i,%02i,%02i\t" ),dtstart.GetHour(),dtstart.GetMinute(),dtend.GetHour(),dtend.GetMinute() );
+                    s += wxString::Format( "%02i,%02i,%02i,%02i\t",dtstart.GetHour(),dtstart.GetMinute(),dtend.GetHour(),dtend.GetMinute() );
                     dtstart=dtend;
                     dtstart.Add( ed );
                 }
@@ -924,16 +924,16 @@ void CrewList::Calculate()
                         {
                             for ( unsigned int ii = 0; ii < t->GetCount(); ii++ )
                                 if ( !( *t )[ii].IsEmpty() )
-                                    g += ( *t )[ii]+_T( "\n" );
+                                    g += ( *t )[ii]+"\n";
                             g.RemoveLast();
                             g = dialog->restoreDangerChar( g );
                             if ( ins )
-                                s += _T( "\n" )+g;
+                                s += "\n"+g;
                             else
                                 s += g;
                         }
                     }
-                    s += +_T( "\t" );;
+                    s += +"\t";;
                 }
             }
             s.RemoveLast();
@@ -942,7 +942,7 @@ void CrewList::Calculate()
             s = wxEmptyString;
         }
     }
-    watchListFile->InsertLine( wxString::Format( _T( "#1.2#\t%s\t%s\t%i\t%s" ),
+    watchListFile->InsertLine( wxString::Format( "#1.2#\t%s\t%s\t%i\t%s",
                                dialog->m_textCtrlWatchStartDate->GetValue().c_str(),dialog->m_textCtrlWatchStartTime->GetValue().c_str(),shift,dialog->m_textCtrlWakeTrip->GetValue().c_str() ),0 );
     watchListFile->Write();
     day = 1;
@@ -1027,7 +1027,7 @@ void CrewList::mergeWatches()
     for ( int i = cc-1 ; i >= 0; i-- )
         if ( leftCol != col[i] )
             gridWake->DeleteCols( col[i] );
-    gridWake->SetCellValue( 0,leftCol,wxString::Format( _T( "%s %s" ),sp.Format( _T( "%H:%M" ) ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() ) );
+    gridWake->SetCellValue( 0,leftCol,wxString::Format( "%s %s",sp.Format( "%H:%M" ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() ) );
     gridWake->EndBatch();
     updateWatchTime( day,0,&dummy );
 
@@ -1065,8 +1065,8 @@ void CrewList::splitWatch()
 
     gridWake->BeginBatch();
     gridWake->InsertCols( selColWake+1 );
-    gridWake->SetCellValue( 0,selColWake,wxString::Format( _T( "%s %s" ),sp.Format( _T( "%H:%M" ) ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() ) );
-    gridWake->SetCellValue( 0,selColWake+1,wxString::Format( _T( "%s %s" ),sp1.Format( _T( "%H:%M" ) ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() ) );
+    gridWake->SetCellValue( 0,selColWake,wxString::Format( "%s %s",sp.Format( "%H:%M" ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() ) );
+    gridWake->SetCellValue( 0,selColWake+1,wxString::Format( "%s %s",sp1.Format( "%H:%M" ).c_str(),dialog->logbookPlugIn->opt->motorh.c_str() ) );
     gridWake->EndBatch();
     updateWatchTime( day,0,&dummy );
 
@@ -1081,7 +1081,7 @@ void CrewList::setAsNewWatchbase()
     dialog->m_textCtrlWatchStartDate->SetValue( start.Format( dialog->logbookPlugIn->opt->sdateformat ) );
     watchListFile->Clear();
     day = 0;
-    dialog->m_textCtrlWakeDay->SetValue( _T( "0" ) );
+    dialog->m_textCtrlWakeDay->SetValue( "0" );
     dialog->m_buttonCalculate->Enable( true );
     dialog->m_buttonReset->Enable( false );
     dialog->m_textCtrlWatchStartDate->Enable( true );
@@ -1129,7 +1129,7 @@ void CrewList::setMembersInMenu()
 
     while ( !watchListFile->Eof() )
     {
-        wxStringTokenizer tkz( col,_T( "\t" ) );
+        wxStringTokenizer tkz( col,"\t" );
         for ( int i = 0; i < 5; i++ )
             tkz.GetNextToken();
         if ( tkz.HasMoreTokens() )
@@ -1141,11 +1141,11 @@ void CrewList::setMembersInMenu()
         }
 
         m = dialog->restoreDangerChar( m );
-        wxStringTokenizer mtkz( m,_T( "\n" ) );
+        wxStringTokenizer mtkz( m,"\n" );
         while ( mtkz.HasMoreTokens() )
         {
             member = mtkz.GetNextToken();
-            member.Replace( _T( "*" ),_T( "" ) );
+            member.Replace( "*","" );
 
             if ( ActualWatch::menuMembers.IsEmpty() && ( member.length() == 1 && member.GetChar( 0 ) != ' ' ) )
                 ActualWatch::menuMembers.Add( member );
@@ -1279,8 +1279,8 @@ void CrewList::clearWake()
     dialog->m_textCtrlWatchStartDate->Enable( true );
     dialog->m_textCtrlWatchStartTime->Enable( true );
     dialog->m_textCtrlWakeTrip->Enable( true );
-    dialog->m_textCtrlWakeDay->SetValue( _T( "0" ) );
-    gridWake->SetColLabelValue( 0,wxString::Format( _T( "1. %s" ),dialog->m_gridGlobal->GetColLabelValue( LogbookDialog::WAKE ).c_str() ) );
+    dialog->m_textCtrlWakeDay->SetValue( "0" );
+    gridWake->SetColLabelValue( 0,wxString::Format( "1. %s",dialog->m_gridGlobal->GetColLabelValue( LogbookDialog::WAKE ).c_str() ) );
     day = 0;
     gridWake->AutoSizeColumns();
     gridWake->AutoSizeRows();
@@ -1331,7 +1331,7 @@ void CrewList::dayNow( bool mode )
     while ( lineno < ( int ) watchListFile->GetLineCount() )
     {
         s = watchListFile->GetLine( lineno );
-        wxStringTokenizer tkz( s,_T( "\t" ) );
+        wxStringTokenizer tkz( s,"\t" );
         tkz.GetNextToken().ToLong( &d );
         if ( ( unsigned int )d != daylast )
             col = 0;
@@ -1339,7 +1339,7 @@ void CrewList::dayNow( bool mode )
         tkz.GetNextToken();
 
         timedf = tkz.GetNextToken();
-        wxStringTokenizer tkzdf( timedf,_T( ":" ) );
+        wxStringTokenizer tkzdf( timedf,":" );
         long h,m;
         tkzdf.GetNextToken().ToLong( &h );
         tkzdf.GetNextToken().ToLong( &m );
@@ -1349,16 +1349,16 @@ void CrewList::dayNow( bool mode )
         getStartEndDate( date, dtstart, dtend );
 
         ttmp  = tkz.GetNextToken();
-        wxStringTokenizer timetkz( ttmp,_T( "," ) );
+        wxStringTokenizer timetkz( ttmp,"," );
         time = timetkz.GetNextToken();
-        time += _T( ":" )+timetkz.GetNextToken();
+        time += ":"+timetkz.GetNextToken();
 
         dtstart = stringToDateTime( date, time, mode );
         dtend = dtstart;
 
         dtend.Add( df );
         dtend.Subtract( ed );
-//		wxMessageBox(dtstart.FormatDate()+_T(" ")+dtstart.FormatTime()+_T("\n")+now.FormatDate()+_T(" ")+now.FormatTime()+_T("\n")+dtend.FormatDate()+_T(" ")+dtend.FormatTime());
+//		wxMessageBox(dtstart.FormatDate()+" "+dtstart.FormatTime()+"\n"+now.FormatDate()+" "+now.FormatTime()+"\n"+dtend.FormatDate()+" "+dtend.FormatTime());
         str = tkz.GetNextToken();
         if ( now.IsBetween( dtstart,dtend ) )
         {
@@ -1438,7 +1438,7 @@ void CrewList::timeTextCtrlTextEntered( wxCommandEvent& event )
 
     if ( checkHourFormat( event.GetString(),-1,-1,&dt ) )
     {
-        dialog->m_textCtrlWatchStartTime->SetValue( dt.Format( _T( "%H:%M" ) ) );
+        dialog->m_textCtrlWatchStartTime->SetValue( dt.Format( "%H:%M" ) );
         dialog->myParseDate( dialog->m_textCtrlWatchStartDate->GetValue(),dt );
         createDefaultDateTime( dt, dtend, time );
         updateWatchTime( 0,0,&dummy );
@@ -1454,7 +1454,7 @@ wxDateTime CrewList::stringToDateTime( wxString date, wxString time,bool mode )
 
     if ( !mode )
     {
-        tkz.SetString( date,_T( "/" ) );
+        tkz.SetString( date,"/" );
         int month = wxAtoi( tkz.GetNextToken() );
         int day = wxAtoi( tkz.GetNextToken() );
         int year = wxAtoi( tkz.GetNextToken() );
@@ -1490,7 +1490,7 @@ void CrewList::readRecord( int nr )
         s = watchListFile->GetLine( lineno );
         s = dialog->restoreDangerChar( s );
 
-        wxStringTokenizer tkz( s,_T( "\t" ) );
+        wxStringTokenizer tkz( s,"\t" );
         tkz.GetNextToken().ToLong( &d );
         if ( d != nr )
         {
@@ -1508,7 +1508,7 @@ void CrewList::readRecord( int nr )
 
         gridWake->SetReadOnly( 1,col );
         gridWake->SetReadOnly( 2,col );
-        gridWake->SetColLabelValue( col,wxString::Format( _T( "%i. Watch" ),c++ ) );
+        gridWake->SetColLabelValue( col,wxString::Format( "%i. Watch",c++ ) );
         tkz.GetNextToken();
 
         for ( int row = 0; row < 4; row++ )
@@ -1518,27 +1518,27 @@ void CrewList::readRecord( int nr )
             else if ( row == 1 )
             {
                 wxString s = tkz.GetNextToken();
-                if ( s.Contains( _T( "\n" ) ) )
+                if ( s.Contains( "\n" ) )
                 {
-                    wxStringTokenizer nl( s,_T( "\n" ) );
+                    wxStringTokenizer nl( s,"\n" );
                     wxString t = nl.GetNextToken();
-                    wxStringTokenizer tkz( t,_T( "/" ) );
+                    wxStringTokenizer tkz( t,"/" );
                     int month = wxAtoi( tkz.GetNextToken() );
                     int day = wxAtoi( tkz.GetNextToken() );
                     int year = wxAtoi( tkz.GetNextToken() );
                     wxDateTime dt( day,( wxDateTime::Month ) month, year );
 
                     t = nl.GetNextToken();
-                    wxStringTokenizer tkz1( t,_T( "/" ) );
+                    wxStringTokenizer tkz1( t,"/" );
                     month = wxAtoi( tkz1.GetNextToken() );
                     day = wxAtoi( tkz1.GetNextToken() );
                     year = wxAtoi( tkz1.GetNextToken() );
                     wxDateTime dt1( day,( wxDateTime::Month ) month, year );
-                    gridWake->SetCellValue( row,col,dt.Format( dialog->logbookPlugIn->opt->sdateformat )+_T( "\n" )+dt1.Format( dialog->logbookPlugIn->opt->sdateformat ) );
+                    gridWake->SetCellValue( row,col,dt.Format( dialog->logbookPlugIn->opt->sdateformat )+"\n"+dt1.Format( dialog->logbookPlugIn->opt->sdateformat ) );
                 }
                 else
                 {
-                    wxStringTokenizer tkz( s,_T( "/" ) );
+                    wxStringTokenizer tkz( s,"/" );
                     int month = wxAtoi( tkz.GetNextToken() );
                     int day = wxAtoi( tkz.GetNextToken() );
                     int year = wxAtoi( tkz.GetNextToken() );
@@ -1550,14 +1550,14 @@ void CrewList::readRecord( int nr )
             {
                 wxDateTime from,to;
                 wxString s = tkz.GetNextToken();
-                wxStringTokenizer tkz( s,_T( "," ) );
+                wxStringTokenizer tkz( s,"," );
                 int fh = wxAtoi( tkz.GetNextToken() );
                 int fm = wxAtoi( tkz.GetNextToken() );
                 int th = wxAtoi( tkz.GetNextToken() );
                 int tm = wxAtoi( tkz.GetNextToken() );
                 from.Set( fh,fm );
                 to.Set( th,tm );
-                gridWake->SetCellValue( row,col,wxString::Format( _T( "%s-%s" ),from.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
+                gridWake->SetCellValue( row,col,wxString::Format( "%s-%s",from.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str(),
                                         to.Format( dialog->logbookPlugIn->opt->stimeformatw ).c_str() ) );
             }
 
@@ -1574,7 +1574,7 @@ void CrewList::readRecord( int nr )
     gridWake->AutoSizeRows();
     gridWake->SetRowSize(	3, gridWake->GetRowHeight( 3 )+10 );
 
-    dialog->m_textCtrlWakeDay->SetValue( wxString::Format( _T( "%i" ),day ) );
+    dialog->m_textCtrlWakeDay->SetValue( wxString::Format( "%i",day ) );
 }
 
 void CrewList::updateLine()
@@ -1589,34 +1589,34 @@ void CrewList::updateLine()
     int cc = gridWake->GetNumberCols();
     for ( int c = 0; c < cc; c++ )
     {
-        s  = wxString::Format( _T( "%i\t" ),day );
-        s += wxString::Format( _T( "%i\t" ),gridWake->GetColSize( c ) );
+        s  = wxString::Format( "%i\t",day );
+        s += wxString::Format( "%i\t",gridWake->GetColSize( c ) );
 
         for ( int r = 0; r < gridWake->GetNumberRows(); r++ )
         {
             if ( r == 0 || r == 3 )
-                s += gridWake->GetCellValue( r,c ) + _T( "\t" );
+                s += gridWake->GetCellValue( r,c ) + "\t";
             else if ( r == 1 )
             {
                 wxDateTime dtstart, dtend;
                 wxString tmp = gridWake->GetCellValue( r,c );
                 wxString start,end;
-                if ( tmp.Contains( _T( "\n" ) ) )
+                if ( tmp.Contains( "\n" ) )
                 {
-                    wxStringTokenizer tkz( tmp,_T( "\n" ) );
+                    wxStringTokenizer tkz( tmp,"\n" );
                     start = tkz.GetNextToken();
                     end   = tkz.GetNextToken();
 
                     LogbookDialog::myParseDate( start,dtstart );
                     LogbookDialog::myParseDate( end  ,dtend );
 
-                    s += wxString::Format( _T( "%i/%i/%i\n%i/%i/%i\t" ),dtstart.GetMonth(),dtstart.GetDay(),dtstart.GetYear(),
+                    s += wxString::Format( "%i/%i/%i\n%i/%i/%i\t",dtstart.GetMonth(),dtstart.GetDay(),dtstart.GetYear(),
                                            dtend.GetMonth(),dtend.GetDay(),dtend.GetYear() );
                 }
                 else
                 {
                     LogbookDialog::myParseDate( tmp,dtstart );
-                    s += wxString::Format( _T( "%i/%i/%i\t" ),dtstart.GetMonth(),dtstart.GetDay(),dtstart.GetYear() );
+                    s += wxString::Format( "%i/%i/%i\t",dtstart.GetMonth(),dtstart.GetDay(),dtstart.GetYear() );
                 }
 
 
@@ -1625,23 +1625,23 @@ void CrewList::updateLine()
             {
                 wxDateTime from, to;
                 wxString g = gridWake->GetCellValue( r,c );
-                wxStringTokenizer sep( g,_T( "-" ) );
+                wxStringTokenizer sep( g,"-" );
                 dialog->myParseTime( sep.GetNextToken(),from );
                 dialog->myParseTime( sep.GetNextToken(),to );
-                s += wxString::Format( _T( "%i,%i,%i,%i\t" ),from.GetHour(),from.GetMinute(),to.GetHour(),to.GetMinute() );
+                s += wxString::Format( "%i,%i,%i,%i\t",from.GetHour(),from.GetMinute(),to.GetHour(),to.GetMinute() );
             }
         }
         s.RemoveLast();
         s = dialog->replaceDangerChar( s );
         watchListFile->InsertLine( s,lineno++ );
-        s = _T( "" );
+        s = "";
     }
 
     wxString l;
     while ( true )
     {
         l = watchListFile->GetLine( lineno );
-        wxStringTokenizer tkz( l,_T( "\t" ) );
+        wxStringTokenizer tkz( l,"\t" );
         if ( ( unsigned int )wxAtoi( tkz.GetNextToken() ) != day )
             break;
         else
@@ -1664,7 +1664,7 @@ int CrewList::getDayOne( int dayone )
     {
         s = watchListFile->GetNextLine();
         if ( watchListFile->Eof() ) return -1;
-        wxStringTokenizer tkz( s,_T( "\t" ) );
+        wxStringTokenizer tkz( s,"\t" );
         tkz.GetNextToken().ToLong( &d );
 
     }
@@ -1678,39 +1678,39 @@ bool CrewList::checkHourFormat( wxString s, int row, int col, wxDateTime *dt )
 
     if ( s.IsEmpty() )
     {
-        gridWake->SetCellValue( row,col,_T( "00:00" ) );
-        s = _T( "0" );
+        gridWake->SetCellValue( row,col,"00:00" );
+        s = "0";
     }
 
     if ( s.GetChar( 0 ) == ',' || s.GetChar( 0 ) == '.' ) // no leading zero when ,3 is entered
-        s.Prepend( _T( "0" ) );
+        s.Prepend( "0" );
 
-    if ( s.Length() == 4 && ( !s.Contains( _T( "." ) ) && !s.Contains( _T( "," ) ) ) ) // NATO-Format entered 1230 => 12.30
-        s.insert( 2,_T( "." ) );
+    if ( s.Length() == 4 && ( !s.Contains( "." ) && !s.Contains( "," ) ) ) // NATO-Format entered 1230 => 12.30
+        s.insert( 2,"." );
 
 
-    if ( s.Contains( _T( "." ) ) )
+    if ( s.Contains( "." ) )
     {
         t = true;
-        sep = _T( "." );
+        sep = ".";
     }
 
-    if ( s.Contains( _T( "," ) ) )
+    if ( s.Contains( "," ) )
     {
         t = true;
-        sep = _T( "," );
+        sep = ",";
     }
 
-    if ( s.Contains( _T( ":" ) ) )
+    if ( s.Contains( ":" ) )
     {
         t = true;
-        sep = _T( ":" );
+        sep = ":";
     }
 
     if ( true != t )
     {
-        s.Append( _T( ":0" ) );
-        sep = _T( ":" );
+        s.Append( ":0" );
+        sep = ":";
     }
 
     wxStringTokenizer tkz( s,sep );
@@ -1719,19 +1719,19 @@ bool CrewList::checkHourFormat( wxString s, int row, int col, wxDateTime *dt )
     if ( tkz.HasMoreTokens() )
         m = tkz.GetNextToken();
     else
-        m = _T( "0" );
-    if ( !h.IsNumber() ) h = _T( "24" );
-    if ( !m.IsNumber() ) m = _T( "60" );
+        m = "0";
+    if ( !h.IsNumber() ) h = "24";
+    if ( !m.IsNumber() ) m = "60";
 
     if ( wxAtoi( h ) > 23 || wxAtoi( m ) > 59 || wxAtoi( h ) < 0 || wxAtoi( m ) < 0 )
     {
-        //wxMessageBox(_("Hours < 0 or > 23\nMinutes < 0 or > 59"),_T(""));
+        //wxMessageBox(_("Hours < 0 or > 23\nMinutes < 0 or > 59"),"");
         if ( row != -1 )
-            gridWake->SetCellValue( row,col,_T( "00:00" ) );
+            gridWake->SetCellValue( row,col,"00:00" );
         return false;
     }
     else
-        s = wxString::Format( _T( "%s:%s" ),h.c_str(),m.c_str() );
+        s = wxString::Format( "%s:%s",h.c_str(),m.c_str() );
 
     dialog->myParseTime( s,*dt );
     return true;
@@ -1757,18 +1757,18 @@ void CrewList::saveCSV( wxString path )
     for ( unsigned int i = 0; i < crewListFile->GetLineCount(); i++ )
     {
         wxString line = crewListFile->GetLine( i );
-        wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
 
         while ( tkz.HasMoreTokens() )
         {
             wxString s;
             s += tkz.GetNextToken().RemoveLast();
             s= dialog->restoreDangerChar( s );
-            result += wxT( "\"" )+s+wxT( "\"," );
+            result += "\""+s+"\",";
         }
         result.RemoveLast();
         csvFile.AddLine( result );
-        result=_T( "" );
+        result="";
     }
 
     csvFile.Write();
@@ -1782,7 +1782,7 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
 {
     wxString path;
 
-    if ( layout == _T( "" ) )
+    if ( layout == "" )
     {
         wxMessageBox( _( "Sorry, no Layout installed" ),_( "Information" ),wxOK );
         return;
@@ -1822,24 +1822,24 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
     wxString middleWake1HTML;
     wxString headerHTML;
 
-    wxString seperatorTop            = wxT( "<!--Repeat -->" );
-    wxString seperatorBottom         = wxT( "<!--Repeat End -->" );
-    wxString seperatorWakeTop        = wxT( "<!--Repeat Wake -->" );
-    wxString seperatorWakeBottom     = wxT( "<!--Repeat Wake End -->" );
-    wxString seperatorWake1Top       = wxT( "<!--Repeat Wake1 -->" );
-    wxString seperatorWake1Bottom    = wxT( "<!--Repeat Wake1 End -->" );
-    wxString seperatorWakeCol0Top     = wxT( "<!--Repeat Col0 -->" );
-    wxString seperatorWakeCol0Bottom  = wxT( "<!--Repeat Col0 End -->" );
-    wxString seperatorWakeCol1Top     = wxT( "<!--Repeat Col1 -->" );
-    wxString seperatorWakeCol1Bottom  = wxT( "<!--Repeat Col1 End -->" );
-    wxString seperatorWakeCol2Top     = wxT( "<!--Repeat Col2 -->" );
-    wxString seperatorWakeCol2Bottom  = wxT( "<!--Repeat Col2 End -->" );
-    wxString seperatorWakeCol3Top     = wxT( "<!--Repeat Col3 -->" );
-    wxString seperatorWakeCol3Bottom  = wxT( "<!--Repeat Col3 End -->" );
-    wxString seperatorWakeCol4Top     = wxT( "<!--Repeat Col4 -->" );
-    wxString seperatorWakeCol4Bottom  = wxT( "<!--Repeat Col4 End -->" );
+    wxString seperatorTop            = "<!--Repeat -->";
+    wxString seperatorBottom         = "<!--Repeat End -->";
+    wxString seperatorWakeTop        = "<!--Repeat Wake -->";
+    wxString seperatorWakeBottom     = "<!--Repeat Wake End -->";
+    wxString seperatorWake1Top       = "<!--Repeat Wake1 -->";
+    wxString seperatorWake1Bottom    = "<!--Repeat Wake1 End -->";
+    wxString seperatorWakeCol0Top     = "<!--Repeat Col0 -->";
+    wxString seperatorWakeCol0Bottom  = "<!--Repeat Col0 End -->";
+    wxString seperatorWakeCol1Top     = "<!--Repeat Col1 -->";
+    wxString seperatorWakeCol1Bottom  = "<!--Repeat Col1 End -->";
+    wxString seperatorWakeCol2Top     = "<!--Repeat Col2 -->";
+    wxString seperatorWakeCol2Bottom  = "<!--Repeat Col2 End -->";
+    wxString seperatorWakeCol3Top     = "<!--Repeat Col3 -->";
+    wxString seperatorWakeCol3Bottom  = "<!--Repeat Col3 End -->";
+    wxString seperatorWakeCol4Top     = "<!--Repeat Col4 -->";
+    wxString seperatorWakeCol4Bottom  = "<!--Repeat Col4 End -->";
 
-    if ( !html.Contains( _T( "<!--Repeat Wake -->" ) ) )
+    if ( !html.Contains( "<!--Repeat Wake -->" ) )
     {
         indexTop        = html.First( seperatorTop )+seperatorTop.Len();
         indexBottom     = html.First( seperatorBottom )+seperatorBottom.Len();
@@ -1847,7 +1847,7 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
         bottomHTML     = html.substr( indexBottom,html.Len()-indexBottom-1 );
         middleHTML     = html.substr( indexTop,indexBottom-indexTop );
     }
-    else if ( !html.Contains( _T( "<!--Repeat -->" ) ) )
+    else if ( !html.Contains( "<!--Repeat -->" ) )
     {
         indexWakeTop          = html.First( seperatorWakeTop )+seperatorWakeTop.Len();
         indexWakeBottom       = html.First( seperatorWakeBottom )+seperatorWakeBottom.Len();
@@ -1873,9 +1873,9 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
         columnWake3HTML		  = html.substr( indexWakeColumn3Top,indexWakeColumn3Bottom-indexWakeColumn3Top-seperatorWakeCol3Bottom.Len() );
         columnWake4HTML		  = html.substr( indexWakeColumn4Top,indexWakeColumn4Bottom-indexWakeColumn4Top-seperatorWakeCol4Bottom.Len() );
 
-        topHTML.Replace( wxT( "#LFROM#" ),_( "from" ) );
-        topHTML.Replace( wxT( "#LTO#" ),_( "to" ) );
-        topHTML.Replace( wxT( "#LWATCH#" ),dialog->m_gridGlobal->GetColLabelValue( 4 ) );
+        topHTML.Replace( "#LFROM#",_( "from" ) );
+        topHTML.Replace( "#LTO#",_( "to" ) );
+        topHTML.Replace( "#LWATCH#",dialog->m_gridGlobal->GetColLabelValue( 4 ) );
     }
     else
     {
@@ -1889,15 +1889,15 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
         middleHTML     = html.substr( indexTop,indexBottom-indexTop );
         bottomWakeHTML = html.substr( indexWakeBottom,html.Len()-1 );
         middleWakeHTML = html.substr( indexWakeTop,indexWakeBottom-indexWakeTop );
-        bottomHTML.Replace( wxT( "#LFROM#" ),_( "from" ) );
-        bottomHTML.Replace( wxT( "#LTO#" ),_( "to" ) );
-        bottomHTML.Replace( wxT( "#LWATCH#" ),dialog->m_gridGlobal->GetColLabelValue( 4 ) );
+        bottomHTML.Replace( "#LFROM#",_( "from" ) );
+        bottomHTML.Replace( "#LTO#",_( "to" ) );
+        bottomHTML.Replace( "#LWATCH#",dialog->m_gridGlobal->GetColLabelValue( 4 ) );
     }
 
     path = data_locn;
     wxTextFile *logFile = new wxTextFile( path );
     if ( mode != 0 )
-        path.Replace( wxT( "txt" ),wxT( "html" ) );
+        path.Replace( "txt","html" );
     else
         path = savePath;
 
@@ -1912,20 +1912,20 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
     wxString newMiddleHTML;
     wxString newWakeHTML;
 
-    topHTML.Replace( wxT( "#TYPE#" ),Export::replaceNewLine( mode,dialog->boatType->GetValue(),false ) );
-    topHTML.Replace( wxT( "#BOATNAME#" ),Export::replaceNewLine( mode,dialog->boatName->GetValue(),false ) );
-    topHTML.Replace( wxT( "#HOMEPORT#" ),Export::replaceNewLine( mode,dialog->homeport->GetValue(),false ) );
-    topHTML.Replace( wxT( "#CALLSIGN#" ),Export::replaceNewLine( mode,dialog->callsign->GetValue(),false ) );
-    topHTML.Replace( wxT( "#REGISTRATION#" ),Export::replaceNewLine( mode,dialog->registration->GetValue(),false ) );
+    topHTML.Replace( "#TYPE#",Export::replaceNewLine( mode,dialog->boatType->GetValue(),false ) );
+    topHTML.Replace( "#BOATNAME#",Export::replaceNewLine( mode,dialog->boatName->GetValue(),false ) );
+    topHTML.Replace( "#HOMEPORT#",Export::replaceNewLine( mode,dialog->homeport->GetValue(),false ) );
+    topHTML.Replace( "#CALLSIGN#",Export::replaceNewLine( mode,dialog->callsign->GetValue(),false ) );
+    topHTML.Replace( "#REGISTRATION#",Export::replaceNewLine( mode,dialog->registration->GetValue(),false ) );
 
-    topHTML.Replace( wxT( "#LTYPE#" ),Export::replaceNewLine( mode,dialog->m_staticText128->GetLabel(),true ) );
-    topHTML.Replace( wxT( "#LBOATNAME#" ),Export::replaceNewLine( mode,dialog->bname->GetLabel(),true ) );
-    topHTML.Replace( wxT( "#LHOMEPORT#" ),Export::replaceNewLine( mode,dialog->m_staticText114->GetLabel(),true ) );
-    topHTML.Replace( wxT( "#LCALLSIGN#" ),Export::replaceNewLine( mode,dialog->m_staticText115->GetLabel(),true ) );
-    topHTML.Replace( wxT( "#LREGISTRATION#" ),Export::replaceNewLine( mode,dialog->m_staticText118->GetLabel(),true ) );
-    topHTML.Replace( wxT( "#LCREWLIST#" ),Export::replaceNewLine( mode,dialog->m_logbook->GetPageText( 2 ),true ) );
+    topHTML.Replace( "#LTYPE#",Export::replaceNewLine( mode,dialog->m_staticText128->GetLabel(),true ) );
+    topHTML.Replace( "#LBOATNAME#",Export::replaceNewLine( mode,dialog->bname->GetLabel(),true ) );
+    topHTML.Replace( "#LHOMEPORT#",Export::replaceNewLine( mode,dialog->m_staticText114->GetLabel(),true ) );
+    topHTML.Replace( "#LCALLSIGN#",Export::replaceNewLine( mode,dialog->m_staticText115->GetLabel(),true ) );
+    topHTML.Replace( "#LREGISTRATION#",Export::replaceNewLine( mode,dialog->m_staticText118->GetLabel(),true ) );
+    topHTML.Replace( "#LCREWLIST#",Export::replaceNewLine( mode,dialog->m_logbook->GetPageText( 2 ),true ) );
 
-    if ( html.Contains( _T( "<!--Repeat -->" ) ) )
+    if ( html.Contains( "<!--Repeat -->" ) )
     {
         htmlFile << topHTML;
 
@@ -1933,7 +1933,7 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
         int colsMax = dialog->m_gridCrew->GetNumberCols();
         for ( int row = 0; row < rowsMax; row++ )
         {
-            if ( dialog->m_menu2->IsChecked( MENUCREWONBOARD ) && dialog->m_gridCrew->GetCellValue( row,ONBOARD ) == _T( "" ) )
+            if ( dialog->m_menu2->IsChecked( MENUCREWONBOARD ) && dialog->m_gridCrew->GetCellValue( row,ONBOARD ) == "" )
                 continue;
             newMiddleHTML = middleHTML;
             for ( int col = 0; col < colsMax; col++ )
@@ -1941,10 +1941,10 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
             htmlFile << newMiddleHTML;
         }
         htmlFile << bottomHTML;
-        topHTML = _T( "" );
+        topHTML = "";
     }
 
-    if ( html.Contains( _T( "<!--Repeat Wake -->" ) ) )
+    if ( html.Contains( "<!--Repeat Wake -->" ) )
     {
         htmlFile << topHTML;
 
@@ -1980,7 +1980,7 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
                     break;
                 s = watchListFile->GetLine( lineno );
                 s = dialog->restoreDangerChar( s );
-                wxStringTokenizer tkz( s,_T( "\t" ) );
+                wxStringTokenizer tkz( s,"\t" );
                 wxString t = tkz.GetNextToken();
                 actDay = wxAtoi( t );
                 if ( actDay != lastday || actDay == maxDay )
@@ -2008,7 +2008,7 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
 
                 for ( int row = 0; row < 5; row++ )
                 {
-                    tmp += _T( "<tr>" );
+                    tmp += "<tr>";
                     for ( int i = 0, offset = 0; i != colTotal; i++, offset += 5 )
                     {
                         switch ( row )
@@ -2030,7 +2030,7 @@ void CrewList::saveHTML( wxString savePath, wxString layout, bool mode )
                             break;
                         }
                     }
-                    tmp += _T( "</tr>" );
+                    tmp += "</tr>";
                 }
                 tmp += middleWake1HTML;
                 htmlFile << tmp;
@@ -2057,81 +2057,81 @@ wxString CrewList::replacePlaceholder( wxString html,wxString s, int nGrid, int 
         switch ( col )
         {
         case NAME:
-            html.Replace( wxT( "#NAME#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LNAME#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#NAME#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LNAME#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case BIRTHNAME:
-            html.Replace( wxT( "#BIRTHNAME#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LBIRTHNAME#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#BIRTHNAME#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LBIRTHNAME#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case FIRSTNAME:
-            html.Replace( wxT( "#FIRSTNAME#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LFIRSTNAME#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#FIRSTNAME#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LFIRSTNAME#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case TITLE:
-            html.Replace( wxT( "#TITLE#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LTITLE#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#TITLE#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LTITLE#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case BIRTHPLACE:
-            html.Replace( wxT( "#BIRTHPLACE#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LBIRTHPLACE#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#BIRTHPLACE#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LBIRTHPLACE#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case BIRTHDATE:
-            html.Replace( wxT( "#BIRTHDATE#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LBIRTHDATE#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#BIRTHDATE#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LBIRTHDATE#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case NATIONALITY:
-            html.Replace( wxT( "#NATIONALITY#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LNATIONALITY#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#NATIONALITY#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LNATIONALITY#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case PASSPORT:
-            html.Replace( wxT( "#PASSPORT#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LPASSPORT#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#PASSPORT#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LPASSPORT#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case EST_IN:
-            html.Replace( wxT( "#EST_IN#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LEST_IN#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#EST_IN#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LEST_IN#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case EST_ON:
-            html.Replace( wxT( "#EST_ON#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LEST_ON#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#EST_ON#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LEST_ON#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case ZIP:
-            html.Replace( wxT( "#ZIP#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LZIP#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#ZIP#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LZIP#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case COUNTRY:
-            html.Replace( wxT( "#COUNTRY#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LCOUNTRY#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#COUNTRY#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LCOUNTRY#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case TOWN:
-            html.Replace( wxT( "#TOWN#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LTOWN#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#TOWN#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LTOWN#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         case STREET:
-            html.Replace( wxT( "#STREET#" ),Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
-            html.Replace( wxT( "#LSTREET#" ),Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
+            html.Replace( "#STREET#",Export::replaceNewLine( mode,grid->GetCellValue( row,col ),false ) );
+            html.Replace( "#LSTREET#",Export::replaceNewLine( mode,grid->GetColLabelValue( col ),true ) );
             break;
         }
         break;
     case 1:
     {
-        html.Replace( wxT( "#N#" ),wxString::Format( _T( "%i" ),col ) );
-        html.Replace( wxT( "#LWATCH#" ),dialog->m_gridGlobal->GetColLabelValue( 4 ) );
-        html.Replace( wxT( "#LENGTH#" ),Export::replaceNewLine( mode,watch[1+offset],false ) );
-        html.Replace( wxT( "#DATE#" ),Export::replaceNewLine( mode,watch[2+offset],false ) );
-        html.Replace( wxT( "#TIME#" ),Export::replaceNewLine( mode,watch[3+offset],false ) );
-        html.Replace( wxT( "#MEMBER#" ),Export::replaceNewLine( mode,watch[4+offset],false ) );
+        html.Replace( "#N#",wxString::Format( "%i",col ) );
+        html.Replace( "#LWATCH#",dialog->m_gridGlobal->GetColLabelValue( 4 ) );
+        html.Replace( "#LENGTH#",Export::replaceNewLine( mode,watch[1+offset],false ) );
+        html.Replace( "#DATE#",Export::replaceNewLine( mode,watch[2+offset],false ) );
+        html.Replace( "#TIME#",Export::replaceNewLine( mode,watch[3+offset],false ) );
+        html.Replace( "#MEMBER#",Export::replaceNewLine( mode,watch[4+offset],false ) );
     }
     case 2:
     {
-        wxString no     = wxString::Format( _T( "#N%i#" ),col );
-        wxString length = wxString::Format( _T( "#LENGTH%i#" ),col );
-        wxString date   = wxString::Format( _T( "#DATE%i#" ),col );
-        wxString time   = wxString::Format( _T( "#TIME%i#" ),col );
-        wxString member = wxString::Format( _T( "#MEMBER%i#" ),col );
+        wxString no     = wxString::Format( "#N%i#",col );
+        wxString length = wxString::Format( "#LENGTH%i#",col );
+        wxString date   = wxString::Format( "#DATE%i#",col );
+        wxString time   = wxString::Format( "#TIME%i#",col );
+        wxString member = wxString::Format( "#MEMBER%i#",col );
 
-        html.Replace( no,    wxString::Format( _T( "%i" ),col ),false );
+        html.Replace( no,    wxString::Format( "%i",col ),false );
         html.Replace( length,Export::replaceNewLine( mode,watch[1],false ),false );
         html.Replace( date,  Export::replaceNewLine( mode,watch[2],false ),false );
         html.Replace( time,  Export::replaceNewLine( mode,watch[3],false ),false );
@@ -2139,7 +2139,7 @@ wxString CrewList::replacePlaceholder( wxString html,wxString s, int nGrid, int 
     }
     break;
     }
-    html.Replace( wxT( "#LADRESS#" ),_( "Adress" ) );
+    html.Replace( "#LADRESS#",_( "Adress" ) );
 
     wxString str( html );
     return str;
@@ -2149,7 +2149,7 @@ wxString CrewList::readLayout( wxString layoutFileName )
 {
     wxString html, path;
 
-    path = layout_locn + layoutFileName + wxT( ".html" );;
+    path = layout_locn + layoutFileName + ".html";;
     wxTextFile layout( path );
 
     layout.Open();
@@ -2171,7 +2171,7 @@ void CrewList::viewHTML( wxString path, wxString layout )
 
     saveHTML( path, layout, true );
 
-    if ( layout != _T( "" ) && wxFile::Exists( html_locn ) )
+    if ( layout != "" && wxFile::Exists( html_locn ) )
         dialog->startBrowser( html_locn );
 }
 
@@ -2182,15 +2182,15 @@ void CrewList::viewODT( wxString path, wxString layout )
 
     saveODT( path, layout, true );
 
-    if ( layout != _T( "" ) && wxFile::Exists( ODT_locn ) )
-        dialog->startApplication( ODT_locn,_T( ".odt" ) );
+    if ( layout != "" && wxFile::Exists( ODT_locn ) )
+        dialog->startApplication( ODT_locn,".odt" );
 }
 
 void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
 {
     wxString path;
 
-    if ( layout == _T( "" ) )
+    if ( layout == "" )
     {
         wxMessageBox( _( "Sorry, no Layout installed" ),_( "Information" ),wxOK );
         return;
@@ -2216,12 +2216,12 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
     wxString bottomWakeODT;
     wxString middleWakeODT;
     wxString headerODT;
-    wxString middleData = _T( "" );
+    wxString middleData = "";
 
-    wxString seperatorTop        = wxT( "[[" );
-    wxString seperatorBottom     = wxT( "]]" );
-    wxString seperatorWakeTop    = wxT( "{{" );
-    wxString seperatorWakeBottom = wxT( "}}" );
+    wxString seperatorTop        = "[[";
+    wxString seperatorBottom     = "]]";
+    wxString seperatorWakeTop    = "{{";
+    wxString seperatorWakeBottom = "}}";
 
     if ( !odt.Contains( seperatorWakeTop ) )
     {
@@ -2254,9 +2254,9 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
         middleODT			= middleODT.substr( 0,indexWakeTop );
         indexWakeTop	    = middleODT.find_last_of( '<' );
         middleWakeODT		= middleODT.substr( 0,indexWakeTop );
-        topODT.Replace( wxT( "#LFROM#" ),_( "from" ) );
-        topODT.Replace( wxT( "#LTO#" ),_( "to" ) );
-        topODT.Replace( wxT( "#LWATCH#" ),Export::replaceNewLine( mode,dialog->m_gridGlobal->GetColLabelValue( 4 ),true ) );
+        topODT.Replace( "#LFROM#",_( "from" ) );
+        topODT.Replace( "#LTO#",_( "to" ) );
+        topODT.Replace( "#LWATCH#",Export::replaceNewLine( mode,dialog->m_gridGlobal->GetColLabelValue( 4 ),true ) );
     }
     else
     {
@@ -2291,28 +2291,28 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
         indexWakeTop	    = middleWakeODT.find_last_of( '<' );
         middleWakeODT		= middleWakeODT.substr( 0,indexWakeTop );
 
-        middleData.Replace( wxT( "#LFROM#" ),_( "from" ) );
-        middleData.Replace( wxT( "#LTO#" ),_( "to" ) );
-        middleData.Replace( wxT( "#LWATCH#" ),Export::replaceNewLine( mode,dialog->m_gridGlobal->GetColLabelValue( 4 ),true ) );
+        middleData.Replace( "#LFROM#",_( "from" ) );
+        middleData.Replace( "#LTO#",_( "to" ) );
+        middleData.Replace( "#LWATCH#",Export::replaceNewLine( mode,dialog->m_gridGlobal->GetColLabelValue( 4 ),true ) );
     }
 
-    topODT.Replace( wxT( "#TYPE#" ),Export::replaceNewLine( mode,dialog->boatType->GetValue(),false ) );
-    topODT.Replace( wxT( "#BOATNAME#" ),Export::replaceNewLine( mode,dialog->boatName->GetValue(),false ) );
-    topODT.Replace( wxT( "#HOMEPORT#" ),Export::replaceNewLine( mode,dialog->homeport->GetValue(),false ) );
-    topODT.Replace( wxT( "#CALLSIGN#" ),Export::replaceNewLine( mode,dialog->callsign->GetValue(),false ) );
-    topODT.Replace( wxT( "#REGISTRATION#" ),Export::replaceNewLine( mode,dialog->registration->GetValue(),false ) );
+    topODT.Replace( "#TYPE#",Export::replaceNewLine( mode,dialog->boatType->GetValue(),false ) );
+    topODT.Replace( "#BOATNAME#",Export::replaceNewLine( mode,dialog->boatName->GetValue(),false ) );
+    topODT.Replace( "#HOMEPORT#",Export::replaceNewLine( mode,dialog->homeport->GetValue(),false ) );
+    topODT.Replace( "#CALLSIGN#",Export::replaceNewLine( mode,dialog->callsign->GetValue(),false ) );
+    topODT.Replace( "#REGISTRATION#",Export::replaceNewLine( mode,dialog->registration->GetValue(),false ) );
 
-    topODT.Replace( wxT( "#LTYPE#" ),Export::replaceNewLine( mode,dialog->m_staticText128->GetLabel(),true ) );
-    topODT.Replace( wxT( "#LBOATNAME#" ),Export::replaceNewLine( mode,dialog->bname->GetLabel(),true ) );
-    topODT.Replace( wxT( "#LHOMEPORT#" ),Export::replaceNewLine( mode,dialog->m_staticText114->GetLabel(),true ) );
-    topODT.Replace( wxT( "#LCALLSIGN#" ),Export::replaceNewLine( mode,dialog->m_staticText115->GetLabel(),true ) );
-    topODT.Replace( wxT( "#LREGISTRATION#" ),Export::replaceNewLine( mode,dialog->m_staticText118->GetLabel(),true ) );
-    topODT.Replace( wxT( "#LCREWLIST#" ),Export::replaceNewLine( mode,dialog->m_logbook->GetPageText( 2 ),true ) );
+    topODT.Replace( "#LTYPE#",Export::replaceNewLine( mode,dialog->m_staticText128->GetLabel(),true ) );
+    topODT.Replace( "#LBOATNAME#",Export::replaceNewLine( mode,dialog->bname->GetLabel(),true ) );
+    topODT.Replace( "#LHOMEPORT#",Export::replaceNewLine( mode,dialog->m_staticText114->GetLabel(),true ) );
+    topODT.Replace( "#LCALLSIGN#",Export::replaceNewLine( mode,dialog->m_staticText115->GetLabel(),true ) );
+    topODT.Replace( "#LREGISTRATION#",Export::replaceNewLine( mode,dialog->m_staticText118->GetLabel(),true ) );
+    topODT.Replace( "#LCREWLIST#",Export::replaceNewLine( mode,dialog->m_logbook->GetPageText( 2 ),true ) );
 
     path = data_locn;
     wxTextFile *logFile = new wxTextFile( path );
     if ( mode != 0 )
-        path.Replace( wxT( "txt" ),wxT( "odt" ) );
+        path.Replace( "txt","odt" );
     else
         path = savePath;
 
@@ -2326,7 +2326,7 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
     wxString newMiddleODT;
     wxString newWakeODT;
 
-    unique_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + _T( ".odt" ) ) );
+    unique_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + ".odt" ) );
     wxTempFileOutputStream out( path );
 
     wxZipInputStream inzip( *in );
@@ -2337,13 +2337,13 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
     outzip.CopyArchiveMetaData( inzip );
 
     while ( entry.reset( inzip.GetNextEntry() ), entry.get() != NULL )
-        if ( !entry->GetName().Matches( _T( "content.xml" ) ) )
+        if ( !entry->GetName().Matches( "content.xml" ) )
             if ( !outzip.CopyEntry( entry.release(), inzip ) )
                 break;
 
     in.reset();
 
-    outzip.PutNextEntry( _T( "content.xml" ) );
+    outzip.PutNextEntry( "content.xml" );
 
     odtFile << topODT;
 
@@ -2353,7 +2353,7 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
         int colsMax = dialog->m_gridCrew->GetNumberCols();
         for ( int row = 0; row < rowsMax; row++ )
         {
-            if ( dialog->m_menu2->IsChecked( MENUCREWONBOARD ) && dialog->m_gridCrew->GetCellValue( row,ONBOARD ) == _T( "" ) )
+            if ( dialog->m_menu2->IsChecked( MENUCREWONBOARD ) && dialog->m_gridCrew->GetCellValue( row,ONBOARD ) == "" )
                 continue;
             newMiddleODT = middleODT;
 #ifdef __WXOSX__
@@ -2382,7 +2382,7 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
         wxString tmp;
         wxArrayString watch;
 
-        middleWakeODT.Replace( wxT( "#LWATCH#" ),dialog->m_gridGlobal->GetColLabelValue( 4 ) );
+        middleWakeODT.Replace( "#LWATCH#",dialog->m_gridGlobal->GetColLabelValue( 4 ) );
         newWakeODT = middleWakeODT;
 
         if ( day == 0 )
@@ -2396,7 +2396,7 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
         if ( ( lineno = getDayOne( day ) ) == -1 ) return;
 
         s = watchListFile->GetLine( lineno );
-        wxStringTokenizer tkz( s,_T( "\t" ) );
+        wxStringTokenizer tkz( s,"\t" );
         wxString t = tkz.GetNextToken();
         lastday = wxAtoi( t );
 
@@ -2409,7 +2409,7 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
             s = watchListFile->GetLine( lineno );
             s = dialog->restoreDangerChar( s );
 
-            wxStringTokenizer tkz( s,_T( "\t" ) );
+            wxStringTokenizer tkz( s,"\t" );
             wxString t = tkz.GetNextToken();
             unsigned int z = wxAtoi( t );
             if ( dDay == z ) break;
@@ -2448,7 +2448,7 @@ void CrewList::saveODT( wxString savePath,wxString layout, bool mode )
 
 wxString CrewList::deleteODTCols( wxString newWakeODT )
 {
-    if ( !newWakeODT.Contains( _T( "#" ) ) ) return newWakeODT;
+    if ( !newWakeODT.Contains( "#" ) ) return newWakeODT;
 
     int first = 1;
     int last;
@@ -2461,8 +2461,8 @@ wxString CrewList::deleteODTCols( wxString newWakeODT )
         if ( first < 0 ) break;
         last  = newWakeODT.find_first_of( '#',first+1 );
         del = newWakeODT.substr( first,( last-first )+1 );
-        if ( del.Contains( _T( "#N" ) ) )
-            del += _T( "." )+w;
+        if ( del.Contains( "#N" ) )
+            del += "."+w;
         first = last;
         newWakeODT.Replace( del,wxEmptyString,false );
     }
@@ -2472,15 +2472,15 @@ wxString CrewList::deleteODTCols( wxString newWakeODT )
 
 wxString CrewList::readLayoutODT( wxString layout )
 {
-    wxString odt = _T( "" );
+    wxString odt = "";
 
-    wxString filename = layout_locn + layout + _T( ".odt" );
+    wxString filename = layout_locn + layout + ".odt";
 
     if ( wxFileExists( filename ) )
     {
 #ifdef __WXOSX__
         unique_ptr<wxZipEntry> entry;
-        static const wxString fn = _T( "content.xml" );
+        static const wxString fn = "content.xml";
         wxString name = wxZipEntry::GetInternalName( fn );
         wxFFileInputStream in( filename );
         wxZipInputStream zip( in );
@@ -2491,12 +2491,12 @@ wxString CrewList::readLayoutODT( wxString layout )
         while ( entry.get() != NULL && entry->GetInternalName() != name );
         if ( entry.get() != NULL )
         {
-            wxTextInputStream txt( zip,_T( "\n" ),wxConvUTF8 );
+            wxTextInputStream txt( zip,"\n",wxConvUTF8 );
             while ( !zip.Eof() )
                 odt += txt.ReadLine();
         }
 #else
-        /*static const wxString fn = _T("content.xml");
+        /*static const wxString fn = "content.xml";
         wxFileInputStream in(filename);
         wxZipInputStream zip(in);
         wxTextInputStream txt(zip);
@@ -2520,7 +2520,7 @@ void CrewList::deleteRow( int row )
 
 void CrewList::saveXML( wxString path )
 {
-    wxString s = _T( "" );
+    wxString s = "";
     wxString line;
     wxString temp;
 
@@ -2544,24 +2544,24 @@ void CrewList::saveXML( wxString path )
     for ( unsigned int i = 0; i < crewListFile->GetLineCount(); i++ )
     {
         line = crewListFile->GetLine( i );
-        wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
-        s = wxString::Format( _T( "<Row ss:Height=\"%u\">" ),dialog->m_gridGlobal->GetRowHeight( i ) );
+        wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
+        s = wxString::Format( "<Row ss:Height=\"%u\">",dialog->m_gridGlobal->GetRowHeight( i ) );
 
         while ( tkz.HasMoreTokens() )
         {
-            s += _T( "<Cell>\n" );
-            s += _T( "<Data ss:Type=\"String\">#DATA#</Data>\n" );
+            s += "<Cell>\n";
+            s += "<Data ss:Type=\"String\">#DATA#</Data>\n";
             temp = tkz.GetNextToken().RemoveLast();
-            temp.Replace( _T( "\\n" ),_T( "&#10;" ) );
-            temp.Replace( _T( "&" ),_T( "&amp;" ) );
-            temp.Replace( _T( "\"" ),_T( "&quot;" ) );
-            temp.Replace( _T( "<" ),_T( "&lt;" ) );
-            temp.Replace( _T( ">" ),_T( "&gt;" ) );
-            temp.Replace( _T( "'" ),_T( "&apos;" ) );
-            s.Replace( _T( "#DATA#" ),temp );
-            s += _T( "</Cell>" );
+            temp.Replace( "\\n","&#10;" );
+            temp.Replace( "&","&amp;" );
+            temp.Replace( "\"","&quot;" );
+            temp.Replace( "<","&lt;" );
+            temp.Replace( ">","&gt;" );
+            temp.Replace( "'","&apos;" );
+            s.Replace( "#DATA#",temp );
+            s += "</Cell>";
         }
-        s += _T( "</Row>>" );
+        s += "</Row>>";
         xmlFile->AddLine( s );
     }
 
@@ -2578,7 +2578,7 @@ void CrewList::backup( wxString path )
 
 void CrewList::saveODS( wxString path )
 {
-    wxString s = _T( "" );
+    wxString s = "";
     wxString line;
     wxString temp;
 
@@ -2591,23 +2591,23 @@ void CrewList::saveODS( wxString path )
     wxString sep( wxFileName::GetPathSeparator() );
 
     temp = dialog->content;
-    temp.Replace( _T( "table:number-columns-repeated=\"33\"" ),_T( "table:number-columns-repeated=\"14\"" ) );
-    temp.Replace( _T( "Logbook" ),_T( "CrewList" ) );
-    zip.PutNextEntry( wxT( "content.xml" ) );
+    temp.Replace( "table:number-columns-repeated=\"33\"","table:number-columns-repeated=\"14\"" );
+    temp.Replace( "Logbook","CrewList" );
+    zip.PutNextEntry( "content.xml" );
     txt << temp;
 
-    txt << _T( "<table:table-row table:style-name=\"ro2\">" );
+    txt << "<table:table-row table:style-name=\"ro2\">";
 
     for ( int i = 0; i < dialog->m_gridCrew->GetNumberCols(); i++ )
     {
-        txt << _T( "<table:table-cell office:value-type=\"string\">" );
-        txt << _T( "<text:p>" );
+        txt << "<table:table-cell office:value-type=\"string\">";
+        txt << "<text:p>";
         txt << dialog->m_gridCrew->GetColLabelValue( i );
-        txt << _T( "</text:p>" );
-        txt << _T( "</table:table-cell>" );
+        txt << "</text:p>";
+        txt << "</table:table-cell>";
     }
 
-    txt << _T( "</table:table-row>" );
+    txt << "</table:table-row>";
 
     long emptyCol = 0;
 
@@ -2618,63 +2618,63 @@ void CrewList::saveODS( wxString path )
         {
             wxString line = stream->ReadLine();
             if ( input.Eof() ) break;
-            txt << _T( "<table:table-row table:style-name=\"ro2\">" );
-            wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
+            txt << "<table:table-row table:style-name=\"ro2\">";
+            wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
 
             while ( tkz.HasMoreTokens() )
             {
                 wxString s = dialog->restoreDangerChar( tkz.GetNextToken().RemoveLast() );
-                if ( s == _T( "" ) )
+                if ( s == "" )
                 {
-                    txt <<  _T( "<table:table-cell />" );
+                    txt <<  "<table:table-cell />";
                     emptyCol++;
                     continue;
                 }
 
-                txt << _T( "<table:table-cell office:value-type=\"string\">" );
+                txt << "<table:table-cell office:value-type=\"string\">";
 
-                wxStringTokenizer str( s, _T( "\n" ) );
+                wxStringTokenizer str( s, "\n" );
                 while ( str.HasMoreTokens() )
                 {
                     wxString e = str.GetNextToken();
-                    e.Replace( _T( "&" ),_T( "&amp;" ) );
-                    e.Replace( _T( "\"" ),_T( "&quot;" ) );
-                    e.Replace( _T( "<" ),_T( "&lt;" ) );
-                    e.Replace( _T( ">" ),_T( "&gt;" ) );
-                    e.Replace( _T( "'" ),_T( "&apos;" ) );
-                    txt << _T( "<text:p>" );
+                    e.Replace( "&","&amp;" );
+                    e.Replace( "\"","&quot;" );
+                    e.Replace( "<","&lt;" );
+                    e.Replace( ">","&gt;" );
+                    e.Replace( "'","&apos;" );
+                    txt << "<text:p>";
                     txt << e;
-                    txt << _T( "</text:p>" );
+                    txt << "</text:p>";
                 }
-                txt << _T( "</table:table-cell>" );
+                txt << "</table:table-cell>";
             }
-            txt << _T( "</table:table-row>" );;
+            txt << "</table:table-row>";;
 
         }
     }
     txt << dialog->contentEnd;
 
-    zip.PutNextEntry( wxT( "mimetype" ) );
-    txt << wxT( "application/vnd.oasis.opendocument.spreadsheet" );
+    zip.PutNextEntry( "mimetype" );
+    txt << "application/vnd.oasis.opendocument.spreadsheet";
 
-    zip.PutNextEntry( wxT( "styles.xml" ) );
+    zip.PutNextEntry( "styles.xml" );
     txt << dialog->styles;
 
-    zip.PutNextEntry( wxT( "meta.xml" ) );
+    zip.PutNextEntry( "meta.xml" );
     txt << dialog->meta;
 
-    zip.PutNextEntry( wxT( "META-INF" ) + sep + wxT( "manifest.xml" ) );
+    zip.PutNextEntry( "META-INF" + sep + "manifest.xml" );
     txt << dialog->manifest;
 
-    zip.PutNextEntry( wxT( "Thumbnails" ) + sep );
+    zip.PutNextEntry( "Thumbnails" + sep );
 
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "floater" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "menubar" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "popupmenu" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "progressbar" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "statusbar" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "toolbar" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "images" ) + sep + wxT( "Bitmaps" ) );
+    zip.PutNextEntry( "Configurations2" + sep + "floater" );
+    zip.PutNextEntry( "Configurations2" + sep + "menubar" );
+    zip.PutNextEntry( "Configurations2" + sep + "popupmenu" );
+    zip.PutNextEntry( "Configurations2" + sep + "progressbar" );
+    zip.PutNextEntry( "Configurations2" + sep + "statusbar" );
+    zip.PutNextEntry( "Configurations2" + sep + "toolbar" );
+    zip.PutNextEntry( "Configurations2" + sep + "images" + sep + "Bitmaps" );
 
     zip.Close();
     out.Close();
@@ -2699,7 +2699,7 @@ void LogbookDialog::OnGridBeginDragWatch( wxGridEvent& event )
     wxDragResult res=src.DoDragDrop( wxDrag_AllowMove );
 
     if ( res != wxDragNone && ( ( DnDWatch* )m_gridCrewWake->GetGridWindow()->GetDropTarget() )->col != col )
-        m_gridCrewWake->SetCellValue( row,col,_T( " " ) );
+        m_gridCrewWake->SetCellValue( row,col," " );
 
     m_gridCrewWake->SetGridCursor( 3,( ( DnDWatch* )m_gridCrewWake->GetGridWindow()->GetDropTarget() )->col );
 }
@@ -2710,7 +2710,7 @@ void LogbookDialog::OnGridBeginDragCrew( wxGridEvent& event )
     int row = crewList->selRow;
 
     for ( int i = 0; i < m_gridCrew->GetNumberCols(); i++ )
-        s += m_gridCrew->GetCellValue( row,i )+ _T( "#" );
+        s += m_gridCrew->GetCellValue( row,i )+ "#";
     s.RemoveLast();
     s.RemoveLast();
     if ( s.IsEmpty() ) return;
@@ -2734,7 +2734,7 @@ void LogbookDialog::OnGridBeginDragCrew( wxGridEvent& event )
         for ( int i = 0; i < m_gridCrew->GetNumberCols(); i++ )
             m_gridCrew->SetCellValue( row,i,wxEmptyString );
         int i = 0;
-        wxStringTokenizer tkz( s,_T( "#" ) );
+        wxStringTokenizer tkz( s,"#" );
         while ( tkz.HasMoreTokens() )
             m_gridCrew->SetCellValue( row,i++,tkz.GetNextToken() );
         ( ( DnDCrew* )m_gridCrew->GetGridWindow()->GetDropTarget() )->moveStr = wxEmptyString;
@@ -2774,27 +2774,27 @@ bool DnDWatch::OnDropText( wxCoord x, wxCoord y, const wxString &text )
     if ( oldTxt.Length() == 1 && oldTxt.GetChar( 0 ) == ' ' )
         oldTxt.RemoveLast();
 
-    if ( text.Contains( _T( "#" ) ) )
+    if ( text.Contains( "#" ) )
     {
-        wxStringTokenizer tkz( text,_T( "#" ) );
+        wxStringTokenizer tkz( text,"#" );
         tkz.GetNextToken(),
                          name = tkz.GetNextToken();
         tkz.GetNextToken();
         fname = tkz.GetNextToken();
 
         if ( !oldTxt.IsEmpty() )
-            oldTxt += _T( "\n" );
+            oldTxt += "\n";
 
         int sel = crewList->dialog->m_choiceCrewNames->GetSelection();
 
         switch ( sel )
         {
         case 0:
-            if ( oldTxt.Contains( ( fname+_T( " " )+name ) ) ) return false;
+            if ( oldTxt.Contains( ( fname+" "+name ) ) ) return false;
             if ( !fname.IsEmpty() )
             {
-                m_pOwner->SetCellValue( 3,col,oldTxt+fname+_T( " " )+name );
-                crewList->checkMemberIsInMenu( fname+_T( " " )+name );
+                m_pOwner->SetCellValue( 3,col,oldTxt+fname+" "+name );
+                crewList->checkMemberIsInMenu( fname+" "+name );
             }
             else
             {
@@ -2814,15 +2814,15 @@ bool DnDWatch::OnDropText( wxCoord x, wxCoord y, const wxString &text )
             break;
         }
     }
-    else if ( text.Contains( _T( "\n" ) ) )
+    else if ( text.Contains( "\n" ) )
     {
         if ( oldTxt.IsEmpty() )
             oldTxt += text;
         else
-            oldTxt += _T( "\n" )+text;
+            oldTxt += "\n"+text;
 
         m_pOwner->SetCellValue( 3,col,oldTxt );
-        m_pOwner->SetCellValue( 3,crewList->selColWake,_T( " " ) );
+        m_pOwner->SetCellValue( 3,crewList->selColWake," " );
 
         if ( crewList->day == ActualWatch::day && crewList->selColWake )
             ActualWatch::member =  wxEmptyString;
@@ -2830,21 +2830,21 @@ bool DnDWatch::OnDropText( wxCoord x, wxCoord y, const wxString &text )
     else
     {
         wxString t = text;
-        t.Replace( _T( "\n" ),_T( " " ) );
+        t.Replace( "\n"," " );
         if ( oldTxt.IsEmpty() )
             oldTxt += t;
         else
-            oldTxt += _T( "\n" )+t;
+            oldTxt += "\n"+t;
 
         m_pOwner->SetCellValue( 3,col,oldTxt );
 
         oldTxt = m_pOwner->GetCellValue( 3,crewList->selColWake );
-        if ( oldTxt.Contains( _T( "\n" )+text ) )
-            oldTxt.Replace( _T( "\n" )+text,_T( "" ) );
-        else if ( oldTxt.Contains( text+_T( "\n" ) ) )
-            oldTxt.Replace( text+_T( "\n" ),_T( "" ) );
+        if ( oldTxt.Contains( "\n"+text ) )
+            oldTxt.Replace( "\n"+text,"" );
+        else if ( oldTxt.Contains( text+"\n" ) )
+            oldTxt.Replace( text+"\n","" );
         else
-            oldTxt.Replace( text,_T( " " ) );
+            oldTxt.Replace( text," " );
 
         m_pOwner->SetCellValue( 3,crewList->selColWake,oldTxt );
 
@@ -2918,11 +2918,11 @@ bool DnDCrew::OnDropText( wxCoord x, wxCoord y, const wxString& text )
 
     moveStr = wxEmptyString;
     for ( int i = 0; i < m_pOwner->GetNumberCols(); i++ )
-        moveStr += m_pOwner->GetCellValue( row,i )+ _T( "#" );
+        moveStr += m_pOwner->GetCellValue( row,i )+ "#";
     moveStr.RemoveLast();
     moveStr.RemoveLast();
 
-    wxStringTokenizer tkz( text,_T( "#" ) );
+    wxStringTokenizer tkz( text,"#" );
     int n = 0;
     while ( tkz.HasMoreTokens() )
         m_pOwner->SetCellValue( row,n++,tkz.GetNextToken() );

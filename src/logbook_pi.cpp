@@ -109,10 +109,10 @@ int logbookkonni_pi::Init( void )
     state = OFF;
     dlgShow = false;
 
-    AddLocaleCatalog( _T( "opencpn-logbookkonni_pi" ) );
+    AddLocaleCatalog( "opencpn-logbookkonni_pi" );
 
     m_plogbook_window = NULL;
-    lastWaypointInRoute = _T( "-1" );
+    lastWaypointInRoute = "-1";
     eventsEnabled = true;
 
     opt = new Options();
@@ -127,20 +127,20 @@ int logbookkonni_pi::Init( void )
 // FOR SVG ICONS  - CMakeLists.txt line 72  PLUGIN_USE_SVG=ON
 		
 #ifdef PLUGIN_USE_SVG
-      m_leftclick_tool_id = InsertPlugInToolSVG(_T( "Logbook" ),
+      m_leftclick_tool_id = InsertPlugInToolSVG("Logbook",
           _svg_logbookkonni,  _svg_logbookkonni_toggled, _svg_logbookkonni_toggled, 
-          wxITEM_CHECK, _("Logbook"), _T( "" ), NULL, LOGBOOK_TOOL_POSITION, 0, this);
+          wxITEM_CHECK, _("Logbook"), "", NULL, LOGBOOK_TOOL_POSITION, 0, this);
 #else
       m_leftclick_tool_id  = InsertPlugInTool
-		  ( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
-          _( "Logbook" ), _T( "" ), NULL,
+		  ( "", _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
+          _( "Logbook" ), "", NULL,
           LOGBOOK_TOOL_POSITION, 0, this );		  		  
 #endif
 
 
 /*  OLD _IMG Ccde
-        m_leftclick_tool_id  = InsertPlugInTool( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
-                               _( "Logbook" ), _T( "" ), NULL,
+        m_leftclick_tool_id  = InsertPlugInTool( "", _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
+                               _( "Logbook" ), "", NULL,
                                LOGBOOK_TOOL_POSITION, 0, this );
 */
 
@@ -155,7 +155,7 @@ int logbookkonni_pi::Init( void )
     m_timer = new wxTimer( timer,ID_LOGTIMER );
     timer->Connect( wxEVT_TIMER, wxObjectEventFunction( &LogbookTimer::OnTimer ) );
 
-    SendPluginMessage( _T( "LOGBOOK_READY_FOR_REQUESTS" ), _T( "TRUE" ) );
+    SendPluginMessage( "LOGBOOK_READY_FOR_REQUESTS", "TRUE" );
 
     return (
                WANTS_CURSOR_LATLON       |
@@ -178,7 +178,7 @@ bool logbookkonni_pi::DeInit( void )
 
 void logbookkonni_pi::shutdown( bool menu )
 {
-    SendPluginMessage( _T( "LOGBOOK_READY_FOR_REQUESTS" ), _T( "FALSE" ) );
+    SendPluginMessage( "LOGBOOK_READY_FOR_REQUESTS", "FALSE" );
 
     if ( m_timer )
         if ( m_timer->IsRunning() )
@@ -201,7 +201,7 @@ void logbookkonni_pi::shutdown( bool menu )
                 || ( opt->engine2Running && opt->toggleEngine2 )
                 || ( opt->generatorRunning && opt->toggleGenerator ) )
         {
-            int a = wxMessageBox( _( "Your engine(s) are still running\n\nStop engine(s) ?" ),_T( "" ),wxYES_NO | wxICON_QUESTION, NULL );
+            int a = wxMessageBox( _( "Your engine(s) are still running\n\nStop engine(s) ?" ),"",wxYES_NO | wxICON_QUESTION, NULL );
             if ( a == wxYES )
                 m_plogbook_window->logbook->resetEngineManualMode( 0 );
         }
@@ -217,7 +217,7 @@ void logbookkonni_pi::shutdown( bool menu )
 
 void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_body )
 {
-    if ( message_id == _T( "OCPN_MAN_OVERBOARD" ) )
+    if ( message_id == "OCPN_MAN_OVERBOARD" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
@@ -227,17 +227,17 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
         if ( !m_plogbook_window )
             startLogbook();
 
-        m_plogbook_window->logbook->MOB_GUID = data.Item( _T( "GUID" ) ).AsString();
+        m_plogbook_window->logbook->MOB_GUID = data.Item( "GUID" ).AsString();
         m_plogbook_window->logbook->MOBIsActive = true;
 
         m_plogbook_window->logbook->appendRow( true, false );
     }
-    else if ( message_id == _T( "POLAR_SAVE_LOGBOOK" ) )
+    else if ( message_id == "POLAR_SAVE_LOGBOOK" )
     {
         if ( m_plogbook_window )
             m_plogbook_window->logbook->update();
     }
-    else if ( message_id == _T( "LOGBOOK_LOG_LASTLINE_REQUEST" ) )
+    else if ( message_id == "LOGBOOK_LOG_LASTLINE_REQUEST" )
     {
         if ( !m_plogbook_window )
             startLogbook();
@@ -251,15 +251,15 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
         wxJSONWriter w;
         wxString out;
         w.Write( key, out );
-        wxString id = _T( "LOGBOOK_LOG_LASTLINE_RESPONSE" );
+        wxString id = "LOGBOOK_LOG_LASTLINE_RESPONSE";
         SetPluginMessage( id,out );
         return;
     }
-    else if ( message_id == _T( "LOGBOOK_IS_READY_FOR_REQUEST" ) )
+    else if ( message_id == "LOGBOOK_IS_READY_FOR_REQUEST" )
     {
-        SendPluginMessage( _T( "LOGBOOK_READY_FOR_REQUESTS" ), _T( "TRUE" ) );
+        SendPluginMessage( "LOGBOOK_READY_FOR_REQUESTS", "TRUE" );
     }
-    else if ( message_id == _T( "LOGBOOK_BUYPARTS_ADDLINE_REQUEST" ) )
+    else if ( message_id == "LOGBOOK_BUYPARTS_ADDLINE_REQUEST" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
@@ -279,20 +279,20 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
 
         for ( int i = 0; i < data.Size(); i++ )
         {
-            priority = data[i].Item( _T( "Priority" ) ).AsInt();
-            category = data[i].Item( _T( "Category" ) ).AsString();
+            priority = data[i].Item( "Priority" ).AsInt();
+            category = data[i].Item( "Category" ).AsString();
             title    = _( "from " );
-            plugin = data[i].Item( _T( "PluginName" ) ).AsString();
+            plugin = data[i].Item( "PluginName" ).AsString();
             title   += plugin + _( "-Plugin" );
-            amount   = data[i].Item( _T( "Amount" ) ).AsInt();
-            unit     = data[i].Item( _T( "Unit" ) ).AsString();
-            text     = data[i].Item( _T( "Text" ) ).AsString();
+            amount   = data[i].Item( "Amount" ).AsInt();
+            unit     = data[i].Item( "Unit" ).AsString();
+            text     = data[i].Item( "Text" ).AsString();
 
-            prText[priority] += wxString::Format( _T( "%4i  %-15s %-30s\n" ),amount,unit.c_str(),text.c_str() );
+            prText[priority] += wxString::Format( "%4i  %-15s %-30s\n",amount,unit.c_str(),text.c_str() );
 
         }
 
-        if ( plugin == _T( "FindIt" ) )
+        if ( plugin == "FindIt" )
             m_plogbook_window->maintenance->deleteFindItRow( category,plugin );
 
         for ( int i = 0; i < 6; i++ )
@@ -303,7 +303,7 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
 
                 int lastRow = m_plogbook_window->m_gridMaintenanceBuyParts->GetNumberRows()-1;
 
-                m_plogbook_window->m_gridMaintenanceBuyParts->SetCellValue( lastRow,0,wxString::Format( _T( "%i" ),i ) );
+                m_plogbook_window->m_gridMaintenanceBuyParts->SetCellValue( lastRow,0,wxString::Format( "%i",i ) );
                 m_plogbook_window->m_gridMaintenanceBuyParts->SetCellValue( lastRow,1,category );
                 m_plogbook_window->m_gridMaintenanceBuyParts->SetCellValue( lastRow,2,title );
                 m_plogbook_window->m_gridMaintenanceBuyParts->SetCellValue( lastRow,3,prText[i].RemoveLast() );
@@ -315,7 +315,7 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
 
         return;
     }
-    else if ( message_id == _T( "LOGBOOK_LOG_ADDLINE_REQUEST" ) )
+    else if ( message_id == "LOGBOOK_LOG_ADDLINE_REQUEST" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
@@ -328,11 +328,11 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
         m_plogbook_window->logbook->appendRow( true, true );
         int lastRow = m_plogbook_window->m_gridGlobal->GetNumberRows()-1;
 
-        m_plogbook_window->m_gridGlobal->SetCellValue( lastRow,13,data.Item( _T( "Remarks" ) ).AsString() );
-        m_plogbook_window->m_gridMotorSails->SetCellValue( lastRow,8,data.Item( _T( "MotorRemarks" ) ).AsString() );
+        m_plogbook_window->m_gridGlobal->SetCellValue( lastRow,13,data.Item( "Remarks" ).AsString() );
+        m_plogbook_window->m_gridMotorSails->SetCellValue( lastRow,8,data.Item( "MotorRemarks" ).AsString() );
         return;
     }
-    else if ( message_id == _T( "OCPN_WPT_ARRIVED" ) )
+    else if ( message_id == "OCPN_WPT_ARRIVED" )
     {
         if ( !opt->waypointArrived || eventsEnabled ) return;
 
@@ -345,9 +345,9 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
             startLogbook();
 
         RMB rmb;
-        rmb.From = data.Item( _T( "WP_arrived" ) ).AsString();
-        rmb.To   = lastWaypointInRoute =  data.Item( _T( "Next_WP" ) ).AsString();
-        m_plogbook_window->logbook->WP_skipped = data.Item( _T( "isSkipped" ) ).AsBool();
+        rmb.From = data.Item( "WP_arrived" ).AsString();
+        rmb.To   = lastWaypointInRoute =  data.Item( "Next_WP" ).AsString();
+        m_plogbook_window->logbook->WP_skipped = data.Item( "isSkipped" ).AsBool();
         m_plogbook_window->logbook->OCPN_Message = true;
 
         m_plogbook_window->logbook->checkWayPoint( rmb );
@@ -355,7 +355,7 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
         m_plogbook_window->logbook->OCPN_Message = false;
         m_plogbook_window->logbook->WP_skipped = false;
     }
-    else if ( message_id == _T( "OCPN_RTE_ENDED" ) )
+    else if ( message_id == "OCPN_RTE_ENDED" )
     {
         if ( !opt->waypointArrived ) return;
 
@@ -369,17 +369,17 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
 
         RMB rmb;
         rmb.From = lastWaypointInRoute;
-        rmb.To = _T( "-1" );
+        rmb.To = "-1";
         m_plogbook_window->logbook->WP_skipped = false;
         m_plogbook_window->logbook->OCPN_Message = true;
 
         m_plogbook_window->logbook->checkWayPoint( rmb );
         m_plogbook_window->logbook->OCPN_Message = false;
-        lastWaypointInRoute = _T( "-1" );
+        lastWaypointInRoute = "-1";
         m_plogbook_window->logbook->lastWayPoint = wxEmptyString;
         m_plogbook_window->logbook->routeIsActive = false;
     }
-    else if ( message_id == _T( "OCPN_RTE_DEACTIVATED" ) )
+    else if ( message_id == "OCPN_RTE_DEACTIVATED" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
@@ -396,7 +396,7 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
             m_plogbook_window->logbook->MOBIsActive = false;
 
     }
-    else if ( message_id == _T( "OCPN_RTE_ACTIVATED" ) )
+    else if ( message_id == "OCPN_RTE_ACTIVATED" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
@@ -406,11 +406,11 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
         if ( !m_plogbook_window )
             startLogbook();
 
-        m_plogbook_window->logbook->activeRoute = data.Item( _T( "Route_activated" ) ).AsString();
-        m_plogbook_window->logbook->activeRouteGUID = data.Item( _T( "GUID" ) ).AsString();
+        m_plogbook_window->logbook->activeRoute = data.Item( "Route_activated" ).AsString();
+        m_plogbook_window->logbook->activeRouteGUID = data.Item( "GUID" ).AsString();
         m_plogbook_window->logbook->routeIsActive = true;
     }
-    else if ( message_id == _T( "OCPN_TRK_ACTIVATED" ) )
+    else if ( message_id == "OCPN_TRK_ACTIVATED" )
     {
         if ( !m_plogbook_window )
             startLogbook();
@@ -420,11 +420,11 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
         int numErrors = reader.Parse( message_body, &data );
         if ( numErrors != 0 ) return;
 
-        m_plogbook_window->logbook->activeTrack = data.Item( _T( "Name" ) ).AsString();
-        m_plogbook_window->logbook->activeTrackGUID = data.Item( _T( "GUID" ) ).AsString();
+        m_plogbook_window->logbook->activeTrack = data.Item( "Name" ).AsString();
+        m_plogbook_window->logbook->activeTrackGUID = data.Item( "GUID" ).AsString();
         m_plogbook_window->logbook->trackIsActive = true;
     }
-    else if ( message_id == _T( "OCPN_TRK_DEACTIVATED" ) )
+    else if ( message_id == "OCPN_TRK_DEACTIVATED" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
@@ -442,36 +442,36 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
         }
 
     }
-    else if ( message_id == _T( "OCPN_TRACKPOINTS_COORDS" ) )
+    else if ( message_id == "OCPN_TRACKPOINTS_COORDS" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
         int numErrors = reader.Parse( message_body, &data );
         if ( numErrors != 0 ) return;
 
-        bool error = data[_T( "error" )].AsBool();
+        bool error = data["error"].AsBool();
 
         if ( !error )
         {
-            double lat = data[_T( "lat" )].AsDouble();
-            double lon = data[_T( "lon" )].AsDouble();
-            int total = data[_T( "TotalNodes" )].AsInt();
-            int i = data[_T( "NodeNr" )].AsInt();
+            double lat = data["lat"].AsDouble();
+            double lon = data["lon"].AsDouble();
+            int total = data["TotalNodes"].AsInt();
+            int i = data["NodeNr"].AsInt();
             if ( i == 1 )
             {
                 wxString ph = m_plogbook_window->kmlPathHeader;
-                ph.Replace( _T( "#NAME#" ),_T( "Trackline" ) );
-                ph.Replace( _T( "#LINE#" ),_T( "#LineTrack" ) );
+                ph.Replace( "#NAME#","Trackline" );
+                ph.Replace( "#LINE#","#LineTrack" );
                 *m_plogbook_window->logbook->kmlFile << ph;
             }
             if ( i <= total )
-                *m_plogbook_window->logbook->kmlFile << wxString::Format( _T( "%f,%f\n" ),lon,lat );
+                *m_plogbook_window->logbook->kmlFile << wxString::Format( "%f,%f\n",lon,lat );
             if ( i == total )
                 *m_plogbook_window->logbook->kmlFile << m_plogbook_window->kmlPathFooter;
         }
         //		m_plogbook_window->logbook->writeTrackToKML(data);
     }
-    else if ( message_id == _T( "OCPN_TRACKS_MERGED" ) )
+    else if ( message_id == "OCPN_TRACKS_MERGED" )
     {
         if ( !m_plogbook_window )
             startLogbook();
@@ -482,30 +482,30 @@ void logbookkonni_pi::SetPluginMessage( wxString &message_id, wxString &message_
         if ( numErrors != 0 ) return;
 
         unsigned int i = 1;
-        wxString target = data[_T( "targetTrack" )].AsString();
+        wxString target = data["targetTrack"].AsString();
         while ( true )
         {
-            if ( data.HasMember( _T( "mergeTrack" )+wxString::Format( _T( "%d" ),i ) ) )
-                m_plogbook_window->logbook->mergeList.Add( data[_T( "mergeTrack" )+wxString::Format( _T( "%d" ),i++ )].AsString() );
+            if ( data.HasMember( "mergeTrack"+wxString::Format( "%d",i ) ) )
+                m_plogbook_window->logbook->mergeList.Add( data["mergeTrack"+wxString::Format( "%d",i++ )].AsString() );
             else
                 break;
 
         }
         m_plogbook_window->logbook->setTrackToNewID( target );
     }
-    else if ( message_id == _T( "OCPN_ROUTE_RESPONSE" ) )
+    else if ( message_id == "OCPN_ROUTE_RESPONSE" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
         int numErrors = reader.Parse( message_body, &data );
         if ( numErrors != 0 ) return;
 
-        bool error = data[0][_T( "error" )].AsBool();
+        bool error = data[0]["error"].AsBool();
 
         if ( !error )
             m_plogbook_window->logbook->writeRouteToKML( data );
     }
-    else if ( message_id == _T( "OCPN_ROUTELIST_RESPONSE" ) )
+    else if ( message_id == "OCPN_ROUTELIST_RESPONSE" )
     {
         wxJSONReader reader;
         wxJSONValue  data;
@@ -525,9 +525,9 @@ void logbookkonni_pi::startLogbook()
         m_plogbook_window->SetPosition( wxPoint( -1,this->m_parent_window->GetParent()->GetPosition().y+80 ) );
 
         if ( m_plogbook_window->IsShown() )
-            SendPluginMessage( wxString( _T( "LOGBOOK_WINDOW_SHOWN" ) ), wxEmptyString );
+            SendPluginMessage( wxString( "LOGBOOK_WINDOW_SHOWN" ), wxEmptyString );
         else
-            SendPluginMessage( _T( "LOGBOOK_WINDOW_HIDDEN" ), wxEmptyString );
+            SendPluginMessage( "LOGBOOK_WINDOW_HIDDEN", wxEmptyString );
     }
 
 }
@@ -570,13 +570,13 @@ void logbookkonni_pi::SetColorScheme( PI_ColorScheme cs )
         }
         else
         {
-            GetGlobalColor( _T( "DILG0" ),&col );   // Dialog Background white
-            GetGlobalColor( _T( "DILG1" ),&col1 );  // Dialog Background
-            GetGlobalColor( _T( "DILG2" ),&back_color ); // Control Background
-            GetGlobalColor( _T( "DILG3" ),&text_color ); // Text
-            GetGlobalColor( _T( "UITX1" ),&uitext ); // Menu Text, derived from UINFF
-            GetGlobalColor( _T( "UDKRD" ),&udkrd );
-            GetGlobalColor( _T( "GREY2" ),&gridline );
+            GetGlobalColor( "DILG0",&col );   // Dialog Background white
+            GetGlobalColor( "DILG1",&col1 );  // Dialog Background
+            GetGlobalColor( "DILG2",&back_color ); // Control Background
+            GetGlobalColor( "DILG3",&text_color ); // Text
+            GetGlobalColor( "UITX1",&uitext ); // Menu Text, derived from UINFF
+            GetGlobalColor( "UDKRD",&udkrd );
+            GetGlobalColor( "GREY2",&gridline );
         }
 
         if ( cs == 0 || cs == 1 )
@@ -738,20 +738,20 @@ void logbookkonni_pi::SetDefaults( void )
         m_bLOGShowIcon = true;
 		
 #ifdef PLUGIN_USE_SVG
-      m_leftclick_tool_id = InsertPlugInToolSVG(_T( "Logbook" ),
+      m_leftclick_tool_id = InsertPlugInToolSVG("Logbook",
           _svg_logbookkonni,  _svg_logbookkonni_toggled, _svg_logbookkonni_toggled, 
-          wxITEM_CHECK, _("Logbook"), _T( "" ), NULL, LOGBOOK_TOOL_POSITION, 0, this);
+          wxITEM_CHECK, _("Logbook"), "", NULL, LOGBOOK_TOOL_POSITION, 0, this);
 #else
       m_leftclick_tool_id  = InsertPlugInTool
-		  ( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
-          _( "Logbook" ), _T( "" ), NULL,
+		  ( "", _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
+          _( "Logbook" ), "", NULL,
           LOGBOOK_TOOL_POSITION, 0, this );		  		  
 #endif
 
 
 /*    OLD _img code
-        m_leftclick_tool_id  = InsertPlugInTool( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
-                               _( "Logbook" ), _T( "" ), NULL,
+        m_leftclick_tool_id  = InsertPlugInTool( "", _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
+                               _( "Logbook" ), "", NULL,
                                LOGBOOK_TOOL_POSITION, 0, this );
 */
 
@@ -764,12 +764,12 @@ wxString logbookkonni_pi::StandardPath( void )
     wxString s = wxFileName::GetPathSeparator();
     wxString stdPath  =( *GetpPrivateApplicationDataLocation());
 
-    stdPath += s + _T("plugins");
+    stdPath += s + "plugins";
 	
     if (!wxDirExists(stdPath))
       wxMkdir(stdPath);
 
-    stdPath += s + _T("logbook");
+    stdPath += s + "logbook";
 
 	if (!wxDirExists(stdPath))
 		wxMkdir(stdPath);
@@ -827,19 +827,19 @@ void logbookkonni_pi::ShowPreferencesDialog( wxWindow* parent )
             if ( m_bLOGShowIcon )
 
 #ifdef PLUGIN_USE_SVG
-      m_leftclick_tool_id = InsertPlugInToolSVG(_T( "Logbook" ),
+      m_leftclick_tool_id = InsertPlugInToolSVG("Logbook",
           _svg_logbookkonni,  _svg_logbookkonni_toggled, _svg_logbookkonni_toggled, 
-          wxITEM_CHECK, _("Logbook"), _T( "" ), NULL, LOGBOOK_TOOL_POSITION, 0, this);
+          wxITEM_CHECK, _("Logbook"), "", NULL, LOGBOOK_TOOL_POSITION, 0, this);
 #else
       m_leftclick_tool_id  = InsertPlugInTool
-		  ( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
-          _( "Logbook" ), _T( "" ), NULL,
+		  ( "", _img_logbook_pi, _img_logbook_pi, wxITEM_CHECK,
+          _( "Logbook" ), "", NULL,
           LOGBOOK_TOOL_POSITION, 0, this );		  		  
 #endif
 
 /*    OLD _img code
-                m_leftclick_tool_id  = InsertPlugInTool( _T( "" ), _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
-                                       _( "Logbook" ), _T( "" ), NULL, LOGBOOK_TOOL_POSITION,
+                m_leftclick_tool_id  = InsertPlugInTool( "", _img_logbook_pi, _img_logbook_pi, wxITEM_NORMAL,
+                                       _( "Logbook" ), "", NULL, LOGBOOK_TOOL_POSITION,
                                        0, this );
 */
 									   
@@ -891,9 +891,9 @@ void logbookkonni_pi::OnToolbarToolCallback( int id )
     }
 
     if ( m_plogbook_window->IsShown() )
-        SendPluginMessage( wxString( _T( "LOGBOOK_WINDOW_SHOWN" ) ), wxEmptyString );
+        SendPluginMessage( wxString( "LOGBOOK_WINDOW_SHOWN" ), wxEmptyString );
     else
-        SendPluginMessage( _T( "LOGBOOK_WINDOW_HIDDEN" ), wxEmptyString );
+        SendPluginMessage( "LOGBOOK_WINDOW_HIDDEN", wxEmptyString );
 
     if ( state == OFF )
     {
@@ -919,15 +919,15 @@ void logbookkonni_pi::SaveConfig()
     if ( pConf )
     {
         pConf->SetPath ( _T ( "/PlugIns/Logbook" ) );
-        pConf->Write ( _T( "ShowLOGIcon" ), m_bLOGShowIcon );
-        pConf->Write ( _T( "Traditional" ), opt->traditional );
-        pConf->Write ( _T( "ToolTips" ),    opt->showToolTips );
+        pConf->Write ( "ShowLOGIcon", m_bLOGShowIcon );
+        pConf->Write ( "Traditional", opt->traditional );
+        pConf->Write ( "ToolTips",    opt->showToolTips );
 
         pConf->Write ( _T ( "FirstTime" ),  opt->firstTime );
         if ( m_plogbook_window )
         {
-            pConf->Write( _T( "DlgWidth" ),  m_plogbook_window->GetSize().GetX() );
-            pConf->Write ( _T( "DlgHeight" ), m_plogbook_window->GetSize().GetY() );
+            pConf->Write( "DlgWidth",  m_plogbook_window->GetSize().GetX() );
+            pConf->Write ( "DlgHeight", m_plogbook_window->GetSize().GetY() );
         }
 
         pConf->Write ( _T ( "Popup" ),opt->popup );
@@ -1046,11 +1046,11 @@ void logbookkonni_pi::SaveConfig()
 
         wxString str = wxEmptyString;
         for ( int i = 0; i < 7; i++ )
-            str += wxString::Format( _T( "%i,%s," ),opt->filterLayout[i],opt->layoutPrefix[i].c_str() );
+            str += wxString::Format( "%i,%s,",opt->filterLayout[i],opt->layoutPrefix[i].c_str() );
         str.RemoveLast();
         pConf->Write ( _T ( "PrefixLayouts" ), str );
 
-        wxString kmlRouteTrack = wxString::Format( _T( "%i,%i" ),opt->kmlRoute,opt->kmlTrack );
+        wxString kmlRouteTrack = wxString::Format( "%i,%i",opt->kmlRoute,opt->kmlTrack );
         pConf->Write ( _T ( "KMLRouteTrack" ), kmlRouteTrack );
         pConf->Write ( _T ( "KMLWidth" ), opt->kmlLineWidth );
         pConf->Write ( _T ( "KMLTransp" ), opt->kmlLineTransparancy );
@@ -1081,40 +1081,40 @@ void logbookkonni_pi::SaveConfig()
         pConf->Write ( _T ( "numberofSails" ), opt->numberSails );
 
         wxString sails = wxEmptyString;
-        sails = wxString::Format( _T( "%i,%i," ),opt->rowGap,opt->colGap );
+        sails = wxString::Format( "%i,%i,",opt->rowGap,opt->colGap );
         for ( int i = 0; i < opt->numberSails; i++ )
-            sails += wxString::Format( _T( "%s,%s,%i," ),opt->abrSails.Item( i ).c_str(),opt->sailsName.Item( i ).c_str(),opt->bSailIsChecked[i] );
+            sails += wxString::Format( "%s,%s,%i,",opt->abrSails.Item( i ).c_str(),opt->sailsName.Item( i ).c_str(),opt->bSailIsChecked[i] );
         sails.RemoveLast();
         pConf->Write ( _T ( "Sails" ), sails );
 
         if ( opt->dtEngine1On.IsValid() )
-            pConf->Write ( _T ( "Engine1TimeStart" ), opt->dtEngine1On.FormatISODate()+_T( " " )+
+            pConf->Write ( _T ( "Engine1TimeStart" ), opt->dtEngine1On.FormatISODate()+" "+
                            opt->dtEngine1On.FormatISOTime() );
         else
             pConf->Write ( _T ( "Engine1TimeStart" ),wxEmptyString );
 
         if ( opt->dtEngine2On.IsValid() )
-            pConf->Write ( _T ( "Engine2TimeStart" ), opt->dtEngine2On.FormatISODate()+_T( " " )+
+            pConf->Write ( _T ( "Engine2TimeStart" ), opt->dtEngine2On.FormatISODate()+" "+
                            opt->dtEngine2On.FormatISOTime() );
         else
             pConf->Write ( _T ( "Engine2TimeStart" ),wxEmptyString );
 
         if ( opt->dtGeneratorOn.IsValid() )
-            pConf->Write ( _T ( "GeneratorTimeStart" ), opt->dtGeneratorOn.FormatISODate()+_T( " " )+
+            pConf->Write ( _T ( "GeneratorTimeStart" ), opt->dtGeneratorOn.FormatISODate()+" "+
                            opt->dtGeneratorOn.FormatISOTime() );
         else
             pConf->Write ( _T ( "GeneratorTimeStart" ),wxEmptyString );
 
-        writeCols( pConf,opt->NavColWidth,		_T( "NavGridColWidth" ) );
-        writeCols( pConf,opt->WeatherColWidth,	_T( "WeatherGridColWidth" ) );
-        writeCols( pConf,opt->MotorColWidth,		_T( "MotorGridColWidth" ) );
-        writeCols( pConf,opt->CrewColWidth,		_T( "CrewGridColWidth" ) );
-        writeCols( pConf,opt->WakeColWidth,		_T( "WakeGridColWidth" ) );
-        writeCols( pConf,opt->EquipColWidth,		_T( "EquipGridColWidth" ) );
-        writeCols( pConf,opt->OverviewColWidth,	_T( "OverviewGridColWidth" ) );
-        writeCols( pConf,opt->ServiceColWidth,	_T( "ServiceGridColWidth" ) );
-        writeCols( pConf,opt->RepairsColWidth,	_T( "RepairsGridColWidth" ) );
-        writeCols( pConf,opt->BuyPartsColWidth,	_T( "BuyPartsGridColWidth" ) );
+        writeCols( pConf,opt->NavColWidth,		"NavGridColWidth" );
+        writeCols( pConf,opt->WeatherColWidth,	"WeatherGridColWidth" );
+        writeCols( pConf,opt->MotorColWidth,		"MotorGridColWidth" );
+        writeCols( pConf,opt->CrewColWidth,		"CrewGridColWidth" );
+        writeCols( pConf,opt->WakeColWidth,		"WakeGridColWidth" );
+        writeCols( pConf,opt->EquipColWidth,		"EquipGridColWidth" );
+        writeCols( pConf,opt->OverviewColWidth,	"OverviewGridColWidth" );
+        writeCols( pConf,opt->ServiceColWidth,	"ServiceGridColWidth" );
+        writeCols( pConf,opt->RepairsColWidth,	"RepairsGridColWidth" );
+        writeCols( pConf,opt->BuyPartsColWidth,	"BuyPartsGridColWidth" );
     }
 }
 
@@ -1122,7 +1122,7 @@ void logbookkonni_pi::writeCols( wxFileConfig *pConf, ArrayOfGridColWidth ar, wx
 {
     wxString str = wxEmptyString;
     for ( unsigned int i = 0; i < ar.Count(); i++ )
-        str += wxString::Format( _T( "%i," ),ar[i] );
+        str += wxString::Format( "%i,",ar[i] );
     str.RemoveLast();
     pConf->Write( entry,str );
 }
@@ -1133,21 +1133,21 @@ void logbookkonni_pi::LoadConfig()
 
     if ( pConf )
     {
-        pConf->SetPath ( _T( "/PlugIns/Logbook" ) );
-        pConf->Read ( _T( "ShowLOGIcon" ),  &m_bLOGShowIcon, 1 );
-        pConf->Read ( _T( "Traditional" ),  &opt->traditional, 1 );
-        pConf->Read ( _T( "ToolTips" ),  &opt->showToolTips );
-        pConf->Read ( _T( "FirstTime" ),  &opt->firstTime );
+        pConf->SetPath ( "/PlugIns/Logbook" );
+        pConf->Read ( "ShowLOGIcon",  &m_bLOGShowIcon, 1 );
+        pConf->Read ( "Traditional",  &opt->traditional, 1 );
+        pConf->Read ( "ToolTips",  &opt->showToolTips );
+        pConf->Read ( "FirstTime",  &opt->firstTime );
 #ifdef __WXMSW__
-        pConf->Read ( _T( "DlgWidth" ),  &opt->dlgWidth,1010 );
+        pConf->Read ( "DlgWidth",  &opt->dlgWidth,1010 );
 #elif defined __WXGTK__
-        pConf->Read ( _T( "DlgWidth" ),  &opt->dlgWidth,1085 );
+        pConf->Read ( "DlgWidth",  &opt->dlgWidth,1085 );
 #elif defined __WXOSX__
-        pConf->Read ( _T( "DlgWidth" ),  &opt->dlgWidth,1085 );
+        pConf->Read ( "DlgWidth",  &opt->dlgWidth,1085 );
 #endif
-        pConf->Read ( _T( "DlgHeight" ),  &opt->dlgHeight,535 );
-        pConf->Read ( _T( "Popup" ),  &opt->popup,true );
-        pConf->Read ( _T( "AutoStartTimer" ),  &opt->autostarttimer, false );
+        pConf->Read ( "DlgHeight",  &opt->dlgHeight,535 );
+        pConf->Read ( "Popup",  &opt->popup,true );
+        pConf->Read ( "AutoStartTimer",  &opt->autostarttimer, false );
 
         pConf->Read ( _T ( "DateFormat" ), &opt->dateformat,0 );
         pConf->Read ( _T ( "DateSepIndiv" ), &opt->dateseparatorindiv );
@@ -1181,9 +1181,9 @@ void logbookkonni_pi::LoadConfig()
         pConf->Read ( _T ( "GPSAuto" ), &opt->gpsAuto );
         pConf->Read ( _T ( "TzIndicator" ), &opt->tzIndicator );
         pConf->Read ( _T ( "TzHours" ), &opt->tzHour );
-        pConf->Read ( _T ( "TimerHours" ), &opt->thour,_T( "0" ) );
-        pConf->Read ( _T ( "TimerMin" ), &opt->tmin,_T( "1" ) );
-        pConf->Read ( _T ( "TimerSec" ), &opt->tsec,_T( "0" ) );
+        pConf->Read ( _T ( "TimerHours" ), &opt->thour,"0" );
+        pConf->Read ( _T ( "TimerMin" ), &opt->tmin,"1" );
+        pConf->Read ( _T ( "TimerSec" ), &opt->tsec,"0" );
         pConf->Read ( _T ( "TimerText" ), &opt->ttext );
 
         opt->timerSec = ( wxAtol( opt->thour )* 3600000 +
@@ -1207,9 +1207,9 @@ void logbookkonni_pi::LoadConfig()
 
         pConf->Read ( _T ( "Vol" ), &opt->vol );
         pConf->Read ( _T ( "Motorhours" ), &opt->motorh );
-        pConf->Read ( _T ( "Engine" ), &opt->engine,_T( "E" ) );
-        pConf->Read ( _T ( "Shaft" ), &opt->shaft,_T( "S" ) );
-        pConf->Read ( _T ( "RPM" ), &opt->rpm,_T( "RPM" ) );
+        pConf->Read ( _T ( "Engine" ), &opt->engine,"E" );
+        pConf->Read ( _T ( "Shaft" ), &opt->shaft,"S" );
+        pConf->Read ( _T ( "RPM" ), &opt->rpm,"RPM" );
 
         pConf->Read ( _T ( "Days" ), &opt->days );
         pConf->Read ( _T ( "Weeks" ), &opt->weeks );
@@ -1270,9 +1270,9 @@ void logbookkonni_pi::LoadConfig()
 
         wxString str = wxEmptyString;
         pConf->Read ( _T ( "PrefixLayouts" ), &str );
-        if ( str.Contains( _T( "," ) ) )
+        if ( str.Contains( "," ) )
         {
-            wxStringTokenizer tkz( str,_T( "," ) );
+            wxStringTokenizer tkz( str,"," );
             for ( int i = 0; i < 7; i++ )
             {
                 opt->filterLayout[i] = ( wxAtoi( tkz.GetNextToken() ) )?true:false;
@@ -1281,11 +1281,11 @@ void logbookkonni_pi::LoadConfig()
         }
 
         wxString kmlRouteTrack = wxEmptyString;
-        pConf->Read ( _T ( "KMLRouteTrack" ), &kmlRouteTrack,_T( "1,1" ) );
-        wxStringTokenizer tkz( kmlRouteTrack,_T( "," ) );
+        pConf->Read ( _T ( "KMLRouteTrack" ), &kmlRouteTrack,"1,1" );
+        wxStringTokenizer tkz( kmlRouteTrack,"," );
         opt->kmlRoute = wxAtoi( tkz.GetNextToken() );
         opt->kmlTrack = wxAtoi( tkz.GetNextToken() );
-        pConf->Read ( _T ( "KMLWidth" ), &opt->kmlLineWidth,_T( "4" ) );
+        pConf->Read ( _T ( "KMLWidth" ), &opt->kmlLineWidth,"4" );
         pConf->Read ( _T ( "KMLTransp" ), &opt->kmlLineTransparancy,0 );
         pConf->Read ( _T ( "KMLRouteColor" ), &opt->kmlRouteColor,0 );
         pConf->Read ( _T ( "KMLTrackColor" ), &opt->kmlTrackColor,3 );
@@ -1296,13 +1296,13 @@ void logbookkonni_pi::LoadConfig()
         pConf->Read ( _T ( "GenRPMIsChecked" ), &opt->bGenRPMIsChecked,false );
 
         pConf->Read ( _T ( "NMEAUseRPM" ), &opt->NMEAUseERRPM,false );
-        pConf->Read ( _T ( "Engine1" ), &opt->engine1Id,_T( "" ) );
-        pConf->Read ( _T ( "Engine2" ), &opt->engine2Id,_T( "" ) );
+        pConf->Read ( _T ( "Engine1" ), &opt->engine1Id,"" );
+        pConf->Read ( _T ( "Engine2" ), &opt->engine2Id,"" );
         pConf->Read ( _T ( "Engine1Runs" ), &opt->engine1Running );
         pConf->Read ( _T ( "Engine2Runs" ), &opt->engine2Running );
 
         pConf->Read ( _T ( "Generator" ), &opt->generator,false );
-        pConf->Read ( _T ( "GeneratorId" ), &opt->generatorId,_T( "" ) );
+        pConf->Read ( _T ( "GeneratorId" ), &opt->generatorId,"" );
         pConf->Read ( _T ( "GeneratorRuns" ), &opt->generatorRunning );
 
         pConf->Read ( _T ( "ShowLayoutP" ), &opt->layoutShow,true );
@@ -1316,7 +1316,7 @@ void logbookkonni_pi::LoadConfig()
         pConf->Read ( _T ( "Sails" ), &sails );
         if ( !sails.IsEmpty() )
         {
-            wxStringTokenizer tkz( sails,_T( "," ) );
+            wxStringTokenizer tkz( sails,"," );
             if ( wxString( sails.GetChar( 0 ) ).IsNumber() )
             {
                 opt->rowGap = wxAtoi( tkz.GetNextToken() );
@@ -1344,7 +1344,7 @@ void logbookkonni_pi::LoadConfig()
 
         if ( !engine1.IsEmpty() )
         {
-            wxStringTokenizer tkz( engine1,_T( " " ) );
+            wxStringTokenizer tkz( engine1," " );
             wxString date = tkz.GetNextToken();
             wxString time = tkz.GetNextToken();
 
@@ -1358,7 +1358,7 @@ void logbookkonni_pi::LoadConfig()
 
         if ( !engine2.IsEmpty() )
         {
-            wxStringTokenizer tkz( engine2,_T( " " ) );
+            wxStringTokenizer tkz( engine2," " );
             wxString date = tkz.GetNextToken();
             wxString time = tkz.GetNextToken();
 
@@ -1372,7 +1372,7 @@ void logbookkonni_pi::LoadConfig()
 
         if ( !genny.IsEmpty() )
         {
-            wxStringTokenizer tkz( genny,_T( " " ) );
+            wxStringTokenizer tkz( genny," " );
             wxString date = tkz.GetNextToken();
             wxString time = tkz.GetNextToken();
 
@@ -1465,7 +1465,7 @@ void logbookkonni_pi::LoadConfig()
 
 ArrayOfGridColWidth logbookkonni_pi::readCols( ArrayOfGridColWidth ar, wxString str )
 {
-    wxStringTokenizer tkz( str,_T( "," ) );
+    wxStringTokenizer tkz( str,"," );
     while ( tkz.HasMoreTokens() )
         ar.Add( wxAtoi( tkz.GetNextToken() ) );
 
@@ -1484,7 +1484,7 @@ ArrayOfGridColWidth logbookkonni_pi::readColsOld( wxFileConfig *pConf, ArrayOfGr
         if ( !r ) break;
         ar.Add( val );
     }
-    pConf->DeleteGroup( _T( "/PlugIns/Logbook/"+entry ) );
+    pConf->DeleteGroup( wxString("/PlugIns/Logbook/") + entry);
 
     return ar;
 }
@@ -1507,7 +1507,7 @@ static std::string get_layoutdir(const std::string base,
 
 void logbookkonni_pi::loadLayouts( wxWindow *parent )
 {
-    wxString FILE = _T( "LogbookKonni*.zip" );
+    wxString FILE = "LogbookKonni*.zip";
     std::unique_ptr<wxZipEntry> entry;
     wxString path;
     wxString sep = wxFileName::GetPathSeparator();
@@ -1558,7 +1558,7 @@ void logbookkonni_pi::loadLayouts( wxWindow *parent )
             else if (name.Contains( sep + "logbook"))
                 path.append("logbook");
             else if (name.Contains( sep + "crew" ))
-                path.append( _T( "crew" ) );
+                path.append( "crew" );
             else if (name.Contains( sep + "overview" ))
                 path.append("overview");
             else if (name.Contains(sep + "service"))
@@ -1672,7 +1672,7 @@ bool LogbookTimer::popUp()
     if ( !plogbook_pi->m_plogbook_window->IsShown() && plogbook_pi->opt->popup )
     {
         plogbook_pi->m_plogbook_window->Show();
-        plogbook_pi->SendLogbookMessage( _T( "LOGBOOK_WINDOW_SHOWN" ), wxEmptyString );
+        plogbook_pi->SendLogbookMessage( "LOGBOOK_WINDOW_SHOWN", wxEmptyString );
         plogbook_pi->dlgShow = true;
     }
 

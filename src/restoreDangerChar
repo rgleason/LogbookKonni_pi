@@ -1,0 +1,134 @@
+boat.cpp:    bool radio = parent->m_radioBtnHTMLBoat->GetValue();
+boat.cpp:    parent->appendOSDirSlash( &layout_locn );
+boat.cpp:    parent->loadLayoutChoice( LogbookDialog::BOAT,layout_locn,parent->boatChoice,parent->logbookPlugIn->opt->layoutPrefix[LogbookDialog::BOAT] );
+boat.cpp:        parent->boatChoice->SetSelection( parent->logbookPlugIn->opt->boatGridLayoutChoice );
+boat.cpp:        parent->boatChoice->SetSelection( parent->logbookPlugIn->opt->boatGridLayoutChoiceODT );
+boat.cpp:    wxWindowList l = parent->m_panel72->GetWindowChildren();
+boat.cpp:    wxWindowList l = parent->m_panel72->GetWindowChildren();
+boat.cpp:            s = parent->restoreDangerChar( s );
+boat.cpp:                s = parent->maintenance->getDateString( s );
+boat.cpp:    if ( parent->m_gridEquipment->GetNumberRows() > 0 )
+boat.cpp:        parent->m_gridEquipment->DeleteRows( 0,parent->m_gridEquipment->GetNumberRows()-1 );
+boat.cpp:        parent->m_gridEquipment->AppendRows();
+boat.cpp:            s = parent->restoreDangerChar( s );
+boat.cpp:            parent->m_gridEquipment->SetCellValue( i,c++,s );
+boat.cpp:            temp = parent->replaceDangerChar( temp );
+boat.cpp:                parent->myParseDate( temp,dt );
+boat.cpp:    int count = parent->m_gridEquipment->GetNumberRows();
+boat.cpp:        for ( int i= 0; i < parent->m_gridEquipment->GetNumberCols(); i++ )
+boat.cpp:            s += parent->replaceDangerChar(
+boat.cpp:                     parent->m_gridEquipment->GetCellValue( r,i ) )
+boat.cpp:    if ( parent->logbookPlugIn->opt->filterLayout[LogbookDialog::BOAT] )
+boat.cpp:        layout.Prepend( parent->logbookPlugIn->opt->layoutPrefix[LogbookDialog::BOAT] );
+boat.cpp:        parent->startApplication( fn,_T( ".odt" ) );
+boat.cpp:                odt.Replace( wxT( "#LBOATNAME#" ),Export::replaceNewLine( true,parent->bname->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LHOMEPORT#" ),Export::replaceNewLine( true,parent->m_staticText114->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LCALLSIGN#" ),Export::replaceNewLine( true,parent->m_staticText115->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LHIN#" ),Export::replaceNewLine( true,parent->m_staticText116->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LSAILNO#" ),Export::replaceNewLine( true,parent->m_staticText117->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LREGISTRATION#" ),Export::replaceNewLine( true,parent->m_staticText118->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LINSURANCE#" ),Export::replaceNewLine( true,parent->m_staticText119->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LPOLICY#" ),Export::replaceNewLine( true,parent->m_staticText120->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LMMSI#" ),Export::replaceNewLine( true,parent->m_staticText53->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LONAME#" ),Export::replaceNewLine( true,parent->m_staticText90->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LOFIRST#" ),Export::replaceNewLine( true,parent->m_staticText91->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LTELEPHONE#" ),Export::replaceNewLine( true,parent->m_staticText95->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LSTREET#" ),Export::replaceNewLine( true,parent->m_staticText92->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LZIP#" ),Export::replaceNewLine( true,parent->m_staticText93->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LTOWN#" ),Export::replaceNewLine( true,parent->m_staticText94->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LTYPE#" ),Export::replaceNewLine( true,parent->m_staticText128->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LBUILDER#" ),Export::replaceNewLine( true,parent->m_staticText125->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LHULL#" ),Export::replaceNewLine( true,parent->m_staticText124->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LLAUNCHED#" ),Export::replaceNewLine( true,parent->m_staticText126->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LYARDNO#" ),Export::replaceNewLine( true,parent->m_staticText127->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LDESIGNER#" ),Export::replaceNewLine( true,parent->m_staticText123->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LCONSTRUCT#" ),Export::replaceNewLine( true,parent->m_staticText129->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LLOA#" ),Export::replaceNewLine( true,parent->m_staticText106->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LLOD#" ),Export::replaceNewLine( true,parent->m_staticText107->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LLWL#" ),Export::replaceNewLine( true,parent->m_staticText108->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LBEAM#" ),Export::replaceNewLine( true,parent->m_staticText109->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LDRAFT#" ),Export::replaceNewLine( true,parent->m_staticText110->GetLabel(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LUSER1#" ),Export::replaceNewLine( true,parent->UserLabel1->GetValue(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LUSER2#" ),Export::replaceNewLine( true,parent->UserLabel2->GetValue(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LUSER3#" ),Export::replaceNewLine( true,parent->UserLabel3->GetValue(),true ) );
+boat.cpp:                odt.Replace( wxT( "#LDISPL#" ),Export::replaceNewLine( true,parent->m_staticText122->GetLabel(),true ) );
+boat.cpp:    odt.Replace( _T( "#LOWNER#" ),Export::replaceNewLine( true,parent->sbSizer6->GetStaticBox()->GetLabel(),true ) );
+boat.cpp:    topODT.Replace( _T( "#LEQUIP#" ),parent->sbSizer12->GetStaticBox()->GetLabel() );
+boat.cpp:    topODT.Replace( _T( "#LETYPE#" ),parent->m_gridEquipment->GetColLabelValue( 0 ) );
+boat.cpp:    topODT.Replace( _T( "#LDISCRIPTION#" ),parent->m_gridEquipment->GetColLabelValue( 1 ) );
+boat.cpp:    topODT.Replace( _T( "#LSERIAL#" ),parent->m_gridEquipment->GetColLabelValue( 2 ) );
+boat.cpp:    topODT.Replace( _T( "#LREMARKS#" ),parent->m_gridEquipment->GetColLabelValue( 3 ) );
+boat.cpp:    for ( int i = 0; i < parent->m_gridEquipment->GetNumberRows(); i++ )
+boat.cpp:        for ( int c = 0; c < parent->m_gridEquipment->GetNumberCols(); c++ )
+boat.cpp:            wxString text = parent->m_gridEquipment->GetCellValue( i,c );
+boat.cpp:                html.Replace( wxT( "#LBOATNAME#" ),parent->bname->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LHOMEPORT#" ),parent->m_staticText114->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LCALLSIGN#" ),parent->m_staticText115->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LHIN#" ),parent->m_staticText116->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LSAILNO#" ),parent->m_staticText117->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LREGISTRATION#" ),parent->m_staticText118->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LINSURANCE#" ),parent->m_staticText119->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LPOLICY#" ),parent->m_staticText120->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LMMSI#" ),parent->m_staticText53->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LONAME#" ),parent->m_staticText90->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LOFIRST#" ),parent->m_staticText91->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LTELEPHONE#" ),parent->m_staticText95->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LSTREET#" ),parent->m_staticText92->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LZIP#" ),parent->m_staticText93->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LTOWN#" ),parent->m_staticText94->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LTYPE#" ),parent->m_staticText128->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LBUILDER#" ),parent->m_staticText125->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LHULL#" ),parent->m_staticText124->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LLAUNCHED#" ),parent->m_staticText126->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LYARDNO#" ),parent->m_staticText127->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LDESIGNER#" ),parent->m_staticText123->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LCONSTRUCT#" ),parent->m_staticText129->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LLOA#" ),parent->m_staticText106->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LLOD#" ),parent->m_staticText107->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LLWL#" ),parent->m_staticText108->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LBEAM#" ),parent->m_staticText109->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LDRAFT#" ),parent->m_staticText110->GetLabel() );
+boat.cpp:                html.Replace( wxT( "#LUSER1#" ),parent->UserLabel1->GetValue() );
+boat.cpp:                html.Replace( wxT( "#LUSER2#" ),parent->UserLabel2->GetValue() );
+boat.cpp:                html.Replace( wxT( "#LUSER3#" ),parent->UserLabel3->GetValue() );
+boat.cpp:                html.Replace( wxT( "#LDISPL#" ),parent->m_staticText122->GetLabel() );
+boat.cpp:    html.Replace( _T( "#LOWNER#" ),parent->sbSizer6->GetStaticBox()->GetLabel() );
+boat.cpp:    html.Replace( _T( "#LDATE#" ),parent->m_gridGlobal->GetColLabelValue( 1 ) );
+boat.cpp:    html.Replace( _T( "#LEQUIP#" ),parent->sbSizer12->GetStaticBox()->GetLabel() );
+boat.cpp:    topHTML.Replace( _T( "#LETYPE#" ),parent->m_gridEquipment->GetColLabelValue( 0 ) );
+boat.cpp:    topHTML.Replace( _T( "#LDISCRIPTION#" ),parent->m_gridEquipment->GetColLabelValue( 1 ) );
+boat.cpp:    topHTML.Replace( _T( "#LSERIAL#" ),parent->m_gridEquipment->GetColLabelValue( 2 ) );
+boat.cpp:    topHTML.Replace( _T( "#LREMARKS#" ),parent->m_gridEquipment->GetColLabelValue( 3 ) );
+boat.cpp:    for ( int i = 0; i < parent->m_gridEquipment->GetNumberRows(); i++ )
+boat.cpp:        for ( int c = 0; c < parent->m_gridEquipment->GetNumberCols(); c++ )
+boat.cpp:            wxString text = parent->m_gridEquipment->GetCellValue( i,c );
+boat.cpp:    if ( parent->logbookPlugIn->opt->filterLayout[LogbookDialog::BOAT] )
+boat.cpp:        layout.Prepend( parent->logbookPlugIn->opt->layoutPrefix[LogbookDialog::BOAT] );
+boat.cpp:        parent->startBrowser( fn );
+boat.cpp:    parent->m_gridEquipment->AppendRows();
+boat.cpp:    parent->m_gridEquipment->SetCellValue( parent->m_gridEquipment->GetNumberRows()-1,
+boat.cpp:                                           parent->m_gridEquipment->GetNumberCols()-1,_T( " " ) );
+boat.cpp:    parent->m_gridEquipment->MakeCellVisible( parent->m_gridEquipment->GetNumberRows()-1,0 );
+boat.cpp:    for ( int i = 0; i < parent->m_gridEquipment->GetNumberCols(); i++ )
+boat.cpp:    if ( parent->m_gridEquipment->GetCellValue(
+boat.cpp:                row,parent->m_gridEquipment->GetNumberCols()-1 ) == _T( "" ) )
+boat.cpp:        parent->m_gridEquipment->SetCellValue(
+boat.cpp:            row,parent->m_gridEquipment->GetNumberCols()-1,_T( " " ) );
+boat.cpp:        parent->m_gridEquipment->DeleteRows( row );
+boat.cpp:                    s += wxT( "\"" )+parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() )+_T( "\"," );
+boat.cpp:                s += wxT( "\"" )+parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() )+_T( "\"," );
+boat.cpp:    xmlFile->AddLine( parent->xmlHead );
+boat.cpp:        s = wxString::Format( _T( "<Row ss:Height=\"%u\">" ),parent->m_gridGlobal->GetRowHeight( i ) );
+boat.cpp:                temp = parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() );
+boat.cpp:    xmlFile->AddLine( parent->xmlEnd );
+boat.cpp:        x = parent->m_gridEquipment->GetNumberCols();
+boat.cpp:    temp = parent->content;
+boat.cpp:                txt << parent->UserLabel1->GetValue();
+boat.cpp:                txt << parent->UserLabel2->GetValue();
+boat.cpp:                txt << parent->UserLabel3->GetValue();
+boat.cpp:            txt << parent->m_gridEquipment->GetColLabelValue( i );
+boat.cpp:            wxString s = parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() );
+boat.cpp:    txt << parent->contentEnd;
+boat.cpp:    txt << parent->styles;
+boat.cpp:    txt << parent->meta;
+boat.cpp:    txt << parent->manifest;

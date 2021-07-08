@@ -24,7 +24,7 @@ EzGrid::EzGrid( wxWindow *parent,
     wxFont font = GetLabelFont();
     int nWidth = 0;
     int nHeight = 18;
-    GetTextExtent( _T( "W" ), &nWidth, &nHeight, NULL, NULL, &font );
+    GetTextExtent( "W", &nWidth, &nHeight, NULL, NULL, &font );
     SetColLabelSize( nHeight+6 );
 #ifdef __WXPOSIX__
     SetDefaultRowSize( nHeight+8, TRUE );
@@ -98,7 +98,7 @@ void EzGrid::RecalcRowLabel()
     wxFont font = GetLabelFont();
     int nWidth = 0;
     int nHeight = 0;
-    GetTextExtent( wxString::Format( _T( "%d" ), GetRows() ),
+    GetTextExtent( wxString::Format( "%d", GetRows() ),
                    &nWidth, &nHeight, NULL, NULL, &font );
     if ( nWidth < 12 ) nWidth = 12;
     SetRowLabelSize( nWidth+6 );

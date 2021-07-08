@@ -163,7 +163,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_radioBtnLocal->SetValue( true );
     fgSizer18->Add( m_radioBtnLocal, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0 );
 
-    wxString m_choiceTzIndicatorChoices[] = { _T( "+" ), _T( "-" ) };
+    wxString m_choiceTzIndicatorChoices[] = { "+", "-" };
     int m_choiceTzIndicatorNChoices = sizeof( m_choiceTzIndicatorChoices ) / sizeof( wxString );
 #ifdef __WXOSX__
     m_choiceTzIndicator = new wxChoice( m_panel15, wxID_ANY, wxDefaultPosition, wxSize( 50,-1 ), m_choiceTzIndicatorNChoices, m_choiceTzIndicatorChoices, 0 );
@@ -173,7 +173,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_choiceTzIndicator->SetSelection( 0 );
     fgSizer18->Add( m_choiceTzIndicator, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0 );
 
-    wxString m_choiceTzHoursChoices[] = { _T( "0" ), _T( "1" ), _T( "2" ), _T( "3" ), _T( "4" ), _T( "5" ), _T( "6" ), _T( "7" ), _T( "8" ), _T( "9" ), _T( "10" ), _T( "11" ), _T( "12" ), _T( "13" ), _T( "14" ) };
+    wxString m_choiceTzHoursChoices[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14" };
     int m_choiceTzHoursNChoices = sizeof( m_choiceTzHoursChoices ) / sizeof( wxString );
 #ifdef __WXOSX__
     m_choiceTzHours = new wxChoice( m_panel15, wxID_ANY, wxDefaultPosition, wxSize( 50,-1 ), m_choiceTzHoursNChoices, m_choiceTzHoursChoices, 0 );
@@ -212,9 +212,9 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_staticText76->Wrap( -1 );
     fgSizer29->Add( m_staticText76, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 0 );
 
-    wxString m_choicePositionFormatChoices[] = { wxString::Format( _T( "054%s 12.1234%s" ),opt->Deg.c_str(),opt->Min.c_str() ),
-                                                 wxString::Format( _T( "054%s 12%s.12,34%s" ),opt->Deg.c_str(),opt->Min.c_str(),opt->Sec.c_str() )
-                                               };//_T("054° 12.1234'"), _T("054° 12' 12.34\"") };
+    wxString m_choicePositionFormatChoices[] = { wxString::Format( "054%s 12.1234%s",opt->Deg.c_str(),opt->Min.c_str() ),
+                                                 wxString::Format( "054%s 12%s.12,34%s",opt->Deg.c_str(),opt->Min.c_str(),opt->Sec.c_str() )
+                                               };//"054° 12.1234'", "054° 12' 12.34\"" };
     int m_choicePositionFormatNChoices = sizeof( m_choicePositionFormatChoices ) / sizeof( wxString );
     m_choicePositionFormat = new wxChoice( m_panel15, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choicePositionFormatNChoices, m_choicePositionFormatChoices, 0 );
     m_choicePositionFormat->SetSelection( 0 );
@@ -312,7 +312,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     m_staticText54 = new wxStaticText( m_panel15, wxID_ANY, _( "Events" ), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
     m_staticText54->Wrap( -1 );
-    m_staticText54->SetFont( wxFont( 10, 74, 90, 92, false, wxT( "Tahoma" ) ) );
+    m_staticText54->SetFont( wxFont( 10, 74, 90, 92, false, "Tahoma" ) );
 
     fgSizer10->Add( m_staticText54, 1, wxALIGN_CENTER_VERTICAL|wxEXPAND, 0 );
 
@@ -480,7 +480,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     fgSizer44->Add( m_staticText100, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlTankWater = new wxTextCtrl( m_panel20, wxID_ANY, wxT( "0" ), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
+    m_textCtrlTankWater = new wxTextCtrl( m_panel20, wxID_ANY, "0", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
     m_textCtrlTankWater->SetToolTip( _( "Set gal/liter in Abbreviations " ) );
     fgSizer44->Add( m_textCtrlTankWater, 0, wxALL, 5 );
 
@@ -493,7 +493,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     fgSizer44->Add( m_staticText102, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlWatermaker = new wxTextCtrl( m_panel20, wxID_ANY, wxT( "0" ), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
+    m_textCtrlWatermaker = new wxTextCtrl( m_panel20, wxID_ANY, "0", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
     m_textCtrlWatermaker->SetToolTip( _( "Set gal/liter in Abbreviations " ) );
 
     fgSizer44->Add( m_textCtrlWatermaker, 0, wxALL, 5 );
@@ -524,7 +524,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     fgSizer43->Add( m_staticText97, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlTankFuel = new wxTextCtrl( m_panel20, wxID_ANY, wxT( "0" ), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
+    m_textCtrlTankFuel = new wxTextCtrl( m_panel20, wxID_ANY, "0", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
     m_textCtrlTankFuel->SetToolTip( _( "Set gal/liter in Abbreviations " ) );
     fgSizer43->Add( m_textCtrlTankFuel, 0, wxALL, 5 );
 
@@ -554,7 +554,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     fgSizer45->Add( m_staticText105, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlBank1 = new wxTextCtrl( m_panel20, wxID_ANY, wxT( "0" ), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
+    m_textCtrlBank1 = new wxTextCtrl( m_panel20, wxID_ANY, "0", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
     fgSizer45->Add( m_textCtrlBank1, 0, wxALL, 5 );
 
 
@@ -566,7 +566,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
 
     fgSizer45->Add( m_staticText107, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-    m_textCtrlBank2 = new wxTextCtrl( m_panel20, wxID_ANY, wxT( "0" ), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
+    m_textCtrlBank2 = new wxTextCtrl( m_panel20, wxID_ANY, "0", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
     fgSizer45->Add( m_textCtrlBank2, 0, wxALL, 5 );
 
     bSizer31->Add( fgSizer45, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
@@ -607,10 +607,10 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_staticText31->Wrap( -1 );
     fgSizer91->Add( m_staticText31, 0, wxALIGN_CENTER_VERTICAL, 5 );
 #ifdef __WXOSX__
-    m_sDeg = new wxTextCtrl( m_panel16, wxID_ANY, _T( "\xA1" ), wxDefaultPosition, wxSize( 40,-1 ), 0 );
+    m_sDeg = new wxTextCtrl( m_panel16, wxID_ANY, "\xA1", wxDefaultPosition, wxSize( 40,-1 ), 0 );
     // don't know if \xA1 is correct, cannot compile for apple
 #else
-    m_sDeg = new wxTextCtrl( m_panel16, wxID_ANY, _T( "\xB0" ), wxDefaultPosition, wxSize( 40,-1 ), 0 );
+    m_sDeg = new wxTextCtrl( m_panel16, wxID_ANY, "\xB0", wxDefaultPosition, wxSize( 40,-1 ), 0 );
 #endif
     fgSizer91->Add( m_sDeg, 0, 0, 5 );
 
@@ -782,7 +782,7 @@ LogbookOptions::LogbookOptions( wxWindow* parent, Options* opt, logbookkonni_pi*
     m_staticText106->Wrap( -1 );
     fgSizer91->Add( m_staticText106, 0, wxALL, 5 );
 
-    m_textCtrlAmpere = new wxTextCtrl( m_panel16, wxID_ANY, _T( "A" ), wxDefaultPosition, wxSize( 40,-1 ), 0 );
+    m_textCtrlAmpere = new wxTextCtrl( m_panel16, wxID_ANY, "A", wxDefaultPosition, wxSize( 40,-1 ), 0 );
     fgSizer91->Add( m_textCtrlAmpere, 0, wxALL, 0 );
     fgSizer91->Add( 0, 0, 1, wxEXPAND, 5 );
 
@@ -1459,13 +1459,13 @@ void LogbookOptions::init()
 
         wxString sep = wxFileName::GetPathSeparator();
 
-        wxString data_locn = stdPath + _T( "data" ) + sep + _T( "logbook.txt" );
+        wxString data_locn = stdPath + "data" + sep + "logbook.txt";
         if ( wxFile::Exists( data_locn ) )
         {
             wxFileInputStream input( data_locn );
             wxTextInputStream* stream = new wxTextInputStream ( input );
 
-            if ( !stream->ReadLine().Contains( _T( "#1.2#" ) ) )
+            if ( !stream->ReadLine().Contains( "#1.2#" ) )
             {
                 log_pi->startLogbook();
                 log_pi->m_plogbook_window->myParseDate( log_pi->m_plogbook_window->m_textCtrlWatchStartDate->GetValue(),textCtrlDate );
@@ -1786,7 +1786,7 @@ void LogbookOptions::setRPMSentence( wxString sentence )
     static wxString e1 = wxEmptyString, e2 = wxEmptyString;
     m_staticTextRPMSentence->SetLabel( sentence );
 
-    wxStringTokenizer tkz( sentence,_T( "," ) );
+    wxStringTokenizer tkz( sentence,"," );
     tkz.GetNextToken();
     wxString source = tkz.GetNextToken();
     wxString t = tkz.GetNextToken();
@@ -1798,7 +1798,7 @@ void LogbookOptions::setRPMSentence( wxString sentence )
 
         m_textCtrlEngine1->SetValue(e1);
         m_textCtrlEngine2->SetValue(e2); */
-//    if(source == _T("E"))
+//    if(source == "E")
 //        m_checkBoxNMEAUseRPM->SetValue(true);
 }
 
@@ -1912,9 +1912,9 @@ void LogbookOptions::OnButtonClickUninstall( wxCommandEvent& ev )
 #ifdef __WXMSW__
     wxStandardPathsBase& stdpath = wxStandardPathsBase::Get();
     wxString s = stdpath.GetPluginsDir();
-    wxString command = s+_T( "\\plugins\\uninst_logbookkonni_pi.exe" );
+    wxString command = s+"\\plugins\\uninst_logbookkonni_pi.exe";
 
-    wxExecute( _T( "explorer.exe /select," )+command );
+    wxExecute( "explorer.exe /select,"+command );
 #endif
 }
 
@@ -2078,11 +2078,11 @@ void LogbookOptions::setValues()
     m_checkBoxNoSeconds->SetValue( opt->noseconds );
     m_choiceNoEngines->SetSelection( opt->engines );
 
-    m_textCtrlTankFuel->SetValue( opt->fuelTank+_T( " " )+opt->vol );
-    m_textCtrlTankWater->SetValue( opt->waterTank+_T( " " )+opt->vol );
-    m_textCtrlBank1->SetValue( opt->bank1+_T( " " )+opt->ampereh );
-    m_textCtrlBank2->SetValue( opt->bank2+_T( " " )+opt->ampereh );
-    m_textCtrlWatermaker->SetValue( opt->watermaker+_T( " " )+opt->vol+_T( "/" )+opt->motorh );
+    m_textCtrlTankFuel->SetValue( opt->fuelTank+" "+opt->vol );
+    m_textCtrlTankWater->SetValue( opt->waterTank+" "+opt->vol );
+    m_textCtrlBank1->SetValue( opt->bank1+" "+opt->ampereh );
+    m_textCtrlBank2->SetValue( opt->bank2+" "+opt->ampereh );
+    m_textCtrlWatermaker->SetValue( opt->watermaker+" "+opt->vol+"/"+opt->motorh );
     m_textCtrlGuradChanged->SetValue( opt->guardChangeText );
     m_textCtrlWayPoint->SetValue( opt->waypointText );
     m_textCtrlChancedCourse->SetValue( opt->courseChangeText );
@@ -2251,13 +2251,13 @@ void LogbookOptions::getValues()
 	switch (m_choiceDistance->GetSelection())
 	{
 	case 0:
-		opt->showDistance = _T("NM");
+		opt->showDistance = "NM";
 		break;
 	case 1:
-		opt->showDistance = _T("m");
+		opt->showDistance = "m";
 		break;
 	case 2:
-		opt->showDistance = _T("km");
+		opt->showDistance = "km";
 		break;
 	}
 
@@ -2265,13 +2265,13 @@ void LogbookOptions::getValues()
 	switch (m_choiceBoatSpeed->GetSelection())
 	{
 	case 0:
-		opt->showBoatSpeed = _T("kts");
+		opt->showBoatSpeed = "kts";
 		break;
 	case 1:
-		opt->showBoatSpeed = _T("m/s");
+		opt->showBoatSpeed = "m/s";
 		break;
 	case 2:
-		opt->showBoatSpeed = _T("kmh");
+		opt->showBoatSpeed = "kmh";
 		break;
 	}
 
@@ -2299,13 +2299,13 @@ void LogbookOptions::getValues()
     switch(m_choiceWindSpeed->GetSelection())
     {
     case 0:
-        opt->showWindSpeed = _T( "kts" );
+        opt->showWindSpeed = "kts";
         break;
     case 1:
-        opt->showWindSpeed = _T( "m/s" );
+        opt->showWindSpeed = "m/s";
         break;
     case 2:
-        opt->showWindSpeed = _T( "kmh" );
+        opt->showWindSpeed = "kmh";
         break;
     }
 
@@ -2428,8 +2428,8 @@ void LogbookOptions::onButtonClickInstallHTMLFiles( wxCommandEvent& event )
 void LogbookOptions::onButtonHTMLEditor( wxCommandEvent & ev )
 {
     wxFileDialog *openFileDialog =
-        new wxFileDialog( this, _( "Set Path to HTML-Editor" ), _T( "" ), _T( "" ),
-                          _T( "" ),
+        new wxFileDialog( this, _( "Set Path to HTML-Editor" ), "", "",
+                          "",
                           wxFD_OPEN );
 
     if ( openFileDialog->ShowModal() == wxID_CANCEL )
@@ -2442,8 +2442,8 @@ void LogbookOptions::onButtonHTMLEditor( wxCommandEvent & ev )
 void LogbookOptions::onButtonClickDataManager( wxCommandEvent& ev )
 {
     wxFileDialog *openFileDialog =
-        new wxFileDialog( this, _( "Set Path to DataManager" ), _T( "" ), _T( "" ),
-                          _T( "" ),
+        new wxFileDialog( this, _( "Set Path to DataManager" ), "", "",
+                          "",
                           wxFD_OPEN );
 
     if ( openFileDialog->ShowModal() == wxID_CANCEL )
@@ -2456,8 +2456,8 @@ void LogbookOptions::onButtonClickDataManager( wxCommandEvent& ev )
 void LogbookOptions::onButtonClickMail( wxCommandEvent& ev )
 {
     wxFileDialog *openFileDialog =
-        new wxFileDialog( this, _( "Set Path to MailClient" ), _T( "" ), _T( "" ),
-                          _T( "" ),
+        new wxFileDialog( this, _( "Set Path to MailClient" ), "", "",
+                          "",
                           wxFD_OPEN );
 
     if ( openFileDialog->ShowModal() == wxID_CANCEL )
@@ -2470,8 +2470,8 @@ void LogbookOptions::onButtonClickMail( wxCommandEvent& ev )
 void LogbookOptions::onButtonClickODT( wxCommandEvent& ev )
 {
     wxFileDialog *openFileDialog =
-        new wxFileDialog( this, _( "Set Path to ODT-Editor" ), _T( "" ), _T( "" ),
-                          _T( "" ),
+        new wxFileDialog( this, _( "Set Path to ODT-Editor" ), "", "",
+                          "",
                           wxFD_OPEN );
 
     if ( openFileDialog->ShowModal() == wxID_CANCEL )
@@ -2483,13 +2483,13 @@ void LogbookOptions::onButtonClickODT( wxCommandEvent& ev )
 
 void LogbookOptions::onTextm_sLiter( wxCommandEvent& event )
 {
-    wxString t = wxString::Format( _T( "%i %s/%s" ),wxAtoi( opt->watermaker ),m_sLiter->GetValue().c_str(),opt->motorh.c_str() );
+    wxString t = wxString::Format( "%i %s/%s",wxAtoi( opt->watermaker ),m_sLiter->GetValue().c_str(),opt->motorh.c_str() );
     this->m_textCtrlWatermaker->SetValue( t );
 
-    t = wxString::Format( _T( "%i %s" ),wxAtoi( m_textCtrlTankWater->GetValue() ),m_sLiter->GetValue().c_str() );
+    t = wxString::Format( "%i %s",wxAtoi( m_textCtrlTankWater->GetValue() ),m_sLiter->GetValue().c_str() );
     this->m_textCtrlTankWater->SetValue( t );
 
-    t = wxString::Format( _T( "%i %s" ),wxAtoi( m_textCtrlTankFuel->GetValue() ),m_sLiter->GetValue().c_str() );
+    t = wxString::Format( "%i %s",wxAtoi( m_textCtrlTankFuel->GetValue() ),m_sLiter->GetValue().c_str() );
     this->m_textCtrlTankFuel->SetValue( t );
 
 }
@@ -2500,7 +2500,7 @@ void LogbookOptions::OnTextEnterm_textCtrlWatermaker( wxCommandEvent& event )
     wxString t = m_textCtrlWatermaker->GetValue();
     t.ToLong( &a );
     m_textCtrlWatermaker->Clear();
-    t = wxString::Format( _T( "%i %s/%s" ),a, m_sLiter->GetValue().c_str(),opt->motorh.c_str() );
+    t = wxString::Format( "%i %s/%s",a, m_sLiter->GetValue().c_str(),opt->motorh.c_str() );
 
     m_textCtrlWatermaker->SetValue( t );
     m_textCtrlTankFuel->SetFocus();
@@ -2512,7 +2512,7 @@ void LogbookOptions::OnTextEnterFuelTank( wxCommandEvent& event )
     wxString t = m_textCtrlTankFuel->GetValue();
     t.ToLong( &a );
     m_textCtrlTankFuel->Clear();
-    t = wxString::Format( _T( "%i %s" ),a, m_sLiter->GetValue().c_str() );
+    t = wxString::Format( "%i %s",a, m_sLiter->GetValue().c_str() );
 
     m_textCtrlTankFuel->SetValue( t );
     m_textCtrlBank1->SetFocus();
@@ -2524,7 +2524,7 @@ void LogbookOptions::OnTextEnterWaterTank( wxCommandEvent& event )
     wxString t = m_textCtrlTankWater->GetValue();
     t.ToLong( &a );
     m_textCtrlTankWater->Clear();
-    t = wxString::Format( _T( "%i %s" ),a, m_sLiter->GetValue().c_str() );
+    t = wxString::Format( "%i %s",a, m_sLiter->GetValue().c_str() );
 
     m_textCtrlTankWater->SetValue( t );
     m_textCtrlWatermaker->SetFocus();
@@ -2536,7 +2536,7 @@ void LogbookOptions::OnTextEnterBank1( wxCommandEvent& event )
     wxString t = m_textCtrlBank1->GetValue();
     t.ToLong( &a );
     m_textCtrlBank1->Clear();
-    t = wxString::Format( _T( "%i %s" ),a, opt->ampereh.c_str() );
+    t = wxString::Format( "%i %s",a, opt->ampereh.c_str() );
 
     m_textCtrlBank1->SetValue( t );
     m_textCtrlBank2->SetFocus();
@@ -2548,7 +2548,7 @@ void LogbookOptions::onTextEnterBank2( wxCommandEvent& event )
     wxString t = m_textCtrlBank2->GetValue();
     t.ToLong( &a );
     m_textCtrlBank2->Clear();
-    t = wxString::Format( _T( "%i %s" ),a, opt->ampereh.c_str() );
+    t = wxString::Format( "%i %s",a, opt->ampereh.c_str() );
 
     m_textCtrlBank2->SetValue( t );
     m_textCtrlTankWater->SetFocus();

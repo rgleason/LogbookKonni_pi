@@ -99,7 +99,7 @@ void wxFastComboEditor::PaintBackground( const wxRect& rectCell,
 void wxFastComboEditor::BeginEdit( int row, int col, wxGrid* grid )
 {
     wxASSERT_MSG( m_control,
-                  wxT( "The wxGridCellEditor must be Created first!" ) );
+                  "The wxGridCellEditor must be Created first!" );
 
     EzGrid* pEzGrid = ( EzGrid* )grid;
     pEzGrid->RevertSel();
@@ -187,7 +187,7 @@ void wxFastComboEditor::SetParameters( const wxString& params )
         return;
     }
     m_choices.Empty();
-    wxStringTokenizer tk( params, _T( ',' ) );
+    wxStringTokenizer tk( params,  ',' );
     while ( tk.HasMoreTokens() )
     {
         m_choices.Add( tk.GetNextToken() );

@@ -432,13 +432,13 @@ void initialize_images( void )
 #ifdef PLUGIN_USE_SVG
     wxFileName fn;
     fn.SetPath(GetPluginDataDir("LogbookKonni_pi"));
-    fn.AppendDir(_T("data"));
-    fn.SetFullName(_T("logbookkonni_pi.svg"));
+    fn.AppendDir("data");
+    fn.SetFullName("logbookkonni_pi.svg");
     _svg_logbookkonni = fn.GetFullPath();
-	wxLogMessage(_T("Loading toolbar icon: ") + _svg_logbookkonni); 
-    fn.SetFullName(_T("logbookkonni_pi_rollover.svg"));
+	wxLogMessage("Loading toolbar icon: " + _svg_logbookkonni); 
+    fn.SetFullName("logbookkonni_pi_rollover.svg");
     _svg_logbookkonni_rollover = fn.GetFullPath();
-    fn.SetFullName(_T("logbookkonni_pi_toggled.svg"));
+    fn.SetFullName("logbookkonni_pi_toggled.svg");
     _svg_logbookkonni_toggled = fn.GetFullPath();
 #endif
 

@@ -58,7 +58,7 @@ void Boat::setLayoutLocation( wxString loc )
         layout_locn = ODTLayout;
     wxString boatLay = layout_locn;
 
-    layout_locn.Append( _T( "boat" ) );
+    layout_locn.Append( "boat" );
     parent->appendOSDirSlash( &layout_locn );
 
     parent->loadLayoutChoice( LogbookDialog::BOAT,layout_locn,parent->boatChoice,parent->logbookPlugIn->opt->layoutPrefix[LogbookDialog::BOAT] );
@@ -71,7 +71,7 @@ void Boat::setLayoutLocation( wxString loc )
 void Boat::createFiles( wxString data, wxString lay )
 {
     data_locn = data;
-    data_locn.Append( _T( "boat.txt" ) );
+    data_locn.Append( "boat.txt" );
     boatFile = new wxTextFile( data_locn );
     wxFileName wxHomeFiledir = data_locn ;
 
@@ -81,7 +81,7 @@ void Boat::createFiles( wxString data, wxString lay )
     }
 
     equip_locn = data;
-    equip_locn.Append( _T( "equipment.txt" ) );
+    equip_locn.Append( "equipment.txt" );
     equipFile = new wxTextFile( equip_locn );
     wxHomeFiledir = equip_locn ;
 
@@ -128,10 +128,10 @@ void Boat::loadData()
     if ( boatFile->GetLineCount() > 0 )
     {
         line = boatFile->GetLine( 0 );
-        if ( line.Contains( _T( "#1.2#" ) ) )
+        if ( line.Contains( "#1.2#" ) )
             line = boatFile->GetLine( 1 );
 
-        wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
 
         int c = 0;
 
@@ -163,7 +163,7 @@ void Boat::loadData()
 
         parent->m_gridEquipment->AppendRows();
 
-        wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
         int c = 0;
 
         while ( tkz.HasMoreTokens() )
@@ -198,10 +198,10 @@ void Boat::saveData()
             {
                 wxDateTime dt;
                 parent->myParseDate( temp,dt );
-                t += wxString::Format( _T( "%i/%i/%i \t" ),dt.GetMonth(), dt.GetDay(), dt.GetYear() );
+                t += wxString::Format( "%i/%i/%i \t",dt.GetMonth(), dt.GetDay(), dt.GetYear() );
             }
             else
-                t += temp+wxT( " \t" );
+                t += temp+" \t";
         }
     }
     t.RemoveLast();
@@ -216,12 +216,12 @@ void Boat::saveData()
     int count = parent->m_gridEquipment->GetNumberRows();
     for ( int r = 0; r < count; r++ )
     {
-        s = _T( "" );
+        s = "";
         for ( int i= 0; i < parent->m_gridEquipment->GetNumberCols(); i++ )
         {
             s += parent->replaceDangerChar(
                      parent->m_gridEquipment->GetCellValue( r,i ) )
-                 +wxT( " \t" );
+                 +" \t";
         }
         equipFile->AddLine( s );
     }
@@ -232,15 +232,15 @@ void Boat::saveData()
 
 wxString Boat::readLayoutFileODT( wxString layout )
 {
-    wxString odt = _T( "" );
+    wxString odt = "";
 
-    wxString filename = layout_locn + layout + _T( ".odt" );
+    wxString filename = layout_locn + layout + ".odt";
 
     if ( wxFileExists( filename ) )
     {
 //#ifdef __WXOSX__
         unique_ptr<wxZipEntry> entry;
-        static const wxString fn = _T( "content.xml" );
+        static const wxString fn = "content.xml";
         wxString name = wxZipEntry::GetInternalName( fn );
         wxFFileInputStream in( filename );
         wxZipInputStream zip( in );
@@ -251,12 +251,12 @@ wxString Boat::readLayoutFileODT( wxString layout )
         while ( entry.get() != NULL && entry->GetInternalName() != name );
         if ( entry.get() != NULL )
         {
-            wxTextInputStream txt( zip,_T( "\n" ),wxConvUTF8 );
+            wxTextInputStream txt( zip,"\n",wxConvUTF8 );
             while ( !zip.Eof() )
                 odt += txt.ReadLine();
         }
 //#else
-        /*	static const wxString fn = _T("content.xml");
+        /*	static const wxString fn = "content.xml";
         	wxFileInputStream in(filename);
         	wxZipInputStream zip(in);
         	wxTextInputStream txt(zip);
@@ -273,11 +273,11 @@ void Boat::viewODT( wxString path,wxString layout,bool mode )
         layout.Prepend( parent->logbookPlugIn->opt->layoutPrefix[LogbookDialog::BOAT] );
 
     toODT( path, layout, mode );
-    if ( layout != _T( "" ) )
+    if ( layout != "" )
     {
         wxString fn = data_locn;
-        fn.Replace( _T( "txt" ),_T( "odt" ) );
-        parent->startApplication( fn,_T( ".odt" ) );
+        fn.Replace( "txt","odt" );
+        parent->startApplication( fn,".odt" );
     }
 }
 
@@ -285,10 +285,10 @@ wxString Boat::toODT( wxString path,wxString layout,bool mode )
 {
     wxString s, odt;
 
-    if ( layout == _T( "" ) )
+    if ( layout == "" )
     {
         wxMessageBox( _( "Sorry, no Layout installed" ),_( "Information" ),wxOK );
-        return _T( "" );
+        return "";
     }
 
     saveData();
@@ -304,148 +304,148 @@ wxString Boat::toODT( wxString path,wxString layout,bool mode )
             switch ( i )
             {
             case 0:
-                odt.Replace( wxT( "#BOATNAME#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LBOATNAME#" ),Export::replaceNewLine( true,parent->bname->GetLabel(),true ) );
+                odt.Replace( "#BOATNAME#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LBOATNAME#",Export::replaceNewLine( true,parent->bname->GetLabel(),true ) );
                 break;
             case 1:
-                odt.Replace( wxT( "#HOMEPORT#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LHOMEPORT#" ),Export::replaceNewLine( true,parent->m_staticText114->GetLabel(),true ) );
+                odt.Replace( "#HOMEPORT#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LHOMEPORT#",Export::replaceNewLine( true,parent->m_staticText114->GetLabel(),true ) );
                 break;
             case 2:
-                odt.Replace( wxT( "#CALLSIGN#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LCALLSIGN#" ),Export::replaceNewLine( true,parent->m_staticText115->GetLabel(),true ) );
+                odt.Replace( "#CALLSIGN#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LCALLSIGN#",Export::replaceNewLine( true,parent->m_staticText115->GetLabel(),true ) );
                 break;
             case 3:
-                odt.Replace( wxT( "#HIN#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LHIN#" ),Export::replaceNewLine( true,parent->m_staticText116->GetLabel(),true ) );
+                odt.Replace( "#HIN#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LHIN#",Export::replaceNewLine( true,parent->m_staticText116->GetLabel(),true ) );
                 break;
             case 4:
-                odt.Replace( wxT( "#SAILNO#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LSAILNO#" ),Export::replaceNewLine( true,parent->m_staticText117->GetLabel(),true ) );
+                odt.Replace( "#SAILNO#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LSAILNO#",Export::replaceNewLine( true,parent->m_staticText117->GetLabel(),true ) );
                 break;
             case 6:
-                odt.Replace( wxT( "#REGISTRATION#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LREGISTRATION#" ),Export::replaceNewLine( true,parent->m_staticText118->GetLabel(),true ) );
+                odt.Replace( "#REGISTRATION#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LREGISTRATION#",Export::replaceNewLine( true,parent->m_staticText118->GetLabel(),true ) );
                 break;
             case 5:
-                odt.Replace( wxT( "#INSURANCE#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LINSURANCE#" ),Export::replaceNewLine( true,parent->m_staticText119->GetLabel(),true ) );
+                odt.Replace( "#INSURANCE#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LINSURANCE#",Export::replaceNewLine( true,parent->m_staticText119->GetLabel(),true ) );
                 break;
             case 7:
-                odt.Replace( wxT( "#POLICY#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LPOLICY#" ),Export::replaceNewLine( true,parent->m_staticText120->GetLabel(),true ) );
+                odt.Replace( "#POLICY#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LPOLICY#",Export::replaceNewLine( true,parent->m_staticText120->GetLabel(),true ) );
                 break;
             case 8:
-                odt.Replace( wxT( "#MMSI#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LMMSI#" ),Export::replaceNewLine( true,parent->m_staticText53->GetLabel(),true ) );
+                odt.Replace( "#MMSI#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LMMSI#",Export::replaceNewLine( true,parent->m_staticText53->GetLabel(),true ) );
                 break;
             case 9:
-                odt.Replace( wxT( "#ONAME#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LONAME#" ),Export::replaceNewLine( true,parent->m_staticText90->GetLabel(),true ) );
+                odt.Replace( "#ONAME#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LONAME#",Export::replaceNewLine( true,parent->m_staticText90->GetLabel(),true ) );
                 break;
             case 10:
-                odt.Replace( wxT( "#OFIRST#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LOFIRST#" ),Export::replaceNewLine( true,parent->m_staticText91->GetLabel(),true ) );
+                odt.Replace( "#OFIRST#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LOFIRST#",Export::replaceNewLine( true,parent->m_staticText91->GetLabel(),true ) );
                 break;
             case 11:
-                odt.Replace( wxT( "#TELEPHONE#" ),Export::replaceNewLine( true,te->GetValue(), false ) );
-                odt.Replace( wxT( "#LTELEPHONE#" ),Export::replaceNewLine( true,parent->m_staticText95->GetLabel(),true ) );
+                odt.Replace( "#TELEPHONE#",Export::replaceNewLine( true,te->GetValue(), false ) );
+                odt.Replace( "#LTELEPHONE#",Export::replaceNewLine( true,parent->m_staticText95->GetLabel(),true ) );
                 break;
             case 12:
-                odt.Replace( wxT( "#STREET#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LSTREET#" ),Export::replaceNewLine( true,parent->m_staticText92->GetLabel(),true ) );
+                odt.Replace( "#STREET#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LSTREET#",Export::replaceNewLine( true,parent->m_staticText92->GetLabel(),true ) );
                 break;
             case 13:
-                odt.Replace( wxT( "#ZIP#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LZIP#" ),Export::replaceNewLine( true,parent->m_staticText93->GetLabel(),true ) );
+                odt.Replace( "#ZIP#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LZIP#",Export::replaceNewLine( true,parent->m_staticText93->GetLabel(),true ) );
                 break;
             case 14:
-                odt.Replace( wxT( "#TOWN#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LTOWN#" ),Export::replaceNewLine( true,parent->m_staticText94->GetLabel(),true ) );
+                odt.Replace( "#TOWN#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LTOWN#",Export::replaceNewLine( true,parent->m_staticText94->GetLabel(),true ) );
                 break;
             case 15:
-                odt.Replace( wxT( "#TYPE#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LTYPE#" ),Export::replaceNewLine( true,parent->m_staticText128->GetLabel(),true ) );
+                odt.Replace( "#TYPE#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LTYPE#",Export::replaceNewLine( true,parent->m_staticText128->GetLabel(),true ) );
                 break;
             case 16:
-                odt.Replace( wxT( "#BUILDER#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LBUILDER#" ),Export::replaceNewLine( true,parent->m_staticText125->GetLabel(),true ) );
+                odt.Replace( "#BUILDER#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LBUILDER#",Export::replaceNewLine( true,parent->m_staticText125->GetLabel(),true ) );
                 break;
             case 17:
-                odt.Replace( wxT( "#HULL#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LHULL#" ),Export::replaceNewLine( true,parent->m_staticText124->GetLabel(),true ) );
+                odt.Replace( "#HULL#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LHULL#",Export::replaceNewLine( true,parent->m_staticText124->GetLabel(),true ) );
                 break;
             case 18:
-                odt.Replace( wxT( "#LAUNCHED#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LLAUNCHED#" ),Export::replaceNewLine( true,parent->m_staticText126->GetLabel(),true ) );
+                odt.Replace( "#LAUNCHED#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LLAUNCHED#",Export::replaceNewLine( true,parent->m_staticText126->GetLabel(),true ) );
                 break;
             case 19:
-                odt.Replace( wxT( "#YARDNO#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LYARDNO#" ),Export::replaceNewLine( true,parent->m_staticText127->GetLabel(),true ) );
+                odt.Replace( "#YARDNO#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LYARDNO#",Export::replaceNewLine( true,parent->m_staticText127->GetLabel(),true ) );
                 break;
             case 20:
-                odt.Replace( wxT( "#DESIGNER#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LDESIGNER#" ),Export::replaceNewLine( true,parent->m_staticText123->GetLabel(),true ) );
+                odt.Replace( "#DESIGNER#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LDESIGNER#",Export::replaceNewLine( true,parent->m_staticText123->GetLabel(),true ) );
                 break;
             case 21:
-                odt.Replace( wxT( "#CONSTRUCT#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LCONSTRUCT#" ),Export::replaceNewLine( true,parent->m_staticText129->GetLabel(),true ) );
+                odt.Replace( "#CONSTRUCT#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LCONSTRUCT#",Export::replaceNewLine( true,parent->m_staticText129->GetLabel(),true ) );
                 break;
             case 22:
-                odt.Replace( wxT( "#LOA#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LLOA#" ),Export::replaceNewLine( true,parent->m_staticText106->GetLabel(),true ) );
+                odt.Replace( "#LOA#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LLOA#",Export::replaceNewLine( true,parent->m_staticText106->GetLabel(),true ) );
                 break;
             case 23:
-                odt.Replace( wxT( "#LOD#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LLOD#" ),Export::replaceNewLine( true,parent->m_staticText107->GetLabel(),true ) );
+                odt.Replace( "#LOD#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LLOD#",Export::replaceNewLine( true,parent->m_staticText107->GetLabel(),true ) );
                 break;
             case 24:
-                odt.Replace( wxT( "#LWL#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LLWL#" ),Export::replaceNewLine( true,parent->m_staticText108->GetLabel(),true ) );
+                odt.Replace( "#LWL#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LLWL#",Export::replaceNewLine( true,parent->m_staticText108->GetLabel(),true ) );
                 break;
             case 25:
-                odt.Replace( wxT( "#BEAM#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LBEAM#" ),Export::replaceNewLine( true,parent->m_staticText109->GetLabel(),true ) );
+                odt.Replace( "#BEAM#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LBEAM#",Export::replaceNewLine( true,parent->m_staticText109->GetLabel(),true ) );
                 break;
             case 26:
-                odt.Replace( wxT( "#DRAFT#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LDRAFT#" ),Export::replaceNewLine( true,parent->m_staticText110->GetLabel(),true ) );
+                odt.Replace( "#DRAFT#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LDRAFT#",Export::replaceNewLine( true,parent->m_staticText110->GetLabel(),true ) );
                 break;
             case 27:
-                odt.Replace( wxT( "#LUSER1#" ),Export::replaceNewLine( true,parent->UserLabel1->GetValue(),true ) );
+                odt.Replace( "#LUSER1#",Export::replaceNewLine( true,parent->UserLabel1->GetValue(),true ) );
                 break;
             case 28:
-                odt.Replace( wxT( "#USER1#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#USER1#",Export::replaceNewLine( true,te->GetValue(),false ) );
                 break;
             case 29:
-                odt.Replace( wxT( "#LUSER2#" ),Export::replaceNewLine( true,parent->UserLabel2->GetValue(),true ) );
+                odt.Replace( "#LUSER2#",Export::replaceNewLine( true,parent->UserLabel2->GetValue(),true ) );
                 break;
             case 30:
-                odt.Replace( wxT( "#USER2#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#USER2#",Export::replaceNewLine( true,te->GetValue(),false ) );
                 break;
             case 31:
-                odt.Replace( wxT( "#LUSER3#" ),Export::replaceNewLine( true,parent->UserLabel3->GetValue(),true ) );
+                odt.Replace( "#LUSER3#",Export::replaceNewLine( true,parent->UserLabel3->GetValue(),true ) );
                 break;
             case 32:
-                odt.Replace( wxT( "#USER3#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#USER3#",Export::replaceNewLine( true,te->GetValue(),false ) );
                 break;
             case 33:
-                odt.Replace( wxT( "#DISPL#" ),Export::replaceNewLine( true,te->GetValue(),false ) );
-                odt.Replace( wxT( "#LDISPL#" ),Export::replaceNewLine( true,parent->m_staticText122->GetLabel(),true ) );
+                odt.Replace( "#DISPL#",Export::replaceNewLine( true,te->GetValue(),false ) );
+                odt.Replace( "#LDISPL#",Export::replaceNewLine( true,parent->m_staticText122->GetLabel(),true ) );
                 break;
             }
         }
     }
 
-    odt.Replace( _T( "#LOWNER#" ),Export::replaceNewLine( true,parent->sbSizer6->GetStaticBox()->GetLabel(),true ) );
-    if ( odt.Contains( wxT( "{{" ) ) )
+    odt.Replace( "#LOWNER#",Export::replaceNewLine( true,parent->sbSizer6->GetStaticBox()->GetLabel(),true ) );
+    if ( odt.Contains( "{{" ) )
         odt = repeatAreaODT( odt );
 
     wxString fn = data_locn;
-    fn.Replace( _T( "txt" ),_T( "odt" ) );
+    fn.Replace( "txt","odt" );
     if ( mode == false )
     {
-        fn.Replace( wxT( "txt" ),wxT( "odt" ) );
+        fn.Replace( "txt","odt" );
     }
     else
         fn = path;
@@ -453,7 +453,7 @@ wxString Boat::toODT( wxString path,wxString layout,bool mode )
     if ( ::wxFileExists( fn ) )
         ::wxRemoveFile( fn );
 
-    unique_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + _T( ".odt" ) ) );
+    unique_ptr<wxFFileInputStream> in( new wxFFileInputStream( layout_locn + layout + ".odt" ) );
     wxTempFileOutputStream out( fn );
 
     wxZipInputStream inzip( *in );
@@ -464,13 +464,13 @@ wxString Boat::toODT( wxString path,wxString layout,bool mode )
     outzip.CopyArchiveMetaData( inzip );
 
     while ( entry.reset( inzip.GetNextEntry() ), entry.get() != NULL )
-        if ( !entry->GetName().Matches( _T( "content.xml" ) ) )
+        if ( !entry->GetName().Matches( "content.xml" ) )
             if ( !outzip.CopyEntry( entry.release(), inzip ) )
                 break;
 
     in.reset();
 
-    outzip.PutNextEntry( _T( "content.xml" ) );
+    outzip.PutNextEntry( "content.xml" );
 
     odtFile << odt;
 
@@ -484,8 +484,8 @@ wxString Boat::repeatAreaODT( wxString odt )
     wxString bottomODT;
     wxString middleODT;
 
-    wxString seperatorTop = wxT( "{{" );
-    wxString seperatorBottom = wxT( "}}" );
+    wxString seperatorTop = "{{";
+    wxString seperatorBottom = "}}";
 
     int indexTop = odt.First( seperatorTop )+seperatorTop.Len();
     int indexBottom = odt.First( seperatorBottom )+seperatorBottom.Len();
@@ -498,19 +498,19 @@ wxString Boat::repeatAreaODT( wxString odt )
     indexBottom = bottomODT.find_first_of( '>' )+1;
     bottomODT = bottomODT.substr( indexBottom,odt.Len()-1 );
 
-    middleODT.Replace( bottomODT,_T( "" ) );
+    middleODT.Replace( bottomODT,"" );
     indexBottom = middleODT.First( seperatorBottom )+seperatorBottom.Len();
     middleODT = middleODT.substr( 0,indexBottom-1 );
     indexBottom = middleODT.find_last_of( '<' );
     middleODT = middleODT.substr( 0,indexBottom );
 
-    topODT.Replace( _T( "#LEQUIP#" ),parent->sbSizer12->GetStaticBox()->GetLabel() );
-    topODT.Replace( _T( "#LETYPE#" ),parent->m_gridEquipment->GetColLabelValue( 0 ) );
-    topODT.Replace( _T( "#LDISCRIPTION#" ),parent->m_gridEquipment->GetColLabelValue( 1 ) );
-    topODT.Replace( _T( "#LSERIAL#" ),parent->m_gridEquipment->GetColLabelValue( 2 ) );
-    topODT.Replace( _T( "#LREMARKS#" ),parent->m_gridEquipment->GetColLabelValue( 3 ) );
+    topODT.Replace( "#LEQUIP#",parent->sbSizer12->GetStaticBox()->GetLabel() );
+    topODT.Replace( "#LETYPE#",parent->m_gridEquipment->GetColLabelValue( 0 ) );
+    topODT.Replace( "#LDISCRIPTION#",parent->m_gridEquipment->GetColLabelValue( 1 ) );
+    topODT.Replace( "#LSERIAL#",parent->m_gridEquipment->GetColLabelValue( 2 ) );
+    topODT.Replace( "#LREMARKS#",parent->m_gridEquipment->GetColLabelValue( 3 ) );
 
-    wxString newMiddleODT = _T( "" );
+    wxString newMiddleODT = "";
     for ( int i = 0; i < parent->m_gridEquipment->GetNumberRows(); i++ )
     {
         wxString temp = middleODT;
@@ -521,16 +521,16 @@ wxString Boat::repeatAreaODT( wxString odt )
             switch ( c )
             {
             case 0:
-                temp.Replace( _T( "#ETYPE#" ),text );
+                temp.Replace( "#ETYPE#",text );
                 break;
             case 1:
-                temp.Replace( _T( "#DISCRIPTION#" ),text );
+                temp.Replace( "#DISCRIPTION#",text );
                 break;
             case 2:
-                temp.Replace( _T( "#SERIAL#" ),text );
+                temp.Replace( "#SERIAL#",text );
                 break;
             case 3:
-                temp.Replace( _T( "#REMARKS#" ),text );
+                temp.Replace( "#REMARKS#",text );
                 break;
             }
         }
@@ -545,7 +545,7 @@ void Boat::toHTML( wxString path, wxString layout, bool mode )
 {
     wxString s, html;
 
-    if ( layout == _T( "" ) )
+    if ( layout == "" )
     {
         wxMessageBox( _( "Sorry, no Layout installed" ),_( "Information" ),wxOK );
         return;
@@ -553,11 +553,11 @@ void Boat::toHTML( wxString path, wxString layout, bool mode )
 
     saveData();
 
-    boatLayoutFile = new wxTextFile( layout_locn+layout+wxT( ".html" ) );
+    boatLayoutFile = new wxTextFile( layout_locn+layout+".html" );
     boatLayoutFile->Open();
 
     wxString fn = data_locn;
-    fn.Replace( _T( "txt" ),_T( "html" ) );
+    fn.Replace( "txt","html" );
     if ( mode == false )
         boatHTMLFile = new wxFile( fn,wxFile::write );
     else
@@ -576,144 +576,144 @@ void Boat::toHTML( wxString path, wxString layout, bool mode )
             switch ( i )
             {
             case 0:
-                html.Replace( wxT( "#BOATNAME#" ),te->GetValue() );
-                html.Replace( wxT( "#LBOATNAME#" ),parent->bname->GetLabel() );
+                html.Replace( "#BOATNAME#",te->GetValue() );
+                html.Replace( "#LBOATNAME#",parent->bname->GetLabel() );
                 break;
             case 1:
-                html.Replace( wxT( "#HOMEPORT#" ),te->GetValue() );
-                html.Replace( wxT( "#LHOMEPORT#" ),parent->m_staticText114->GetLabel() );
+                html.Replace( "#HOMEPORT#",te->GetValue() );
+                html.Replace( "#LHOMEPORT#",parent->m_staticText114->GetLabel() );
                 break;
             case 2:
-                html.Replace( wxT( "#CALLSIGN#" ),te->GetValue() );
-                html.Replace( wxT( "#LCALLSIGN#" ),parent->m_staticText115->GetLabel() );
+                html.Replace( "#CALLSIGN#",te->GetValue() );
+                html.Replace( "#LCALLSIGN#",parent->m_staticText115->GetLabel() );
                 break;
             case 3:
-                html.Replace( wxT( "#HIN#" ),te->GetValue() );
-                html.Replace( wxT( "#LHIN#" ),parent->m_staticText116->GetLabel() );
+                html.Replace( "#HIN#",te->GetValue() );
+                html.Replace( "#LHIN#",parent->m_staticText116->GetLabel() );
                 break;
             case 4:
-                html.Replace( wxT( "#SAILNO#" ),te->GetValue() );
-                html.Replace( wxT( "#LSAILNO#" ),parent->m_staticText117->GetLabel() );
+                html.Replace( "#SAILNO#",te->GetValue() );
+                html.Replace( "#LSAILNO#",parent->m_staticText117->GetLabel() );
                 break;
             case 6:
-                html.Replace( wxT( "#REGISTRATION#" ),te->GetValue() );
-                html.Replace( wxT( "#LREGISTRATION#" ),parent->m_staticText118->GetLabel() );
+                html.Replace( "#REGISTRATION#",te->GetValue() );
+                html.Replace( "#LREGISTRATION#",parent->m_staticText118->GetLabel() );
                 break;
             case 5:
-                html.Replace( wxT( "#INSURANCE#" ),te->GetValue() );
-                html.Replace( wxT( "#LINSURANCE#" ),parent->m_staticText119->GetLabel() );
+                html.Replace( "#INSURANCE#",te->GetValue() );
+                html.Replace( "#LINSURANCE#",parent->m_staticText119->GetLabel() );
                 break;
             case 7:
-                html.Replace( wxT( "#POLICY#" ),te->GetValue() );
-                html.Replace( wxT( "#LPOLICY#" ),parent->m_staticText120->GetLabel() );
+                html.Replace( "#POLICY#",te->GetValue() );
+                html.Replace( "#LPOLICY#",parent->m_staticText120->GetLabel() );
                 break;
             case 8:
-                html.Replace( wxT( "#MMSI#" ),te->GetValue() );
-                html.Replace( wxT( "#LMMSI#" ),parent->m_staticText53->GetLabel() );
+                html.Replace( "#MMSI#",te->GetValue() );
+                html.Replace( "#LMMSI#",parent->m_staticText53->GetLabel() );
                 break;
             case 9:
-                html.Replace( wxT( "#ONAME#" ),te->GetValue() );
-                html.Replace( wxT( "#LONAME#" ),parent->m_staticText90->GetLabel() );
+                html.Replace( "#ONAME#",te->GetValue() );
+                html.Replace( "#LONAME#",parent->m_staticText90->GetLabel() );
                 break;
             case 10:
-                html.Replace( wxT( "#OFIRST#" ),te->GetValue() );
-                html.Replace( wxT( "#LOFIRST#" ),parent->m_staticText91->GetLabel() );
+                html.Replace( "#OFIRST#",te->GetValue() );
+                html.Replace( "#LOFIRST#",parent->m_staticText91->GetLabel() );
                 break;
             case 11:
-                html.Replace( wxT( "#TELEPHONE#" ),te->GetValue() );
-                html.Replace( wxT( "#LTELEPHONE#" ),parent->m_staticText95->GetLabel() );
+                html.Replace( "#TELEPHONE#",te->GetValue() );
+                html.Replace( "#LTELEPHONE#",parent->m_staticText95->GetLabel() );
                 break;
             case 12:
-                html.Replace( wxT( "#STREET#" ),te->GetValue() );
-                html.Replace( wxT( "#LSTREET#" ),parent->m_staticText92->GetLabel() );
+                html.Replace( "#STREET#",te->GetValue() );
+                html.Replace( "#LSTREET#",parent->m_staticText92->GetLabel() );
                 break;
             case 13:
-                html.Replace( wxT( "#ZIP#" ),te->GetValue() );
-                html.Replace( wxT( "#LZIP#" ),parent->m_staticText93->GetLabel() );
+                html.Replace( "#ZIP#",te->GetValue() );
+                html.Replace( "#LZIP#",parent->m_staticText93->GetLabel() );
                 break;
             case 14:
-                html.Replace( wxT( "#TOWN#" ),te->GetValue() );
-                html.Replace( wxT( "#LTOWN#" ),parent->m_staticText94->GetLabel() );
+                html.Replace( "#TOWN#",te->GetValue() );
+                html.Replace( "#LTOWN#",parent->m_staticText94->GetLabel() );
                 break;
             case 15:
-                html.Replace( wxT( "#TYPE#" ),te->GetValue() );
-                html.Replace( wxT( "#LTYPE#" ),parent->m_staticText128->GetLabel() );
+                html.Replace( "#TYPE#",te->GetValue() );
+                html.Replace( "#LTYPE#",parent->m_staticText128->GetLabel() );
                 break;
             case 16:
-                html.Replace( wxT( "#BUILDER#" ),te->GetValue() );
-                html.Replace( wxT( "#LBUILDER#" ),parent->m_staticText125->GetLabel() );
+                html.Replace( "#BUILDER#",te->GetValue() );
+                html.Replace( "#LBUILDER#",parent->m_staticText125->GetLabel() );
                 break;
             case 17:
-                html.Replace( wxT( "#HULL#" ),te->GetValue() );
-                html.Replace( wxT( "#LHULL#" ),parent->m_staticText124->GetLabel() );
+                html.Replace( "#HULL#",te->GetValue() );
+                html.Replace( "#LHULL#",parent->m_staticText124->GetLabel() );
                 break;
             case 18:
-                html.Replace( wxT( "#LAUNCHED#" ),te->GetValue() );
-                html.Replace( wxT( "#LLAUNCHED#" ),parent->m_staticText126->GetLabel() );
+                html.Replace( "#LAUNCHED#",te->GetValue() );
+                html.Replace( "#LLAUNCHED#",parent->m_staticText126->GetLabel() );
                 break;
             case 19:
-                html.Replace( wxT( "#YARDNO#" ),te->GetValue() );
-                html.Replace( wxT( "#LYARDNO#" ),parent->m_staticText127->GetLabel() );
+                html.Replace( "#YARDNO#",te->GetValue() );
+                html.Replace( "#LYARDNO#",parent->m_staticText127->GetLabel() );
                 break;
             case 20:
-                html.Replace( wxT( "#DESIGNER#" ),te->GetValue() );
-                html.Replace( wxT( "#LDESIGNER#" ),parent->m_staticText123->GetLabel() );
+                html.Replace( "#DESIGNER#",te->GetValue() );
+                html.Replace( "#LDESIGNER#",parent->m_staticText123->GetLabel() );
                 break;
             case 21:
-                html.Replace( wxT( "#CONSTRUCT#" ),te->GetValue() );
-                html.Replace( wxT( "#LCONSTRUCT#" ),parent->m_staticText129->GetLabel() );
+                html.Replace( "#CONSTRUCT#",te->GetValue() );
+                html.Replace( "#LCONSTRUCT#",parent->m_staticText129->GetLabel() );
                 break;
             case 22:
-                html.Replace( wxT( "#LOA#" ),te->GetValue() );
-                html.Replace( wxT( "#LLOA#" ),parent->m_staticText106->GetLabel() );
+                html.Replace( "#LOA#",te->GetValue() );
+                html.Replace( "#LLOA#",parent->m_staticText106->GetLabel() );
                 break;
             case 23:
-                html.Replace( wxT( "#LOD#" ),te->GetValue() );
-                html.Replace( wxT( "#LLOD#" ),parent->m_staticText107->GetLabel() );
+                html.Replace( "#LOD#",te->GetValue() );
+                html.Replace( "#LLOD#",parent->m_staticText107->GetLabel() );
                 break;
             case 24:
-                html.Replace( wxT( "#LWL#" ),te->GetValue() );
-                html.Replace( wxT( "#LLWL#" ),parent->m_staticText108->GetLabel() );
+                html.Replace( "#LWL#",te->GetValue() );
+                html.Replace( "#LLWL#",parent->m_staticText108->GetLabel() );
                 break;
             case 25:
-                html.Replace( wxT( "#BEAM#" ),te->GetValue() );
-                html.Replace( wxT( "#LBEAM#" ),parent->m_staticText109->GetLabel() );
+                html.Replace( "#BEAM#",te->GetValue() );
+                html.Replace( "#LBEAM#",parent->m_staticText109->GetLabel() );
                 break;
             case 26:
-                html.Replace( wxT( "#DRAFT#" ),te->GetValue() );
-                html.Replace( wxT( "#LDRAFT#" ),parent->m_staticText110->GetLabel() );
+                html.Replace( "#DRAFT#",te->GetValue() );
+                html.Replace( "#LDRAFT#",parent->m_staticText110->GetLabel() );
                 break;
             case 27:
-                html.Replace( wxT( "#LUSER1#" ),parent->UserLabel1->GetValue() );
+                html.Replace( "#LUSER1#",parent->UserLabel1->GetValue() );
                 break;
             case 28:
-                html.Replace( wxT( "#USER1#" ),te->GetValue() );
+                html.Replace( "#USER1#",te->GetValue() );
                 break;
             case 29:
-                html.Replace( wxT( "#LUSER2#" ),parent->UserLabel2->GetValue() );
+                html.Replace( "#LUSER2#",parent->UserLabel2->GetValue() );
                 break;
             case 30:
-                html.Replace( wxT( "#USER2#" ),te->GetValue() );
+                html.Replace( "#USER2#",te->GetValue() );
                 break;
             case 31:
-                html.Replace( wxT( "#LUSER3#" ),parent->UserLabel3->GetValue() );
+                html.Replace( "#LUSER3#",parent->UserLabel3->GetValue() );
                 break;
             case 32:
-                html.Replace( wxT( "#USER3#" ),te->GetValue() );
+                html.Replace( "#USER3#",te->GetValue() );
                 break;
             case 33:
-                html.Replace( wxT( "#DISPL#" ),te->GetValue() );
-                html.Replace( wxT( "#LDISPL#" ),parent->m_staticText122->GetLabel() );
+                html.Replace( "#DISPL#",te->GetValue() );
+                html.Replace( "#LDISPL#",parent->m_staticText122->GetLabel() );
                 break;
             }
         }
     }
 
-    html.Replace( _T( "#LOWNER#" ),parent->sbSizer6->GetStaticBox()->GetLabel() );
-    html.Replace( _T( "#LDATE#" ),parent->m_gridGlobal->GetColLabelValue( 1 ) );
-    html.Replace( _T( "#LEQUIP#" ),parent->sbSizer12->GetStaticBox()->GetLabel() );
+    html.Replace( "#LOWNER#",parent->sbSizer6->GetStaticBox()->GetLabel() );
+    html.Replace( "#LDATE#",parent->m_gridGlobal->GetColLabelValue( 1 ) );
+    html.Replace( "#LEQUIP#",parent->sbSizer12->GetStaticBox()->GetLabel() );
 
-    if ( html.Contains( wxT( "<!--Repeat -->" ) ) )
+    if ( html.Contains( "<!--Repeat -->" ) )
         html = repeatArea( html );
 #ifdef __WXOSX__
     wxString str( html.wx_str(), wxConvUTF8 );
@@ -730,8 +730,8 @@ wxString Boat::repeatArea( wxString html )
     wxString bottomHTML;
     wxString middleHTML;
 
-    wxString seperatorTop = wxT( "<!--Repeat -->" );
-    wxString seperatorBottom = wxT( "<!--Repeat End -->" );
+    wxString seperatorTop = "<!--Repeat -->";
+    wxString seperatorBottom = "<!--Repeat End -->";
 
     int indexTop = html.First( seperatorTop )+seperatorTop.Len();
     int indexBottom = html.First( seperatorBottom )+seperatorBottom.Len();
@@ -740,12 +740,12 @@ wxString Boat::repeatArea( wxString html )
     bottomHTML = html.substr( indexBottom,html.Len()-1 );
     middleHTML = html.substr( indexTop,indexBottom-indexTop );
 
-    topHTML.Replace( _T( "#LETYPE#" ),parent->m_gridEquipment->GetColLabelValue( 0 ) );
-    topHTML.Replace( _T( "#LDISCRIPTION#" ),parent->m_gridEquipment->GetColLabelValue( 1 ) );
-    topHTML.Replace( _T( "#LSERIAL#" ),parent->m_gridEquipment->GetColLabelValue( 2 ) );
-    topHTML.Replace( _T( "#LREMARKS#" ),parent->m_gridEquipment->GetColLabelValue( 3 ) );
+    topHTML.Replace( "#LETYPE#",parent->m_gridEquipment->GetColLabelValue( 0 ) );
+    topHTML.Replace( "#LDISCRIPTION#",parent->m_gridEquipment->GetColLabelValue( 1 ) );
+    topHTML.Replace( "#LSERIAL#",parent->m_gridEquipment->GetColLabelValue( 2 ) );
+    topHTML.Replace( "#LREMARKS#",parent->m_gridEquipment->GetColLabelValue( 3 ) );
 
-    wxString newMiddleHTML = _T( "" );
+    wxString newMiddleHTML = "";
     for ( int i = 0; i < parent->m_gridEquipment->GetNumberRows(); i++ )
     {
         wxString temp = middleHTML;
@@ -756,16 +756,16 @@ wxString Boat::repeatArea( wxString html )
             switch ( c )
             {
             case 0:
-                temp.Replace( _T( "#ETYPE#" ),text );
+                temp.Replace( "#ETYPE#",text );
                 break;
             case 1:
-                temp.Replace( _T( "#DISCRIPTION#" ),text );
+                temp.Replace( "#DISCRIPTION#",text );
                 break;
             case 2:
-                temp.Replace( _T( "#SERIAL#" ),text );
+                temp.Replace( "#SERIAL#",text );
                 break;
             case 3:
-                temp.Replace( _T( "#REMARKS#" ),text );
+                temp.Replace( "#REMARKS#",text );
                 break;
             }
         }
@@ -782,10 +782,10 @@ void Boat::viewHTML( wxString path, wxString layout, bool mode )
         layout.Prepend( parent->logbookPlugIn->opt->layoutPrefix[LogbookDialog::BOAT] );
 
     toHTML( path, layout, mode );
-    if ( layout != _T( "" ) )
+    if ( layout != "" )
     {
         wxString fn = data_locn;
-        fn.Replace( _T( "txt" ),_T( "html" ) );
+        fn.Replace( "txt","html" );
         parent->startBrowser( fn );
     }
 }
@@ -798,14 +798,14 @@ void Boat::addEquip()
 
     parent->m_gridEquipment->AppendRows();
     parent->m_gridEquipment->SetCellValue( parent->m_gridEquipment->GetNumberRows()-1,
-                                           parent->m_gridEquipment->GetNumberCols()-1,_T( " " ) );
+                                           parent->m_gridEquipment->GetNumberCols()-1," " );
     parent->m_gridEquipment->MakeCellVisible( parent->m_gridEquipment->GetNumberRows()-1,0 );
 
     equipFile->Open();
 
     for ( int i = 0; i < parent->m_gridEquipment->GetNumberCols(); i++ )
     {
-        s += _T( "," );
+        s += ",";
     }
 
     equipFile->AddLine( s );
@@ -817,9 +817,9 @@ void Boat::cellChanged( int row, int col )
     modified = true;
 
     if ( parent->m_gridEquipment->GetCellValue(
-                row,parent->m_gridEquipment->GetNumberCols()-1 ) == _T( "" ) )
+                row,parent->m_gridEquipment->GetNumberCols()-1 ) == "" )
         parent->m_gridEquipment->SetCellValue(
-            row,parent->m_gridEquipment->GetNumberCols()-1,_T( " " ) );
+            row,parent->m_gridEquipment->GetNumberCols()-1," " );
 }
 
 void Boat::deleteRow( int row )
@@ -842,7 +842,7 @@ void Boat::toCSV( wxString savePath )
 
     wxTextFile* csvFile = new wxTextFile( savePath );
     wxString path = savePath;
-    path.Replace( wxT( "Boat" ),wxT( "Equipment" ) );
+    path.Replace( "Boat","Equipment" );
     wxTextFile* csvEquipFile = new wxTextFile( path );
 
     if ( csvFile->Exists() )
@@ -870,7 +870,7 @@ void Boat::saveCSV( wxTextFile* file, bool mode )
     for ( unsigned int i = 0; i < ( ( mode )?boatFile:equipFile )->GetLineCount(); i++ )
     {
         line = ( ( mode )?boatFile:equipFile )->GetLine( i );
-        wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
         col = 0;
 
         while ( tkz.HasMoreTokens() )
@@ -879,18 +879,18 @@ void Boat::saveCSV( wxTextFile* file, bool mode )
             {
                 if ( col != 27 && col != 29 && col != 31 )
                 {
-                    s += wxT( "\"" )+parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() )+_T( "\"," );
+                    s += "\""+parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() )+"\",";
                 }
                 else
                     tkz.GetNextToken();
             }
             else
-                s += wxT( "\"" )+parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() )+_T( "\"," );
+                s += "\""+parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() )+"\",";
             col++;
         }
         s.RemoveLast();
         file->AddLine( s );
-        s=_T( "" );
+        s="";
     }
 
     file->Write();
@@ -906,7 +906,7 @@ void Boat::toXML( wxString savePath )
 
     wxTextFile* xmlFile = new wxTextFile( savePath );
     wxString path = savePath;
-    path.Replace( wxT( "Boat" ),wxT( "Equipment" ) );
+    path.Replace( "Boat","Equipment" );
     wxTextFile* xmlEquipFile = new wxTextFile( path );
 
     if ( xmlFile->Exists() )
@@ -943,29 +943,29 @@ void Boat::saveXML( wxTextFile* xmlFile, bool mode )
     {
         int col = 0;
         line = file->GetLine( i );
-        wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
-        s = wxString::Format( _T( "<Row ss:Height=\"%u\">" ),parent->m_gridGlobal->GetRowHeight( i ) );
+        wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
+        s = wxString::Format( "<Row ss:Height=\"%u\">",parent->m_gridGlobal->GetRowHeight( i ) );
 
         while ( tkz.HasMoreTokens() )
         {
             if ( col != 27 && col != 29 && col != 31 )
             {
-                s += _T( "<Cell>" );
-                s += _T( "<Data ss:Type=\"String\">#DATA#</Data>" );
+                s += "<Cell>";
+                s += "<Data ss:Type=\"String\">#DATA#</Data>";
                 temp = parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() );
-                temp.Replace( _T( "\n" ),_T( "&#10;" ) );
-                temp.Replace( _T( "&" ),_T( "&amp;" ) );
-                temp.Replace( _T( "\"" ),_T( "&quot;" ) );
-                temp.Replace( _T( "<" ),_T( "&lt;" ) );
-                temp.Replace( _T( ">" ),_T( "&gt;" ) );
-                temp.Replace( _T( "'" ),_T( "&apos;" ) );
-                s.Replace( _T( "#DATA#" ),temp );
-                s += _T( "</Cell>" );
+                temp.Replace( "\n","&#10;" );
+                temp.Replace( "&","&amp;" );
+                temp.Replace( "\"","&quot;" );
+                temp.Replace( "<","&lt;" );
+                temp.Replace( ">","&gt;" );
+                temp.Replace( "'","&apos;" );
+                s.Replace( "#DATA#",temp );
+                s += "</Cell>";
             }
             else tkz.GetNextToken();
             col++;
         }
-        s += _T( "</Row>" );
+        s += "</Row>";
         xmlFile->AddLine( s );
     }
 
@@ -983,13 +983,13 @@ void Boat::backup( wxString path )
     saveData();
 
     wxCopyFile( data_locn,path );
-    path.Replace( z,_T( "equipment" ) );
+    path.Replace( z,"equipment" );
     wxCopyFile( equip_locn,path );
 }
 
 void Boat::toODS( wxString path )
 {
-    wxString s = _T( "" );
+    wxString s = "";
     wxString line;
     wxString temp;
 
@@ -999,7 +999,7 @@ void Boat::toODS( wxString path )
 
     wxFileName fn( path );
     wxString sf = fn.GetName();
-    path.Replace( sf,_T( "equipment" ) );
+    path.Replace( sf,"equipment" );
 
     saveODS( path, true );
 }
@@ -1012,15 +1012,15 @@ void Boat::saveODS( wxString path, bool mode )
     if ( mode )
     {
         temp = equip_locn;
-        col = _T( "table:number-columns-repeated=\"4\"" );
-        tableName = _T( "Equipment" );
+        col = "table:number-columns-repeated=\"4\"";
+        tableName = "Equipment";
         x = parent->m_gridEquipment->GetNumberCols();
     }
     else
     {
         temp = data_locn;
-        col = _T( "table:number-columns-repeated=\"31\"" );
-        tableName = _T( "Boat" );
+        col = "table:number-columns-repeated=\"31\"";
+        tableName = "Boat";
         x = ctrlStaticText.GetCount();
     }
 
@@ -1034,38 +1034,38 @@ void Boat::saveODS( wxString path, bool mode )
     wxString sep( wxFileName::GetPathSeparator() );
 
     temp = parent->content;
-    temp.Replace( _T( "table:number-columns-repeated=\"33\"" ),col );
-    temp.Replace( _T( "Logbook" ),tableName );
-    zip.PutNextEntry( wxT( "content.xml" ) );
+    temp.Replace( "table:number-columns-repeated=\"33\"",col );
+    temp.Replace( "Logbook",tableName );
+    zip.PutNextEntry( "content.xml" );
     txt << temp;
 
-    txt << _T( "<table:table-row table:style-name=\"ro2\">" );
+    txt << "<table:table-row table:style-name=\"ro2\">";
     for ( int i = 0; i < x; i++ )
     {
-        txt << _T( "<table:table-cell office:value-type=\"string\">" );
-        txt << _T( "<text:p>" );
+        txt << "<table:table-cell office:value-type=\"string\">";
+        txt << "<text:p>";
         if ( !mode )
         {
             if ( i == 27 )
             {
                 txt << parent->UserLabel1->GetValue();
-                txt << _T( "</text:p>" );
-                txt << _T( "</table:table-cell>" );
+                txt << "</text:p>";
+                txt << "</table:table-cell>";
 
-                txt << _T( "<table:table-cell office:value-type=\"string\">" );
-                txt << _T( "<text:p>" );
+                txt << "<table:table-cell office:value-type=\"string\">";
+                txt << "<text:p>";
                 txt << parent->UserLabel2->GetValue();
-                txt << _T( "</text:p>" );
-                txt << _T( "</table:table-cell>" );
+                txt << "</text:p>";
+                txt << "</table:table-cell>";
 
-                txt << _T( "<table:table-cell office:value-type=\"string\">" );
-                txt << _T( "<text:p>" );
+                txt << "<table:table-cell office:value-type=\"string\">";
+                txt << "<text:p>";
                 txt << parent->UserLabel3->GetValue();
-                txt << _T( "</text:p>" );
-                txt << _T( "</table:table-cell>" );
+                txt << "</text:p>";
+                txt << "</table:table-cell>";
 
-                txt << _T( "<table:table-cell office:value-type=\"string\">" );
-                txt << _T( "<text:p>" );
+                txt << "<table:table-cell office:value-type=\"string\">";
+                txt << "<text:p>";
                 wxStaticText* t = wxDynamicCast( ctrlStaticText[i], wxStaticText );
                 txt << t->GetLabel();
             }
@@ -1077,10 +1077,10 @@ void Boat::saveODS( wxString path, bool mode )
         }
         else
             txt << parent->m_gridEquipment->GetColLabelValue( i );
-        txt << _T( "</text:p>" );
-        txt << _T( "</table:table-cell>" );
+        txt << "</text:p>";
+        txt << "</table:table-cell>";
     }
-    txt << _T( "</table:table-row>" );
+    txt << "</table:table-row>";
 
 //	bool empty = false;
     long emptyCol = 0;
@@ -1091,15 +1091,15 @@ void Boat::saveODS( wxString path, bool mode )
         line = stream->ReadLine(); // for #1.2#
         int col = 0;
         if ( input.Eof() ) break;
-        txt << _T( "<table:table-row table:style-name=\"ro2\">" );
-        wxStringTokenizer tkz( line, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        txt << "<table:table-row table:style-name=\"ro2\">";
+        wxStringTokenizer tkz( line, "\t",wxTOKEN_RET_EMPTY );
 
         while ( tkz.HasMoreTokens() )
         {
             wxString s = parent->restoreDangerChar( tkz.GetNextToken().RemoveLast() );
-            if ( s == _T( "" ) )
+            if ( s == "" )
             {
-                txt <<  _T( "<table:table-cell />" );
+                txt <<  "<table:table-cell />";
                 //empty = true;
                 emptyCol++;
                 col++;
@@ -1107,55 +1107,55 @@ void Boat::saveODS( wxString path, bool mode )
             }
 
             if ( col != 27 && col != 29 && col != 31 )
-                txt << _T( "<table:table-cell office:value-type=\"string\">" );
+                txt << "<table:table-cell office:value-type=\"string\">";
             else
             {
                 col++;
                 continue;
             }
 
-            wxStringTokenizer str( s, _T( "\n" ) );
+            wxStringTokenizer str( s, "\n" );
             while ( str.HasMoreTokens() )
             {
                 wxString e = str.GetNextToken();
-                e.Replace( _T( "&" ),_T( "&amp;" ) );
-                e.Replace( _T( "\"" ),_T( "&quot;" ) );
-                e.Replace( _T( "<" ),_T( "&lt;" ) );
-                e.Replace( _T( ">" ),_T( "&gt;" ) );
-                e.Replace( _T( "'" ),_T( "&apos;" ) );
-                txt << _T( "<text:p>" );
+                e.Replace( "&","&amp;" );
+                e.Replace( "\"","&quot;" );
+                e.Replace( "<","&lt;" );
+                e.Replace( ">","&gt;" );
+                e.Replace( "'","&apos;" );
+                txt << "<text:p>";
                 txt << e;
-                txt << _T( "</text:p>" );
+                txt << "</text:p>";
             }
-            txt << _T( "</table:table-cell>" );
+            txt << "</table:table-cell>";
             col++;
         }
-        txt << _T( "</table:table-row>" );;
+        txt << "</table:table-row>";;
 
     }
     txt << parent->contentEnd;
 
-    zip.PutNextEntry( wxT( "mimetype" ) );
-    txt << wxT( "application/vnd.oasis.opendocument.spreadsheet" );
+    zip.PutNextEntry( "mimetype" );
+    txt << "application/vnd.oasis.opendocument.spreadsheet";
 
-    zip.PutNextEntry( wxT( "styles.xml" ) );
+    zip.PutNextEntry( "styles.xml" );
     txt << parent->styles;
 
-    zip.PutNextEntry( wxT( "meta.xml" ) );
+    zip.PutNextEntry( "meta.xml" );
     txt << parent->meta;
 
-    zip.PutNextEntry( wxT( "META-INF" ) + sep + wxT( "manifest.xml" ) );
+    zip.PutNextEntry( "META-INF" + sep + "manifest.xml" );
     txt << parent->manifest;
 
-    zip.PutNextEntry( wxT( "Thumbnails" ) + sep );
+    zip.PutNextEntry( "Thumbnails" + sep );
 
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "floater" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "menubar" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "popupmenu" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "progressbar" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "statusbar" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "toolbar" ) );
-    zip.PutNextEntry( wxT( "Configurations2" ) + sep + wxT( "images" ) + sep + wxT( "Bitmaps" ) );
+    zip.PutNextEntry( "Configurations2" + sep + "floater" );
+    zip.PutNextEntry( "Configurations2" + sep + "menubar" );
+    zip.PutNextEntry( "Configurations2" + sep + "popupmenu" );
+    zip.PutNextEntry( "Configurations2" + sep + "progressbar" );
+    zip.PutNextEntry( "Configurations2" + sep + "statusbar" );
+    zip.PutNextEntry( "Configurations2" + sep + "toolbar" );
+    zip.PutNextEntry( "Configurations2" + sep + "images" + sep + "Bitmaps" );
 
     zip.Close();
     out.Close();

@@ -45,7 +45,7 @@ Maintenance::Maintenance( LogbookDialog* d, wxString data, wxString layout, wxSt
 
     wxString serviceData = data;
     wxTextFile *serviceFile;
-    serviceData.Append( _T( "service.txt" ) );
+    serviceData.Append( "service.txt" );
     wxFileName wxHomeFiledir = serviceData ;
     if ( !wxHomeFiledir.FileExists() )
     {
@@ -60,7 +60,7 @@ Maintenance::Maintenance( LogbookDialog* d, wxString data, wxString layout, wxSt
 
     wxString buyPartsData = data;
     wxTextFile *buyPartsFile;
-    buyPartsData.Append( _T( "buyparts.txt" ) );
+    buyPartsData.Append( "buyparts.txt" );
     wxHomeFiledir = buyPartsData ;
     if ( !wxHomeFiledir.FileExists() )
     {
@@ -75,7 +75,7 @@ Maintenance::Maintenance( LogbookDialog* d, wxString data, wxString layout, wxSt
 
     wxString repairsData = data;
     wxTextFile *repairsFile;
-    repairsData.Append( _T( "repairs.txt" ) );
+    repairsData.Append( "repairs.txt" );
     wxHomeFiledir = repairsData ;
     if ( !wxHomeFiledir.FileExists() )
     {
@@ -88,13 +88,13 @@ Maintenance::Maintenance( LogbookDialog* d, wxString data, wxString layout, wxSt
     repairsFile->Close();
     data_locnRepairs = repairsData;
 
-    m_choices[0] = dialog->m_gridGlobal->GetColLabelValue( 6 )+_T( " +" );								// Distance/T
-    m_choices[1] = wxString( _( "Engine " ) )+dialog->m_gridMotorSails->GetColLabelValue( 1 )+_T( " +" );	// Motor1/h
-    m_choices[2] = wxString( _( "Engine " ) )+dialog->m_gridMotorSails->GetColLabelValue( 4 )+_T( " +" );	// Motor2/h
-    m_choices[3] = dialog->m_gridMotorSails->GetColLabelValue( 11 )+_T( " +" );							// Generator/h
-    m_choices[4] = dialog->m_gridMotorSails->GetColLabelValue( 13 )+_T( " <=" );						// Bank1/AH
-    m_choices[5] = dialog->m_gridMotorSails->GetColLabelValue( 15 )+_T( " <=" );						// Bank2/AH
-    m_choices[6] = dialog->m_gridMotorSails->GetColLabelValue( 17 )+_T( " +" );							// Watermaker/h
+    m_choices[0] = dialog->m_gridGlobal->GetColLabelValue( 6 )+" +";								// Distance/T
+    m_choices[1] = wxString( _( "Engine " ) )+dialog->m_gridMotorSails->GetColLabelValue( 1 )+" +";	// Motor1/h
+    m_choices[2] = wxString( _( "Engine " ) )+dialog->m_gridMotorSails->GetColLabelValue( 4 )+" +";	// Motor2/h
+    m_choices[3] = dialog->m_gridMotorSails->GetColLabelValue( 11 )+" +";							// Generator/h
+    m_choices[4] = dialog->m_gridMotorSails->GetColLabelValue( 13 )+" <=";						// Bank1/AH
+    m_choices[5] = dialog->m_gridMotorSails->GetColLabelValue( 15 )+" <=";						// Bank2/AH
+    m_choices[6] = dialog->m_gridMotorSails->GetColLabelValue( 17 )+" +";							// Watermaker/h
     m_choices[7] = dialog->m_gridGlobal->GetColLabelValue( 3 );										// Status
     m_choices[8]  = _( "Fix Date" );
     m_choices[9]  = _( "Date + Days" );
@@ -105,12 +105,12 @@ Maintenance::Maintenance( LogbookDialog* d, wxString data, wxString layout, wxSt
     m_YesNo[0] = _( "Yes" );
     m_YesNo[1] = _( "No" );
 
-    m_Priority[0] = _T( "0" );
-    m_Priority[1] = _T( "1" );
-    m_Priority[2] = _T( "2" );
-    m_Priority[3] = _T( "3" );
-    m_Priority[4] = _T( "4" );
-    m_Priority[5] = _T( "5" );
+    m_Priority[0] = "0";
+    m_Priority[1] = "1";
+    m_Priority[2] = "2";
+    m_Priority[3] = "3";
+    m_Priority[4] = "4";
+    m_Priority[5] = "5";
 }
 
 Maintenance::~Maintenance( void )
@@ -132,7 +132,7 @@ void Maintenance::setLayoutLocation()
 
     wxString buypartsLay = layout_locnBuyParts;
 
-    buypartsLay.Append( _T( "buyparts" ) );
+    buypartsLay.Append( "buyparts" );
     dialog->appendOSDirSlash( &buypartsLay );
     layout_locnBuyParts = buypartsLay;
     dialog->loadLayoutChoice( LogbookDialog::GBUYPARTS,buypartsLay,dialog->m_choiceSelectLayoutBuyParts,opt->layoutPrefix[LogbookDialog::GBUYPARTS] );
@@ -149,7 +149,7 @@ void Maintenance::setLayoutLocation()
 
     wxString serviceLay = layout_locnService;
 
-    serviceLay.Append( _T( "service" ) );
+    serviceLay.Append( "service" );
     dialog->appendOSDirSlash( &serviceLay );
     layout_locnService = serviceLay;
     dialog->loadLayoutChoice( LogbookDialog::GSERVICE,serviceLay,dialog->m_choiceSelectLayoutService,opt->layoutPrefix[LogbookDialog::GSERVICE] );
@@ -166,7 +166,7 @@ void Maintenance::setLayoutLocation()
 
     wxString repairsLay = layout_locnRepairs;
 
-    repairsLay.Append( _T( "repairs" ) );
+    repairsLay.Append( "repairs" );
     dialog->appendOSDirSlash( &repairsLay );
     layout_locnRepairs = repairsLay;
     dialog->loadLayoutChoice( LogbookDialog::GREPAIRS,repairsLay,dialog->m_choiceSelectLayoutRepairs,opt->layoutPrefix[LogbookDialog::GREPAIRS] );
@@ -202,10 +202,10 @@ void Maintenance::addLine()
     boolEditor->UseStringValues( _( "Yes" ),_( "No" ) );
     grid->SetCellEditor( lastRow,ACTIVE,boolEditor );
 
-    grid->SetCellValue( lastRow,PRIORITY,_T( "5" ) );
+    grid->SetCellValue( lastRow,PRIORITY,"5" );
     grid->SetCellValue( lastRow,IF,m_choices[0] );
-    grid->SetCellValue( lastRow,WARN,_T( "1" ) );
-    grid->SetCellValue( lastRow,URGENT,_T( "2" ) );
+    grid->SetCellValue( lastRow,WARN,"1" );
+    grid->SetCellValue( lastRow,URGENT,"2" );
     cellCollChanged( IF, lastRow );
     cellCollChanged( WARN, lastRow );
     checkService( dialog->m_gridGlobal->GetNumberRows()-1 );
@@ -223,7 +223,7 @@ void Maintenance::addLineRepairs()
     selectedRowRepairs = lastRowRepairs;
     setAlignmentRepairs();
 
-    repairs->SetCellValue( lastRowRepairs,RPRIORITY,_T( "0" ) );
+    repairs->SetCellValue( lastRowRepairs,RPRIORITY,"0" );
     checkRepairs();
 }
 
@@ -236,7 +236,7 @@ void Maintenance::addLineBuyParts()
     selectedRowBuyParts = lastRowBuyParts;
     setAlignmentBuyParts();
 
-    buyparts->SetCellValue( lastRowBuyParts,PPRIORITY,_T( "0" ) );
+    buyparts->SetCellValue( lastRowBuyParts,PPRIORITY,"0" );
     checkBuyParts();
 }
 
@@ -266,7 +266,7 @@ void Maintenance::loadData()
     wxString t, s;
 
     wxFileInputStream input( data_locn );
-    wxTextInputStream* stream = new wxTextInputStream ( input,_T( "\n" ),wxConvUTF8 );
+    wxTextInputStream* stream = new wxTextInputStream ( input,"\n",wxConvUTF8 );
 
     int row = 0;
     int sel = -1;
@@ -276,13 +276,13 @@ void Maintenance::loadData()
     {
         t = stream->ReadLine();
         if ( input.Eof() ) break;
-        if ( t.Contains( _T( "#1.2#" ) ) )
+        if ( t.Contains( "#1.2#" ) )
         {
             continue;
         }
         addLine();
 
-        wxStringTokenizer tkz( t, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( t, "\t",wxTOKEN_RET_EMPTY );
         int c = 0;
         while ( tkz.HasMoreTokens() )
         {
@@ -323,21 +323,21 @@ void Maintenance::loadData()
     }
     dialog->m_gridMaintanence->EndBatch();
     wxFileInputStream input1( data_locnBuyParts );
-    wxTextInputStream* stream1 = new wxTextInputStream ( input1,_T( "\n" ),wxConvUTF8 );
+    wxTextInputStream* stream1 = new wxTextInputStream ( input1,"\n",wxConvUTF8 );
 
     row = 0;
 
     while ( true )
     {
         t = stream1->ReadLine();
-        if ( t.Contains( _T( "#1.2#" ) ) )
+        if ( t.Contains( "#1.2#" ) )
         {
             continue;
         }
         if ( input1.Eof() ) break;
         addLineBuyParts();
 
-        wxStringTokenizer tkz( t, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( t, "\t",wxTOKEN_RET_EMPTY );
         int c = 0;
         while ( tkz.HasMoreTokens() )
         {
@@ -378,21 +378,21 @@ void Maintenance::loadData()
     }
 
     wxFileInputStream input2( data_locnRepairs );
-    wxTextInputStream* stream2 = new wxTextInputStream ( input2,_T( "\n" ),wxConvUTF8 );
+    wxTextInputStream* stream2 = new wxTextInputStream ( input2,"\n",wxConvUTF8 );
 
     row = 0;
     while ( true )
     {
         t = stream2->ReadLine();
         if ( input2.Eof() ) break;
-        if ( t.Contains( _T( "#1.2#" ) ) )
+        if ( t.Contains( "#1.2#" ) )
         {
             continue;
         }
 
         addLineRepairs();
 
-        wxStringTokenizer tkz( t, _T( "\t" ),wxTOKEN_RET_EMPTY );
+        wxStringTokenizer tkz( t, "\t",wxTOKEN_RET_EMPTY );
         int c = 0;
         while ( tkz.HasMoreTokens() )
         {
@@ -435,16 +435,16 @@ int Maintenance::getSelection( wxString s )
 
 wxString Maintenance::getDateString( wxString s )
 {
-    if ( s.IsEmpty() || s.GetChar( 0 ) == ' ' ) return _T( "" );
+    if ( s.IsEmpty() || s.GetChar( 0 ) == ' ' ) return "";
 
-    wxStringTokenizer tkz( s,_T( "/" ) );
+    wxStringTokenizer tkz( s,"/" );
     int month = wxAtoi( tkz.GetNextToken() );
     int day = wxAtoi( tkz.GetNextToken() );
     int year = wxAtoi( tkz.GetNextToken() );
     wxDateTime dt;
     dt.Set( day, ( wxDateTime::Month ) month,year );
 
-    return wxString::Format( _T( "%s" ),dt.Format( opt->sdateformat ).c_str() );
+    return wxString::Format( "%s",dt.Format( opt->sdateformat ).c_str() );
 }
 
 void Maintenance::buyParts( int i )
@@ -486,13 +486,13 @@ void Maintenance::setRowBackground( int row, wxColour &c )
         grid->SetCellBackgroundColour( row,i,c );
 
     if ( c == wxColour( 255,0,0 ) )
-        grid->SetCellValue( row,PRIORITY,_T( "1" ) );
+        grid->SetCellValue( row,PRIORITY,"1" );
     else if ( c == wxColour( 255,255,0 ) )
-        grid->SetCellValue( row,PRIORITY,_T( "3" ) );
+        grid->SetCellValue( row,PRIORITY,"3" );
     else if ( c == wxColour( 0,255,0 ) )
-        grid->SetCellValue( row,PRIORITY,_T( "5" ) );
+        grid->SetCellValue( row,PRIORITY,"5" );
   	else if ( c == wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) )
-        grid->SetCellValue( row,PRIORITY,_T( "0" ) );
+        grid->SetCellValue( row,PRIORITY,"0" );
 }
 
 void Maintenance::checkService( int row )
@@ -1088,7 +1088,7 @@ void Maintenance::setRowDone( int row )
 
 void Maintenance::setRepairDone( int row )
 {
-    repairs->SetCellValue( row,RPRIORITY,_T( "0" ) );
+    repairs->SetCellValue( row,RPRIORITY,"0" );
     setRowBackgroundRepairs( row, white );
     checkBuyParts();
 
@@ -1122,70 +1122,70 @@ void Maintenance::cellCollChanged( int col, int row )
             grid->SetCellValue( selectedRow,START,
                                 dialog->m_gridGlobal->GetCellValue(
                                     dialog->m_gridGlobal->GetNumberRows()-1,LogbookHTML::DTOTAL ) );
-            grid->SetCellValue( selectedRow,WARN,_T( "1" ) );
-            grid->SetCellValue( selectedRow,URGENT,_T( "2" ) );
+            grid->SetCellValue( selectedRow,WARN,"1" );
+            grid->SetCellValue( selectedRow,URGENT,"2" );
         }
         else if ( g == m_choices[1] ) //Engine #1
         {
             grid->SetCellValue( selectedRow,START,
                                 dialog->m_gridMotorSails->GetCellValue(
                                     dialog->m_gridMotorSails->GetNumberRows()-1,LogbookHTML::MOTORT ) );
-            grid->SetCellValue( selectedRow,WARN,_T( "1" ) );
-            grid->SetCellValue( selectedRow,URGENT,_T( "2" ) );
+            grid->SetCellValue( selectedRow,WARN,"1" );
+            grid->SetCellValue( selectedRow,URGENT,"2" );
         }
         else if ( g == m_choices[2] ) //Engine #2
         {
             grid->SetCellValue( selectedRow,START,
                                 dialog->m_gridMotorSails->GetCellValue(
                                     dialog->m_gridMotorSails->GetNumberRows()-1,LogbookHTML::MOTOR1T ) );
-            grid->SetCellValue( selectedRow,WARN,_T( "1" ) );
-            grid->SetCellValue( selectedRow,URGENT,_T( "2" ) );
+            grid->SetCellValue( selectedRow,WARN,"1" );
+            grid->SetCellValue( selectedRow,URGENT,"2" );
         }
         else if ( g == m_choices[3] ) //Generator
         {
             grid->SetCellValue( selectedRow,START,
                                 dialog->m_gridMotorSails->GetCellValue(
                                     dialog->m_gridMotorSails->GetNumberRows()-1,LogbookHTML::GENET ) );
-            grid->SetCellValue( selectedRow,WARN,_T( "1" ) );
-            grid->SetCellValue( selectedRow,URGENT,_T( "2" ) );
+            grid->SetCellValue( selectedRow,WARN,"1" );
+            grid->SetCellValue( selectedRow,URGENT,"2" );
         }
         else if ( g == m_choices[4] ) //Bank #1
         {
-            grid->SetCellValue( selectedRow,START,wxString::Format( _T( "%s %s" ),opt->bank1.c_str(),opt->ampereh.c_str() ) );
-            grid->SetCellValue( selectedRow,WARN,wxString::Format( _T( "%i" ),( int )( wxAtoi( opt->bank1 )/100*25 ) ) );
-            grid->SetCellValue( selectedRow,URGENT,wxString::Format( _T( "%i" ),( int )( wxAtoi( opt->bank1 )/100*15 ) ) );
+            grid->SetCellValue( selectedRow,START,wxString::Format( "%s %s",opt->bank1.c_str(),opt->ampereh.c_str() ) );
+            grid->SetCellValue( selectedRow,WARN,wxString::Format( "%i",( int )( wxAtoi( opt->bank1 )/100*25 ) ) );
+            grid->SetCellValue( selectedRow,URGENT,wxString::Format( "%i",( int )( wxAtoi( opt->bank1 )/100*15 ) ) );
         }
         else if ( g == m_choices[5] ) //Bank #2
         {
-            grid->SetCellValue( selectedRow,START,wxString::Format( _T( "%s %s" ),opt->bank2.c_str(),opt->ampereh.c_str() ) );
-            grid->SetCellValue( selectedRow,WARN,wxString::Format( _T( "%i" ),( int )( wxAtoi( opt->bank2 )/100*25 ) ) );
-            grid->SetCellValue( selectedRow,URGENT,wxString::Format( _T( "%i" ),( int )( wxAtoi( opt->bank2 )/100*15 ) ) );
+            grid->SetCellValue( selectedRow,START,wxString::Format( "%s %s",opt->bank2.c_str(),opt->ampereh.c_str() ) );
+            grid->SetCellValue( selectedRow,WARN,wxString::Format( "%i",( int )( wxAtoi( opt->bank2 )/100*25 ) ) );
+            grid->SetCellValue( selectedRow,URGENT,wxString::Format( "%i",( int )( wxAtoi( opt->bank2 )/100*15 ) ) );
         }
         else if ( g == m_choices[6] ) //Watermaker
         {
             grid->SetCellValue( selectedRow,START,
                                 dialog->m_gridMotorSails->GetCellValue(
                                     dialog->m_gridMotorSails->GetNumberRows()-1,LogbookHTML::WATERMT ) );
-            grid->SetCellValue( selectedRow,WARN,_T( "1" ) );
-            grid->SetCellValue( selectedRow,URGENT,_T( "2" ) );
+            grid->SetCellValue( selectedRow,WARN,"1" );
+            grid->SetCellValue( selectedRow,URGENT,"2" );
         }
         else if ( g == m_choices[7] ) //Status
         {
             grid->BeginBatch();
-            grid->SetCellValue( selectedRow,WARN,_T( "" ) );
+            grid->SetCellValue( selectedRow,WARN,"" );
             grid->EndBatch();
         }
         else if ( g == m_choices[8] )
         {
-            grid->SetCellValue( selectedRow,START,_T( "" ) );
+            grid->SetCellValue( selectedRow,START,"" );
             grid->SetCellValue( selectedRow,WARN,  ( wxDateTime::Now().Add( wxDateSpan( 0,0,0,1 ) ) ).Format( opt->sdateformat ) );
             grid->SetCellValue( selectedRow,URGENT,( wxDateTime::Now().Add( wxDateSpan( 0,0,0,1 ) ) ).Format( opt->sdateformat ) );
         }
         else if ( g == m_choices[9] || g == m_choices[10] || g == m_choices[11] )
         {
             grid->SetCellValue( selectedRow,START,wxDateTime::Now().Format( opt->sdateformat ) );
-            grid->SetCellValue( selectedRow,WARN,_T( "1" ) );
-            grid->SetCellValue( selectedRow,URGENT,_T( "2" ) );
+            grid->SetCellValue( selectedRow,WARN,"1" );
+            grid->SetCellValue( selectedRow,URGENT,"2" );
         }
         col = WARN;
     }
@@ -1205,7 +1205,7 @@ void Maintenance::cellCollChanged( int col, int row )
             s = s.substr( s.find_last_of( ' ' ) );
             wxDouble d;
             grid->GetCellValue( row,col ).ToDouble( &d );
-            ss = wxString::Format( _T( "%5.0f %s" ),d,s.c_str() );
+            ss = wxString::Format( "%5.0f %s",d,s.c_str() );
         }
         else if ( g == m_choices[9] || g == m_choices[10] || g == m_choices[11] )
         {
@@ -1218,7 +1218,7 @@ void Maintenance::cellCollChanged( int col, int row )
                 s = dialog->logbookPlugIn->opt->month;
             wxDouble d;
             grid->GetCellValue( row,col ).ToDouble( &d );
-            ss = wxString::Format( _T( "%5.0f %s" ),d,s.c_str() );
+            ss = wxString::Format( "%5.0f %s",d,s.c_str() );
         }
         else
         {
@@ -1236,10 +1236,10 @@ void Maintenance::cellCollChanged( int col, int row )
 
     if ( col == ACTIVE )
     {
-        if ( grid->GetCellValue( row,ACTIVE ) == m_YesNo[0] && grid->GetCellValue( row,PRIORITY ) == _T( "0" ) )
-            grid->SetCellValue( row,PRIORITY,_T( "5" ) );
+        if ( grid->GetCellValue( row,ACTIVE ) == m_YesNo[0] && grid->GetCellValue( row,PRIORITY ) == "0" )
+            grid->SetCellValue( row,PRIORITY,"5" );
         else if ( grid->GetCellValue( row,ACTIVE ) == m_YesNo[1] )
-            grid->SetCellValue( row,PRIORITY,_T( "0" ) );
+            grid->SetCellValue( row,PRIORITY,"0" );
 
         setBuyPartsPriority( grid ,row, PRIORITY, TEXT );
     }
@@ -1255,10 +1255,10 @@ void Maintenance::update()
 {
     if ( !modified ) return;
 
-    wxString s = _T( "#1.2#\n" ), temp;
+    wxString s = "#1.2#\n", temp;
 
     wxString newLocn = data_locn;
-    newLocn.Replace( _T( "txt" ),_T( "Bak" ) );
+    newLocn.Replace( "txt","Bak" );
     wxRename( data_locn,newLocn );
 
     wxFileOutputStream output( data_locn );
@@ -1286,7 +1286,7 @@ void Maintenance::update()
                     wxDateTime dt;
                     temp = grid->GetCellValue( r,c );
                     LogbookDialog::myParseDate( temp,dt );
-                    temp = wxString::Format( _T( "%i/%i/%i" ),dt.GetMonth(), dt.GetDay(), dt.GetYear() );
+                    temp = wxString::Format( "%i/%i/%i",dt.GetMonth(), dt.GetDay(), dt.GetYear() );
                 }
                 else
                     temp = grid->GetCellValue( r,c );
@@ -1298,7 +1298,7 @@ void Maintenance::update()
                     wxDateTime dt;
                     temp = grid->GetCellValue( r,c );
                     LogbookDialog::myParseDate( temp,dt );
-                    temp = wxString::Format( _T( "%i/%i/%i" ),dt.GetMonth(), dt.GetDay(), dt.GetYear() );
+                    temp = wxString::Format( "%i/%i/%i",dt.GetMonth(), dt.GetDay(), dt.GetYear() );
                 }
                 else
                     temp = grid->GetCellValue( r,c );
@@ -1310,17 +1310,17 @@ void Maintenance::update()
                     wxDateTime dt;
                     temp = grid->GetCellValue( r,c );
                     LogbookDialog::myParseDate( temp,dt );
-                    temp = wxString::Format( _T( "%i/%i/%i" ),dt.GetMonth(), dt.GetDay(), dt.GetYear() );
+                    temp = wxString::Format( "%i/%i/%i",dt.GetMonth(), dt.GetDay(), dt.GetYear() );
                 }
                 else
                     temp = grid->GetCellValue( r,c );
             }
             s += dialog->replaceDangerChar( temp );
-            s += _T( " \t" );
+            s += " \t";
         }
         s.RemoveLast();
-        stream->WriteString( s+_T( "\n" ) );
-        s = _T( "" );
+        stream->WriteString( s+"\n" );
+        s = "";
     }
     output.Close();
 //	modified = false;
@@ -1329,10 +1329,10 @@ void Maintenance::update()
 void Maintenance::updateRepairs()
 {
     if ( !modifiedR ) return;
-    wxString s = _T( "" ), temp;
+    wxString s = "", temp;
 
     wxString newLocn = data_locnRepairs;
-    newLocn.Replace( _T( "txt" ),_T( "Bak" ) );
+    newLocn.Replace( "txt","Bak" );
     wxRename( data_locnRepairs,newLocn );
 
     wxFileOutputStream output( data_locnRepairs );
@@ -1345,11 +1345,11 @@ void Maintenance::updateRepairs()
         {
             temp = dialog->m_gridMaintanenceRepairs->GetCellValue( r,c );
             s += dialog->replaceDangerChar( temp );
-            s += _T( " \t" );
+            s += " \t";
         }
         s.RemoveLast();
-        stream->WriteString( s+_T( "\n" ) );
-        s = _T( "" );
+        stream->WriteString( s+"\n" );
+        s = "";
     }
     output.Close();
 //	modified = false;
@@ -1358,10 +1358,10 @@ void Maintenance::updateRepairs()
 void Maintenance::updateBuyParts()
 {
     if ( !modifiedB ) return;
-    wxString s = _T( "" ), temp;
+    wxString s = "", temp;
 
     wxString newLocn = data_locnBuyParts;
-    newLocn.Replace( _T( "txt" ),_T( "Bak" ) );
+    newLocn.Replace( "txt","Bak" );
     wxRename( data_locnBuyParts,newLocn );
 
     wxFileOutputStream output( data_locnBuyParts );
@@ -1378,14 +1378,14 @@ void Maintenance::updateBuyParts()
             {
                 wxDateTime dt;
                 dialog->myParseDate( temp.RemoveLast(),dt );
-                s.Replace( temp,wxString::Format( _T( "%i/%i/%i" ),dt.GetMonth(), dt.GetDay(), dt.GetYear() ) );
+                s.Replace( temp,wxString::Format( "%i/%i/%i",dt.GetMonth(), dt.GetDay(), dt.GetYear() ) );
             }
 
-            s += _T( " \t" );
+            s += " \t";
         }
         s.RemoveLast();
-        stream->WriteString( s+_T( "\n" ) );
-        s = _T( "" );
+        stream->WriteString( s+"\n" );
+        s = "";
     }
     output.Close();
     modified = false;
@@ -1419,10 +1419,10 @@ void Maintenance::viewODT( int tab,wxString path,wxString layout,int mode )
 
     toODT( tab,locn, layout, mode );
 
-    if ( layout != _T( "" ) )
+    if ( layout != "" )
     {
-        fn.Replace( _T( "txt" ),_T( "odt" ) );
-        dialog->startApplication( fn,_T( ".odt" ) );
+        fn.Replace( "txt","odt" );
+        dialog->startApplication( fn,".odt" );
     }
 }
 
@@ -1454,9 +1454,9 @@ void Maintenance::viewHTML( int tab,wxString path,wxString layout,int mode )
 
     toHTML( tab,locn, layout, mode );
 
-    if ( layout != _T( "" ) )
+    if ( layout != "" )
     {
-        fn.Replace( _T( "txt" ),_T( "html" ) );
+        fn.Replace( "txt","html" );
         dialog->startBrowser( fn );
     }
 }
@@ -1499,11 +1499,11 @@ wxString Maintenance::toHTML( int tab,wxString path,wxString layout,int mode )
     html = replaceLabels( html,grid );
 
     if ( !cutInPartsHTML( html, &top, &header, &middle, &bottom ) )
-        return _T( "" );
+        return "";
 
     wxTextFile* text = setFiles( savePath, &tempPath, mode );
 
-    writeToHTML( text,grid,tempPath,layout_loc+layout+_T( ".html" ), top,header,middle,bottom,mode );
+    writeToHTML( text,grid,tempPath,layout_loc+layout+".html", top,header,middle,bottom,mode );
 
     return tempPath;
 }
@@ -1512,30 +1512,30 @@ wxString Maintenance::replaceLabels( wxString s, wxGrid *grid )
 {
     if ( grid == this->grid )
     {
-        s.Replace( _T( "#LSERVICE#" ),		dialog->m_notebook6->GetPageText( 0 ) );
-        s.Replace( _T( "#LPRIORITY#" ),	grid->GetColLabelValue( 0 ) );
-        s.Replace( _T( "#LTEXT#" ),		grid->GetColLabelValue( 1 ) );
-        s.Replace( _T( "#LIF#" ),			grid->GetColLabelValue( 2 ) );
-        s.Replace( _T( "#LWARN#" ),		grid->GetColLabelValue( 3 ) );
-        s.Replace( _T( "#LURGENT#" ),		grid->GetColLabelValue( 4 ) );
-        s.Replace( _T( "#LSTART#" ),		grid->GetColLabelValue( 5 ) );
-        s.Replace( _T( "#LACTIVE#" ),		grid->GetColLabelValue( 6 ) );
+        s.Replace( "#LSERVICE#",		dialog->m_notebook6->GetPageText( 0 ) );
+        s.Replace( "#LPRIORITY#",	grid->GetColLabelValue( 0 ) );
+        s.Replace( "#LTEXT#",		grid->GetColLabelValue( 1 ) );
+        s.Replace( "#LIF#",			grid->GetColLabelValue( 2 ) );
+        s.Replace( "#LWARN#",		grid->GetColLabelValue( 3 ) );
+        s.Replace( "#LURGENT#",		grid->GetColLabelValue( 4 ) );
+        s.Replace( "#LSTART#",		grid->GetColLabelValue( 5 ) );
+        s.Replace( "#LACTIVE#",		grid->GetColLabelValue( 6 ) );
     }
     else if ( grid == repairs )
     {
-        s.Replace( _T( "#LREPAIRS#" ),		dialog->m_notebook6->GetPageText( 1 ) );
-        s.Replace( _T( "#LPRIORITY#" ),	grid->GetColLabelValue( 0 ) );
-        s.Replace( _T( "#LTEXT#" ),		grid->GetColLabelValue( 1 ) );
+        s.Replace( "#LREPAIRS#",		dialog->m_notebook6->GetPageText( 1 ) );
+        s.Replace( "#LPRIORITY#",	grid->GetColLabelValue( 0 ) );
+        s.Replace( "#LTEXT#",		grid->GetColLabelValue( 1 ) );
     }
     else if ( grid == buyparts )
     {
-        s.Replace( _T( "#LBUYPARTS#" ),	dialog->m_notebook6->GetPageText( 2 ) );
-        s.Replace( _T( "#LPRIORITY#" ),	grid->GetColLabelValue( 0 ) );
-        s.Replace( _T( "#LCATEGORY#" ),	grid->GetColLabelValue( 1 ) );
-        s.Replace( _T( "#LTITLE#" ),		grid->GetColLabelValue( 2 ) );
-        s.Replace( _T( "#LBUYPARTS#" ),	grid->GetColLabelValue( 3 ) );
-        s.Replace( _T( "#LDATE#" ),		grid->GetColLabelValue( 4 ) );
-        s.Replace( _T( "#LAT#" ),			grid->GetColLabelValue( 5 ) );
+        s.Replace( "#LBUYPARTS#",	dialog->m_notebook6->GetPageText( 2 ) );
+        s.Replace( "#LPRIORITY#",	grid->GetColLabelValue( 0 ) );
+        s.Replace( "#LCATEGORY#",	grid->GetColLabelValue( 1 ) );
+        s.Replace( "#LTITLE#",		grid->GetColLabelValue( 2 ) );
+        s.Replace( "#LBUYPARTS#",	grid->GetColLabelValue( 3 ) );
+        s.Replace( "#LDATE#",		grid->GetColLabelValue( 4 ) );
+        s.Replace( "#LAT#",			grid->GetColLabelValue( 5 ) );
     }
 
     return s;
@@ -1579,10 +1579,10 @@ wxString Maintenance::toODT( int tab,wxString path,wxString layout,int mode )
     odt = replaceLabels( odt,grid );
 
     if ( !cutInPartsODT( odt, &top, &header,	&middle, &bottom ) )
-        return _T( "" );
+        return "";
 
     wxTextFile* text = setFiles( savePath, &tempPath, mode );
-    writeToODT( text,grid,tempPath,layout_loc+layout+_T( ".odt" ), top,header,middle,bottom,mode );
+    writeToODT( text,grid,tempPath,layout_loc+layout+".odt", top,header,middle,bottom,mode );
 
     return tempPath;
 }
@@ -1606,13 +1606,13 @@ wxString Maintenance::setPlaceHoldersService( int mode, wxGrid *grid, int row, w
     wxString newMiddleODT;
 
     newMiddleODT = middleODT;
-    newMiddleODT.Replace( wxT( "#PRIORITY#" ),replaceNewLine( mode,grid->GetCellValue( row,PRIORITY ) ) );
-    newMiddleODT.Replace( wxT( "#TEXT#" ),replaceNewLine( mode,grid->GetCellValue( row,TEXT ) ) );
-    newMiddleODT.Replace( wxT( "#IF#" ),replaceNewLine( mode,grid->GetCellValue( row,IF ) ) );
-    newMiddleODT.Replace( wxT( "#WARN#" ),replaceNewLine( mode,grid->GetCellValue( row,WARN ) ) );
-    newMiddleODT.Replace( wxT( "#URGENT#" ),replaceNewLine( mode,grid->GetCellValue( row,URGENT ) ) );
-    newMiddleODT.Replace( wxT( "#START#" ),replaceNewLine( mode,grid->GetCellValue( row,START ) ) );
-    newMiddleODT.Replace( wxT( "#ACTIVE#" ),replaceNewLine( mode,grid->GetCellValue( row,ACTIVE ) ) );
+    newMiddleODT.Replace( "#PRIORITY#",replaceNewLine( mode,grid->GetCellValue( row,PRIORITY ) ) );
+    newMiddleODT.Replace( "#TEXT#",replaceNewLine( mode,grid->GetCellValue( row,TEXT ) ) );
+    newMiddleODT.Replace( "#IF#",replaceNewLine( mode,grid->GetCellValue( row,IF ) ) );
+    newMiddleODT.Replace( "#WARN#",replaceNewLine( mode,grid->GetCellValue( row,WARN ) ) );
+    newMiddleODT.Replace( "#URGENT#",replaceNewLine( mode,grid->GetCellValue( row,URGENT ) ) );
+    newMiddleODT.Replace( "#START#",replaceNewLine( mode,grid->GetCellValue( row,START ) ) );
+    newMiddleODT.Replace( "#ACTIVE#",replaceNewLine( mode,grid->GetCellValue( row,ACTIVE ) ) );
 
     return newMiddleODT;
 }
@@ -1622,8 +1622,8 @@ wxString Maintenance::setPlaceHoldersRepairs( int mode, wxGrid *grid, int row, w
     wxString newMiddleODT;
 
     newMiddleODT = middleODT;
-    newMiddleODT.Replace( wxT( "#PRIORITY#" ),replaceNewLine( mode,grid->GetCellValue( row,RPRIORITY ) ) );
-    newMiddleODT.Replace( wxT( "#REPAIRSTEXT#" ),replaceNewLine( mode,grid->GetCellValue( row,RTEXT ) ) );
+    newMiddleODT.Replace( "#PRIORITY#",replaceNewLine( mode,grid->GetCellValue( row,RPRIORITY ) ) );
+    newMiddleODT.Replace( "#REPAIRSTEXT#",replaceNewLine( mode,grid->GetCellValue( row,RTEXT ) ) );
 
     return newMiddleODT;
 }
@@ -1633,12 +1633,12 @@ wxString Maintenance::setPlaceHoldersBuyParts( int mode, wxGrid *grid, int row, 
     wxString newMiddleODT;
     newMiddleODT = middleODT;
 
-    newMiddleODT.Replace( wxT( "#PRIORITY#" ),replaceNewLine( mode,grid->GetCellValue( row,PPRIORITY ) ) );
-    newMiddleODT.Replace( wxT( "#CATEGORY#" ),replaceNewLine( mode,grid->GetCellValue( row,PCATEGORY ) ) );
-    newMiddleODT.Replace( wxT( "#TITLE#" ),replaceNewLine( mode,grid->GetCellValue( row,TITLE ) ) );
-    newMiddleODT.Replace( wxT( "#BUYPARTS#" ),replaceNewLine( mode,grid->GetCellValue( row,PARTS ) ) );
-    newMiddleODT.Replace( wxT( "#DATE#" ),replaceNewLine( mode,grid->GetCellValue( row,DATE ) ) );
-    newMiddleODT.Replace( wxT( "#AT#" ),replaceNewLine( mode,grid->GetCellValue( row,AT ) ) );
+    newMiddleODT.Replace( "#PRIORITY#",replaceNewLine( mode,grid->GetCellValue( row,PPRIORITY ) ) );
+    newMiddleODT.Replace( "#CATEGORY#",replaceNewLine( mode,grid->GetCellValue( row,PCATEGORY ) ) );
+    newMiddleODT.Replace( "#TITLE#",replaceNewLine( mode,grid->GetCellValue( row,TITLE ) ) );
+    newMiddleODT.Replace( "#BUYPARTS#",replaceNewLine( mode,grid->GetCellValue( row,PARTS ) ) );
+    newMiddleODT.Replace( "#DATE#",replaceNewLine( mode,grid->GetCellValue( row,DATE ) ) );
+    newMiddleODT.Replace( "#AT#",replaceNewLine( mode,grid->GetCellValue( row,AT ) ) );
 
     return newMiddleODT;
 }
@@ -1649,10 +1649,10 @@ wxString Maintenance::replaceNewLine( int mode, wxString str )
     {
     case 0:
         // HTML
-        str.Replace( wxT( "\n" ),wxT( "<br>" ) );
+        str.Replace( "\n","<br>" );
         break;
     case 1: // ODT
-        str.Replace( wxT( "\n" ),wxT( "<text:line-break/>" ) );
+        str.Replace( "\n","<text:line-break/>" );
         break;
     }
 
@@ -1663,14 +1663,14 @@ wxString Maintenance::readLayoutHTML( wxString path1,wxString layoutFileName )
 {
     wxString html, path;
 
-    path = path1 + layoutFileName + wxT( ".html" );;
+    path = path1 + layoutFileName + ".html";;
     wxTextFile layout( path );
 
     layout.Open();
 
     for ( unsigned int i = 0; i < layout.GetLineCount(); i++ )
     {
-        html += layout.GetLine( i )+_T( "\n" );
+        html += layout.GetLine( i )+"\n";
     }
 
     layout.Close();
