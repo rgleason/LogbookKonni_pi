@@ -7,6 +7,8 @@
 
 #include "LogbookOptions.h"
 
+#include <memory>
+
 #include <wx/dir.h>
 #include <wx/filedlg.h>
 #include <wx/filefn.h>
@@ -15,13 +17,13 @@
 #include <wx/textfile.h>
 #include <wx/tooltip.h>
 
-#include <memory>
 
 #include "Logbook.h"
 #include "LogbookDialog.h"
 #include "Options.h"
 #include "folder.xpm"
 #include "logbook_pi.h"
+
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////

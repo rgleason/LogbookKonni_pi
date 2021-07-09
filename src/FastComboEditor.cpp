@@ -1,13 +1,16 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
-#include "FastComboEditor.h"
+
 #ifdef __WXGTK__
 #include <gtk/gtk.h>
 #endif
+
 #include <wx/tokenzr.h>
 
 #include "EzGrid.h"
+#include "FastComboEditor.h"
+
 
 wxSComboBox::wxSComboBox(wxWindow* parent, wxWindowID id, const wxString& value,
                          const wxPoint& pos, const wxSize& size, int n,

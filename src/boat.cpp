@@ -3,6 +3,8 @@
 #include <wx/wx.h>
 #endif
 
+#include <memory>
+
 #include <wx/dir.h>
 #include <wx/event.h>
 #include <wx/filefn.h>
@@ -14,13 +16,12 @@
 #include <wx/wfstream.h>
 #include <wx/zipstrm.h>
 
-#include <memory>
-
+#include "boat.h"
 #include "Export.h"
 #include "LogbookDialog.h"
-#include "Options.h"
-#include "boat.h"
 #include "logbook_pi.h"
+#include "Options.h"
+
 using namespace std;
 
 Boat::Boat(LogbookDialog* d, wxString data, wxString lay, wxString layoutODT) {

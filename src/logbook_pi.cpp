@@ -33,17 +33,18 @@
 
 #include <memory>
 
+
 #include <wx/datectrl.h>
 #include <wx/dir.h>
 #include <wx/event.h>
 #include <wx/filefn.h>
+#include <wx/jsonreader.h>
 #include <wx/msgdlg.h>
+#include <wx/stdpaths.h>
 #include <wx/stdpaths.h>
 #include <wx/sysopt.h>
 #include <wx/timer.h>
-#include <wx/stdpaths.h>
 #include <wx/wxprec.h>
-#include <wx/jsonreader.h>
 
 #include "Logbook.h"
 #include "LogbookDialog.h"
@@ -71,7 +72,6 @@ extern "C" DECL_EXP opencpn_plugin* create_pi(void* ppimgr) {
 
 extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p) { delete p; }
 
-#include "icons.h"
 
 //---------------------------------------------------------------------------------------------------------
 //

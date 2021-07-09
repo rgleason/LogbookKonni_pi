@@ -2,6 +2,7 @@
 #include <wx/wx.h>
 #endif
 
+
 #include <wx/datetime.h>
 #include <wx/filename.h>
 #include <wx/generic/gridctrl.h>
@@ -18,6 +19,7 @@
 #include "Maintenance.h"
 #include "Options.h"
 #include "logbook_pi.h"
+
 
 Maintenance::Maintenance(LogbookDialog* d, wxString data, wxString layout,
                          wxString layoutODT)

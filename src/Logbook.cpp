@@ -5,17 +5,24 @@
 #define PI 3.14159265
 
 #include <math.h>
+
+
 #include <wx/dir.h>
+#include <wx/fileconf.h>
 #include <wx/filefn.h>
 #include <wx/fs_inet.h>
+#include <wx/generic/gridctrl.h>
+#include <wx/grid.h>
 #include <wx/image.h>
 #include <wx/msgdlg.h>
 #include <wx/object.h>
+#include <wx/stdpaths.h>
 #include <wx/textctrl.h>
 #include <wx/textfile.h>
 #include <wx/tokenzr.h>
 #include <wx/txtstrm.h>
 #include <wx/wfstream.h>
+
 
 #include "Logbook.h"
 #include "LogbookDialog.h"
@@ -24,10 +31,6 @@
 #include "Options.h"
 #include "logbook_pi.h"
 #include "nmea0183/nmea0183.h"
-#include "wx/fileconf.h"
-#include "wx/generic/gridctrl.h"
-#include "wx/grid.h"
-#include "wx/stdpaths.h"
 
 Logbook::Logbook(LogbookDialog* parent, wxString data, wxString layout,
                  wxString layoutODT)

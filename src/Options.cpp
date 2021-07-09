@@ -2,6 +2,10 @@
 #include "wx/wx.h"
 #endif  // precompiled headers
 
+#ifdef __WXMSW__
+#include <windows.h>
+#endif
+
 #include <wx/mimetype.h>
 #include <wx/msgdlg.h>
 #include <wx/tokenzr.h>
@@ -278,8 +282,6 @@ or change this text in Toolbox/Plugins/Logbook\n\nShift+Enter appends a new line
 #endif
 
 #ifdef __WXMSW__
-#include <windows.h>
-
   filetype1 = wxTheMimeTypesManager->GetFileTypeFromExtension("RSS");
 
   if (filetype1) {

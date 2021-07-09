@@ -1,27 +1,26 @@
-//#pragma once
-#include "LogbookHTML.h"
-
-#include "Logbook.h"
-#include "LogbookDialog.h"
-#include "Options.h"
-#include "logbook_pi.h"
-
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
 
+#include <map>
+#include <memory>
+
 #include <wx/grid.h>
 #include <wx/mimetype.h>
+#include <wx/stdpaths.h>
 #include <wx/textfile.h>
 #include <wx/tokenzr.h>
 #include <wx/txtstrm.h>
 #include <wx/wfstream.h>
 #include <wx/zipstrm.h>
 
-#include <map>
-#include <memory>
+#include "Logbook.h"
+#include "LogbookHTML.h"
+#include "LogbookDialog.h"
+#include "Options.h"
+#include "logbook_pi.h"
 
-#include "wx/stdpaths.h"
+
 using namespace std;
 
 LogbookHTML::LogbookHTML(Logbook *l, LogbookDialog *d, wxString data,

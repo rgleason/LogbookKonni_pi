@@ -1,7 +1,11 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+
+#include <typeinfo>
+
 #include <wx/config.h>
+#include <wx/window.h>
 
 #include "EzGrid.h"
 #include "FastComboEditor.h"
@@ -31,9 +35,6 @@ EzGrid::EzGrid(wxWindow* parent, wxWindowID id, const wxPoint& pos,
 
 EzGrid::~EzGrid() {}
 
-#include <wx/window.h>
-
-#include <typeinfo>
 void EzGrid::OnCellLeftClick(wxGridEvent& ev) {
   // Store the click co-ordinates in the editor if possible
   // if an editor has created a ClientData area, we presume it's

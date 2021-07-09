@@ -7,18 +7,20 @@
 //
 
 ///////////////////////////////////////////////////////////////////////////
-#include "LogbookDialog.h"
 
+#include <wx/arrimpl.cpp>
 #include <wx/bitmap.h>
 #include <wx/button.h>
 #include <wx/colour.h>
 #include <wx/dialog.h>
-#include <wx/dir.h>
 #include <wx/dirdlg.h>
+#include <wx/dir.h>
+#include <wx/fileconf.h>
 #include <wx/filefn.h>
 #include <wx/font.h>
 #include <wx/fs_inet.h>
 #include <wx/gdicmn.h>
+#include <wx/generic/gridctrl.h>
 #include <wx/grid.h>
 #include <wx/html/htmlwin.h>
 #include <wx/icon.h>
@@ -32,6 +34,7 @@
 #include <wx/sizer.h>
 #include <wx/splitter.h>
 #include <wx/statline.h>
+#include <wx/stdpaths.h>
 #include <wx/string.h>
 #include <wx/textctrl.h>
 #include <wx/textfile.h>
@@ -39,26 +42,20 @@
 #include <wx/tokenzr.h>
 #include <wx/treectrl.h>
 
-#include <wx/arrimpl.cpp>
-
-#include "Logbook.h"
 #include "Options.h"
 #include "icons.h"
 #include "logbook_pi.h"
 #include "tinyxml.h"
-#include "wx/fileconf.h"
-#include "wx/generic/gridctrl.h"
-#include "wx/grid.h"
-#include "wx/stdpaths.h"
-#if wxCHECK_VERSION(2, 9, 0)
+
 #ifdef __WXOSX__
 #include <wx/uiaction.h>
-#endif
 #endif
 
 #include "back.xpm"
 #include "down.xpm"
 #include "forward.xpm"
+#include "LogbookDialog.h"
+#include "Logbook.h"
 #include "up.xpm"
 
 //#define PBVE_DEBUG 1
@@ -8708,6 +8705,7 @@ void SelectLogbook::OnInit(wxInitDialogEvent& ev) {
 }
 
 //////////////////////////// myGridStringTable /////////
+#include <wx/arrimpl.cpp> 
 WX_DEFINE_OBJARRAY(myGridStringArray)
 
 myGridStringTable::myGridStringTable() : wxGridTableBase() {}

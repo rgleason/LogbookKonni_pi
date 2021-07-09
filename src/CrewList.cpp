@@ -1,14 +1,8 @@
-#include "CrewList.h"
-
-#include "Export.h"
-#include "Logbook.h"
-#include "LogbookDialog.h"
-#include "Options.h"
-#include "logbook_pi.h"
-
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+
+#include <memory>
 
 #include <wx/arrstr.h>
 #include <wx/filename.h>
@@ -18,7 +12,14 @@
 #include <wx/wfstream.h>
 #include <wx/zipstrm.h>
 
-#include <memory>
+
+#include "CrewList.h"
+#include "Export.h"
+#include "LogbookDialog.h"
+#include "Logbook.h"
+#include "logbook_pi.h"
+#include "Options.h"
+
 using namespace std;
 
 bool ActualWatch::active = false;

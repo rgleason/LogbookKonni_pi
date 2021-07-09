@@ -1,6 +1,7 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+
 #include "GridCellChoiceRenderer.h"
 
 void wxGridCellChoiceRenderer::Draw(wxGrid& grid, wxGridCellAttr& attr,

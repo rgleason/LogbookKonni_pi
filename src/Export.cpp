@@ -2,6 +2,8 @@
 #include <wx/wx.h>
 #endif
 
+#include <memory>
+
 #include <wx/filename.h>
 #include <wx/generic/gridctrl.h>
 #include <wx/mimetype.h>
@@ -9,11 +11,11 @@
 #include <wx/wfstream.h>
 #include <wx/zipstrm.h>
 
-#include <memory>
 
+#include "boat.h"
 #include "Export.h"
 #include "LogbookDialog.h"
-#include "boat.h"
+
 using namespace std;
 
 Export::Export(LogbookDialog* dialog) { this->dialog = dialog; }

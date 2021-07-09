@@ -3,19 +3,21 @@
 #include <wx/wx.h>
 #endif
 
+#include <map>
+
+
 #include <wx/dir.h>
 #include <wx/filename.h>
 #include <wx/generic/gridctrl.h>
 #include <wx/txtstrm.h>
 #include <wx/zipstrm.h>
 
-#include <map>
-
-#include "Logbook.h"
 #include "LogbookDialog.h"
+#include "Logbook.h"
+#include "logbook_pi.h"
 #include "Options.h"
 #include "OverView.h"
-#include "logbook_pi.h"
+
 using namespace std;
 OverView::OverView(LogbookDialog* d, wxString data, wxString lay,
                    wxString layoutODT)
