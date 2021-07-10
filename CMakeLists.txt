@@ -208,3 +208,12 @@ configure_file(
   @ONLY
 )
 
+
+# Update data/Layouts.zip if required. Check in new version into git.
+add_custom_target(layouts)
+add_custom_command(
+  TARGET layouts
+  COMMAND cmake -E tar cf ${PROJECT_SOURCE_DIR}/data/Layouts.zip --format=zip
+    Clouds HTMLLayouts ODTLayouts
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/Layouts 
+)
