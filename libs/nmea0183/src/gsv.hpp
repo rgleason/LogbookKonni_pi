@@ -41,39 +41,33 @@
 ** You can use it any way you like.
 */
 
-// Required for struct SAT_INFO
-#include "SatInfo.h"
-
 class GSV : public RESPONSE
 {
 
-   public:
+public:
 
-      GSV();
-     ~GSV();
+    GSV();
+    ~GSV();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      int NumberOfMessages;
-      int MessageNumber;
-      int   SatsInView;
-      SAT_INFO SatInfo[4];
+    int   SatsInView;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const GSV& operator = ( const GSV& source );
+    virtual const GSV& operator = ( const GSV& source );
 };
 
 #endif // GSV_CLASS_HEADER

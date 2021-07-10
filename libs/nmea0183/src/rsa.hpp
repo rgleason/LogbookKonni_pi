@@ -45,33 +45,33 @@ class RSA : public RESPONSE
 {
 //   DECLARE_DYNAMIC( RSA )
 
-   public:
+public:
 
-      RSA();
-     ~RSA();
+    RSA();
+    ~RSA();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double           Starboard;
-      NMEA0183_BOOLEAN IsStarboardDataValid;
-      double           Port;
-      NMEA0183_BOOLEAN IsPortDataValid;
+    double           Starboard;
+    NMEA0183L_BOOLEAN IsStarboardDataValid;
+    double           Port;
+    NMEA0183L_BOOLEAN IsPortDataValid;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const RSA& operator = ( const RSA& source );
+    virtual const RSA& operator = ( const RSA& source );
 };
 
 #endif // RSA_CLASS_HEADER

@@ -43,81 +43,81 @@
 
 MTW::MTW()
 {
-   Mnemonic = _T("MTW");
-   Empty();
+    Mnemonic = _T( "MTW" );
+    Empty();
 }
 
 MTW::~MTW()
 {
-   Mnemonic.Empty();
-   Empty();
+    Mnemonic.Empty();
+    Empty();
 }
 
 void MTW::Empty( void )
 {
 //   ASSERT_VALID( this );
 
-   Temperature = 0.0;
-   UnitOfMeasurement.Empty();
+    Temperature = 0.0;
+    UnitOfMeasurement.Empty();
 }
 
 bool MTW::Parse( const SENTENCE& sentence )
 {
 //   ASSERT_VALID( this );
 
-   /*
-   ** MTW - Water Temperature
-   **
-   **        1   2 3
-   **        |   | | 
-   ** $--MTW,x.x,C*hh<CR><LF>
-   **
-   ** Field Number: 
-   **  1) Degrees
-   **  2) Unit of Measurement, Celcius
-   **  3) Checksum
-   */
+    /*
+    ** MTW - Water Temperature
+    **
+    **        1   2 3
+    **        |   | |
+    ** $--MTW,x.x,C*hh<CR><LF>
+    **
+    ** Field Number:
+    **  1) Degrees
+    **  2) Unit of Measurement, Celcius
+    **  3) Checksum
+    */
 
-   /*
-   ** First we check the checksum...
-   */
+    /*
+    ** First we check the checksum...
+    */
 
-   if ( sentence.IsChecksumBad( 3 ) == TRUE )
-   {
-      SetErrorMessage( _T("Invalid Checksum") );
-      return( FALSE );
-   } 
+    if ( sentence.IsChecksumBad( 3 ) == TRUE )
+    {
+        SetErrorMessage( _T( "Invalid Checksum" ) );
+        return ( FALSE );
+    }
 
-   Temperature       = sentence.Double( 1 );
-   UnitOfMeasurement = sentence.Field( 2 );
+    Temperature       = sentence.Double( 1 );
+    UnitOfMeasurement = sentence.Field( 2 );
 
-   return( TRUE );
+    return ( TRUE );
 }
 
 bool MTW::Write( SENTENCE& sentence )
 {
 //   ASSERT_VALID( this );
 
-   /*
-   ** Let the parent do its thing
-   */
-   
-   RESPONSE::Write( sentence );
+    /*
+    ** Let the parent do its thing
+    */
 
-   sentence += Temperature;
-   sentence += UnitOfMeasurement;
+    RESPONSE::Write( sentence );
 
-   sentence.Finish();
+    sentence += Temperature;
+    sentence += UnitOfMeasurement;
 
-   return( TRUE );
+    sentence.Finish();
+
+    return ( TRUE );
 }
 
 const MTW& MTW::operator = ( const MTW& source )
 {
 //   ASSERT_VALID( this );
 
-   Temperature       = source.Temperature;
-   UnitOfMeasurement = source.UnitOfMeasurement;
+    Temperature       = source.Temperature;
+    UnitOfMeasurement = source.UnitOfMeasurement;
 
-   return( *this );
+    return ( *this );
 }

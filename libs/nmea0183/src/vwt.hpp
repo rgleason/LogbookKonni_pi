@@ -44,34 +44,34 @@ class VWT : public RESPONSE
 {
 //   DECLARE_DYNAMIC( MWV )
 
-   public:
+public:
 
-      VWT();
-     ~VWT();
+    VWT();
+    ~VWT();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double           WindDirectionMagnitude;
-      LEFTRIGHT	     DirectionOfWind;
-      double           WindSpeedKnots;
-      double           WindSpeedms;
-      double           WindSpeedKmh;
+    double           WindDirectionMagnitude;
+    LEFTRIGHT	     DirectionOfWind;
+    double           WindSpeedKnots;
+    double           WindSpeedms;
+    double           WindSpeedKmh;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const VWT& operator = ( const VWT& source );
+    virtual const VWT& operator = ( const VWT& source );
 };
 
 #endif // VWT_CLASS_HEADER

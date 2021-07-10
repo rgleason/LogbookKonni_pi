@@ -35,7 +35,7 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
-#include "version.h"
+#include "config.h"
 
 #include "ocpn_plugin.h"
 #include "Options.h"
@@ -52,7 +52,7 @@
 #include <wx/fileconf.h>
 #include <wx/dynarray.h>
 
-#include "../libs/json/jsonwriter.h"
+#include <wx/jsonwriter.h>
 //----------------------------------------------------------------------------------------------------------
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------

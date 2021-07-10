@@ -42,33 +42,33 @@
 
 class DPT : public RESPONSE
 {
-   //DECLARE_DYNAMIC( DPT )
+    //DECLARE_DYNAMIC( DPT )
 
-   public:
+public:
 
-      DPT();
-     ~DPT();
+    DPT();
+    ~DPT();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double DepthMeters;
-      double OffsetFromTransducerMeters;
+    double DepthMeters;
+    double OffsetFromTransducerMeters;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const DPT& operator = ( const DPT& source );
+    virtual const DPT& operator = ( const DPT& source );
 };
 
 #endif // DPT_CLASS_HEADER

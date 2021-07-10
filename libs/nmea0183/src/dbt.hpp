@@ -42,34 +42,34 @@
 
 class DBT : public RESPONSE
 {
-   //DECLARE_DYNAMIC( DBT )
+    //DECLARE_DYNAMIC( DBT )
 
-   public:
+public:
 
-      DBT();
-     ~DBT();
+    DBT();
+    ~DBT();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double DepthFeet;
-      double DepthMeters;
-      double DepthFathoms;
+    double DepthFeet;
+    double DepthMeters;
+    double DepthFathoms;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      const DBT& operator = ( const DBT& source );
+    const DBT& operator = ( const DBT& source );
 };
 
 #endif // DBT_CLASS_HEADER

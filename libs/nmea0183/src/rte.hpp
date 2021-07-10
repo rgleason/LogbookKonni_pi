@@ -44,30 +44,30 @@
 class RTE : public RESPONSE
 {
 
-   private:
+private:
 
-      void delete_all_entries( void );
+    void delete_all_entries( void );
 
-      double last_message_number_received;
+    double last_message_number_received;
 
-      int last_waypoint_number_written;
+    int last_waypoint_number_written;
 
-   public:
+public:
 
-      RTE();
-     ~RTE();
+    RTE();
+    ~RTE();
 
 
-      ROUTE_TYPE TypeOfRoute;
-      wxString    RouteName;
-      wxArrayString Waypoints;
-      int message_number;
-      int total_number_of_messages;
+    ROUTE_TYPE TypeOfRoute;
+    wxString    RouteName;
+    wxArrayString Waypoints;
+    int message_number;
+    int total_number_of_messages;
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
-      virtual bool AddWaypoint(const wxString& name);
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
+    virtual bool AddWaypoint( const wxString& name );
 };
 
 #endif // RTE_CLASS_HEADER
