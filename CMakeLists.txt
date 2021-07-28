@@ -3,7 +3,7 @@
 # Copyright:
 # License:     wxWidgets License
 # ~~~
-
+# Using ShipDriver_pi VERSION 2.8.5.1
 # -------- Cmake setup ---------
 #
 cmake_minimum_required(VERSION 3.12.0)
@@ -73,7 +73,7 @@ endif ()
 #
 # -------  Plugin setup --------
 #
-project(LogbookKonni_pi VERSION 1.4.16.2)
+project(LogbookKonni_pi VERSION 1.4.17.0)
 set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
 
 set(DISPLAY_NAME Logbook)    # Dialogs, installer artifacts, ...
