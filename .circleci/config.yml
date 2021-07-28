@@ -60,6 +60,7 @@ jobs:
         default: "fp-x86-20-v2"
     <<: *flatpak-steps
  
+
   build-macos:
     macos:
       xcode: "11.0.0"
