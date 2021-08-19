@@ -43,49 +43,49 @@
 
 LATLONG::LATLONG()
 {
-   Empty();
+    Empty();
 }
 
 LATLONG::~LATLONG()
 {
-   Empty();
+    Empty();
 }
 
 void LATLONG::Empty( void )
 {
 
-   Latitude.Empty();
-   Longitude.Empty();
+    Latitude.Empty();
+    Longitude.Empty();
 }
 
 bool LATLONG::Parse( int LatitudePositionFieldNumber, int NorthingFieldNumber, int LongitudePositionFieldNumber, int EastingFieldNumber, const SENTENCE& LineToParse )
 {
 
-   Latitude.Parse(  LatitudePositionFieldNumber, NorthingFieldNumber, LineToParse );
-   Longitude.Parse( LongitudePositionFieldNumber, EastingFieldNumber, LineToParse );
+    Latitude.Parse(  LatitudePositionFieldNumber, NorthingFieldNumber, LineToParse );
+    Longitude.Parse( LongitudePositionFieldNumber, EastingFieldNumber, LineToParse );
 
-   if ( Latitude.IsDataValid() && Longitude.IsDataValid() )
-   {
-      return( TRUE );
-   }
-   else
-   {
-      return( FALSE );
-   }
+    if ( Latitude.IsDataValid() && Longitude.IsDataValid() )
+    {
+        return ( TRUE );
+    }
+    else
+    {
+        return ( FALSE );
+    }
 }
 
 void LATLONG::Write( SENTENCE& sentence )
 {
 
-   Latitude.Write( sentence );
-   Longitude.Write( sentence );
+    Latitude.Write( sentence );
+    Longitude.Write( sentence );
 }
 
 const LATLONG& LATLONG::operator = ( const LATLONG& source )
 {
 
-   Latitude  = source.Latitude;
-   Longitude = source.Longitude;
+    Latitude  = source.Latitude;
+    Longitude = source.Longitude;
 
-   return( *this );
+    return ( *this );
 }

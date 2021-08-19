@@ -44,31 +44,31 @@
 class WPL : public RESPONSE
 {
 
-   public:
+public:
 
-      WPL();
-     ~WPL();
+    WPL();
+    ~WPL();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      LATLONG Position;
-      wxString To;
+    LATLONG Position;
+    wxString To;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const WPL& operator = ( const WPL& source );
+    virtual const WPL& operator = ( const WPL& source );
 };
 
 #endif // WPL_CLASS_HEADER

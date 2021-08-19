@@ -43,56 +43,56 @@
 
 LONGITUDE::LONGITUDE()
 {
-   Empty();
+    Empty();
 }
 
 LONGITUDE::~LONGITUDE()
 {
-   Empty();
+    Empty();
 }
 
 void LONGITUDE::Empty( void )
 {
 
-   Longitude = 0.0;
-   Easting   = EW_Unknown;
+    Longitude = 0.0;
+    Easting   = EW_Unknown;
 }
 
 bool LONGITUDE::IsDataValid( void )
 {
-   if ( Easting != East && Easting != West )
-   {
-      return( FALSE );
-   }
+    if ( Easting != East && Easting != West )
+    {
+        return ( FALSE );
+    }
 
-   return( TRUE );
+    return ( TRUE );
 }
 
 void LONGITUDE::Parse( int position_field_number, int east_or_west_field_number, const SENTENCE& sentence )
 {
-   wxString w_or_e = sentence.Field( east_or_west_field_number );
-   Set( sentence.Double( position_field_number ), w_or_e );
+    wxString w_or_e = sentence.Field( east_or_west_field_number );
+    Set( sentence.Double( position_field_number ), w_or_e );
 }
 
 void LONGITUDE::Set( double position, const wxString& east_or_west )
 {
 //   assert( east_or_west != NULL );
 
-   Longitude = position;
-   wxString ts = east_or_west;
+    Longitude = position;
+    wxString ts = east_or_west;
 
-   if ( ts.Trim(false)[ 0 ] == 'E' )
-   {
-      Easting = East;
-   }
-   else if ( ts.Trim(false)[ 0 ] == 'W' )
-   {
-      Easting = West;
-   }
-   else
-   {
-      Easting = EW_Unknown;
-   }
+    if ( ts.Trim( false )[ 0 ] == 'E' )
+    {
+        Easting = East;
+    }
+    else if ( ts.Trim( false )[ 0 ] == 'W' )
+    {
+        Easting = West;
+    }
+    else
+    {
+        Easting = EW_Unknown;
+    }
 }
 
 void LONGITUDE::Write( SENTENCE& sentence )
@@ -103,41 +103,42 @@ void LONGITUDE::Write( SENTENCE& sentence )
     int d;
     int m;
 
-    if (Longitude < 0.0) {
-            Longitude = -Longitude;
-            neg = 1;
-            }
-    d = (int) Longitude;
-    m = (int) ((Longitude - (double) d) * 60000.0);
+    if ( Longitude < 0.0 )
+    {
+        Longitude = -Longitude;
+        neg = 1;
+    }
+    d = ( int ) Longitude;
+    m = ( int ) ( ( Longitude - ( double ) d ) * 60000.0 );
 
-    if (neg)
-            d = -d;
+    if ( neg )
+        d = -d;
 
-    temp_string.Printf(_T("%03d%02d.%03d"), d, m / 1000, m % 1000);
+    temp_string.Printf( _T( "%03d%02d.%03d" ), d, m / 1000, m % 1000 );
 
-   sentence += temp_string;
+    sentence += temp_string;
 
-   if ( Easting == East )
-   {
-       sentence += _T("E");
-   }
-   else if ( Easting == West )
-   {
-       sentence += _T("W");
-   }
-   else
-   {
-      /*
-      ** Add Nothing
-      */
-   }
+    if ( Easting == East )
+    {
+        sentence += _T( "E" );
+    }
+    else if ( Easting == West )
+    {
+        sentence += _T( "W" );
+    }
+    else
+    {
+        /*
+        ** Add Nothing
+        */
+    }
 }
 
 const LONGITUDE& LONGITUDE::operator = ( const LONGITUDE& source )
 {
 
-   Longitude = source.Longitude;
-   Easting   = source.Easting;
+    Longitude = source.Longitude;
+    Easting   = source.Easting;
 
-   return( *this );
+    return ( *this );
 }

@@ -1,4 +1,7 @@
-//#include <wx/textctrl.h>
+#ifndef WX_DATEPICKER_SHIM
+#define WX_DATEPICKER_SHIM
+
+#include <wx/textctrl.h>
 
 #define wxDatePickerCtrlNameStr wxT("datectrl")
 
@@ -23,11 +26,14 @@ enum
     wxDP_ALLOWNONE = 8
 };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverloaded-virtual"
+
 class WXDLLIMPEXP_ADV wxDatePickerCtrl : public wxTextCtrl
 {
 public:
     // creating the control
-//    wxDatePickerCtrl() { Init(); }
+    //    wxDatePickerCtrl() { Init(); }
     virtual ~wxDatePickerCtrl() {}
     wxDatePickerCtrl(wxWindow *parent,
                      wxWindowID id,
@@ -37,7 +43,7 @@ public:
                      long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                      const wxValidator& validator = wxDefaultValidator,
                      const wxString& name = wxDatePickerCtrlNameStr)
-        : wxTextCtrl(parent, id, date.IsValid() ? date.Format() :"N/A", pos, size, 0, validator, name)
+        : wxTextCtrl(parent, id, date.Format(), pos, size, 0, validator, name)
     {}
     // wxDatePickerCtrl methods
     void SetValue(const wxDateTime& date) { wxTextCtrl::SetValue(date.FormatISODate()); }
@@ -49,3 +55,7 @@ public:
     bool SetDateRange(const wxDateTime& lowerdate = wxDefaultDateTime,
                       const wxDateTime& upperdate = wxDefaultDateTime) {return true;}
 };
+
+#pragma clang diagnostic pop
+
+#endif   // WX_DATEPICKER_SHIM

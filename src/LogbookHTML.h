@@ -22,7 +22,7 @@
 #include <wx/filename.h>
 #include <wx/wfstream.h>
 #include <wx/txtstrm.h>
-#include "../libs/json/jsonreader.h"
+#include <wx/jsonreader.h>
 
 class LogbookDialog;
 class Logbook;

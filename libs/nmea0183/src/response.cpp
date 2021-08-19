@@ -43,52 +43,52 @@
 
 RESPONSE::RESPONSE()
 {
-   Talker.Empty();
-   ErrorMessage.Empty();
+    Talker.Empty();
+    ErrorMessage.Empty();
 }
 
 RESPONSE::~RESPONSE()
 {
-   Mnemonic.Empty();
-   Talker.Empty();
-   ErrorMessage.Empty();
+    Mnemonic.Empty();
+    Talker.Empty();
+    ErrorMessage.Empty();
 }
 
-void RESPONSE::SetContainer( NMEA0183 *container )
+void RESPONSE::SetContainer( NMEA0183L *container )
 {
-   container_p = container;
+    container_p = container;
 }
 
 void RESPONSE::SetErrorMessage( const wxString& error_message )
 {
-   ErrorMessage  = Mnemonic;
-   ErrorMessage += _T(", ");
-   ErrorMessage += error_message;
+    ErrorMessage  = Mnemonic;
+    ErrorMessage += _T( ", " );
+    ErrorMessage += error_message;
 }
 
 bool RESPONSE::Write( SENTENCE& sentence )
 {
-   /*
-   ** All NMEA0183 sentences begin with the mnemonic...
-   */
+    /*
+    ** All NMEA0183 sentences begin with the mnemonic...
+    */
 
-    sentence  = _T("$");
+    sentence  = _T( "$" );
 
-    if(NULL == container_p)
-          sentence.Sentence.Append(_T("--"));
+    if ( NULL == container_p )
+        sentence.Sentence.Append( _T( "--" ) );
     else
-          sentence.Sentence.Append(container_p->TalkerID);
+        sentence.Sentence.Append( container_p->TalkerID );
 
-    sentence.Sentence.Append(Mnemonic);
+    sentence.Sentence.Append( Mnemonic );
 
-   return( TRUE );
+    return ( TRUE );
 }
 
 const wxString& RESPONSE::PlainEnglish( void )
 {
-   static wxString return_string;
+    static wxString return_string;
 
-   return_string.Empty();
+    return_string.Empty();
 
-   return( return_string );
+    return ( return_string );
 }

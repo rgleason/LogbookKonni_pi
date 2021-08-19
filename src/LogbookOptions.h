@@ -56,7 +56,6 @@
 #include <wx/image.h>
 #include <wx/icon.h>
 #include <wx/bmpbuttn.h>
-#include <wx/notebook.h>
 #include <wx/scrolwin.h>
 #include <wx/dialog.h>
 #include <wx/tglbtn.h>
@@ -71,12 +70,15 @@
 #include <wx/statline.h>
 #include <wx/checkbox.h>
 #include <wx/textctrl.h>
+#include <wx/notebook.h>
 #include <wx/generic/grid.h>
 #include <wx/choice.h>
 #include <wx/button.h>
 #include <wx/dialog.h>
 #include <wx/tglbtn.h>
 #endif
+
+#include "LogbookDialog.h"
 
 ///////////////////////////////////////////////////////////////////////////
 

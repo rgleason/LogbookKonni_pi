@@ -44,33 +44,33 @@
 class VTG : public RESPONSE
 {
 
-   public:
+public:
 
-      VTG();
-     ~VTG();
+    VTG();
+    ~VTG();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double TrackDegreesTrue;
-      double TrackDegreesMagnetic;
-	   double SpeedKnots;
-	   double SpeedKilometersPerHour;
+    double TrackDegreesTrue;
+    double TrackDegreesMagnetic;
+    double SpeedKnots;
+    double SpeedKilometersPerHour;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const VTG& operator = ( const VTG& source );
+    virtual const VTG& operator = ( const VTG& source );
 };
 
 #endif // VTG_CLASS_HEADER

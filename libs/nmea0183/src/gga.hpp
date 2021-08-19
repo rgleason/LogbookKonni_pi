@@ -44,38 +44,38 @@
 class GGA : public RESPONSE
 {
 
-   public:
+public:
 
-      GGA();
-     ~GGA();
+    GGA();
+    ~GGA();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      wxString         UTCTime;
-      LATLONG          Position;
-      int              GPSQuality;
-      int              NumberOfSatellitesInUse;
-      double           HorizontalDilutionOfPrecision;
-      double           AntennaAltitudeMeters;
-      double           GeoidalSeparationMeters;
-      double           AgeOfDifferentialGPSDataSeconds;
-      int              DifferentialReferenceStationID;
+    wxString         UTCTime;
+    LATLONG          Position;
+    int              GPSQuality;
+    int              NumberOfSatellitesInUse;
+    double           HorizontalDilutionOfPrecision;
+    double           AntennaAltitudeMeters;
+    double           GeoidalSeparationMeters;
+    double           AgeOfDifferentialGPSDataSeconds;
+    int              DifferentialReferenceStationID;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const GGA& operator = ( const GGA& source );
+    virtual const GGA& operator = ( const GGA& source );
 };
 
 #endif // GGA_CLASS_HEADER

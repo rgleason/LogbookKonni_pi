@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010  David S. Register
+ * Copyright (C) 2010 by David S. Register   *
  * Copyright (c) 2011-2013 Konnibe
  * Copyright (c) 2013-2015 Del Edson
  * Copyright (c) 2015-2021 Peter Tulp
@@ -18,14 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/******************************************************************************
- * $Id: logbookkonni_pi.h,v 1.8 2010/06/21 01:54:37 bdbcat Exp $
- *
- * Project:  OpenCPN
- * Purpose:  DEMO Plugin
- * Author:   David Register
- */
-
 #ifndef _LOGBOOKPIKONNI_H_
 #define _LOGBOOKPIKONNI_H_
 
@@ -35,7 +27,7 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
-#include "version.h"
+#include "config.h"
 
 #include "ocpn_plugin.h"
 #include "Options.h"
@@ -52,7 +44,7 @@
 #include <wx/fileconf.h>
 #include <wx/dynarray.h>
 
-#include "../libs/json/jsonwriter.h"
+#include <wx/jsonwriter.h>
 //----------------------------------------------------------------------------------------------------------
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
@@ -167,6 +159,5 @@ public:
     logbookkonni_pi* plogbook_pi;
 };
 #endif
-
 
 

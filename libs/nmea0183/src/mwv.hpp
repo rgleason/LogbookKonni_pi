@@ -57,7 +57,7 @@ class MWV : public RESPONSE
       wxString          Reference;
       double           WindSpeed;
       wxString          WindSpeedUnits;
-      NMEA0183_BOOLEAN IsDataValid;
+      NMEA0183L_BOOLEAN IsDataValid;
 
       /*
       ** Methods
