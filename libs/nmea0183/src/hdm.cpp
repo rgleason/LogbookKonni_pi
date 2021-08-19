@@ -43,71 +43,71 @@
 
 HDM::HDM()
 {
-   Mnemonic = _T("HDM");
-   Empty();
+    Mnemonic = _T( "HDM" );
+    Empty();
 }
 
 HDM::~HDM()
 {
-   Mnemonic.Empty();
-   Empty();
+    Mnemonic.Empty();
+    Empty();
 }
 
 void HDM::Empty( void )
 {
-   DegreesMagnetic = 0.0;
+    DegreesMagnetic = 0.0;
 }
 
 bool HDM::Parse( const SENTENCE& sentence )
 {
 
-   /*
-   ** HDM - Heading - Magnetic
-   **
-   **        1   2 3
-   **        |   | |
-   ** $--HDM,x.x,M*hh<CR><LF>
-   **
-   ** Field Number:
-   **  1) Heading Degrees, Magnetic
-   **  2) M = Magnetic
-   **  3) Checksum
-   */
+    /*
+    ** HDM - Heading - Magnetic
+    **
+    **        1   2 3
+    **        |   | |
+    ** $--HDM,x.x,M*hh<CR><LF>
+    **
+    ** Field Number:
+    **  1) Heading Degrees, Magnetic
+    **  2) M = Magnetic
+    **  3) Checksum
+    */
 
-   /*
-   ** First we check the checksum...
-   */
+    /*
+    ** First we check the checksum...
+    */
 
-   if ( sentence.IsChecksumBad( 3 ) == TRUE )
-   {
-      SetErrorMessage( _T("Invalid Checksum") );
-      return( FALSE );
-   }
+    if ( sentence.IsChecksumBad( 3 ) == TRUE )
+    {
+        SetErrorMessage( _T( "Invalid Checksum" ) );
+        return ( FALSE );
+    }
 
-   DegreesMagnetic = sentence.Double( 1 );
+    DegreesMagnetic = sentence.Double( 1 );
 
-   return( TRUE );
+    return ( TRUE );
 }
 
 bool HDM::Write( SENTENCE& sentence )
 {
-   /*
-   ** Let the parent do its thing
-   */
+    /*
+    ** Let the parent do its thing
+    */
 
-   RESPONSE::Write( sentence );
+    RESPONSE::Write( sentence );
 
-   sentence += DegreesMagnetic;
-   sentence += _T("M");
+    sentence += DegreesMagnetic;
+    sentence += _T( "M" );
 
-   sentence.Finish();
+    sentence.Finish();
 
-   return( TRUE );
+    return ( TRUE );
 }
 
 const HDM& HDM::operator = ( const HDM& source )
 {
-      DegreesMagnetic = source.DegreesMagnetic;
+    DegreesMagnetic = source.DegreesMagnetic;
 
-   return( *this );
+    return ( *this );
 }

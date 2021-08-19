@@ -48,11 +48,7 @@ public:
     enum fieldsService {PRIORITY,TEXT,IF,WARN,URGENT,START,ACTIVE};
 public:
     Maintenance( LogbookDialog* d, wxString data, wxString lay, wxString layoutODT );
-#ifdef __WXOSX__
     virtual ~Maintenance( void );
-#else
-    ~Maintenance( void );
-#endif
     void addLine();
     void addLineRepairs();
     void addLineBuyParts();

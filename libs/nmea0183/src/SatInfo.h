@@ -35,10 +35,10 @@
 
 typedef struct
 {
-   int SatNumber;
-   int ElevationDegrees;
-   int AzimuthDegreesTrue;
-   int SignalToNoiseRatio;
+    int SatNumber;
+    int ElevationDegrees;
+    int AzimuthDegreesTrue;
+    int SignalToNoiseRatio;
 } SAT_INFO;
 
 #endif // SAT_INFO_HEADER

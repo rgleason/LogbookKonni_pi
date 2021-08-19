@@ -42,37 +42,37 @@
 
 class ZDA : public RESPONSE
 {
-   //DECLARE_DYNAMIC( ZDA )
+    //DECLARE_DYNAMIC( ZDA )
 
-   public:
+public:
 
-      ZDA();
-     ~ZDA();
+    ZDA();
+    ~ZDA();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      wxString UTCTime;
-      int     Day;
-      int     Month;
-      int     Year;
-      int     LocalHourDeviation;
-      int     LocalMinutesDeviation;
+    wxString UTCTime;
+    int     Day;
+    int     Month;
+    int     Year;
+    int     LocalHourDeviation;
+    int     LocalMinutesDeviation;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const ZDA& operator = ( const ZDA& source );
+    virtual const ZDA& operator = ( const ZDA& source );
 };
 
 #endif // ZDA_CLASS_HEADER

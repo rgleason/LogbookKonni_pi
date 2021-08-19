@@ -44,31 +44,31 @@ class MTW : public RESPONSE
 {
 //   DECLARE_DYNAMIC( MTW )
 
-   public:
+public:
 
-      MTW();
-     ~MTW();
+    MTW();
+    ~MTW();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double  Temperature;
-      wxString UnitOfMeasurement;
+    double  Temperature;
+    wxString UnitOfMeasurement;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( const SENTENCE& sentence );
-      virtual bool Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( const SENTENCE& sentence );
+    virtual bool Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const MTW& operator = ( const MTW& source );
+    virtual const MTW& operator = ( const MTW& source );
 };
 
 #endif // MTW_CLASS_HEADER

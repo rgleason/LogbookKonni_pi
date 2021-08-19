@@ -54,8 +54,8 @@ class XTE : public RESPONSE
       ** Data
       */
 
-      NMEA0183_BOOLEAN IsLoranBlinkOK;
-      NMEA0183_BOOLEAN IsLoranCCycleLockOK;
+      NMEA0183L_BOOLEAN IsLoranBlinkOK;
+      NMEA0183L_BOOLEAN IsLoranCCycleLockOK;
       double           CrossTrackErrorDistance;
       LEFTRIGHT        DirectionToSteer;
       wxString          CrossTrackUnits;

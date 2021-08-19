@@ -46,97 +46,97 @@ class SENTENCE;
 class LATITUDE
 {
 
-   public:
+public:
 
-      LATITUDE();
-      virtual ~LATITUDE();
+    LATITUDE();
+    virtual ~LATITUDE();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double Latitude;
+    double Latitude;
 
-      NORTHSOUTH Northing;
+    NORTHSOUTH Northing;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool IsDataValid( void );
-      virtual void Parse( int PositionFieldNumber, int NorthingFieldNumber, const SENTENCE& LineToParse );
-      virtual void Set( double Position, const wxString& Northing );
-      virtual void Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool IsDataValid( void );
+    virtual void Parse( int PositionFieldNumber, int NorthingFieldNumber, const SENTENCE& LineToParse );
+    virtual void Set( double Position, const wxString& Northing );
+    virtual void Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const LATITUDE& operator = ( const LATITUDE& source );
+    virtual const LATITUDE& operator = ( const LATITUDE& source );
 };
 
 class LONGITUDE
 {
 
-   public:
+public:
 
-      LONGITUDE();
-      virtual ~LONGITUDE();
+    LONGITUDE();
+    virtual ~LONGITUDE();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      double Longitude;
+    double Longitude;
 
-      EASTWEST Easting;
+    EASTWEST Easting;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool IsDataValid( void );
-      virtual void Parse( int PositionFieldNumber, int EastingFieldNumber, const SENTENCE& LineToParse );
-      virtual void Set( double Position, const wxString& Easting );
-      virtual void Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool IsDataValid( void );
+    virtual void Parse( int PositionFieldNumber, int EastingFieldNumber, const SENTENCE& LineToParse );
+    virtual void Set( double Position, const wxString& Easting );
+    virtual void Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const LONGITUDE& operator = ( const LONGITUDE& source );
+    virtual const LONGITUDE& operator = ( const LONGITUDE& source );
 };
 
 class LATLONG
 {
 
-   public:
+public:
 
-      LATLONG();
-      virtual ~LATLONG();
+    LATLONG();
+    virtual ~LATLONG();
 
-      /*
-      ** Data
-      */
+    /*
+    ** Data
+    */
 
-      LATITUDE  Latitude;
-      LONGITUDE Longitude;
+    LATITUDE  Latitude;
+    LONGITUDE Longitude;
 
-      /*
-      ** Methods
-      */
+    /*
+    ** Methods
+    */
 
-      virtual void Empty( void );
-      virtual bool Parse( int LatitudePostionFieldNumber, int NorthingFieldNumber, int LongitudePositionFieldNumber, int EastingFieldNumber, const SENTENCE& LineToParse );
-      virtual void Write( SENTENCE& sentence );
+    virtual void Empty( void );
+    virtual bool Parse( int LatitudePostionFieldNumber, int NorthingFieldNumber, int LongitudePositionFieldNumber, int EastingFieldNumber, const SENTENCE& LineToParse );
+    virtual void Write( SENTENCE& sentence );
 
-      /*
-      ** Operators
-      */
+    /*
+    ** Operators
+    */
 
-      virtual const LATLONG& operator = ( const LATLONG& source );
+    virtual const LATLONG& operator = ( const LATLONG& source );
 };
 
 #endif // LATLONG_CLASS_HEADER
