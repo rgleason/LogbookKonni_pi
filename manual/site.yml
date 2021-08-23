@@ -1,7 +1,7 @@
 site:
   title: Advanced Logbook Manual
   url:  https://nowhere.net
-  start_page: logbook:ROOT:logbook.adoc
+  start_page: logbook:ROOT:index.adoc
 
 content:
   sources:
