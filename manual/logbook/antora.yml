@@ -1,4 +1,4 @@
 name: logbook
-title: logbook
+title: Advanced Logbook Manual
 version: '0.1'
 start_page: ROOT:logbook.adoc 
