@@ -1,6 +1,6 @@
-== Logbook
+= Logbook
 
-=== Links
+== Links
 
 * Source: https://github.com/ptulp/LogbookKonni_pi[Github Repository -
 Peter Tulp maintains the plugin]
@@ -13,7 +13,7 @@ https://opencpn.org/OpenCPN/plugins/logbookkonni.html[Website Download]
 * Forum: https://github.com/delatbabel/LogbookKonni-1.2/[LogbookKonni CF
 Thread]
 
-=== 1. What and Why
+== 1. What and Why
 
 The Logbook plugin is useful for creating and maintaining many types of
 logs for your boat.
@@ -21,11 +21,11 @@ logs for your boat.
 The plugin is now maintained by Del, Konnibe has been unable to continue
 development due to ill health.
 
-=== 2. Install
+== 2. Install
 
 See the user manual for information about installing and enabling this plugin.
 
-=== 3. Standard actions
+== 3. Standard actions
 
 *An additional Layouts zip file is needed for the first install and
 should be downloaded through the official download page.*
@@ -55,7 +55,7 @@ started.* See RED circle in below picture.
 
 image::logbook_help.png[]
 
-=== 4. Options
+== 4. Options
 
 Setting preferences for the logbook is done in the Logbook Preferences
 dialog. You can get to this from the main OpenCPN Options
@@ -64,7 +64,7 @@ image::settings_002.png[]
 
 window, go to the Plugins tab, select the Logbook plugin and click “Preferences”
 
-=== 5. Use with GE2KAP
+== 5. Use with GE2KAP
 
 On http://gdayii.ca/index.php[GE2KAP] website, select “Downloads” in the
 Menubar.
@@ -73,7 +73,7 @@ C2GPXKML - V4.0.2 New July. 31, 2015 Converts GPX, KML, SRW, Maxsea and
 Ozi formats. Supports Konni logbook plugin csv to combine track and
 logbook data.
 
-=== Preference Pages
+== Preference Pages
 
 Here are the preference pages for Logbook. In the Help file (see above)
 all the fields are explained in detail.
@@ -88,7 +88,7 @@ image::logbook_pref4.png[]
 
 image::logbook_pref5.png[]
 
-=== 6. Editing the LogBook
+== 6. Editing the LogBook
 
 An illustration worth a thousand words, follow these screenshots.
 
