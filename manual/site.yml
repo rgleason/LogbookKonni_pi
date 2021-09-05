@@ -2,13 +2,13 @@ site:
   title: Logbook Manual
   url:  https://nowhere.net
   start_page: logbook:ROOT:index.adoc
- 
+
 content:
   sources:
     - url: ..
       start_path: manual
       branches: HEAD
-      edit_url: https://github.com/opencpn-manuals/logbook_pi/edit/master/{path}
+      edit_url: https://github.com/opencpn-manuals/LogbookKonni_pi/edit/master/{path}
 
 ui:   
   bundle:
