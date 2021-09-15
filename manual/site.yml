@@ -1,5 +1,5 @@
 site:
-  title: Logbook Manual
+  title: Logbook
   url:  https://nowhere.net
   start_page: logbook:ROOT:index.adoc
 
