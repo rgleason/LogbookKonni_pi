@@ -74,18 +74,19 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 #
 # -------  Plugin setup --------
 #
-project(LogbookKonni_pi VERSION 1.4.17.4)
+project(LogbookKonni_pi VERSION 1.4.18.0)
 set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
 
 set(DISPLAY_NAME Logbook)    # Dialogs, installer artifacts, ...
 set(PLUGIN_API_NAME Logbook) # As of GetCommonName() in plugin API
 set(CPACK_PACKAGE_CONTACT "Del Elson")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Complex, feature-rich logbook")
-set(CPACK_PACKAGE_DESCRIPTION [=[
-Complex logbook with a lot of features including a customizable layout.
-To use all the features, you will have to download and install the Layout Files as instructed when you run the plugin for the first time.
-
-Help is available on YouTube, search LogbookKonni
+set(CPACK_PACKAGE_DESCRIPTION [=[ 
+Complex logbook with a lot of features including a 
+customizable layout. To use all the features, you will 
+have to download and install the Layout Files as instructed 
+when you run the plugin for the first time. 
+Help on YouTube search LogbookKonni
 ]=])
 
 set(PKG_AUTHOR "Del Elson")
