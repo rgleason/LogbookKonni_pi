@@ -57,24 +57,12 @@ set(OCPN_RELEASE_REPO
 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
-# set(OCPN_TARGET_TUPLE "" CACHE STRING
-#  "Target spec: \"platform;version;arch\""
-#)
-
-#string(TOLOWER "${OCPN_TARGET_TUPLE}" _lc_target)
-#if ("${_lc_target}" MATCHES "android*")
-#  set(QT_ANDROID ON)
-#  # Until we have a proper toolchain file:
-#  set(CMAKE_CROSSCOMPILING ON)
-#else ()
-#  set(QT_ANDROID OFF)
-#  add_definitions(-D__OCPN_USE_CURL__)
-#endif ()
+include(PluginOptions)
 
 #
 # -------  Plugin setup --------
 #
-project(LogbookKonni_pi VERSION 1.4.18.0)
+project(LogbookKonni_pi VERSION 1.4.18.5)
 set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
 
 set(DISPLAY_NAME Logbook)    # Dialogs, installer artifacts, ...
@@ -174,7 +162,8 @@ if (NOT ${BUILD_TYPE} STREQUAL "flatpak")
 # shipdriver added
   add_subdirectory("libs/jsoncpp")
   target_link_libraries(${PACKAGE_NAME} ocpn::jsoncpp)
-  
+
+# Needed for Logbook  
   add_subdirectory("libs/nmea0183")
   target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183)
 
@@ -184,9 +173,6 @@ if (NOT ${BUILD_TYPE} STREQUAL "flatpak")
   add_subdirectory("libs/wxJSON")
   target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
 endif ()
-
-# For OSX pkg generation.  Old
-# file(COPY ${PROJECT_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})
 
 configure_file(
   ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include//config.h
