@@ -34,7 +34,7 @@ fi
 # Install the pre-built wxWidgets package
 wget -q https://download.opencpn.org/s/rwoCNGzx6G34tbC/download \
     -O /tmp/wx312B_opencpn50_macos109.tar.xz
-tar -C /tmp -xJf /tmp/wx312B_opencpn50_macos109.tar.xz 
+tar -C /tmp -xJf /tmp/wx312B_opencpn50_macos109.tar.xz
 
 
 # Build and package
@@ -50,12 +50,10 @@ cmake \
 if [[ -z "$CI" ]]; then
     echo '$CI not found in environment, assuming local setup'
     echo "Complete build using 'cd build; make tarball' or so."
-    exit 0 
+    exit 0
 fi
 
 make VERBOSE=1 tarball
-
-make pkg    
 
 # Install cloudsmith needed by upload script
 python3 -m pip install --user cloudsmith-cli
