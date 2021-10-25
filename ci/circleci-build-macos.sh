@@ -22,15 +22,6 @@ for pkg in $(sed '/#/d' < $here/../build-deps/macos-deps);  do
     brew link --overwrite $pkg || brew install $pkg
 done
 
-if brew list --cask --versions packages; then
-    version=$(pkg_version packages '--cask')
-    sudo installer \
-        -pkg /usr/local/Caskroom/packages/$version/packages/Packages.pkg \
-        -target /
-else
-    brew install --cask packages
-fi
-
 # Install the pre-built wxWidgets package
 
 wget -q https://download.opencpn.org/s/MCiRiq4fJcKD56r/download \
@@ -50,12 +41,10 @@ cmake \
 if [[ -z "$CI" ]]; then
     echo '$CI not found in environment, assuming local setup'
     echo "Complete build using 'cd build; make tarball' or so."
-    exit 0 
+    exit 0
 fi
 
 make VERBOSE=1 tarball
-
-make pkg    
 
 # Install cloudsmith needed by upload script
 python3 -m pip install --user cloudsmith-cli
