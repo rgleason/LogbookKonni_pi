@@ -106,7 +106,8 @@ for f in \
     manual \
     po \
     README.md \
-    src
+    src \
+	bld-wo-clone.bat
 do
     if test -e "$f"; then
         git checkout HEAD $f
