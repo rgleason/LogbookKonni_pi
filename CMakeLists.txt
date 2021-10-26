@@ -1,5 +1,5 @@
 # ~~~
-# Lognookr
+# Logbookkonni_pi
 # Copyright:
 # License:     wxWidgets License
 # ~~~
@@ -62,7 +62,7 @@ include(PluginOptions)
 #
 # -------  Plugin setup --------
 #
-project(LogbookKonni_pi VERSION 1.4.18.9)
+project(LogbookKonni_pi VERSION 1.4.18.10)
 set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
 
 set(DISPLAY_NAME Logbook)    # Dialogs, installer artifacts, ...
