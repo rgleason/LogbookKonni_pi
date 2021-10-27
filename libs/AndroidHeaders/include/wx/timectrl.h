@@ -1,3 +1,6 @@
+#ifndef _WX_TIMECTRL_H_
+#define _WX_TIMECTRL_H_
+
 #define wxTimePickerCtrlNameStr wxS("timectrl")
 
 // No special styles are currently defined for this control but still define a
@@ -27,3 +30,6 @@ public:
     wxDateTime GetTimeCtrlValue() const { wxDateTime dt; dt.ParseISOTime(wxTextCtrl::GetValue()); return dt; }
 
 };
+
+
+#endif

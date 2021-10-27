@@ -1,3 +1,6 @@
+#ifndef _WX_DATECTRL_H_
+#define _WX_DATECTRL_H_
+
 #define wxDatePickerCtrlNameStr wxT("datectrl")
 
 // wxDatePickerCtrl styles
@@ -47,3 +50,5 @@ public:
     bool SetDateRange(const wxDateTime& lowerdate = wxDefaultDateTime,
                       const wxDateTime& upperdate = wxDefaultDateTime) {return true;}
 };
+
+#endif   // _WX_DATECTRL_H_

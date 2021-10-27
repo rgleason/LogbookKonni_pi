@@ -62,7 +62,7 @@ include(PluginOptions)
 #
 # -------  Plugin setup --------
 #
-project(LogbookKonni_pi VERSION 1.4.19.0)
+project(LogbookKonni_pi VERSION 1.4.20.0)
 set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
 
 set(DISPLAY_NAME Logbook)    # Dialogs, installer artifacts, ...
@@ -107,6 +107,7 @@ SET(SRC
   src/Export.h
   src/Export.cpp
   src/TexFont.cpp
+  src/TexFont.h
 )
 
 # -------- Setup completed, build the plugin --------
