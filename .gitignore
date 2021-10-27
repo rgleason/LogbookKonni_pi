@@ -1,4 +1,4 @@
 build
 po/*.pot
 .DS_Store
-thumbs.db
+Thumbs.db
