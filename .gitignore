@@ -1,5 +1,5 @@
 build
 po/*.pot
 .DS_Store
-Thumbs.db
+*humbs.db
 cache
