@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (c) 2011-2013 Konnibe
  * Copyright (c) 2013-2015 Del Edson
  * Copyright (c) 2015-2021 Peter Tulp
@@ -16,41 +15,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-=======
-
- * Copyright (c) 2011-2013 Konnibe
-
- * Copyright (c) 2013-2015 Del Edson
-
- * Copyright (c) 2015-2021 Peter Tulp
-
- *
-
- * This program is free software: you can redistribute it and/or modify
-
- * it under the terms of the GNU General Public License as published by
-
- * the Free Software Foundation, either version 2 of the License, or
-
- * (at your option) any later version.
-
- *
-
- * This program is distributed in the hope that it will be useful,
-
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
- * GNU General Public License for more details.
-
- *
-
- * You should have received a copy of the GNU General Public License
-
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
->>>>>>> d5cf4c9 (1.4.20.0 add android-pile)
 */
 
 
@@ -61,17 +25,6 @@
 #define PI 3.14159265
 
 #include <math.h>
-
-<<<<<<< HEAD
-=======
-#include "Logbook.h"
-#include "LogbookDialog.h"
-#include "LogbookHTML.h"
-#include "LogbookOptions.h"
-#include "Options.h"
-#include "logbook_pi.h"
-#include "nmea0183/nmea0183.h"
->>>>>>> d5cf4c9 (1.4.20.0 add android-pile)
 
 #include <wx/dir.h>
 #include <wx/fileconf.h>
@@ -89,8 +42,6 @@
 #include <wx/txtstrm.h>
 #include <wx/wfstream.h>
 
-
-<<<<<<< HEAD
 #include "Logbook.h"
 #include "LogbookDialog.h"
 #include "LogbookHTML.h"
@@ -99,8 +50,6 @@
 #include "logbook_pi.h"
 #include "nmea0183/nmea0183.h"
 
-=======
->>>>>>> d5cf4c9 (1.4.20.0 add android-pile)
 Logbook::Logbook(LogbookDialog* parent, wxString data, wxString layout,
                  wxString layoutODT)
     : LogbookHTML(this, parent, data, layout) {
