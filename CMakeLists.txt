@@ -62,19 +62,14 @@ include(PluginOptions)
 #
 # -------  Plugin setup --------
 #
-project(LogbookKonni_pi VERSION 1.4.21.0)
+project(LogbookKonni_pi VERSION 1.4.22.0)
 set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
 
 set(DISPLAY_NAME Logbook)    # Dialogs, installer artifacts, ...
 set(PLUGIN_API_NAME Logbook) # As of GetCommonName() in plugin API
 set(CPACK_PACKAGE_CONTACT "Del Elson")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Complex, feature-rich logbook")
-set(CPACK_PACKAGE_DESCRIPTION [=[ Marine Logbook ]=])
-#customizable layout. To use all the features, you will 
-#have to download and install the Layout Files as instructed 
-#3hen you run the plugin for the first time. 
-#Help on YouTube search LogbookKonni
-#]=])
+set(CPACK_PACKAGE_DESCRIPTION "Marine Logbook")
 
 set(PKG_AUTHOR "Del Elson")
 set(PKG_IS_OPEN_SOURCE "yes")
