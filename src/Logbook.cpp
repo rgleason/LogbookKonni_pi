@@ -62,17 +62,6 @@
 
 #include <math.h>
 
-<<<<<<< HEAD
-=======
-#include "Logbook.h"
-#include "LogbookDialog.h"
-#include "LogbookHTML.h"
-#include "LogbookOptions.h"
-#include "Options.h"
-#include "logbook_pi.h"
-#include "nmea0183/nmea0183.h"
->>>>>>> d5cf4c9 (1.4.20.0 add android-pile)
-
 #include <wx/dir.h>
 #include <wx/fileconf.h>
 #include <wx/filefn.h>
@@ -89,8 +78,6 @@
 #include <wx/txtstrm.h>
 #include <wx/wfstream.h>
 
-
-<<<<<<< HEAD
 #include "Logbook.h"
 #include "LogbookDialog.h"
 #include "LogbookHTML.h"
@@ -99,8 +86,7 @@
 #include "logbook_pi.h"
 #include "nmea0183/nmea0183.h"
 
-=======
->>>>>>> d5cf4c9 (1.4.20.0 add android-pile)
+
 Logbook::Logbook(LogbookDialog* parent, wxString data, wxString layout,
                  wxString layoutODT)
     : LogbookHTML(this, parent, data, layout) {
