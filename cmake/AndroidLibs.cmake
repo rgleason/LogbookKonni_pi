@@ -6,13 +6,6 @@ cmake_minimum_required(VERSION 3.1)
 
 find_package(Gettext REQUIRED)
 
-set(Qt_Build  "build_arm64/qtbase"
-  CACHE STRING "Base directory for QT build"
-)
-set(wxQt_Build "build_android_release_64_static_O3"
-  CACHE STRING "wxWidgets QT build base directory"
-)
-
 # install() needs to find the cross-compiled library:
 set_property(
   TARGET ${PACKAGE_NAME}
@@ -37,11 +30,25 @@ if (NOT EXISTS ${OCPN_ANDROID_CACHEDIR}/master.zip)
   )
 endif ()
 if (NOT EXISTS ${_master_base})
+  message(STATUS "Extracting image (patience, please...)")
   execute_process(
     COMMAND ${CMAKE_COMMAND} -E tar -xzf ${OCPN_ANDROID_CACHEDIR}/master.zip
     WORKING_DIRECTORY "${OCPN_ANDROID_CACHEDIR}"
   )
 endif ()
+
+# Set up Qt_Build and wxQt_Build
+if ("${ARM_ARCH}" STREQUAL "aarch64")
+  set(_Qt_Build  "build_arm64/qtbase")
+  set(_wxQt_Build "build_android_release_64_static_O3")
+elseif ("${ARM_ARCH}" STREQUAL "armhf")
+  set(_Qt_Build  "build_arm32_19_O3/qtbase")
+  set(_wxQt_Build "build_android_release_19_static_O3")
+else ()
+  message(FATAL_ERROR "No valid arm configuration detected.")
+endif ()
+set(Qt_Build  ${_Qt_Build} CACHE STRING "Base directory for QT build")
+set(wxQt_Build ${_wxQt_Build} CACHE STRING "wxWidgets QT build base directory")
 
 # Setup directories and libraries
 if ("${Qt_Build}" MATCHES "arm64")
@@ -61,7 +68,7 @@ else ()
 endif ()
 
 include_directories(
-  "${PROJECT_SOURCE_DIR}/libs/AndroidHeaders/include"
+  ${PROJECT_SOURCE_DIR}/libs/AndroidHeaders/include
   ${_qt_include}
   ${_qt_include}/QtWidgets
   ${_qt_include}/QtCore
@@ -97,4 +104,3 @@ add_compile_definitions(
 if (NOT CMAKE_BUILD_TYPE MATCHES "Debug|RelWithDebInfo")
   string(APPEND CMAKE_SHARED_LINKER_FLAGS " -s")
 endif ()
-
