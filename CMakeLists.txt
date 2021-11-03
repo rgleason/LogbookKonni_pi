@@ -69,7 +69,10 @@ set(DISPLAY_NAME Logbook)    # Dialogs, installer artifacts, ...
 set(PLUGIN_API_NAME Logbook) # As of GetCommonName() in plugin API
 set(CPACK_PACKAGE_CONTACT "Del Elson")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Complex, feature-rich logbook")
-set(CPACK_PACKAGE_DESCRIPTION "Marine Logbook")
+set(CPACK_PACKAGE_DESCRIPTION [=[ Marine Logbook
+with flexible and customizable  layout. Help on YouTube,
+search LogbookKonni
+]=])
 
 set(PKG_AUTHOR "Del Elson")
 set(PKG_IS_OPEN_SOURCE "yes")

@@ -608,11 +608,11 @@ int logbookkonni_pi::GetPlugInVersionMinor() { return PLUGIN_VERSION_MINOR; }
 wxString logbookkonni_pi::GetCommonName() { return _("Logbook"); }
 
 wxString logbookkonni_pi::GetShortDescription() {
-  return R"""(_(CPACK_PACKAGE_DESCRIPTION_SUMMARY))""";
+  return _(CPACK_PACKAGE_DESCRIPTION_SUMMARY);
 }
 
 wxString logbookkonni_pi::GetLongDescription() {
-  return R"""(_(CPACK_PACKAGE_DESCRIPTION))""";
+  return _(CPACK_PACKAGE_DESCRIPTION);
 }
 
 void logbookkonni_pi::OnContextMenuItemCallback(int id) {}
