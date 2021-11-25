@@ -200,19 +200,19 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
       new wxToggleButton(m_panelEngine, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize, 0);
   bSizer49->Add(m_toggleBtnEngine1, 0,
-                wxALIGN_CENTER_VERTICAL | wxRIGHT | wxLEFT, 0);
+                 wxRIGHT | wxLEFT, 0);
 
   m_toggleBtnEngine2 =
       new wxToggleButton(m_panelEngine, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize, 0);
   bSizer49->Add(m_toggleBtnEngine2, 0,
-                wxALIGN_CENTER_VERTICAL | wxRIGHT | wxLEFT, 0);
+                 wxRIGHT | wxLEFT, 0);
 
   m_toggleBtnGenerator =
       new wxToggleButton(m_panelEngine, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize, 0);
   bSizer49->Add(m_toggleBtnGenerator, 0,
-                wxALIGN_CENTER_VERTICAL | wxRIGHT | wxLEFT, 0);
+                 wxRIGHT | wxLEFT, 0);
 
   bSizer45->Add(bSizer49, 0, wxRIGHT | wxLEFT | wxBOTTOM, 5);
 
@@ -460,7 +460,7 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
   fgSizer53->Add(m_staticTextStatusText, 0, wxRIGHT | wxLEFT, 5);
   m_staticTextStatusText->SetFont(wxFont(7, 74, 90, 90, false, "Tahoma"));
 
-  bSizer39->Add(fgSizer53, 1, wxALIGN_RIGHT | wxALIGN_CENTER_VERTICAL, 0);
+  bSizer39->Add(fgSizer53, 1);
 
   if (!logbookPlugIn->opt->statusbar) {
     Statusbar->SetSizer(bSizer39);
@@ -2110,7 +2110,7 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
                                 wxEmptyString, wxITEM_NORMAL);
   m_menu7->Append(m_menuItem13);
 
-  bSizer12->Add(m_gridMaintanence, 1, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+  bSizer12->Add(m_gridMaintanence, 1, wxALL, 5);
 
   fgSizer151->Add(bSizer12, 1, wxEXPAND, 5);
 
@@ -2255,7 +2255,7 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
                                  wxEmptyString, wxITEM_NORMAL);
   m_menu71->Append(m_menuItem131);
 
-  bSizer122->Add(m_gridMaintanenceRepairs, 1, wxALIGN_CENTER_VERTICAL | wxALL,
+  bSizer122->Add(m_gridMaintanenceRepairs, 1, wxALL,
                  5);
 
   fgSizer1513->Add(bSizer122, 1, wxEXPAND, 5);
