@@ -99,6 +99,7 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
   timer = t;
   logbookTimerWindow = lt;
   GPSTimer = NULL;
+  SailsTimer = NULL;
   //	wxInitAllImageHandlers();
 
   this->SetSizeHints(wxSize(-1, -1), wxDefaultSize);
@@ -476,7 +477,7 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
   wxBoxSizer* bSizer391;
   bSizer391 = new wxBoxSizer(wxVERTICAL);
   m_gridGlobal = new wxGrid(m_panel6, wxID_ANY, wxDefaultPosition,
-                            wxDefaultSize, wxALWAYS_SHOW_SB);
+                            wxDefaultSize/*, wxALWAYS_SHOW_SB*/);
 
   // Grid
   m_gridGlobal->CreateGrid(0, 14);
@@ -592,7 +593,7 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
   bSizer11 = new wxBoxSizer(wxVERTICAL);
 
   m_gridWeather = new wxGrid(m_panel7, wxID_ANY, wxDefaultPosition,
-                             wxDefaultSize, wxALWAYS_SHOW_SB);
+                             wxDefaultSize/*, wxALWAYS_SHOW_SB*/);
 
   // Grid
   m_gridWeather->CreateGrid(0, 15);
@@ -665,7 +666,7 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
   bSizer111 = new wxBoxSizer(wxVERTICAL);
 
   m_gridMotorSails = new wxGrid(m_panel71, wxID_ANY, wxDefaultPosition,
-                                wxDefaultSize, wxALWAYS_SHOW_SB);
+                                wxDefaultSize/*, wxALWAYS_SHOW_SB*/);
 
   // Grid
   m_gridMotorSails->CreateGrid(0, 24);
@@ -1097,7 +1098,7 @@ LogbookDialog::LogbookDialog(logbookkonni_pi* d, wxTimer* t, LogbookTimer* lt,
   bSizer36 = new wxBoxSizer(wxVERTICAL);
 
   m_gridCrew = new wxGrid(m_panel211, wxID_ANY, wxDefaultPosition,
-                          wxDefaultSize, wxALWAYS_SHOW_SB);
+                          wxDefaultSize/*, wxALWAYS_SHOW_SB*/);
 
   // Grid
   m_gridCrew->CreateGrid(0, 15);
@@ -3188,6 +3189,12 @@ LogbookDialog::~LogbookDialog() {
   this->Disconnect(wxEVT_TIMER, wxTimerEventHandler(LogbookDialog::OnTimerGPS));
   delete GPSTimer;
   GPSTimer = NULL;
+
+  if(SailsTimer){
+    SailsTimer->Stop();
+    delete SailsTimer;
+    SailsTimer = NULL;
+  }
 
   if (logbookTimer->IsRunning()) logbookTimer->Stop();
 
@@ -8724,7 +8731,7 @@ void SelectLogbook::OnInit(wxInitDialogEvent& ev) {
 }
 
 //////////////////////////// myGridStringTable /////////
-#include <wx/arrimpl.cpp> 
+#include <wx/arrimpl.cpp>
 WX_DEFINE_OBJARRAY(myGridStringArray)
 
 myGridStringTable::myGridStringTable() : wxGridTableBase() {}
