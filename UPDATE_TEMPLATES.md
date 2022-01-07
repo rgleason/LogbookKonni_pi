@@ -4,19 +4,20 @@ updates-templates README
 The script update-templates can be used to update a plugin with
 newer versions of the shipdriver templates. The basic workflow
 is to
-
+  - If keys exist in the ./ci folder copy them to ./build-deps.
+  - Bootstrap process by downloading the updates-templates script
+    and add it to repo if it does not exist.
   - Make sure the plugin repo is clean (commit or stash changes)
-  - Bootstrap process by downloading script and add it to repo.
   - Pin files which should not be updated.
   - Run script
-  - Inspect the results, handle possible conflicts and commit the
-    changes.
-  - Handle updates to CMakeLists.txt and other plugin-specific files.
+  - Inspect the results.
+  - Handle updates to CMakeLists.txt/Plugin.cmake and the
+    flatpak yaml manifest.
   - Upstream local changes to shipdriver templates
 
 Bootstrapping
 -------------
-Only required if the update script is yet not part of the repo. Once
+Only required if the update script is not yet part of the repo. Once
 installed, the script is self-updating.
 
 Linux:
@@ -29,14 +30,14 @@ Linux:
     $ git commit -m "Add update-templates script"
 
 It is also possible to use wget instead of curl, like
-`wget $repo/update-templates`. Windows works the same way, except that
-the `chmod` command does not make sense here and hence is omitted.
+`wget $repo/update-templates`. Windows works the same way when using git-bash,
+except that the `chmod` command does not make sense here and hence is omitted.
 
 
-Bootstrap - Windows
--------------------
+Bootstrap - Windows (cmd.com)
+-----------------------------
 
-As in linux, bootstrapping is only required if the script is yet not
+As in linux, bootstrapping is only required if the script is not yet
 available in the plugin repo. Once installed, it's self-updating.
 
 The script is written in bash, so git-bash is required. Using git-bash, the
@@ -63,67 +64,53 @@ Running
 -------
 
 The script is run from the plugin top directory using
-`./update-templates`. In windows, assuming standard installation paths:
+`./update-templates`. In windows CMD, assuming standard installation paths:
 
     > "C:\Program Files\Git\bin\bash.exe" update-templates
 
 Usage summary:
 
-    update-templates [-t] [treeish]
+    update-templates [-T] [treeish]
+    update-templates  -h
+    update-templates  -l
+    
+**treeish** defaults to _shipdriver/master_ i. e., templates are updated
+from shipdriver's development branch. It could be set to a branch
+like _shipdriver/v3.0_ or a tag like _sd3.0.0_ to retrieve data from
+corresponding git trees.
 
-The *-t* option adds a *-X theirs* to the git merge performed. It will
-resolve all conflicts by using the upstream shipdriver stuff. By default,
-the conflicts will be unresolved in the results.
+**-l** lists available tags which can be used as _treeish_
 
-The *treeish* option can be used to merge changes from another shipdriver
-state than the default shipdriver/master i. e., a tag or a commit from
-the shipdriver repo.
+**-T** runs in test mode, lots of output, requires an existing shipdriver 
+remote and does not self-update.
 
 *update-templates -h* prints the complete help message.
 
+Script unconditionally updates known files and commits them directly.
 
-Inspecting results and committing
----------------------------------
-
-The basic check is `git status`. This will display a list of modified or
-added files. `git diff --staged <filename>` lists files which are unmerged
-and thus needs handling.
-
-If the template files have local changes there might be conflicts. These
-can be resolved manually by editing the conflicting file.
-
-All changes can be reverted using `git checkout HEAD <file>` -- doing this
-on a conflicted file resolves the conflict.
-
-Another option is to apply all changes unconditionally, basically dropping
-local changes using `git checkout shipdriver/master <file>` -- this also
-resolves a possible conflict.
-
-`git diff HEAD upstream/master` for file or directory shows the applied
-changes.  A typical sequence is
-
-    $ git diff --stat HEAD upstream/master ci    # list files changed in ci/
-    $ git diff HEAD upstream/master ci           # list the actual diff(s)
-    $ git checkout upstream/master ci            # Accept all changes
-
-When all looks good changes can be committed using something like
-`git commit -m "Update shipdriver templates."`
+Examples:
+ 
+    update-templates shipdriver/v3.0    -- get updates from v3.0 branch
+    update-templates sd3.0.0            -- get updates from sd3.0.0 tag
+    update-templates -l                 -- list all available tags
 
 Checking modifications in CMakeLists.txt and flatpak manifest
 -------------------------------------------------------------
 
-Besides the changes in generic files, CMakeLists.txt typically also needs to
-be updated. However, this file is specific for each plugin, and changes must
-be applied manually.
+As part of the 3.0.0 transition CMakeLists.txt is split into one plugin-specific 
+file Plugin.cmake and a generic CMakeLists.txt.  Later updates
+are only supposed to affect CMakeLists.txt while Plugin.cmake, the
+plugin-specific parts is kept as-is.
 
-The changes made in shipdriver's CMakeLists.txt is a good starting point to
-check. Af running the script these changes are appended as a comment to
-CMakeLists.txt. Reviewing these changes should give a good hint about the
-changes needed. After review, remove the diff comment.
+The "flatpak manifest" is the yaml file configuring the flatpak build,
+named like flatpak/org.opencpn.OpenCPN.Plugin.\*.yaml.  This might need
+to be updated. If there have been changes to the shipdriver manifest 
+since the last release these are added as comments at the end of the
+manifest. Review the file, consider applying corresponding changes to
+the manifest and eventually remove the comment.
 
 
 Upstreaming local changes to shipdriver
 ---------------------------------------
-After resolving conflicts, please consider upstreaming local changes which
-to the shipdriver templates using a PR so that next update runs
-smoother.
+If there is a need to modify any of the files updated by update-templates,
+please file bugs against the shipdriver repo so the next update runs smoother.

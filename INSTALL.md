@@ -1,9 +1,13 @@
 ## INSTALL: Building Plugins generic README.
 
-Install build dependencies as described in the
-[wiki](https://github.com/Rasbats/managed_plugins/wiki/Local-Build)
-Then clone this repository, enter it and make
-`rm -rf build; mkdir build; cd build`.
+Install build dependencies as described in the 
+[manual](https://opencpn-manuals.github.io/main/AlternativeWorkflow/Local-Build.html)
+
+After cloning, enter this directory, setup the library submodule and
+enter a fresh working directory:
+
+    $ git submodule update --init opencpn-libs
+    $ rm -rf build; mkdir build; cd build
 
 A "normal" (not flatpak) tar.gz tarball which can be used by the new plugin
 installer available from OpenCPN 5.2.0 is built using:
@@ -22,9 +26,8 @@ has been removed in the 5.6.0 cycle.
 
 #### Building for Android
 
-Builds for android requires an ndk installation. By default, the location
-/opt/android/ndk is used. If unsuitable, use the environment variable
-`NDK_HOME` to define the full path to the ndk installation
+Builds for android requires an ndk installation and an updated cmake,
+see manual (above).
 
 To build an android aarch64 tarball:
 
@@ -40,5 +43,6 @@ To build an android armhf tarball
 On windows, a different workflow is used:
 
     > ..\buildwin\win_deps.bat
-    > cmake -T v141_xp -G "Visual Studio 15 2017" --config RelWithDebInfo  ..
+    > cmake -T v141_xp -G "Visual Studio 15 2017" ^
+           -DCMAKE_BUILD_TYPE=RelWithDebInfo  ..
     > cmake --build . --target tarball --config RelWithDebInfo
