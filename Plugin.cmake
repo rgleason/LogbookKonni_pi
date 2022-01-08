@@ -32,7 +32,7 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 #
 #
 # -------  Plugin setup --------
-#  Using Shipdriver version 3.0.0
+#  Using Shipdriver version 3.0.0 from branch v3.0
 
 set(PKG_NAME LogbookKonni_pi)
 set(PKG_VERSION  1.4.24.0)
@@ -87,7 +87,7 @@ macro(late_init)
   # Perform initialization after the PACKAGE_NAME library, compilers
   # and ocpn::api is available.
   if (PLUGIN_USE_SVG)
-    target_compile_definitions(${PACKAGE_NAME} PUBLIC SHIPDRIVER_USE_SVG)
+    target_compile_definitions(${PACKAGE_NAME} PUBLIC PLUGIN_USE_SVG)
   endif ()
 endmacro ()
 
@@ -110,7 +110,7 @@ macro(add_plugin_libraries)
   add_subdirectory("libs/nmea0183")
   target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183
 
-  # The wxsvg library enables SVG overall in the plugin
+#  The wxsvg library enables SVG overall in the plugin
 #  add_subdirectory("libs/wxsvg")
 #  target_link_libraries(${PACKAGE_NAME} ocpn::wxsvg)
 
