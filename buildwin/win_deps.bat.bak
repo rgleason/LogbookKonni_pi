@@ -21,7 +21,9 @@ python -m pip install -q setuptools wheel
 python -m pip install -q cloudsmith-cli
 python -m pip install -q cryptography
 
-set WXWIN=C:\wxWidgets-3.1.2
+set SCRIPTDIR=%~dp0
+set WXWIN=%SCRIPTDIR%..\cache\wxWidgets-3.1.2
+
 set wxWidgets_ROOT_DIR=%WXWIN%
 set wxWidgets_LIB_DIR=%WXWIN%\lib\vc_dll
 SET PATH=%PATH%;%WXWIN%;%wxWidgets_LIB_DIR%

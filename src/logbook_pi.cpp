@@ -612,11 +612,13 @@ int logbookkonni_pi::GetPlugInVersionMinor() { return PLUGIN_VERSION_MINOR; }
 wxString logbookkonni_pi::GetCommonName() { return _("Logbook"); }
 
 wxString logbookkonni_pi::GetShortDescription() {
-  return _(CPACK_PACKAGE_DESCRIPTION_SUMMARY);
+//  return _(CPACK_PACKAGE_DESCRIPTION_SUMMARY);
+  return _("Complex, feature-rich logbook");
 }
 
 wxString logbookkonni_pi::GetLongDescription() {
-  return _(CPACK_PACKAGE_DESCRIPTION);
+// return _(CPACK_PACKAGE_DESCRIPTION);
+  return _("Marine Logbook with flexible and customizable layout. Help on YouTube, search LogbookKonni");
 }
 
 void logbookkonni_pi::OnContextMenuItemCallback(int id) {}
