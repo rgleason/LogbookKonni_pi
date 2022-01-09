@@ -11,11 +11,11 @@ set PATH=%PATH%;%WXWIN%;%wxWidgets_LIB_DIR%;%wxWidgets_INCLUDE_DIRS%;C:\Program 
 set PATH=C:\Program Files\Cmake\bin;%PATH%
 
 REM Example Only. Change rasbats/shipdriver_pi.git to match the repo you want to clone.
-REM git clone  https://github.com/rasbats/shipdriver_pi.git
+git clone  https://github.com/rasbats/shipdriver_pi.git
 REM Example Only. Change shipdriver_pi to match the repo being used.
-REM cd logbookkonni_pi
+cd shipdriver_pi
 
-REM mkdir  build
+mkdir  build
 cd build
 cmake -T v141_xp ..
 cmake -G "Visual Studio 15 2017" -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
