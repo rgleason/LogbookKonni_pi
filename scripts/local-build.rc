@@ -1,8 +1,6 @@
 # This is an example configuration file. The items GIT_KEY_PASSWORD and
 # CLOUDSMITH_API_KEY are secrets and hence obfuscated here. Other values
-# are as used by me.  
-# REMOVE THIS FILE FROM THE SCRIPTS FOLDER AFTER ADDING PRIVATE KEYS.
-#
+# are as used by me.
 #
 # The configuration is used by the local-build, git-push and local-push
 # scripts. It is not required for a regular local build according to
@@ -32,9 +30,3 @@ export GIT_REPO=git@github.com:leamas/plugins.git
 export CLOUDSMITH_STABLE_REPO=alec-leamas/opencpn-plugins-stable
 export CLOUDSMITH_UNSTABLE_REPO=alec-leamas/opencpn-plugins-unstable
 export CLOUDSMITH_BETA_REPO=alec-leamas/opencpn-plugins-stable
-
-# OR something like
-
-# export CLOUDSMITH_STABLE_REPO=opencpn/<plugin>-prod
-# export CLOUDSMITH_UNSTABLE_REPO=opencpn/<plugin>-alpha
-# export CLOUDSMITH_BETA_REPO=opencpn/<plugin>-beta
