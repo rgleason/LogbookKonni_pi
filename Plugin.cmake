@@ -32,7 +32,7 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 #
 #
 # -------  Plugin setup --------
-#  Using Shipdriver version 3.0.0 from branch v3.0
+#  Using Shipdriver version 3.0.2 beta1 from branch v3.0
 
 set(PKG_NAME LogbookKonni_pi)
 set(PKG_VERSION  1.4.26.0)
