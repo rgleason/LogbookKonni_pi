@@ -233,8 +233,8 @@ workflows:
       - build-focal:
           <<: *std-filters
 
-#      - build-focal-wx31:
-#          <<: *std-filters
+##      - build-focal-wx31:
+##          <<: *std-filters
 
       - build-buster:
           <<: *std-filters
@@ -242,11 +242,11 @@ workflows:
       - build-bullseye:
           <<: *std-filters
 
-      - build-android-arm64:
-          <<: *std-filters
+##      - build-android-arm64:
+##          <<: *std-filters
 
-      - build-android-armhf:
-          <<: *std-filters
+##      - build-android-armhf:
+##         <<: *std-filters
 
       - build-bionic-armhf:
           <<: *std-filters
