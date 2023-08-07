@@ -131,9 +131,14 @@ if ("${_git_tag}" STREQUAL "")
 else ()
   set(pkg_displayname "${PLUGIN_API_NAME}-${_git_tag}")
 endif ()
+
+message(STATUS "pkg_displayname0: ${pkg_displayname}.")
+
 string(APPEND pkg_displayname
   "-${plugin_target}${_wx_abi}${_display_arch}-${plugin_target_version}"
 )
+
+message(STATUS "pkg_displayname1: ${pkg_displayname}.")
 
 # pkg_xmlname: XML metadata basename
 set(pkg_xmlname ${pkg_displayname})
@@ -173,5 +178,8 @@ elseif ("${plugin_target}" MATCHES "ubuntu|raspbian|debian|mingw")
 else ()
   set(pkg_target_arch "${plugin_target}")
 endif ()
+
+message(STATUS "OCPN_WX_ABI: ${OCPN_WX_ABI}.")
+message(STATUS "pkg_target_arch: ${pkg_target_arch}.")
 
 #cmake-format: on
