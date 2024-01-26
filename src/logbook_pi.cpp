@@ -68,7 +68,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p) { delete p; }
 //          PlugIn initialization and de-init
 //
 //---------------------------------------------------------------------------------------------------------
-logbookkonni_pi::logbookkonni_pi(void* ppimgr) : opencpn_plugin_116(ppimgr) {
+logbookkonni_pi::logbookkonni_pi(void* ppimgr) : opencpn_plugin_117(ppimgr) {
   // Create the PlugIn icons
   initialize_images();
   opt = new Options();
@@ -608,6 +608,14 @@ int logbookkonni_pi::GetAPIVersionMinor() { return API_VERSION_MINOR; }
 int logbookkonni_pi::GetPlugInVersionMajor() { return PLUGIN_VERSION_MAJOR; }
 
 int logbookkonni_pi::GetPlugInVersionMinor() { return PLUGIN_VERSION_MINOR; }
+
+int GetPlugInVersionPatch() { return PLUGIN_VERSION_PATCH; }
+
+int GetPlugInVersionPost() { return PLUGIN_VERSION_TWEAK; }
+
+const char *GetPlugInVersionPre() { return PKG_PRERELEASE; }
+
+const char *GetPlugInVersionBuild() { return PKG_BUILD_INFO; }
 
 wxString logbookkonni_pi::GetCommonName() { return _("Logbook"); }
 

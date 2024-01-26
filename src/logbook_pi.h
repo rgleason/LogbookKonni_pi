@@ -57,7 +57,7 @@ class LogbookTimer;
 class LogbookOptions;
 class Options;
 
-class logbookkonni_pi  :  public opencpn_plugin_116
+class logbookkonni_pi  :  public opencpn_plugin_117
 {
 public:
     enum states {OFF,ONNOEVENTS,ONWITHEVENTS};
