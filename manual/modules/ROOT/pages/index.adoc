@@ -151,11 +151,13 @@ image:book5.jpeg[]
 For those who would like the Logbook Manual in a separate format from
 the plugin, here are two downloads:
 
-https://opencpn.org/wiki/dokuwiki/lib/exe/fetch.php?media=opencpn:files:logbook_help_conversion.docx
+https://opencpn.org/wiki/dokuwiki/lib/exe/fetch.php?media=opencpn:files:logbook_help_conversion.docx[Logbook_help_conversion.docx]
 
-https://opencpn.org/wiki/dokuwiki/lib/exe/fetch.php?media=opencpn:files:logbook_help_conversion.docx
+https://opencpn.org/wiki/dokuwiki/lib/exe/fetch.php?media=opencpn:files:logbook1.2-help.doc[Logbook1.2-help.doc]
 
-https://opencpn.org/wiki/dokuwiki/lib/exe/fetch.php?media=opencpn:files:logbook_help_conversion.docx
+https://opencpn.org/wiki/dokuwiki/lib/exe/fetch.php?media=opencpn:files:logbook1.2-help.docx[Logbook1.2-help.docx]
+
+
 
 image::logbook1.2-help.pdf[]
   Find the file
