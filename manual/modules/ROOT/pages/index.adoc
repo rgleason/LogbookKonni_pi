@@ -2,12 +2,11 @@
 
 == Links
 
-* Source: https://github.com/ptulp/LogbookKonni_pi[Github Repository -
-Peter Tulp maintains the plugin]
+* Maintenance Source: https://github.com/rgleason/LogBookKonni_pi rgleason
 * Source: https://github.com/delatbabel/LogbookKonni-1.2[Github
 Repository - Delatbabel]
-* Alternative Maintenance Source: https://github.com/rgleason/LogBookKonni_pi
-* Releases: https://github.com/delatbabel/LogbookKonni-1.2/releases[Github Releases]
+* Old Source: https://github.com/ptulp/LogbookKonni_pi[Github Repository -
+Peter Tulp used to maintain the plugin]
 * Download: https://opencpn.org/OpenCPN/plugins/logbookkonni.html[Website Download]
 * Forum: https://github.com/delatbabel/LogbookKonni-1.2/[LogbookKonni CF
 Thread]
