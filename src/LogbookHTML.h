@@ -27,6 +27,7 @@
 class LogbookDialog;
 class Logbook;
 #include <map>
+#include <mutex>
 using namespace std;
 class LogbookHTML
 {
@@ -99,4 +100,5 @@ public:
     wxString route;
 
     wxTextOutputStream *kmlFile;
+    mutable mutex kmlFileMtx;
 };
