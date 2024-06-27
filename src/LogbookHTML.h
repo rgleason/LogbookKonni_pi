@@ -27,7 +27,6 @@
 class LogbookDialog;
 class Logbook;
 #include <map>
-#include <mutex>
 using namespace std;
 class LogbookHTML
 {
