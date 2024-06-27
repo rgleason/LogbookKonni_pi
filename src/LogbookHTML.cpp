@@ -1367,7 +1367,6 @@ void LogbookHTML::toKML(wxString path) {
   wxFileOutputStream output(path);
   wxTextOutputStream kmlFile1(output);
 
-  lock_guard<mutex> lock(kmlFileMtx);
   kmlFile = &kmlFile1;
 
   wxString h = parent->kmlHead;
@@ -1543,7 +1542,6 @@ void LogbookHTML::toKML(wxString path) {
 void LogbookHTML::writeTrackToKML(wxJSONValue data) {
   wxString trkLine = parent->kmlPathHeader;
   trkLine.Replace("#NAME#", "Trackline");
-  lock_guard<mutex> lock(kmlFileMtx);
   if (kmlFile == nullptr) {
     return;
   }
@@ -1559,7 +1557,6 @@ void LogbookHTML::writeRouteToKML(wxJSONValue data) {
   wxString routeLine = parent->kmlPathHeader;
   routeLine.Replace("#NAME#", "Routeline");
   routeLine.Replace("#LINE#", "#LineRoute");
-  lock_guard<mutex> lock(kmlFileMtx);
   if (kmlFile == nullptr) {
     return;
   }

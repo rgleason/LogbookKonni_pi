@@ -100,5 +100,4 @@ public:
     wxString route;
 
     wxTextOutputStream *kmlFile;
-    mutable mutex kmlFileMtx;
 };
