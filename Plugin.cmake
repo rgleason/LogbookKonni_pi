@@ -77,8 +77,6 @@ SET(SRC
   src/OverView.cpp
   src/Export.h
   src/Export.cpp
-  src/TexFont.cpp
-  src/TexFont.h
 )
 
 set(PKG_API_LIB api-17)  #  A directory in libs/ e. g., api-17 or api-16
