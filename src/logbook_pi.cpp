@@ -615,13 +615,13 @@ int logbookkonni_pi::GetPlugInVersionMajor() { return PLUGIN_VERSION_MAJOR; }
 
 int logbookkonni_pi::GetPlugInVersionMinor() { return PLUGIN_VERSION_MINOR; }
 
-int GetPlugInVersionPatch() { return PLUGIN_VERSION_PATCH; }
+int logbookkonni_pi::GetPlugInVersionPatch() { return PLUGIN_VERSION_PATCH; }
 
-int GetPlugInVersionPost() { return PLUGIN_VERSION_TWEAK; }
+int logbookkonni_pi::GetPlugInVersionPost() { return PLUGIN_VERSION_TWEAK; }
 
-const char *GetPlugInVersionPre() { return PKG_PRERELEASE; }
+const char* logbookkonni_pi::GetPlugInVersionPre() { return PKG_PRERELEASE; }
 
-const char *GetPlugInVersionBuild() { return PKG_BUILD_INFO; }
+const char* logbookkonni_pi::GetPlugInVersionBuild() { return PKG_BUILD_INFO; }
 
 wxString logbookkonni_pi::GetCommonName() { return _("Logbook"); }
 
