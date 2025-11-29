@@ -98,8 +98,8 @@ macro(add_plugin_libraries)
   add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxJSON")
   target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
 
-  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/plugingl")
-  target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/plugin_dc")
+  target_link_libraries(${PACKAGE_NAME} ocpn::plugin_dc)
 
   # Added by Shipdriver
   add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/jsoncpp")
@@ -110,8 +110,8 @@ macro(add_plugin_libraries)
   target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183
 
 #  The wxsvg library enables SVG overall in the plugin
-#  add_subdirectory("libs/wxsvg")
-#  target_link_libraries(${PACKAGE_NAME} ocpn::wxsvg)
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxsvg")
+  target_link_libraries(${PACKAGE_NAME} ocpn::wxsvg)
 
 )
 
