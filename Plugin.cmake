@@ -90,28 +90,28 @@ endmacro ()
 
 macro(add_plugin_libraries)
 
-  # Add libraries required by this plugin
+# Add libraries required by this plugin
 
-  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/tinyxml")
-  target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+#  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/tinyxml")
+#  target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 
-  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxJSON")
-  target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
+#  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxJSON")
+#  target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
 
-  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/plugin_dc")
-  target_link_libraries(${PACKAGE_NAME} ocpn::plugin_dc)
+#  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/plugin_dc")
+#  target_link_libraries(${PACKAGE_NAME} ocpn::plugin_dc)
 
   # Added by Shipdriver
-  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/jsoncpp")
-  target_link_libraries(${PACKAGE_NAME} ocpn::jsoncpp)
+#  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/jsoncpp")
+#  target_link_libraries(${PACKAGE_NAME} ocpn::jsoncpp)
   
   # Needed for Logbook  
   add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/nmea0183")
   target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183
 
 #  The wxsvg library enables SVG overall in the plugin
-  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxsvg")
-  target_link_libraries(${PACKAGE_NAME} ocpn::wxsvg)
+# add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxsvg")
+#  target_link_libraries(${PACKAGE_NAME} ocpn::wxsvg)
 
 )
 
