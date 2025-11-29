@@ -3,7 +3,7 @@
 ## Copyright:   2015
 ## License:     GPLv3+
 ##---------------------------------------------------------------------------
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.5.0)
 
 if (TARGET ocpn::nmea0183)
     return ()
