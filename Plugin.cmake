@@ -92,8 +92,8 @@ macro(add_plugin_libraries)
 
 # Add libraries required by this plugin
 
-#  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/tinyxml")
-#  target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/tinyxml")
+  target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 
 #  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxJSON")
 #  target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
@@ -102,8 +102,8 @@ macro(add_plugin_libraries)
 #  target_link_libraries(${PACKAGE_NAME} ocpn::plugin_dc)
 
   # Added by Shipdriver
-#  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/jsoncpp")
-#  target_link_libraries(${PACKAGE_NAME} ocpn::jsoncpp)
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/jsoncpp")
+  target_link_libraries(${PACKAGE_NAME} ocpn::jsoncpp)
   
   # Needed for Logbook  
   add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/nmea0183")
