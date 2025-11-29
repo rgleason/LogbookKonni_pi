@@ -105,8 +105,8 @@ macro(add_plugin_libraries)
   add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/jsoncpp")
   target_link_libraries(${PACKAGE_NAME} ocpn::jsoncpp)
   
-  # Needed for Logbook  
-  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/nmea0183")
+  # Needed for Logbook - opencpn-libs does not have a nmea0183/nmea0183.h file 
+  add_subdirectory("${CMAKE_SOURCE_DIR}/libs/nmea0183")
   target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183
 
 #  The wxsvg library enables SVG overall in the plugin

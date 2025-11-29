@@ -39,7 +39,7 @@
 #include <wx/textfile.h>
 #include "ocpn_plugin.h"
 #include "LogbookHTML.h"
-// #include "nmea0183/nmea0183.h"    opencpn-libs/nmea0183 does not have this file
+#include "nmea0183/nmea0183.h"    opencpn-libs/nmea0183 does not have this file
 
 //#define PBVE_DEBUG 1
 #define DEVICE_TIMEOUT 4 // NMEA-Device doesn't send for 4 sec. sets the strings to empty in appendRow()
