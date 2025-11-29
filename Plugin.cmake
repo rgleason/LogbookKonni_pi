@@ -32,7 +32,6 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 #
 #
 # -------  Plugin setup --------
-#  Using Shipdriver version 3.3.0 from branch v3.0
 
 set(PKG_NAME LogbookKonni_pi)
 set(PKG_VERSION  1.5.00.0) 
@@ -79,7 +78,7 @@ SET(SRC
   src/Export.cpp
 )
 
-set(PKG_API_LIB api-17)  #  A directory in libs/ e. g., api-17 or api-16
+set(PKG_API_LIB api-18)  #  A directory in libs/ e. g., api-17 or api-16
 
 macro(late_init)
   # Perform initialization after the PACKAGE_NAME library, compilers
@@ -90,22 +89,24 @@ macro(late_init)
 endmacro ()
 
 macro(add_plugin_libraries)
+
   # Add libraries required by this plugin
-  add_subdirectory("libs/tinyxml")
+
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/tinyxml")
   target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 
-  add_subdirectory("libs/wxJSON")
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxJSON")
   target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
 
-  add_subdirectory("libs/plugingl")
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/plugingl")
   target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 
   # Added by Shipdriver
-  add_subdirectory("libs/jsoncpp")
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/jsoncpp")
   target_link_libraries(${PACKAGE_NAME} ocpn::jsoncpp)
   
   # Needed for Logbook  
-  add_subdirectory("libs/nmea0183")
+  add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/nmea0183")
   target_link_libraries(${PACKAGE_NAME} ocpn::nmea0183
 
 #  The wxsvg library enables SVG overall in the plugin
