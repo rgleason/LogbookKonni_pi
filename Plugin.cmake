@@ -34,7 +34,7 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 # -------  Plugin setup --------
 
 set(PKG_NAME LogbookKonni_pi)
-set(PKG_VERSION  1.5.01.0) 
+set(PKG_VERSION  1.5.02.0) 
 set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
 
 set(DISPLAY_NAME Logbook)    # Dialogs, installer artifacts, ...
